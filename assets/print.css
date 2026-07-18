@@ -1,0 +1,276 @@
+/*
+ * Document Library — Professional Print Stylesheet
+ * Designed for A4 export via Pandoc, Typora, browser print, or WeasyPrint.
+ * Color system: Navy #1a1a2e | Separator #d0d4dc | Header bg #e8eaf2 | Amber #d4a000
+ */
+
+/* ─── Page Layout ─────────────────────────────────────────────────────────── */
+
+@page {
+  size: A4;
+  margin: 25mm 20mm 20mm 20mm;
+  @bottom-right {
+    content: counter(page);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.5pt;
+    color: #888;
+  }
+}
+
+@page :first {
+  margin-top: 28mm;
+}
+
+/* ─── Base Typography ─────────────────────────────────────────────────────── */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11pt;
+  color: #1a1a1a;
+  line-height: 1.55;
+  max-width: 170mm;
+  margin: 0 auto;
+  padding: 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+p {
+  margin: 5px 0;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  color: #555;
+  font-size: 9pt;
+}
+
+a {
+  color: #1a1a2e;
+  text-decoration: none;
+}
+
+/* ─── Headings ────────────────────────────────────────────────────────────── */
+
+h1 {
+  font-size: 14pt;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a2e;
+  letter-spacing: 0.02em;
+  border-bottom: 2.5px solid #1a1a2e;
+  padding-bottom: 9px;
+  margin: 26px 0 18px;
+  page-break-after: avoid;
+}
+
+h2 {
+  font-size: 9pt;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid #c0c6d6;
+  padding-bottom: 4px;
+  margin: 24px 0 10px;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #2a2a3e;
+  margin: 16px 0 7px;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-size: 10pt;
+  font-weight: 600;
+  color: #333;
+  margin: 12px 0 5px;
+  page-break-after: avoid;
+}
+
+/* ─── Horizontal Rules ────────────────────────────────────────────────────── */
+
+hr {
+  border: none;
+  border-top: 1px solid #d0d4dc;
+  margin: 18px 0;
+}
+
+/* ─── Tables ──────────────────────────────────────────────────────────────── */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 18px;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+th {
+  background-color: #e8eaf2;
+  color: #1a1a2e;
+  font-weight: 700;
+  font-size: 9pt;
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid #c0c6d6;
+  letter-spacing: 0.03em;
+}
+
+td {
+  border: 1px solid #d0d4dc;
+  padding: 6px 10px;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+/* Signature tables — never split across pages */
+table:last-of-type,
+table + p + table,
+h2:last-of-type + table {
+  page-break-inside: avoid;
+  page-break-before: avoid;
+}
+
+/* ─── Blockquotes (warnings, conditionals) ────────────────────────────────── */
+
+blockquote {
+  border-left: 3px solid #d4a000;
+  padding: 9px 14px;
+  background-color: #fffcf0;
+  margin: 12px 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+
+blockquote p {
+  margin: 4px 0;
+}
+
+/* ─── Lists ───────────────────────────────────────────────────────────────── */
+
+ul, ol {
+  margin: 6px 0;
+  padding-left: 22px;
+}
+
+li {
+  margin: 3px 0;
+  line-height: 1.5;
+}
+
+/* Task list checkboxes */
+li input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* ─── Code ────────────────────────────────────────────────────────────────── */
+
+code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 9.5pt;
+  background: #f4f5f7;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+pre {
+  background: #f4f5f7;
+  padding: 10px 14px;
+  border-left: 3px solid #c0c6d6;
+  font-size: 9pt;
+  overflow-x: auto;
+  page-break-inside: avoid;
+}
+
+/* ─── Page Break Utilities ────────────────────────────────────────────────── */
+
+.page-break {
+  page-break-before: always;
+}
+
+/* Keep section heading with its first table */
+h2 + table,
+h3 + table,
+h2 + p + table {
+  page-break-inside: avoid;
+}
+
+/* ─── Screen Preview (non-print) ──────────────────────────────────────────── */
+
+@media screen {
+  body {
+    padding: 20mm 24mm;
+    background: #f0f2f5;
+    max-width: none;
+  }
+
+  /* Simulate A4 page on screen */
+  body > * {
+    max-width: 170mm;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1 {
+    margin-top: 32px;
+  }
+
+  table {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  th {
+    background-color: #e8eaf2;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f8f9fb;
+  }
+}
+
+/* ─── Print Overrides ─────────────────────────────────────────────────────── */
+
+@media print {
+  body {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+    font-size: 10.5pt;
+  }
+
+  h1 {
+    margin-top: 16px;
+  }
+
+  /* Avoid widows/orphans */
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Don't print link URLs */
+  a[href]::after {
+    content: none;
+  }
+
+  /* Ensure table headers repeat on page break */
+  thead {
+    display: table-header-group;
+  }
+
+  /* Signature block stays together */
+  h2:last-of-type,
+  h2:last-of-type + table {
+    page-break-inside: avoid;
+    page-break-before: avoid;
+  }
+}

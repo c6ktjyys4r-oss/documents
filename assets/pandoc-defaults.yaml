@@ -1,0 +1,23 @@
+# Pandoc Export Defaults — Document Library
+# Usage: pandoc --defaults assets/pandoc-defaults.yaml -o output.html input.md
+#        pandoc --defaults assets/pandoc-defaults.yaml -o output.pdf  input.md
+
+from: markdown
+to: html5
+standalone: true
+css:
+  - assets/print.css
+highlight-style: tango
+
+metadata:
+  lang: en
+  papersize: a4
+
+# For PDF via wkhtmltopdf or WeasyPrint, use the pdf-engine flag:
+#   pandoc --defaults assets/pandoc-defaults.yaml --pdf-engine=weasyprint -o output.pdf input.md
+
+# HTML output variables
+variables:
+  document-css: true
+  mainfont: Arial
+  fontsize: 11pt
