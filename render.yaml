@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: alba-docs
+    runtime: static
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
