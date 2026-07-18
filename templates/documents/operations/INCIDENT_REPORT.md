@@ -1,7 +1,7 @@
 ---
 template: Incident Report
 category: Operations
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,16 +10,18 @@ version: 2.0
 
 ---
 
-# تقرير حادثة &nbsp;/&nbsp; INCIDENT REPORT
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{ReportDate}}
+
+---
+
+# تقرير حادثة &nbsp;/&nbsp; Incident Report
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
-| **رقم التقرير / Report No.** | {{ReferenceNumber}} |
 | **تاريخ الحادثة / Incident Date** | {{IncidentDate}} |
 | **وقت الحادثة / Incident Time** | {{IncidentTime}} |
-| **تاريخ التقرير / Report Date** | {{ReportDate}} |
 | **موقع الحادثة / Incident Location** | {{IncidentLocation}} |
 | **نوع الحادثة / Incident Type** | {{IncidentType}} |
 | **الخطورة / Severity** | {{Severity}} |
@@ -84,9 +86,10 @@ version: 2.0
 |---|---|---|
 | {{PreparedBy}} | {{ReviewedBy}} | {{ApprovedBy}} |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ReviewedByTitle}} / {{ReviewedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
+| *(Official Stamp / الختم الرسمي)* | | |
 | Signature: ___________ | Signature: ___________ | Signature: ___________ |
 | Date: ___________ | Date: ___________ | Date: ___________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا التقرير في السجلات التشغيلية الرسمية للمنشأة. / This report is retained in the company's official operational records.*

@@ -1,7 +1,7 @@
 ---
 template: Promotion Letter
 category: HR
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,11 +10,11 @@ version: 2.0
 
 ---
 
-**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-# خطاب ترقية &nbsp;/&nbsp; PROMOTION LETTER
+# خطاب ترقية &nbsp;/&nbsp; Promotion Letter
 
 ---
 
@@ -54,7 +54,7 @@ version: 2.0
 
 ---
 
-**Arabic:**
+## Arabic (عربي):
 
 يسعدنا إبلاغكم بترقيتكم إلى منصب **{{NewJobTitleAr}}** اعتبارًا من **{{EffectiveDate}}**، وذلك تقديرًا لجهودكم ومساهماتكم المتميزة.
 
@@ -62,9 +62,9 @@ version: 2.0
 
 ---
 
-**English:**
+## English:
 
-We are pleased to inform you of your promotion to **{{NewJobTitle}}**, effective **{{EffectiveDate}}**, in recognition of your outstanding contributions and dedication.
+We are pleased to inform you of your promotion to **{{NewJobTitle}}**, effective **{{EffectiveDate}}**, in recognition of your outstanding contributions.
 
 {{AdditionalNotes}}
 
@@ -76,6 +76,10 @@ We are pleased to inform you of your promotion to **{{NewJobTitle}}**, effective
 |---|---|
 | {{AuthorisedBy}} | {{EmployeeNameEn}} |
 | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | {{NewJobTitle}} |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| التوقيع والختم / Signature & Stamp | Date / التاريخ: ___________________________ |
-| Date / التاريخ: ___________________________ | |
+| *(Official Stamp / الختم الرسمي)* | |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
+
+---
+
+*يُحتفظ بنسخة من هذا الخطاب في ملف الموظف. / A copy of this letter is retained in the employee's file.*

@@ -1,7 +1,7 @@
 ---
 template: Payment Voucher
 category: Finance
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,14 +10,17 @@ version: 2.0
 
 ---
 
-# سند صرف &nbsp;/&nbsp; PAYMENT VOUCHER
+**Ref / المرجع:** {{VoucherNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# سند صرف &nbsp;/&nbsp; Payment Voucher
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
 | **رقم السند / Voucher No.** | {{VoucherNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **مركز التكلفة / Cost Centre** | {{CostCentre}} |
 | **العملة / Currency** | {{Currency}} |
 
@@ -30,8 +33,8 @@ version: 2.0
 | **الاسم / Name** | {{PayeeName}} |
 | **رقم الهوية / ID No.** | {{PayeeID}} |
 | **الجهة / Organization** | {{PayeeOrganization}} |
-| **رقم الآيبان / IBAN** | {{IBAN}} |
 | **اسم البنك / Bank Name** | {{BankNameAr}} / {{BankName}} |
+| **رقم الآيبان / IBAN** | {{IBAN}} |
 
 ---
 
@@ -39,11 +42,11 @@ version: 2.0
 
 | البيان / Description | المبلغ / Amount (SAR) |
 |---|---|
-| {{PaymentDescription}} | {{Amount}} |
+| {{PaymentDescription1}} | {{Amount1}} |
 | {{PaymentDescription2}} | {{Amount2}} |
 | **الإجمالي / Total** | **{{TotalAmount}}** |
 
-**المبلغ كتابةً / Amount in Words (AR):** {{AmountInWordsAr}}
+**المبلغ كتابةً (عربي):** {{AmountInWordsAr}}
 
 **Amount in Words (EN):** {{AmountInWords}}
 
@@ -61,9 +64,10 @@ version: 2.0
 |---|---|---|
 | {{PreparedBy}} | {{AuthorisedBy}} | {{ReceivedBy}} |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | |
+| *(Official Stamp / الختم الرسمي)* | | |
 | Signature: ___________ | Signature: ___________ | Signature: ___________ |
 | Date: ___________ | Date: ___________ | Date: ___________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا السند في السجلات المالية الرسمية للمنشأة. / This voucher is retained in the company's official financial records.*

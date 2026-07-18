@@ -1,7 +1,7 @@
 ---
 template: Visitor Pass
 category: Administration
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,15 +10,11 @@ version: 2.0
 
 ---
 
-# تصريح زيارة &nbsp;/&nbsp; VISITOR PASS
+**Ref / المرجع:** {{PassNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-| البيان / Field | القيمة / Value |
-|---|---|
-| **رقم التصريح / Pass No.** | {{PassNumber}} |
-| **التاريخ / Date** | {{Date}} |
-| **صالح حتى / Valid For** | {{ValidForDate}} |
+# تصريح زيارة &nbsp;/&nbsp; Visitor Pass
 
 ---
 
@@ -44,20 +40,22 @@ version: 2.0
 | **المنطقة المسموح بها / Permitted Area** | {{PermittedArea}} |
 | **وقت الدخول / Check-In Time** | {{CheckInTime}} |
 | **وقت الخروج / Check-Out Time** | {{CheckOutTime}} |
+| **صالح حتى / Valid Until** | {{ValidForDate}} |
 
 ---
 
 *يجب أن يكون الزائر برفقة مضيفه في جميع الأوقات. يُعاد هذا التصريح عند المغادرة.*
 
-*Visitor must be accompanied at all times. This pass must be returned on departure.*
+*Visitor must be accompanied by their host at all times. This pass must be returned upon departure.*
 
 ---
 
 ## Signatures / التواقيع
 
-| صادر بواسطة / Issued By | توقيع الزائر / Visitor Signature |
+| صادر بواسطة / Issued By | توقيع الزائر / Visitor Acknowledgement |
 |---|---|
 | {{PreparedBy}} | {{VisitorName}} |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+| *(Official Stamp / الختم الرسمي)* | |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |

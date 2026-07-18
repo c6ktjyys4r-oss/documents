@@ -1,7 +1,7 @@
 ---
 template: Asset Return
 category: Operations
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,14 +10,16 @@ version: 2.0
 
 ---
 
-# محضر إعادة أصول &nbsp;/&nbsp; ASSET RETURN
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# محضر إعادة أصول &nbsp;/&nbsp; Asset Return Record
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
-| **رقم المحضر / Reference No.** | {{ReferenceNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **مرجع تسليم الأصل الأصلي / Original Handover Ref.** | {{OriginalHandoverReference}} |
 
 ---
@@ -34,11 +36,11 @@ version: 2.0
 
 ## الأصول المُعادة / Assets Returned
 
-| # | الأصل / Asset Description | رقم الأصل / Asset ID | الحالة عند الإعادة / Condition at Return | الملحقات / Accessories | ملاحظات / Notes |
+| # | الأصل / Asset | رقم الأصل / Asset ID | الحالة عند الإعادة / Return Condition | الملحقات / Accessories | ملاحظات / Notes |
 |---|---|---|---|---|---|
 | 1 | {{AssetDescription1}} | {{AssetID1}} | {{ConditionAtReturn1}} | {{Accessories1}} | {{Notes1}} |
 | 2 | {{AssetDescription2}} | {{AssetID2}} | {{ConditionAtReturn2}} | {{Accessories2}} | {{Notes2}} |
-| 3 | | | | | |
+| 3 | {{AssetDescription3}} | {{AssetID3}} | {{ConditionAtReturn3}} | {{Accessories3}} | {{Notes3}} |
 
 ---
 
@@ -51,7 +53,7 @@ version: 2.0
 
 ---
 
-**ملاحظات / Remarks:** {{Remarks}}
+**ملاحظات / General Remarks:** {{Remarks}}
 
 ---
 
@@ -61,9 +63,10 @@ version: 2.0
 |---|---|---|
 | {{ReturnedByName}} | {{ReceivedBy}} | {{VerifiedBy}} |
 | {{ReturnedByTitle}} / {{ReturnedByTitleAr}} | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} | {{VerifiedByTitle}} / {{VerifiedByTitleAr}} |
+| *(Official Stamp / الختم الرسمي)* | | |
 | Signature: ___________ | Signature: ___________ | Signature: ___________ |
 | Date: ___________ | Date: ___________ | Date: ___________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا المحضر في سجلات الأصول الرسمية للمنشأة. / This record is retained in the company's official asset registry.*

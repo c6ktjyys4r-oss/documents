@@ -1,7 +1,7 @@
 ---
 template: IT Request
 category: Administration
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,32 +10,27 @@ version: 2.0
 
 ---
 
-# نموذج طلب تقنية المعلومات &nbsp;/&nbsp; IT REQUEST FORM
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# نموذج طلب تقنية المعلومات &nbsp;/&nbsp; IT Request Form
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
-| **رقم التذكرة / Ticket No.** | {{ReferenceNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **الأولوية / Priority** | {{Priority}} |
 | **نوع الطلب / Request Type** | {{RequestType}} |
 | **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
 | **القسم / Department** | {{Department}} |
-
----
-
-## تفاصيل الطلب / Request Details
-
-| البيان / Field | القيمة / Value |
-|---|---|
-| **الموضوع / Subject** | {{Subject}} |
 | **النظام / الجهاز / System or Device** | {{SystemOrDevice}} |
 | **الموقع / Location** | {{Location}} |
+| **تاريخ الإنجاز المطلوب / Required By** | {{RequiredByDate}} |
 
 ---
 
-**وصف المشكلة / الطلب — Problem or Request Description:**
+## وصف الطلب / Request Description
 
 **عربي:** {{DescriptionAr}}
 
@@ -43,9 +38,7 @@ version: 2.0
 
 ---
 
-**تأثير العمل / Business Impact:** {{BusinessImpactAr}} / {{BusinessImpact}}
-
-**تاريخ الإنجاز المطلوب / Required Completion Date:** {{RequiredByDate}}
+**تأثير على العمل / Business Impact:** {{BusinessImpactAr}} / {{BusinessImpact}}
 
 ---
 
@@ -53,9 +46,9 @@ version: 2.0
 
 | الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
 |---|---|---|---|---|
-| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
-| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
-| مدير تقنية المعلومات / IT Manager | {{ITManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| مقدم الطلب / Requester | {{RequestedBy}} | ___________ | ___________ | — |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | ___________ | ☐ Approved &nbsp; ☐ Rejected |
+| مدير تقنية المعلومات / IT Manager | {{ITManager}} | ___________ | ___________ | ☐ Approved &nbsp; ☐ Rejected |
 
 ---
 
@@ -72,6 +65,6 @@ version: 2.0
 
 **ملاحظات / Remarks:** {{Remarks}}
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا الطلب في سجلات تقنية المعلومات الرسمية للمنشأة. / This request is retained in the company's official IT records.*

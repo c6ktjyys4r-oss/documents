@@ -1,7 +1,7 @@
 ---
 template: Asset Handover
 category: Operations
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,14 +10,11 @@ version: 2.0
 
 ---
 
-# محضر تسليم واستلام أصول &nbsp;/&nbsp; ASSET HANDOVER
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-| البيان / Field | القيمة / Value |
-|---|---|
-| **رقم المحضر / Reference No.** | {{ReferenceNumber}} |
-| **التاريخ / Date** | {{Date}} |
+# محضر تسليم واستلام أصول &nbsp;/&nbsp; Asset Handover Record
 
 ---
 
@@ -43,15 +40,15 @@ version: 2.0
 
 ## الأصول المُسلَّمة / Assets Handed Over
 
-| # | الأصل / Asset Description | رقم الأصل / Asset ID | الحالة / Condition | الملحقات / Accessories | ملاحظات / Notes |
+| # | الأصل / Asset | رقم الأصل / Asset ID | الحالة / Condition | الملحقات / Accessories | ملاحظات / Notes |
 |---|---|---|---|---|---|
 | 1 | {{AssetDescription1}} | {{AssetID1}} | {{Condition1}} | {{Accessories1}} | {{Notes1}} |
 | 2 | {{AssetDescription2}} | {{AssetID2}} | {{Condition2}} | {{Accessories2}} | {{Notes2}} |
-| 3 | | | | | |
+| 3 | {{AssetDescription3}} | {{AssetID3}} | {{Condition3}} | {{Accessories3}} | {{Notes3}} |
 
 ---
 
-**ملاحظات / Remarks:** {{Remarks}}
+**ملاحظات / General Remarks:** {{Remarks}}
 
 ---
 
@@ -61,9 +58,10 @@ version: 2.0
 |---|---|---|
 | {{IssuedByName}} | {{ReceivedByName}} | {{WitnessName}} |
 | {{IssuedByTitle}} / {{IssuedByTitleAr}} | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} | {{WitnessTitle}} / {{WitnessTitleAr}} |
+| *(Official Stamp / الختم الرسمي)* | | |
 | Signature: ___________ | Signature: ___________ | Signature: ___________ |
 | Date: ___________ | Date: ___________ | Date: ___________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا المحضر في سجلات الأصول الرسمية للمنشأة. / This record is retained in the company's official asset registry.*

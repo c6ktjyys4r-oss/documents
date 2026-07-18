@@ -1,25 +1,27 @@
 ---
 template: Quotation
 category: Finance
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
 
 **{{CompanyName}}**
-{{CompanyAddress}}
-{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
+{{CompanyAddress}} &nbsp;|&nbsp; {{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 
 ---
 
-# عرض سعر &nbsp;/&nbsp; QUOTATION
+**Ref / المرجع:** {{QuotationNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# عرض سعر &nbsp;/&nbsp; Quotation
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
 | **رقم عرض السعر / Quotation No.** | {{QuotationNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **صالح حتى / Valid Until** | {{ValidUntil}} |
 | **العملة / Currency** | {{Currency}} |
 
@@ -34,7 +36,7 @@ version: 2.0
 
 **{{ClientName}}**
 {{ClientAddress}}
-للاهتمام: {{ClientContactPerson}}
+للاهتمام / Attn: {{ClientContactPerson}}
 
 ---
 
@@ -42,9 +44,9 @@ version: 2.0
 
 | # | الوصف / Description | الكمية / Qty | سعر الوحدة / Unit Price | الإجمالي / Total |
 |---|---|---|---|---|
-| 1 | {{ItemDescription}} | {{Qty}} | {{UnitPrice}} | {{LineTotal}} |
+| 1 | {{ItemDescription1}} | {{Qty1}} | {{UnitPrice1}} | {{LineTotal1}} |
 | 2 | {{ItemDescription2}} | {{Qty2}} | {{UnitPrice2}} | {{LineTotal2}} |
-| 3 | | | | |
+| 3 | {{ItemDescription3}} | {{Qty3}} | {{UnitPrice3}} | {{LineTotal3}} |
 
 ---
 
@@ -52,14 +54,16 @@ version: 2.0
 |---|---|
 | **المجموع / Subtotal** | {{Subtotal}} |
 | **الضريبة / Tax ({{TaxRate}}%)** | {{TaxAmount}} |
-| **الخصم / Discount** | {{Discount}} |
+| **الخصم / Discount** | ({{Discount}}) |
 | **الإجمالي / Total** | **{{Total}}** |
 
 ---
 
-**الشروط والأحكام / Terms and Conditions:** {{TermsAndConditions}}
+**شروط الدفع / Payment Terms:** {{PaymentTerms}}
 
-**التسليم / Delivery Timeline:** {{DeliveryTimeline}}
+**موعد التسليم / Delivery Timeline:** {{DeliveryTimeline}}
+
+**الشروط والأحكام / Terms and Conditions:** {{TermsAndConditions}}
 
 **ملاحظات / Notes:** {{Notes}}
 
@@ -67,13 +71,14 @@ version: 2.0
 
 ## Signatures / التواقيع
 
-| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Approved By |
+| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Authorised By |
 |---|---|
 | {{PreparedBy}} | {{ApprovedBy}} |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+| *(Official Stamp / الختم الرسمي)* | |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*هذا العرض ساري المفعول حتى {{ValidUntil}} ولا يُعدّ التزامًا تعاقديًا حتى يتم إصدار أمر الشراء. / This quotation is valid until {{ValidUntil}} and does not constitute a contractual commitment until a purchase order is issued.*

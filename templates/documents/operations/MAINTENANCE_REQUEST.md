@@ -1,7 +1,7 @@
 ---
 template: Maintenance Request
 category: Operations
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,14 +10,16 @@ version: 2.0
 
 ---
 
-# طلب صيانة &nbsp;/&nbsp; MAINTENANCE REQUEST
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# طلب صيانة &nbsp;/&nbsp; Maintenance Request
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
-| **رقم الطلب / Request No.** | {{ReferenceNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **الأولوية / Priority** | {{Priority}} |
 | **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
 | **القسم / Department** | {{Department}} |
@@ -30,7 +32,7 @@ version: 2.0
 | البيان / Field | القيمة / Value |
 |---|---|
 | **نوع الصيانة / Maintenance Type** | {{MaintenanceType}} |
-| **الأصل / Asset / Item** | {{AssetDescription}} |
+| **الأصل / Asset** | {{AssetDescription}} |
 | **رقم الأصل / Asset ID** | {{AssetID}} |
 | **تاريخ الاكتشاف / Date Noticed** | {{DateNoticed}} |
 | **التاريخ المطلوب / Required By** | {{RequiredByDate}} |
@@ -57,18 +59,18 @@ version: 2.0
 
 | الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
 |---|---|---|---|---|
-| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
-| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
-| الصيانة / Maintenance | {{MaintenanceApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| مقدم الطلب / Requester | {{RequestedBy}} | ___________ | ___________ | — |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | ___________ | ☐ Approved &nbsp; ☐ Rejected |
+| الصيانة / Maintenance | {{MaintenanceApprover}} | ___________ | ___________ | ☐ Approved &nbsp; ☐ Rejected |
 
 ---
 
-## للاستخدام الداخلي فقط / For Internal Use Only
+## للاستخدام الداخلي / For Internal Use Only
 
-**تاريخ البدء / Start Date:** {{StartDate}} &nbsp;&nbsp; **تاريخ الإنجاز / Completion Date:** {{CompletionDate}}
+**تاريخ البدء / Start Date:** {{StartDate}} &nbsp;|&nbsp; **تاريخ الإنجاز / Completion Date:** {{CompletionDate}}
 
 **الملاحظات / Remarks:** {{Remarks}}
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا الطلب في سجلات الصيانة الرسمية للمنشأة. / This request is retained in the company's official maintenance records.*

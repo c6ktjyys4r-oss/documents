@@ -1,7 +1,7 @@
 ---
 template: Circular
 category: General
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,14 +10,16 @@ version: 2.0
 
 ---
 
-# تعميم &nbsp;/&nbsp; CIRCULAR
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# تعميم &nbsp;/&nbsp; Circular
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
-| **رقم التعميم / Circular No.** | {{ReferenceNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **إلى / To** | {{Recipient}} |
 | **الموضوع / Subject** | {{Subject}} |
 | **تاريخ النفاذ / Effective Date** | {{EffectiveDate}} |
@@ -26,13 +28,9 @@ version: 2.0
 
 ## الإشعار / Notice
 
-**عربي:**
+**عربي:** {{BodyAr}}
 
-{{BodyAr}}
-
-**English:**
-
-{{Body}}
+**English:** {{Body}}
 
 ---
 
@@ -52,11 +50,11 @@ version: 2.0
 
 ---
 
-## الاستفسارات / Contact
+## الاستفسارات / Enquiries
 
-للاستفسار، يُرجى التواصل مع {{ContactPerson}} على {{ContactDetails}}.
+للاستفسار يُرجى التواصل مع **{{ContactPerson}}** على **{{ContactDetails}}**.
 
-For questions, contact {{ContactPerson}} at {{ContactDetails}}.
+For enquiries, contact **{{ContactPerson}}** at **{{ContactDetails}}**.
 
 ---
 
@@ -66,6 +64,10 @@ For questions, contact {{ContactPerson}} at {{ContactDetails}}.
 |---|---|
 | {{PreparedBy}} | {{ApprovedBy}} |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
-| {{Department}} | |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+| {{Department}} | *(Official Stamp / الختم الرسمي)* |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
+
+---
+
+*يُحتفظ بنسخة من هذا التعميم في السجلات الرسمية للمنشأة. / A copy of this circular is retained in the company's official records.*

@@ -1,7 +1,7 @@
 ---
 template: Experience Certificate
 category: HR
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -11,13 +11,13 @@ version: 2.0
 
 ---
 
-**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
-**To Whom It May Concern / إلى من يهمه الأمر**
+**إلى من يهمه الأمر / To Whom It May Concern**
 
 ---
 
-# شهادة خبرة &nbsp;/&nbsp; EXPERIENCE CERTIFICATE
+# شهادة خبرة &nbsp;/&nbsp; Experience Certificate
 
 ---
 
@@ -59,9 +59,13 @@ We wish {{EmployeeNameEn}} every success in future endeavours.
 
 ## Signatures / التواقيع
 
-| المفوّض بالتوقيع / Authorised Signatory | الختم الرسمي / Official Stamp |
+| الختم الرسمي / Official Stamp | المفوّض بالتوقيع / Authorised Signatory |
 |---|---|
-| {{AuthorisedBy}} | *(Stamp here / ختم هنا)* |
-| {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | |
-| Signature / التوقيع: ___________________________ | |
-| Date / التاريخ: ___________________________ | |
+| *(Stamp here / ختم هنا)* | {{AuthorisedBy}} |
+| | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} |
+| | Signature: ___________________________ |
+| | Date: ___________________________ |
+
+---
+
+*صدرت هذه الشهادة بتاريخ {{Date}} وتُحفظ في السجلات الرسمية للشركة. / This certificate was issued on {{Date}} and is retained in the company's official records.*

@@ -1,7 +1,7 @@
 ---
 template: Appreciation Letter
 category: HR
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,11 +10,11 @@ version: 2.0
 
 ---
 
-**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-# خطاب شكر وتقدير &nbsp;/&nbsp; LETTER OF APPRECIATION
+# خطاب شكر وتقدير &nbsp;/&nbsp; Letter of Appreciation
 
 ---
 
@@ -28,9 +28,9 @@ version: 2.0
 
 ---
 
-**Arabic:**
+## Arabic (عربي):
 
-نتقدم إليكم بأسمى عبارات الشكر والتقدير على {{AppreciationReasonAr}}.
+نتقدم إليكم بأسمى عبارات الشكر والتقدير على **{{AppreciationReasonAr}}**.
 
 {{AppreciationBodyAr}}
 
@@ -38,9 +38,9 @@ version: 2.0
 
 ---
 
-**English:**
+## English:
 
-We extend our sincere appreciation for {{AppreciationReason}}.
+We extend our sincere appreciation for **{{AppreciationReason}}**.
 
 {{AppreciationBody}}
 
@@ -54,5 +54,10 @@ Your dedication and commitment are highly valued, and we look forward to your co
 |---|---|
 | {{AuthorisedBy}} | *(Official Stamp / الختم الرسمي)* |
 | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | |
-| Signature / التوقيع: ___________________________ | |
-| Date / التاريخ: ___________________________ | |
+| {{Department}} — {{CompanyName}} | |
+| Signature: ___________________________ | |
+| Date: ___________________________ | |
+
+---
+
+*يُحتفظ بنسخة من هذا الخطاب في ملف الموظف. / A copy of this letter is retained in the employee's file.*

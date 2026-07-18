@@ -1,7 +1,7 @@
 ---
 template: Transfer Letter
 category: HR
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,11 +10,11 @@ version: 2.0
 
 ---
 
-**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-# خطاب نقل &nbsp;/&nbsp; TRANSFER LETTER
+# خطاب نقل &nbsp;/&nbsp; Transfer Letter
 
 ---
 
@@ -43,7 +43,7 @@ version: 2.0
 
 ---
 
-**Arabic:**
+## Arabic (عربي):
 
 يُرجى التفضل بالعلم بأنه تقرر نقلكم من **{{CurrentDepartment}}** إلى **{{NewDepartment}}** اعتبارًا من **{{EffectiveDate}}**.
 
@@ -51,7 +51,7 @@ version: 2.0
 
 ---
 
-**English:**
+## English:
 
 Please be advised that your transfer from **{{CurrentDepartment}}** to **{{NewDepartment}}** has been approved, effective **{{EffectiveDate}}**.
 
@@ -65,6 +65,10 @@ Please be advised that your transfer from **{{CurrentDepartment}}** to **{{NewDe
 |---|---|
 | {{AuthorisedBy}} | {{EmployeeNameEn}} |
 | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | {{JobTitle}} |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| التوقيع والختم / Signature & Stamp | Date / التاريخ: ___________________________ |
-| Date / التاريخ: ___________________________ | |
+| *(Official Stamp / الختم الرسمي)* | |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
+
+---
+
+*يُحتفظ بنسخة من هذا الخطاب في ملف الموظف. / A copy of this letter is retained in the employee's file.*

@@ -1,7 +1,7 @@
 ---
 template: Employment Verification Letter
 category: HR
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -11,13 +11,13 @@ version: 2.0
 
 ---
 
-**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
-
-**To / إلى:** {{Purpose}} &nbsp;|&nbsp; {{PurposeAr}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-# خطاب تحقق من التوظيف &nbsp;/&nbsp; EMPLOYMENT VERIFICATION LETTER
+# خطاب تحقق من التوظيف &nbsp;/&nbsp; Employment Verification Letter
+
+**إلى / To:** {{PurposeAr}} / {{Purpose}}
 
 ---
 
@@ -32,7 +32,7 @@ version: 2.0
 | **الجنسية** | {{NationalityAr}} |
 | **المسمى الوظيفي** | {{JobTitleAr}} |
 | **القسم** | {{DepartmentAr}} |
-| **تاريخ الالتحاق بالعمل** | {{DateOfJoining}} |
+| **تاريخ الالتحاق** | {{DateOfJoining}} |
 | **حالة التوظيف** | {{EmploymentStatusAr}} |
 
 {{AdditionalDetailsAr}}
@@ -63,9 +63,13 @@ This letter is issued upon the request of the employee for **{{Purpose}}** and s
 
 ## Signatures / التواقيع
 
-| المفوّض بالتوقيع / Authorised Signatory | الختم الرسمي / Official Stamp |
+| الختم الرسمي / Official Stamp | المفوّض بالتوقيع / Authorised Signatory |
 |---|---|
-| {{AuthorisedBy}} | *(Stamp here / ختم هنا)* |
-| {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | |
-| Signature / التوقيع: ___________________________ | |
-| Date / التاريخ: ___________________________ | |
+| *(Stamp here / ختم هنا)* | {{AuthorisedBy}} |
+| | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} |
+| | Signature: ___________________________ |
+| | Date: ___________________________ |
+
+---
+
+*صدر هذا الخطاب بتاريخ {{Date}} ويُحتفظ به في السجلات الرسمية للشركة. / This letter was issued on {{Date}} and is retained in the company's official records.*

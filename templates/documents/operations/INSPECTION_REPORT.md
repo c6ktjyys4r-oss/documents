@@ -1,7 +1,7 @@
 ---
 template: Inspection Report
 category: Operations
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,14 +10,16 @@ version: 2.0
 
 ---
 
-# تقرير فحص وتفتيش &nbsp;/&nbsp; INSPECTION REPORT
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# تقرير فحص وتفتيش &nbsp;/&nbsp; Inspection Report
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
-| **رقم التقرير / Report No.** | {{ReferenceNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **نوع الفحص / Inspection Type** | {{InspectionType}} |
 | **الموقع / Location** | {{Location}} |
 | **المفتِّش / Inspector** | {{InspectorName}} |
@@ -27,7 +29,9 @@ version: 2.0
 
 ## نطاق الفحص / Scope of Inspection
 
-{{InspectionScopeAr}} / {{InspectionScope}}
+**عربي:** {{InspectionScopeAr}}
+
+**English:** {{InspectionScope}}
 
 ---
 
@@ -35,23 +39,18 @@ version: 2.0
 
 | # | البند / Item | الحالة / Status | الملاحظات / Remarks |
 |---|---|---|---|
-| 1 | {{InspectionItem1}} | مقبول / اخفاق / لا ينطبق &nbsp;·&nbsp; Pass / Fail / N/A | {{Remarks1}} |
-| 2 | {{InspectionItem2}} | مقبول / اخفاق / لا ينطبق &nbsp;·&nbsp; Pass / Fail / N/A | {{Remarks2}} |
-| 3 | {{InspectionItem3}} | مقبول / اخفاق / لا ينطبق &nbsp;·&nbsp; Pass / Fail / N/A | {{Remarks3}} |
+| 1 | {{InspectionItem1}} | ☐ Pass &nbsp; ☐ Fail &nbsp; ☐ N/A | {{Remarks1}} |
+| 2 | {{InspectionItem2}} | ☐ Pass &nbsp; ☐ Fail &nbsp; ☐ N/A | {{Remarks2}} |
+| 3 | {{InspectionItem3}} | ☐ Pass &nbsp; ☐ Fail &nbsp; ☐ N/A | {{Remarks3}} |
 
 ---
 
 ## المخالفات / Findings
 
-### المخالفة 1 / Finding 1
-
-**المنطقة / Area:** {{Area1}}
-
-**الملاحظة / Observation:** {{Observation1}}
-
-**الخطورة / Severity:** {{Severity1}}
-
-**التوصية / Recommendation:** {{Recommendation1}}
+| # | المنطقة / Area | الملاحظة / Observation | الخطورة / Severity | التوصية / Recommendation |
+|---|---|---|---|---|
+| 1 | {{Area1}} | {{Observation1}} | {{Severity1}} | {{Recommendation1}} |
+| 2 | {{Area2}} | {{Observation2}} | {{Severity2}} | {{Recommendation2}} |
 
 ---
 
@@ -59,7 +58,9 @@ version: 2.0
 
 **الحالة العامة / Overall Status:** {{OverallStatus}}
 
-{{SummaryNotesAr}} / {{SummaryNotes}}
+**عربي:** {{SummaryNotesAr}}
+
+**English:** {{SummaryNotes}}
 
 ---
 
@@ -67,7 +68,8 @@ version: 2.0
 
 | الإجراء / Action | المسؤول / Owner | الأولوية / Priority | الموعد / Due Date |
 |---|---|---|---|
-| {{Action1}} | {{Owner1}} | {{Priority1}} | {{DueDate1}} |
+| {{CorrectiveAction1}} | {{Owner1}} | {{Priority1}} | {{DueDate1}} |
+| {{CorrectiveAction2}} | {{Owner2}} | {{Priority2}} | {{DueDate2}} |
 
 ---
 
@@ -77,9 +79,10 @@ version: 2.0
 |---|---|
 | {{InspectorName}} | {{ReviewedBy}} |
 | {{InspectorTitle}} / {{InspectorTitleAr}} | {{ReviewedByTitle}} / {{ReviewedByTitleAr}} |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+| *(Official Stamp / الختم الرسمي)* | |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا التقرير في السجلات التشغيلية الرسمية للمنشأة. / This report is retained in the company's official operational records.*

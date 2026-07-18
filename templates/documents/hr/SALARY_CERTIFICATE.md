@@ -2,33 +2,43 @@
 template: Salary Certificate
 category: HR
 reference: Alba A1
-version: 1.0
+version: 1.1
 ---
+
+{{Logo}}
 
 **{{CompanyName}}**
 
 ---
 
-**Serial No.:** {{SerialNumber}} &nbsp;|&nbsp; **Issue Date:** {{IssueDate}}
+**Ref / المرجع:** {{SerialNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{IssueDate}}
 
 ---
 
-**To:** {{Purpose}}
-*(General / To the Bank / To the Embassy / For Rental Purposes / Other: {{CustomPurpose}})*
+**إلى / To:** {{PurposeAr}} / {{Purpose}}
+*(عام / General — إلى البنك / To the Bank — للسفارة / To the Embassy — لأغراض الإيجار / Rental Purposes — أخرى / Other: {{CustomPurpose}})*
 
 ---
 
-## Employee Information
-
-| Name (AR) | Name (EN) | Job Title (AR) | Job Title (EN) | Nationality | National ID / Iqama No. |
-|---|---|---|---|---|---|
-| {{EmployeeNameAr}} | {{EmployeeNameEn}} | {{JobTitleAr}} | {{JobTitleEn}} | {{Nationality}} | {{NationalID}} |
+# شهادة راتب &nbsp;/&nbsp; Salary Certificate
 
 ---
 
-## Certificate Body
+## معلومات الموظف / Employee Information
 
-**Arabic (right column):**
+| البيان / Field | القيمة / Value |
+|---|---|
+| **الاسم (عربي) / Name (AR)** | {{EmployeeNameAr}} |
+| **الاسم (إنجليزي) / Name (EN)** | {{EmployeeNameEn}} |
+| **المسمى الوظيفي (عربي) / Job Title (AR)** | {{JobTitleAr}} |
+| **المسمى الوظيفي (إنجليزي) / Job Title (EN)** | {{JobTitleEn}} |
+| **الجنسية / Nationality** | {{Nationality}} |
+| **رقم الهوية / الإقامة / National ID or Iqama** | {{NationalID}} |
+| **تاريخ الالتحاق / Date of Joining** | {{DateOfJoining}} |
+
+---
+
+## Arabic (يُشهد بأن):
 
 إلى {{PurposeAr}}،
 
@@ -46,11 +56,11 @@ version: 1.0
 
 *(IBAN: {{IBAN}} — {{BankName}})*
 
-صدرت هذه الشهادة بناءً على طلب الموظف/ة لتقديمها إلى {{Purpose}} ولا تُستخدم لأي غرض آخر.
+صدرت هذه الشهادة بناءً على طلب الموظف/ة لتقديمها إلى **{{PurposeAr}}** ولا تُستخدم لأي غرض آخر.
 
 ---
 
-**English (left column):**
+## English (This is to certify that):
 
 To {{Purpose}},
 
@@ -68,18 +78,21 @@ This is to certify that **{{EmployeeNameEn}}** is employed with **{{CompanyName}
 
 *(IBAN: {{IBAN}} — {{BankName}})*
 
-This certificate is issued upon the request of the employee for the purpose stated above and should not be used for any other purpose.
+This certificate is issued upon the request of the employee for **{{Purpose}}** and should not be used for any other purpose.
 
 ---
 
-## Signatures
+## Signatures / التواقيع
 
-| Official Seal / الختم الرسمي | Authorised Signatory / المفوض بالتوقيع |
+| الختم الرسمي / Official Stamp | المفوّض بالتوقيع / Authorised Signatory |
 |---|---|
-| *(Stamp here)* | {{AuthorisedBy}} |
+| *(Stamp here / ختم هنا)* | {{AuthorisedBy}} |
 | | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} |
 | | Signature: ___________________________ |
+| | Date: ___________________________ |
 
 ---
 
 *{{AdditionalNote}}*
+
+*صدرت هذه الشهادة بناءً على طلب الموظف/ة وتُحفظ في السجلات الرسمية للشركة. / This certificate is issued upon employee request and retained in the company's official records.*

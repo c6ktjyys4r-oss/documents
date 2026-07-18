@@ -1,7 +1,7 @@
 ---
 template: Training Request
 category: Administration
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,14 +10,16 @@ version: 2.0
 
 ---
 
-# نموذج طلب تدريب &nbsp;/&nbsp; TRAINING REQUEST FORM
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# نموذج طلب تدريب &nbsp;/&nbsp; Training Request Form
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
-| **رقم المرجع / Reference No.** | {{ReferenceNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
 | **القسم / Department** | {{Department}} |
 
@@ -71,15 +73,15 @@ version: 2.0
 
 | الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
 |---|---|---|---|---|
-| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
-| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
-| الموارد البشرية / HR | {{HRApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
-| المالية / Finance | {{FinanceApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| مقدم الطلب / Requester | {{RequestedBy}} | ___________ | ___________ | — |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | ___________ | ☐ Approved &nbsp; ☐ Rejected |
+| الموارد البشرية / HR | {{HRApprover}} | ___________ | ___________ | ☐ Approved &nbsp; ☐ Rejected |
+| المالية / Finance | {{FinanceApprover}} | ___________ | ___________ | ☐ Approved &nbsp; ☐ Rejected |
 
 ---
 
 **ملاحظات / Remarks:** {{Remarks}}
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا الطلب في سجلات التدريب الرسمية للموارد البشرية. / This request is retained in the official HR training records.*

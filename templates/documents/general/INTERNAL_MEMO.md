@@ -1,7 +1,7 @@
 ---
 template: Internal Memo
 category: General
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
@@ -10,7 +10,7 @@ version: 2.0
 
 ---
 
-# مذكرة داخلية &nbsp;/&nbsp; INTERNAL MEMORANDUM
+# مذكرة داخلية &nbsp;/&nbsp; Internal Memorandum
 
 ---
 
@@ -48,7 +48,7 @@ version: 2.0
 
 **English:** {{ActionRequired}}
 
-**Deadline / الموعد النهائي:** {{Deadline}}
+**الموعد النهائي / Deadline:** {{Deadline}}
 
 ---
 
@@ -58,5 +58,9 @@ version: 2.0
 |---|---|
 | {{PreparedBy}} | {{ApprovedBy}} |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
+
+---
+
+*هذه المذكرة للاستخدام الداخلي فقط. / This memorandum is for internal use only.*

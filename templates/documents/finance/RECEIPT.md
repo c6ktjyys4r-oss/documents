@@ -1,25 +1,27 @@
 ---
 template: Receipt
 category: Finance
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
 
 **{{CompanyName}}**
-{{CompanyAddress}}
-{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
+{{CompanyAddress}} &nbsp;|&nbsp; {{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 
 ---
 
-# إيصال استلام &nbsp;/&nbsp; RECEIPT
+**Ref / المرجع:** {{ReceiptNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# إيصال استلام &nbsp;/&nbsp; Receipt
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
 | **رقم الإيصال / Receipt No.** | {{ReceiptNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **العملة / Currency** | {{Currency}} |
 
 ---
@@ -35,15 +37,15 @@ version: 2.0
 
 | البيان / Description | المبلغ / Amount |
 |---|---|
-| {{PaymentDescription}} | {{Amount}} |
+| {{PaymentDescription1}} | {{Amount1}} |
 | {{PaymentDescription2}} | {{Amount2}} |
 | **الإجمالي / Total** | **{{TotalAmount}}** |
+
+---
 
 **طريقة الدفع / Payment Method:** {{PaymentMethod}}
 
 **رقم المرجع / Reference No.:** {{PaymentReference}}
-
----
 
 **ملاحظات / Notes:** {{Notes}}
 
@@ -51,9 +53,13 @@ version: 2.0
 
 ## Signatures / التواقيع
 
-| استُلم بواسطة / Received By | الختم الرسمي / Official Stamp |
+| استُلم بواسطة / Received By | |
 |---|---|
-| {{ReceivedBy}} | *(Stamp here / ختم هنا)* |
+| {{ReceivedBy}} | *(Official Stamp / الختم الرسمي)* |
 | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} | |
-| Signature / التوقيع: ___________________________ | |
-| Date / التاريخ: ___________________________ | |
+| Signature: ___________________________ | |
+| Date: ___________________________ | |
+
+---
+
+*هذا الإيصال وثيقة رسمية دليل على استلام الدفع. / This receipt is an official document confirming payment received.*

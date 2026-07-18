@@ -1,26 +1,28 @@
 ---
 template: Invoice
 category: Finance
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
 
 **{{CompanyName}}**
-{{CompanyAddress}}
-{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
-{{TaxRegistrationNumber}}
+{{CompanyAddress}} &nbsp;|&nbsp; {{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
+رقم السجل الضريبي / Tax Reg. No.: {{TaxRegistrationNumber}}
 
 ---
 
-# فاتورة &nbsp;/&nbsp; INVOICE
+**Ref / المرجع:** {{InvoiceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# فاتورة &nbsp;/&nbsp; Invoice
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
 | **رقم الفاتورة / Invoice No.** | {{InvoiceNumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **تاريخ الاستحقاق / Due Date** | {{DueDate}} |
 | **العملة / Currency** | {{Currency}} |
 
@@ -30,7 +32,6 @@ version: 2.0
 
 **{{CompanyName}}**
 {{CompanyAddress}}
-رقم السجل الضريبي / Tax Reg. No.: {{TaxRegistrationNumber}}
 
 ## إلى / To
 
@@ -44,9 +45,9 @@ version: 2.0
 
 | # | الوصف / Description | الكمية / Qty | سعر الوحدة / Unit Price | الإجمالي / Total |
 |---|---|---|---|---|
-| 1 | {{ItemDescription}} | {{Qty}} | {{UnitPrice}} | {{LineTotal}} |
+| 1 | {{ItemDescription1}} | {{Qty1}} | {{UnitPrice1}} | {{LineTotal1}} |
 | 2 | {{ItemDescription2}} | {{Qty2}} | {{UnitPrice2}} | {{LineTotal2}} |
-| 3 | | | | |
+| 3 | {{ItemDescription3}} | {{Qty3}} | {{UnitPrice3}} | {{LineTotal3}} |
 
 ---
 
@@ -54,15 +55,14 @@ version: 2.0
 |---|---|
 | **المجموع / Subtotal** | {{Subtotal}} |
 | **الضريبة / Tax ({{TaxRate}}%)** | {{TaxAmount}} |
-| **الخصم / Discount** | {{Discount}} |
+| **الخصم / Discount** | ({{Discount}}) |
 | **الإجمالي المستحق / Total Due** | **{{TotalDue}}** |
 
 ---
 
 **طريقة الدفع / Payment Method:** {{PaymentMethod}}
 
-**البيانات البنكية / Bank Details:**
-{{BankName}} &nbsp;|&nbsp; IBAN: {{IBAN}}
+**البيانات البنكية / Bank Details:** {{BankName}} &nbsp;|&nbsp; IBAN: {{IBAN}}
 
 **ملاحظات / Notes:** {{Notes}}
 
@@ -70,13 +70,14 @@ version: 2.0
 
 ## Signatures / التواقيع
 
-| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Approved By |
+| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Authorised By |
 |---|---|
 | {{PreparedBy}} | {{ApprovedBy}} |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
-| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
-| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+| *(Official Stamp / الختم الرسمي)* | |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*تُعدّ هذه الفاتورة وثيقة رسمية معتمدة. / This invoice is an official and approved document.*

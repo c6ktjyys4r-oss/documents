@@ -1,30 +1,43 @@
 ---
 template: Company Letter
 category: General
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
 
 **{{CompanyName}}**
-{{CompanyAddress}}
-{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}} &nbsp;|&nbsp; {{CompanyWebsite}}
+{{CompanyAddress}} &nbsp;|&nbsp; {{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}} &nbsp;|&nbsp; {{CompanyWebsite}}
 
 ---
 
-**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-**To / إلى:**
+**إلى / To:**
 {{RecipientName}}
 {{RecipientTitle}}
 {{RecipientOrganization}}
 {{RecipientAddress}}
 
-**Subject / الموضوع:** {{Subject}}
+**الموضوع / Subject:** {{Subject}}
 
 ---
+
+## Arabic (عربي):
+
+حضرة {{RecipientSalutationAr}}،
+
+{{BodyAr}}
+
+{{ClosingLineAr}}
+
+مع خالص التقدير،
+
+---
+
+## English:
 
 Dear {{RecipientSalutation}},
 
@@ -36,28 +49,16 @@ Yours sincerely,
 
 ---
 
-حضرة {{RecipientSalutation}}،
-
-{{BodyAr}}
-
-{{ClosingLineAr}}
-
-مع خالص التقدير،
-
----
-
 ## Signatures / التواقيع
 
-| المفوّض بالتوقيع / Authorised Signatory | الختم الرسمي / Official Stamp |
+| المفوّض بالتوقيع والختم / Authorised Signatory & Stamp | |
 |---|---|
-| {{PreparedBy}} | *(Stamp here / ختم هنا)* |
+| {{PreparedBy}} | *(Official Stamp / الختم الرسمي)* |
 | {{PreparedByTitle}} / {{PreparedByTitleAr}} | |
-| Signature / التوقيع: ___________________________ | |
-| Date / التاريخ: ___________________________ | |
+| {{Department}} — {{CompanyName}} | |
+| Signature: ___________________________ | |
+| Date: ___________________________ | |
 
 ---
 
-| معتمد من / Approved By | التوقيع / Signature |
-|---|---|
-| {{ApprovedBy}} | ___________________________ |
-| {{ApprovedByTitle}} / {{ApprovedByTitleAr}} | |
+*يُحتفظ بنسخة من هذا الخطاب في السجلات الرسمية للمنشأة. / A copy of this letter is retained in the company's official records.*

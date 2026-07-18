@@ -1,7 +1,8 @@
 ---
 template: Employee Information Form
 category: HR
-version: 2.0
+version: 2.1
+note: All fields must be completed in full. Incomplete forms will be returned.
 ---
 
 {{Logo}}
@@ -10,11 +11,11 @@ version: 2.0
 
 ---
 
-**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-# نموذج بيانات الموظف &nbsp;/&nbsp; EMPLOYEE INFORMATION FORM
+# نموذج بيانات الموظف &nbsp;/&nbsp; Employee Information Form
 
 ---
 
@@ -42,7 +43,7 @@ version: 2.0
 | **المدينة / City** | {{City}} |
 | **رقم الجوال / Mobile** | {{Mobile}} |
 | **البريد الإلكتروني / Email** | {{Email}} |
-| **جهة الاتصال في حالة الطوارئ / Emergency Contact Name** | {{EmergencyContactName}} |
+| **جهة الاتصال في حالة الطوارئ / Emergency Contact** | {{EmergencyContactName}} |
 | **رقم الطوارئ / Emergency Phone** | {{EmergencyContactPhone}} |
 | **صلة القرابة / Relationship** | {{EmergencyContactRelationship}} |
 
@@ -73,17 +74,21 @@ version: 2.0
 
 ## إقرار / Declaration
 
-أُقرّ بأن جميع المعلومات الواردة أعلاه صحيحة ودقيقة.
+أُقرّ بأن جميع المعلومات الواردة أعلاه صحيحة ودقيقة، وأتعهد بإبلاغ قسم الموارد البشرية بأي تغييرات.
 
-I confirm that all information provided above is accurate and complete.
+I confirm that all information provided above is accurate and complete. I undertake to inform the HR Department of any changes.
 
 ---
 
 ## Signatures / التواقيع
 
-| توقيع الموظف / Employee Signature | استلم بواسطة / Received By |
+| توقيع الموظف / Employee Signature | استُلم بواسطة / Received By (HR) |
 |---|---|
 | {{FullNameEn}} | {{ReceivedBy}} |
-| Signature / التوقيع: ___________________________ | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} |
-| Date / التاريخ: ___________________________ | Signature / التوقيع: ___________________________ |
-| | Date / التاريخ: ___________________________ |
+| | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} |
+| Signature: ___________________________ | Signature: ___________________________ |
+| Date: ___________________________ | Date: ___________________________ |
+
+---
+
+*يُحتفظ بهذا النموذج في ملف الموظف ضمن السجلات الرسمية للموارد البشرية. / This form is retained in the employee's file within the official HR records.*

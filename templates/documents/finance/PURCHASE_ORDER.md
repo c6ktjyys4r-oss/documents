@@ -1,25 +1,27 @@
 ---
 template: Purchase Order
 category: Finance
-version: 2.0
+version: 2.1
 ---
 
 {{Logo}}
 
 **{{CompanyName}}**
-{{CompanyAddress}}
-{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
+{{CompanyAddress}} &nbsp;|&nbsp; {{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 
 ---
 
-# أمر شراء &nbsp;/&nbsp; PURCHASE ORDER
+**Ref / المرجع:** {{PONumber}} &nbsp;|&nbsp; **Date / التاريخ:** {{Date}}
+
+---
+
+# أمر شراء &nbsp;/&nbsp; Purchase Order
 
 ---
 
 | البيان / Field | القيمة / Value |
 |---|---|
 | **رقم أمر الشراء / PO No.** | {{PONumber}} |
-| **التاريخ / Date** | {{Date}} |
 | **تاريخ التسليم المطلوب / Required Delivery Date** | {{DeliveryDate}} |
 | **العملة / Currency** | {{Currency}} |
 | **مركز التكلفة / Cost Centre** | {{CostCentre}} |
@@ -41,9 +43,9 @@ version: 2.0
 
 | # | الوصف / Description | الكمية / Qty | الوحدة / Unit | سعر الوحدة / Unit Price | الإجمالي / Total |
 |---|---|---|---|---|---|
-| 1 | {{ItemDescription}} | {{Qty}} | {{Unit}} | {{UnitPrice}} | {{LineTotal}} |
+| 1 | {{ItemDescription1}} | {{Qty1}} | {{Unit1}} | {{UnitPrice1}} | {{LineTotal1}} |
 | 2 | {{ItemDescription2}} | {{Qty2}} | {{Unit2}} | {{UnitPrice2}} | {{LineTotal2}} |
-| 3 | | | | | |
+| 3 | {{ItemDescription3}} | {{Qty3}} | {{Unit3}} | {{UnitPrice3}} | {{LineTotal3}} |
 
 ---
 
@@ -69,9 +71,10 @@ version: 2.0
 |---|---|---|
 | {{RequestedBy}} | {{AuthorisedBy}} | {{FinanceApprover}} |
 | {{RequestedByTitle}} / {{RequestedByTitleAr}} | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | {{FinanceTitle}} / {{FinanceTitleAr}} |
+| *(Official Stamp / الختم الرسمي)* | | |
 | Signature: ___________ | Signature: ___________ | Signature: ___________ |
 | Date: ___________ | Date: ___________ | Date: ___________ |
 
-| الختم الرسمي / Official Stamp |
-|---|
-| *(Stamp here / ختم هنا)* |
+---
+
+*يُحتفظ بهذا الأمر في سجلات المشتريات الرسمية للمنشأة. / This order is retained in the company's official procurement records.*
