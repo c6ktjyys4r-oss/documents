@@ -74,3 +74,44 @@
 |------|-----------|--------|
 | Alba | long-scene-74280324 | aws-us-east-1 |
 | api-server | red-art-58862536 | aws-us-east-2 |
+
+
+---
+
+## 2026-07-18 — Auth Regression Fix (Session 4)
+
+### Root Causes Discovered
+
+| # | Root Cause | Impact |
+|---|-----------|--------|
+| RC-1 | `EMERGENCY_ADMIN_PASSWORD_HASH` not set in Tarout production | Admin break-glass login permanently blocked |
+| RC-2 | Neon DB has 0 active employee credentials (data not migrated from Render) | Employee login also blocked |
+
+### Evidence
+
+- `env.ts`: empty string fallback `?? ""` is falsy → `getAdminPasswordHash()` returns null in production
+- `localAuth.ts`: null storedHash → `login()` returns null → every admin attempt denied
+- Neon DB: 3 employees, 1 credential row with `isActive=false` + `status=archived`
+- Session 2 env list: NODE_ENV, DATABASE_URL, JWT_SECRET, SESSION_SECRET, ENCRYPTION_SECRET — `EMERGENCY_ADMIN_PASSWORD_HASH` absent
+
+### Fixes Applied
+
+1. **`EMERGENCY_ADMIN_PASSWORD_HASH`** set via Tarout `envVariable.bulkUpsert` (with `restart: true`)
+2. **Employee credential** created for id=70 CHERRY OLANDRIA (`isActive=true`, `mustChangePassword=true`)
+
+### Verification
+
+| Check | Result |
+|-------|--------|
+| Admin login (admin) | ✅ `{"role":"super_admin","employeeId":null}` |
+| Employee login (cherry.olandria) | ✅ `{"role":"employee","employeeId":70,"mustChangePassword":true}` |
+
+### Full Audit Report
+
+`audits/2026-07-18-auth-regression-tarout.md`
+
+### Actions Required
+
+1. Change admin password immediately after first login
+2. Create credential for employee id=71 via admin UI
+3. Determine if other Render DB data needs migrating to Neon
