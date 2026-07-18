@@ -67,3 +67,4 @@ Update this file whenever a document is created, revised, approved, or archived.
 | T-045 | Loan Acknowledgement | HR | 1.0 | `templates/documents/hr/LOAN_ACKNOWLEDGEMENT.md` |
 | T-046 | Final Settlement Form | HR | 1.0 | `templates/documents/hr/FINAL_SETTLEMENT.md` |
 | T-047 | Payslip | HR | 1.0 | `templates/documents/hr/PAYSLIP.md` |
+| T-048 | Annual Leave Encashment | HR | 1.0 | `templates/documents/hr/ANNUAL_LEAVE_ENCASHMENT.md` |
