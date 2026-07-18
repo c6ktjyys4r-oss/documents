@@ -1,38 +1,63 @@
 ---
 template: Announcement
 category: General
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# ANNOUNCEMENT
-
-**Company:** {{CompanyName}}
-**Date:** {{Date}}
-**Reference:** {{ReferenceNumber}}
+**{{CompanyName}}**
 
 ---
 
-## {{Subject}}
+# إعلان &nbsp;/&nbsp; ANNOUNCEMENT
+
+---
+
+| البيان / Field | القيمة / Value |
+|---|---|
+| **رقم المرجع / Reference No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **إلى / To** | {{Audience}} |
+| **الموضوع / Subject** | {{Subject}} |
+| **تاريخ النفاذ / Effective Date** | {{EffectiveDate}} |
+
+---
+
+## الإعلان / Announcement
+
+**عربي:**
+
+{{BodyAr}}
+
+**English:**
 
 {{Body}}
 
 ---
 
-**Further Details:**
+## تفاصيل إضافية / Additional Details
 
-{{AdditionalDetails}}
+**عربي:** {{AdditionalDetailsAr}}
 
-**Effective Date:** {{EffectiveDate}}
-
-**Contact for Enquiries:** {{ContactPerson}} — {{ContactDetails}}
+**English:** {{AdditionalDetails}}
 
 ---
 
-**Issued By:** {{PreparedBy}}
-**Title:** {{PreparedByTitle}}
-**Department:** {{Department}}
+## الاستفسارات / Enquiries
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+للاستفسار: {{ContactPerson}} &nbsp;|&nbsp; {{ContactDetails}}
+
+For enquiries: {{ContactPerson}} &nbsp;|&nbsp; {{ContactDetails}}
+
+---
+
+## Signatures / التواقيع
+
+| صادر عن / Issued By | الختم الرسمي / Official Stamp |
+|---|---|
+| {{PreparedBy}} | *(Stamp here / ختم هنا)* |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | |
+| {{Department}} | |
+| Signature / التوقيع: ___________________________ | |
+| Date / التاريخ: ___________________________ | |

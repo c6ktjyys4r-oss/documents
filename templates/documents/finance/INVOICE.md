@@ -1,61 +1,82 @@
 ---
 template: Invoice
 category: Finance
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# INVOICE
-
----
-
-**From:**
-{{CompanyName}}
+**{{CompanyName}}**
 {{CompanyAddress}}
-{{CompanyPhone}} | {{CompanyEmail}}
+{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 {{TaxRegistrationNumber}}
 
-**To:**
-{{ClientName}}
-{{ClientAddress}}
-{{ClientTaxNumber}}
+---
+
+# فاتورة &nbsp;/&nbsp; INVOICE
 
 ---
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Invoice No.** | {{InvoiceNumber}} |
-| **Date** | {{Date}} |
-| **Due Date** | {{DueDate}} |
-| **Currency** | {{Currency}} |
+| **رقم الفاتورة / Invoice No.** | {{InvoiceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **تاريخ الاستحقاق / Due Date** | {{DueDate}} |
+| **العملة / Currency** | {{Currency}} |
 
 ---
 
-## Items
+## من / From
 
-| # | Description | Qty | Unit Price | Total |
+**{{CompanyName}}**
+{{CompanyAddress}}
+رقم السجل الضريبي / Tax Reg. No.: {{TaxRegistrationNumber}}
+
+## إلى / To
+
+**{{ClientName}}**
+{{ClientAddress}}
+رقم السجل الضريبي / Tax Reg. No.: {{ClientTaxNumber}}
+
+---
+
+## البنود / Line Items
+
+| # | الوصف / Description | الكمية / Qty | سعر الوحدة / Unit Price | الإجمالي / Total |
 |---|---|---|---|---|
 | 1 | {{ItemDescription}} | {{Qty}} | {{UnitPrice}} | {{LineTotal}} |
-| 2 | | | | |
+| 2 | {{ItemDescription2}} | {{Qty2}} | {{UnitPrice2}} | {{LineTotal2}} |
+| 3 | | | | |
 
 ---
 
 | | |
 |---|---|
-| **Subtotal** | {{Subtotal}} |
-| **Tax ({{TaxRate}}%)** | {{TaxAmount}} |
-| **Discount** | {{Discount}} |
-| **Total Due** | {{TotalDue}} |
+| **المجموع / Subtotal** | {{Subtotal}} |
+| **الضريبة / Tax ({{TaxRate}}%)** | {{TaxAmount}} |
+| **الخصم / Discount** | {{Discount}} |
+| **الإجمالي المستحق / Total Due** | **{{TotalDue}}** |
 
 ---
 
-**Payment Method:** {{PaymentMethod}}
-**Bank Details:** {{BankDetails}}
-**Notes:** {{Notes}}
+**طريقة الدفع / Payment Method:** {{PaymentMethod}}
+
+**البيانات البنكية / Bank Details:**
+{{BankName}} &nbsp;|&nbsp; IBAN: {{IBAN}}
+
+**ملاحظات / Notes:** {{Notes}}
 
 ---
 
-**Prepared By:** {{PreparedBy}}
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+## Signatures / التواقيع
+
+| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Approved By |
+|---|---|
+| {{PreparedBy}} | {{ApprovedBy}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

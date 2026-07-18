@@ -1,61 +1,77 @@
 ---
 template: IT Request
 category: Administration
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# IT REQUEST FORM
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# نموذج طلب تقنية المعلومات &nbsp;/&nbsp; IT REQUEST FORM
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Ticket No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Requested By** | {{RequestedBy}} |
-| **Department** | {{Department}} |
-| **Priority** | {{Priority}} |
-| **Request Type** | {{RequestType}} |
+| **رقم التذكرة / Ticket No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **الأولوية / Priority** | {{Priority}} |
+| **نوع الطلب / Request Type** | {{RequestType}} |
+| **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
+| **القسم / Department** | {{Department}} |
 
 ---
 
-## Request Details
+## تفاصيل الطلب / Request Details
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Subject** | {{Subject}} |
-| **System / Device / Software** | {{SystemOrDevice}} |
-| **Description** | {{RequestDescription}} |
-| **Required By** | {{RequiredByDate}} |
+| **الموضوع / Subject** | {{Subject}} |
+| **النظام / الجهاز / System or Device** | {{SystemOrDevice}} |
+| **الموقع / Location** | {{Location}} |
 
 ---
 
-**Impact if not resolved:** {{ImpactDescription}}
+**وصف المشكلة / الطلب — Problem or Request Description:**
+
+**عربي:** {{DescriptionAr}}
+
+**English:** {{Description}}
 
 ---
 
-## For IT Use
+**تأثير العمل / Business Impact:** {{BusinessImpactAr}} / {{BusinessImpact}}
 
-| Field | Value |
+**تاريخ الإنجاز المطلوب / Required Completion Date:** {{RequiredByDate}}
+
+---
+
+## الاعتمادات / Approvals
+
+| الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
+|---|---|---|---|---|
+| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| مدير تقنية المعلومات / IT Manager | {{ITManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+
+---
+
+## للاستخدام الداخلي — تقنية المعلومات / For IT Use Only
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Assigned To** | {{AssignedTo}} |
-| **Estimated Completion** | {{EstimatedCompletion}} |
-| **Actual Completion** | {{ActualCompletion}} |
-| **Action Taken** | {{ActionTaken}} |
-| **Status** | {{Status}} |
+| **المعالج / Assigned To** | {{AssignedTo}} |
+| **تاريخ البدء / Start Date** | {{StartDate}} |
+| **تاريخ الإغلاق / Closure Date** | {{ClosureDate}} |
+| **الحل / Resolution** | {{Resolution}} |
 
 ---
 
-**Requested By:** {{RequestedBy}}
-**Signature:** ___________________________
+**ملاحظات / Remarks:** {{Remarks}}
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
-
-**Resolved By:** {{ResolvedBy}}
-**Signature:** ___________________________
-**Date:** ___________________________
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

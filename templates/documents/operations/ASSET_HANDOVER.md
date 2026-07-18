@@ -1,63 +1,69 @@
 ---
 template: Asset Handover
 category: Operations
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# ASSET HANDOVER FORM
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# محضر تسليم واستلام أصول &nbsp;/&nbsp; ASSET HANDOVER
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Reference No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Handover Type** | {{HandoverType}} |
+| **رقم المحضر / Reference No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
 
 ---
 
-## Recipient Details
+## جهة التسليم / Issuing Party
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Name** | {{RecipientName}} |
-| **Title** | {{RecipientTitle}} |
-| **Department** | {{Department}} |
-| **Location** | {{Location}} |
+| **الاسم / Name** | {{IssuedByNameAr}} / {{IssuedByName}} |
+| **المسمى / Title** | {{IssuedByTitleAr}} / {{IssuedByTitle}} |
+| **القسم / Department** | {{IssuingDepartment}} |
 
 ---
 
-## Assets Handed Over
+## جهة الاستلام / Receiving Party
 
-| # | Asset Description | Asset ID / Serial | Condition | Accessories Included | Notes |
+| البيان / Field | القيمة / Value |
+|---|---|
+| **الاسم / Name** | {{ReceivedByNameAr}} / {{ReceivedByName}} |
+| **المسمى / Title** | {{ReceivedByTitleAr}} / {{ReceivedByTitle}} |
+| **القسم / Department** | {{ReceivingDepartment}} |
+
+---
+
+## الأصول المُسلَّمة / Assets Handed Over
+
+| # | الأصل / Asset Description | رقم الأصل / Asset ID | الحالة / Condition | الملحقات / Accessories | ملاحظات / Notes |
 |---|---|---|---|---|---|
-| 1 | {{AssetDescription}} | {{AssetID}} | {{Condition}} | {{Accessories}} | {{Notes}} |
-| 2 | | | | | |
+| 1 | {{AssetDescription1}} | {{AssetID1}} | {{Condition1}} | {{Accessories1}} | {{Notes1}} |
+| 2 | {{AssetDescription2}} | {{AssetID2}} | {{Condition2}} | {{Accessories2}} | {{Notes2}} |
+| 3 | | | | | |
 
 ---
 
-## Terms
-
-- Recipient is responsible for the safe custody and proper use of the above assets.
-- Assets remain the property of {{CompanyName}}.
-- Any damage, loss, or misuse must be reported immediately.
-
-{{AdditionalTerms}}
+**ملاحظات / Remarks:** {{Remarks}}
 
 ---
 
-**Issued By:** {{PreparedBy}}
-**Title:** {{PreparedByTitle}}
-**Signature:** ___________________________
-**Date:** {{Date}}
+## Signatures / التواقيع
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+| المُسلِّم / Issued By | المُستَلِم / Received By | الشاهد / Witness |
+|---|---|---|
+| {{IssuedByName}} | {{ReceivedByName}} | {{WitnessName}} |
+| {{IssuedByTitle}} / {{IssuedByTitleAr}} | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} | {{WitnessTitle}} / {{WitnessTitleAr}} |
+| Signature: ___________ | Signature: ___________ | Signature: ___________ |
+| Date: ___________ | Date: ___________ | Date: ___________ |
 
-**Received By:** {{RecipientName}}
-**Signature:** ___________________________
-**Date:** ___________________________
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

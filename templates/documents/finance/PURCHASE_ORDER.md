@@ -1,64 +1,77 @@
 ---
 template: Purchase Order
 category: Finance
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# PURCHASE ORDER
-
----
-
-**Buyer:**
-{{CompanyName}}
+**{{CompanyName}}**
 {{CompanyAddress}}
-{{CompanyPhone}} | {{CompanyEmail}}
-
-**Supplier:**
-{{SupplierName}}
-{{SupplierAddress}}
-{{SupplierContactPerson}}
+{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 
 ---
 
-| Field | Value |
+# أمر شراء &nbsp;/&nbsp; PURCHASE ORDER
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **PO Number** | {{PONumber}} |
-| **Date** | {{Date}} |
-| **Required By** | {{RequiredByDate}} |
-| **Currency** | {{Currency}} |
-| **Delivery Location** | {{DeliveryLocation}} |
+| **رقم أمر الشراء / PO No.** | {{PONumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **تاريخ التسليم المطلوب / Required Delivery Date** | {{DeliveryDate}} |
+| **العملة / Currency** | {{Currency}} |
+| **مركز التكلفة / Cost Centre** | {{CostCentre}} |
 
 ---
 
-## Order Items
+## المورد / Supplier
 
-| # | Item Description | Qty | Unit | Unit Price | Total |
+| البيان / Field | القيمة / Value |
+|---|---|
+| **اسم المورد / Supplier Name** | {{SupplierName}} |
+| **العنوان / Address** | {{SupplierAddress}} |
+| **جهة التواصل / Contact** | {{SupplierContact}} |
+| **رقم السجل الضريبي / Tax Reg. No.** | {{SupplierTaxNumber}} |
+
+---
+
+## البنود / Line Items
+
+| # | الوصف / Description | الكمية / Qty | الوحدة / Unit | سعر الوحدة / Unit Price | الإجمالي / Total |
 |---|---|---|---|---|---|
 | 1 | {{ItemDescription}} | {{Qty}} | {{Unit}} | {{UnitPrice}} | {{LineTotal}} |
-| 2 | | | | | |
+| 2 | {{ItemDescription2}} | {{Qty2}} | {{Unit2}} | {{UnitPrice2}} | {{LineTotal2}} |
+| 3 | | | | | |
 
 ---
 
 | | |
 |---|---|
-| **Subtotal** | {{Subtotal}} |
-| **Tax ({{TaxRate}}%)** | {{TaxAmount}} |
-| **Shipping** | {{Shipping}} |
-| **Total** | {{Total}} |
+| **المجموع / Subtotal** | {{Subtotal}} |
+| **الضريبة / Tax ({{TaxRate}}%)** | {{TaxAmount}} |
+| **الإجمالي / Total** | **{{TotalAmount}}** |
 
 ---
 
-**Payment Terms:** {{PaymentTerms}}
+**شروط التسليم / Delivery Terms:** {{DeliveryTerms}}
 
-**Special Instructions:** {{SpecialInstructions}}
+**شروط الدفع / Payment Terms:** {{PaymentTerms}}
 
-**Notes:** {{Notes}}
+**ملاحظات / Notes:** {{Notes}}
 
 ---
 
-**Prepared By:** {{PreparedBy}}
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
-**Date:** {{Date}}
+## Signatures / التواقيع
+
+| طُلب بواسطة / Requested By | اعتمد بواسطة / Authorised By | المالية / Finance |
+|---|---|---|
+| {{RequestedBy}} | {{AuthorisedBy}} | {{FinanceApprover}} |
+| {{RequestedByTitle}} / {{RequestedByTitleAr}} | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | {{FinanceTitle}} / {{FinanceTitleAr}} |
+| Signature: ___________ | Signature: ___________ | Signature: ___________ |
+| Date: ___________ | Date: ___________ | Date: ___________ |
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

@@ -1,65 +1,67 @@
 ---
 template: Resignation Acceptance
 category: HR
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
+**{{CompanyName}}**
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
-
-**To:**
-{{EmployeeName}}
-{{JobTitle}} — {{Department}}
-
-**Subject:** Acceptance of Resignation
-
-Dear {{EmployeeName}},
-
-We acknowledge receipt of your resignation letter dated **{{ResignationDate}}** and formally accept your resignation from the position of **{{JobTitle}}**.
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-**Last Working Day:** {{LastWorkingDay}}
-
-**Notice Period:** {{NoticePeriod}}
+# قبول الاستقالة &nbsp;/&nbsp; RESIGNATION ACCEPTANCE
 
 ---
 
-## Handover
+## معلومات الموظف / Employee Details
+
+| البيان / Field | القيمة / Value |
+|---|---|
+| **اسم الموظف / Employee Name** | {{EmployeeNameAr}} / {{EmployeeNameEn}} |
+| **رقم الموظف / Employee Code** | {{EmployeeCode}} |
+| **المسمى الوظيفي / Job Title** | {{JobTitleAr}} / {{JobTitle}} |
+| **القسم / Department** | {{Department}} |
+| **تاريخ تقديم الاستقالة / Resignation Submission Date** | {{ResignationDate}} |
+| **آخر يوم عمل / Last Working Day** | {{LastWorkingDay}} |
+| **فترة الإشعار / Notice Period** | {{NoticePeriod}} |
+
+---
+
+**Arabic:**
+
+نُحيطكم علمًا بأننا استلمنا خطاب استقالتكم المؤرخ في **{{ResignationDate}}**، ونُعلمكم رسميًا بقبولها اعتبارًا من **{{LastWorkingDay}}**.
+
+{{HandoverInstructionsAr}}
+
+{{ClearanceProcessAr}}
+
+نشكركم على جهودكم ومساهماتكم خلال فترة عملكم مع **{{CompanyNameAr}}**، ونتمنى لكم التوفيق في مسيرتكم المهنية.
+
+---
+
+**English:**
+
+We acknowledge receipt of your resignation letter dated **{{ResignationDate}}** and formally confirm its acceptance, effective **{{LastWorkingDay}}**.
 
 {{HandoverInstructions}}
 
-## Clearance
-
 {{ClearanceProcess}}
 
-## Final Entitlements
-
-{{EntitlementsDescription}}
+We thank you for your contributions during your tenure with **{{CompanyName}}** and wish you every success in your future endeavours.
 
 ---
 
-We thank you for your contribution to {{CompanyName}} and wish you well in your future endeavours.
+## Signatures / التواقيع
 
----
-
-**Prepared By:** {{PreparedBy}}
-
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
-
----
-
-**Employee Acknowledgement**
-
-I confirm receipt of this resignation acceptance.
-
-**Employee Name:** {{EmployeeName}}
-**Signature:** ___________________________
-**Date:** ___________________________
+| المفوّض بالتوقيع والختم / Authorised Signatory & Stamp | إقرار الموظف / Employee Acknowledgement |
+|---|---|
+| {{AuthorisedBy}} | {{EmployeeNameEn}} |
+| {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | {{JobTitle}} |
+| *(Official Stamp / الختم الرسمي)* | |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |

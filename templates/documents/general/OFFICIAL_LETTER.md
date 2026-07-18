@@ -1,29 +1,34 @@
 ---
 template: Official Letter
 category: General
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
+**{{CompanyName}}**
 {{CompanyAddress}}
-{{CompanyPhone}} | {{CompanyEmail}}
+{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
-**To:**
+---
+
+**To / إلى:**
 {{RecipientName}}
 {{RecipientTitle}}
 {{RecipientOrganization}}
 {{RecipientAddress}}
 
-**Via:** {{DeliveryMethod}}
+**Via / عبر:** {{DeliveryMethod}}
 
-**Subject:** {{Subject}}
+**Subject / الموضوع:** {{Subject}}
+
+---
+
+**English:**
 
 Dear {{RecipientSalutation}},
 
@@ -35,13 +40,29 @@ Dear {{RecipientSalutation}},
 
 Yours faithfully,
 
-{{PreparedBy}}
-{{PreparedByTitle}}
-{{Department}}
-{{CompanyName}}
+---
 
-**Official Stamp:** ___________________________
+**عربي:**
 
-**Signature:** ___________________________
+حضرة {{RecipientSalutationAr}}،
 
-**Date Signed:** {{DateSigned}}
+{{OpeningParagraphAr}}
+
+{{BodyAr}}
+
+{{ClosingParagraphAr}}
+
+مع خالص التقدير،
+
+---
+
+## Signatures / التواقيع
+
+| المفوّض بالتوقيع / Authorised Signatory | الختم الرسمي / Official Stamp |
+|---|---|
+| {{PreparedBy}} | *(Stamp here / ختم هنا)* |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | |
+| {{Department}} | |
+| {{CompanyName}} | |
+| Signature / التوقيع: ___________________________ | |
+| Date / التاريخ: {{DateSigned}} | |

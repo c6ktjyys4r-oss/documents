@@ -1,64 +1,69 @@
 ---
 template: Asset Return
 category: Operations
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# ASSET RETURN FORM
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# محضر إعادة أصول &nbsp;/&nbsp; ASSET RETURN
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Reference No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Original Handover Ref.** | {{OriginalHandoverReference}} |
+| **رقم المحضر / Reference No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **مرجع تسليم الأصل الأصلي / Original Handover Ref.** | {{OriginalHandoverReference}} |
 
 ---
 
-## Returning Party
+## جهة الإعادة / Returning Party
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Name** | {{ReturnedByName}} |
-| **Title** | {{ReturnedByTitle}} |
-| **Department** | {{Department}} |
+| **الاسم / Name** | {{ReturnedByNameAr}} / {{ReturnedByName}} |
+| **المسمى / Title** | {{ReturnedByTitleAr}} / {{ReturnedByTitle}} |
+| **القسم / Department** | {{Department}} |
 
 ---
 
-## Assets Returned
+## الأصول المُعادة / Assets Returned
 
-| # | Asset Description | Asset ID / Serial | Condition at Return | Accessories Returned | Notes |
+| # | الأصل / Asset Description | رقم الأصل / Asset ID | الحالة عند الإعادة / Condition at Return | الملحقات / Accessories | ملاحظات / Notes |
 |---|---|---|---|---|---|
-| 1 | {{AssetDescription}} | {{AssetID}} | {{Condition}} | {{Accessories}} | {{Notes}} |
-| 2 | | | | | |
+| 1 | {{AssetDescription1}} | {{AssetID1}} | {{ConditionAtReturn1}} | {{Accessories1}} | {{Notes1}} |
+| 2 | {{AssetDescription2}} | {{AssetID2}} | {{ConditionAtReturn2}} | {{Accessories2}} | {{Notes2}} |
+| 3 | | | | | |
 
 ---
 
-## Condition Assessment
+## تقييم الحالة / Condition Assessment
 
-| Asset ID | Expected Condition | Actual Condition | Discrepancy |
+| رقم الأصل / Asset ID | الحالة المتوقعة / Expected | الحالة الفعلية / Actual | الفرق / Discrepancy |
 |---|---|---|---|
-| {{AssetID}} | {{ExpectedCondition}} | {{ActualCondition}} | {{Discrepancy}} |
+| {{AssetID1}} | {{ExpectedCondition1}} | {{ActualCondition1}} | {{Discrepancy1}} |
+| {{AssetID2}} | {{ExpectedCondition2}} | {{ActualCondition2}} | {{Discrepancy2}} |
 
 ---
 
-**Remarks:** {{Remarks}}
+**ملاحظات / Remarks:** {{Remarks}}
 
 ---
 
-**Returned By:** {{ReturnedByName}}
-**Signature:** ___________________________
-**Date:** ___________________________
+## Signatures / التواقيع
 
-**Received By:** {{ReceivedBy}}
-**Title:** {{ReceivedByTitle}}
-**Signature:** ___________________________
-**Date:** ___________________________
+| المُعيد / Returned By | المُستَلِم / Received By | تحقق بواسطة / Verified By |
+|---|---|---|
+| {{ReturnedByName}} | {{ReceivedBy}} | {{VerifiedBy}} |
+| {{ReturnedByTitle}} / {{ReturnedByTitleAr}} | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} | {{VerifiedByTitle}} / {{VerifiedByTitleAr}} |
+| Signature: ___________ | Signature: ___________ | Signature: ___________ |
+| Date: ___________ | Date: ___________ | Date: ___________ |
 
-**Verified By:** {{ApprovedBy}}
-**Signature:** ___________________________
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

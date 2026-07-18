@@ -1,83 +1,92 @@
 ---
 template: Incident Report
 category: Operations
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# INCIDENT REPORT
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# تقرير حادثة &nbsp;/&nbsp; INCIDENT REPORT
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Report No.** | {{ReferenceNumber}} |
-| **Date of Report** | {{Date}} |
-| **Incident Date** | {{IncidentDate}} |
-| **Incident Time** | {{IncidentTime}} |
-| **Location** | {{Location}} |
-| **Incident Type** | {{IncidentType}} |
-| **Severity** | {{Severity}} |
+| **رقم التقرير / Report No.** | {{ReferenceNumber}} |
+| **تاريخ الحادثة / Incident Date** | {{IncidentDate}} |
+| **وقت الحادثة / Incident Time** | {{IncidentTime}} |
+| **تاريخ التقرير / Report Date** | {{ReportDate}} |
+| **موقع الحادثة / Incident Location** | {{IncidentLocation}} |
+| **نوع الحادثة / Incident Type** | {{IncidentType}} |
+| **الخطورة / Severity** | {{Severity}} |
 
 ---
 
-## Persons Involved
+## المُبلِّغ عن الحادثة / Reported By
 
-| Name | Role / Title | Department | Contact |
+| البيان / Field | القيمة / Value |
+|---|---|
+| **الاسم / Name** | {{ReporterNameAr}} / {{ReporterName}} |
+| **المسمى الوظيفي / Job Title** | {{ReporterTitle}} |
+| **القسم / Department** | {{Department}} |
+
+---
+
+## وصف الحادثة / Incident Description
+
+**عربي:** {{IncidentDescriptionAr}}
+
+**English:** {{IncidentDescription}}
+
+---
+
+## المتضررون / Persons Involved
+
+| الاسم / Name | الدور / Role | الإصابة / Injury | الحالة / Status |
 |---|---|---|---|
-| {{Name}} | {{Role}} | {{Department}} | {{Contact}} |
+| {{PersonName1}} | {{PersonRole1}} | {{Injury1}} | {{Status1}} |
+| {{PersonName2}} | {{PersonRole2}} | {{Injury2}} | {{Status2}} |
 
 ---
 
-## Incident Description
+## السبب الجذري / Root Cause
 
-{{IncidentDescription}}
+**عربي:** {{RootCauseAr}}
 
----
-
-## Immediate Actions Taken
-
-{{ImmediateActions}}
+**English:** {{RootCause}}
 
 ---
 
-## Root Cause Analysis
+## الإجراءات الفورية المتخذة / Immediate Actions Taken
 
-**Probable Cause:** {{ProbableCause}}
+**عربي:** {{ImmediateActionsAr}}
 
-**Contributing Factors:** {{ContributingFactors}}
-
----
-
-## Impact
-
-**People:** {{PeopleImpact}}
-**Property / Equipment:** {{PropertyImpact}}
-**Operations:** {{OperationsImpact}}
+**English:** {{ImmediateActions}}
 
 ---
 
-## Corrective Actions
+## الإجراءات التصحيحية / Corrective Actions
 
-| Action | Owner | Due Date | Status |
+| الإجراء / Action | المسؤول / Owner | الموعد / Due Date | الحالة / Status |
 |---|---|---|---|
-| {{Action}} | {{Owner}} | {{DueDate}} | Open |
+| {{CorrectiveAction1}} | {{Owner1}} | {{DueDate1}} | مفتوح / Open |
+| {{CorrectiveAction2}} | {{Owner2}} | {{DueDate2}} | مفتوح / Open |
 
 ---
 
-## Preventive Measures
+## Signatures / التواقيع
 
-{{PreventiveMeasures}}
+| أُعِدَّ بواسطة / Prepared By | راجعه / Reviewed By | اعتمد بواسطة / Approved By |
+|---|---|---|
+| {{PreparedBy}} | {{ReviewedBy}} | {{ApprovedBy}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ReviewedByTitle}} / {{ReviewedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
+| Signature: ___________ | Signature: ___________ | Signature: ___________ |
+| Date: ___________ | Date: ___________ | Date: ___________ |
 
----
-
-**Reported By:** {{PreparedBy}}
-**Title:** {{PreparedByTitle}}
-**Signature:** ___________________________
-
-**Reviewed By:** {{ApprovedBy}}
-**Signature:** ___________________________
-**Date:** {{Date}}
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

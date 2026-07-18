@@ -1,54 +1,63 @@
 ---
 template: Visitor Pass
 category: Administration
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# VISITOR PASS
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# تصريح زيارة &nbsp;/&nbsp; VISITOR PASS
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Pass No.** | {{PassNumber}} |
-| **Date** | {{Date}} |
-| **Valid For** | {{ValidForDate}} |
+| **رقم التصريح / Pass No.** | {{PassNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **صالح حتى / Valid For** | {{ValidForDate}} |
 
 ---
 
-## Visitor Information
+## بيانات الزائر / Visitor Information
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Full Name** | {{VisitorName}} |
-| **ID / Passport No.** | {{VisitorID}} |
-| **Organization** | {{VisitorOrganization}} |
-| **Contact Number** | {{VisitorPhone}} |
+| **الاسم الكامل / Full Name** | {{VisitorNameAr}} / {{VisitorName}} |
+| **رقم الهوية / الجواز / ID or Passport No.** | {{VisitorID}} |
+| **الجهة / Organization** | {{VisitorOrganization}} |
+| **رقم الجوال / Contact Number** | {{VisitorPhone}} |
+| **الجنسية / Nationality** | {{VisitorNationality}} |
 
 ---
 
-## Visit Details
+## تفاصيل الزيارة / Visit Details
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Purpose of Visit** | {{VisitPurpose}} |
-| **Host Name** | {{HostName}} |
-| **Host Department** | {{HostDepartment}} |
-| **Area / Floor Permitted** | {{PermittedArea}} |
-| **Check-In Time** | {{CheckInTime}} |
-| **Check-Out Time** | {{CheckOutTime}} |
+| **الغرض / Purpose of Visit** | {{VisitPurposeAr}} / {{VisitPurpose}} |
+| **المضيف / Host Name** | {{HostNameAr}} / {{HostName}} |
+| **القسم / Department** | {{HostDepartment}} |
+| **المنطقة المسموح بها / Permitted Area** | {{PermittedArea}} |
+| **وقت الدخول / Check-In Time** | {{CheckInTime}} |
+| **وقت الخروج / Check-Out Time** | {{CheckOutTime}} |
 
 ---
 
-**Issued By:** {{PreparedBy}}
-**Signature:** ___________________________
-
-**Visitor Signature:** ___________________________
-
----
+*يجب أن يكون الزائر برفقة مضيفه في جميع الأوقات. يُعاد هذا التصريح عند المغادرة.*
 
 *Visitor must be accompanied at all times. This pass must be returned on departure.*
+
+---
+
+## Signatures / التواقيع
+
+| صادر بواسطة / Issued By | توقيع الزائر / Visitor Signature |
+|---|---|
+| {{PreparedBy}} | {{VisitorName}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |

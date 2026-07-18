@@ -1,77 +1,85 @@
 ---
 template: Training Request
 category: Administration
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# TRAINING REQUEST FORM
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# نموذج طلب تدريب &nbsp;/&nbsp; TRAINING REQUEST FORM
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Reference No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Requested By** | {{RequestedBy}} |
-| **Department** | {{Department}} |
+| **رقم المرجع / Reference No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
+| **القسم / Department** | {{Department}} |
 
 ---
 
-## Participant(s)
+## بيانات الموظف / Employee Details
 
-| Name | Title | Department |
-|---|---|---|
-| {{ParticipantName}} | {{Title}} | {{Department}} |
-
----
-
-## Training Details
-
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Training Title** | {{TrainingTitle}} |
-| **Provider / Vendor** | {{TrainingProvider}} |
-| **Type** | {{TrainingType}} |
-| **Location / Platform** | {{Location}} |
-| **Proposed Dates** | {{ProposedDates}} |
-| **Duration** | {{Duration}} |
+| **الاسم / Name** | {{EmployeeNameAr}} / {{EmployeeNameEn}} |
+| **المسمى الوظيفي / Job Title** | {{JobTitleAr}} / {{JobTitle}} |
+| **الفرع / Branch** | {{Branch}} |
 
 ---
 
-## Costs
+## تفاصيل التدريب / Training Details
 
-| Item | Amount |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Tuition / Fees** | {{TrainingFee}} |
-| **Travel** | {{TravelCost}} |
-| **Accommodation** | {{AccommodationCost}} |
-| **Other** | {{OtherCosts}} |
-| **Total** | {{TotalCost}} |
-| **Currency** | {{Currency}} |
+| **عنوان الدورة / Training Title** | {{TrainingTitle}} |
+| **الجهة المنظِّمة / Provider** | {{TrainingProvider}} |
+| **نوع التدريب / Type** | {{TrainingType}} |
+| **الموقع / المنصة / Location or Platform** | {{Location}} |
+| **التواريخ المقترحة / Proposed Dates** | {{ProposedDates}} |
+| **المدة / Duration** | {{Duration}} |
 
 ---
 
-**Business Justification:** {{Justification}}
+## التكاليف / Costs
 
-**Expected Benefit / Outcome:** {{ExpectedBenefit}}
-
-**Budget Code / Cost Centre:** {{CostCentre}}
+| البند / Item | المبلغ / Amount |
+|---|---|
+| رسوم التدريب / Tuition Fees | {{TrainingFee}} |
+| تكاليف السفر / Travel | {{TravelCost}} |
+| الإقامة / Accommodation | {{AccommodationCost}} |
+| أخرى / Other | {{OtherCosts}} |
+| **الإجمالي / Total** | **{{TotalCost}}** |
+| **العملة / Currency** | {{Currency}} |
 
 ---
 
-## Approvals
+**المبرر التجاري / Business Justification:** {{JustificationAr}} / {{Justification}}
 
-| Role | Name | Signature | Date | Decision |
+**النتائج المتوقعة / Expected Outcome:** {{ExpectedBenefitAr}} / {{ExpectedBenefit}}
+
+**مركز التكلفة / Cost Centre:** {{CostCentre}}
+
+---
+
+## الاعتمادات / Approvals
+
+| الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
 |---|---|---|---|---|
-| Requested By | {{RequestedBy}} | ___________ | | |
-| Line Manager | {{LineManager}} | ___________ | | Approved / Rejected |
-| HR | {{HRApprover}} | ___________ | | Approved / Rejected |
-| Finance | {{FinanceApprover}} | ___________ | | Approved / Rejected |
+| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| الموارد البشرية / HR | {{HRApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| المالية / Finance | {{FinanceApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
 
 ---
 
-**Remarks:** {{Remarks}}
+**ملاحظات / Remarks:** {{Remarks}}
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

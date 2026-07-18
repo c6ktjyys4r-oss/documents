@@ -1,49 +1,62 @@
 ---
 template: Internal Memo
 category: General
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# INTERNAL MEMORANDUM
-
-**Company:** {{CompanyName}}
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# مذكرة داخلية &nbsp;/&nbsp; INTERNAL MEMORANDUM
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **To** | {{Recipient}} |
-| **From** | {{PreparedBy}}, {{Department}} |
-| **Date** | {{Date}} |
-| **Reference** | {{ReferenceNumber}} |
-| **Subject** | {{Subject}} |
-| **Priority** | {{Priority}} |
-| **Confidentiality** | {{ConfidentialityLevel}} |
+| **إلى / To** | {{Recipient}} |
+| **من / From** | {{PreparedBy}} — {{Department}} |
+| **التاريخ / Date** | {{Date}} |
+| **المرجع / Reference** | {{ReferenceNumber}} |
+| **الموضوع / Subject** | {{Subject}} |
+| **الأولوية / Priority** | {{Priority}} |
+| **السرية / Confidentiality** | {{ConfidentialityLevel}} |
 
 ---
 
-## Purpose
+## الغرض / Purpose
 
-{{Purpose}}
+**عربي:** {{PurposeAr}}
 
-## Details
-
-{{Body}}
-
-## Action Required
-
-{{ActionRequired}}
-
-## Deadline
-
-{{Deadline}}
+**English:** {{Purpose}}
 
 ---
 
-**Prepared By:** {{PreparedBy}}
-**Signature:** ___________________________
+## التفاصيل / Details
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+**عربي:** {{BodyAr}}
+
+**English:** {{Body}}
+
+---
+
+## الإجراء المطلوب / Action Required
+
+**عربي:** {{ActionRequiredAr}}
+
+**English:** {{ActionRequired}}
+
+**Deadline / الموعد النهائي:** {{Deadline}}
+
+---
+
+## Signatures / التواقيع
+
+| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Approved By |
+|---|---|
+| {{PreparedBy}} | {{ApprovedBy}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |

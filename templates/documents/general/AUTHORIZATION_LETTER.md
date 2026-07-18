@@ -1,52 +1,74 @@
 ---
 template: Authorization Letter
 category: General
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
+**{{CompanyName}}**
 {{CompanyAddress}}
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
-**To Whom It May Concern**
+**To Whom It May Concern / إلى من يهمه الأمر**
 
 ---
 
-# LETTER OF AUTHORIZATION
+# خطاب تفويض &nbsp;/&nbsp; LETTER OF AUTHORIZATION
 
-I, {{AuthorizerName}}, {{AuthorizerTitle}} of {{CompanyName}}, hereby authorize:
+---
+
+**Arabic:**
+
+أنا الموقّع أدناه، **{{AuthorizerNameAr}}**، **{{AuthorizerTitleAr}}** في **{{CompanyNameAr}}**، أُفوِّض بموجب هذا الخطاب:
+
+**الاسم:** {{AuthorizedPersonNameAr}}
+**رقم الهوية / الجواز:** {{AuthorizedPersonID}}
+**المسمى الوظيفي / الصفة:** {{AuthorizedPersonTitleAr}}
+
+للتصرف نيابةً عن **{{CompanyNameAr}}** في الغرض التالي:
+
+**الغرض:** {{AuthorizationPurposeAr}}
+
+**النطاق:** {{AuthorizationScopeAr}}
+
+**الفترة:** من {{ValidFrom}} إلى {{ValidUntil}}
+
+---
+
+**English:**
+
+I, the undersigned, **{{AuthorizerName}}**, **{{AuthorizerTitle}}** of **{{CompanyName}}**, hereby authorize:
 
 **Name:** {{AuthorizedPersonName}}
 **ID / Passport Number:** {{AuthorizedPersonID}}
 **Title / Role:** {{AuthorizedPersonTitle}}
 
-to act on behalf of {{CompanyName}} for the following purpose:
+to act on behalf of **{{CompanyName}}** for the following purpose:
 
 **Purpose:** {{AuthorizationPurpose}}
 
 **Scope:** {{AuthorizationScope}}
 
-**Valid From:** {{ValidFrom}}
-**Valid Until:** {{ValidUntil}}
+**Valid From:** {{ValidFrom}} &nbsp;**Valid Until:** {{ValidUntil}}
 
 ---
+
+{{AdditionalConditionsAr}}
 
 {{AdditionalConditions}}
 
 ---
 
-**Authorized By:** {{AuthorizerName}}
-**Title:** {{AuthorizerTitle}}
-**Department:** {{Department}}
+## Signatures / التواقيع
 
-**Signature:** ___________________________
-
-**Official Stamp:** ___________________________
-
-**Date:** {{Date}}
+| المفوِّض / Authorizer | الختم الرسمي / Official Stamp |
+|---|---|
+| {{AuthorizerNameAr}} / {{AuthorizerName}} | *(Stamp here / ختم هنا)* |
+| {{AuthorizerTitleAr}} / {{AuthorizerTitle}} | |
+| {{Department}} | |
+| Signature / التوقيع: ___________________________ | |
+| Date / التاريخ: ___________________________ | |

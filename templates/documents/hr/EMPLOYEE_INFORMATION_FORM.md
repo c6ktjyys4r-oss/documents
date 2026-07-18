@@ -1,81 +1,89 @@
 ---
 template: Employee Information Form
 category: HR
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# EMPLOYEE INFORMATION FORM
-
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
-**Confidential**
+**{{CompanyName}}**
 
 ---
 
-## Personal Information
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
-| Field | Value |
+---
+
+# نموذج بيانات الموظف &nbsp;/&nbsp; EMPLOYEE INFORMATION FORM
+
+---
+
+## المعلومات الشخصية / Personal Information
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Full Name** | {{EmployeeName}} |
-| **Date of Birth** | {{DateOfBirth}} |
-| **Gender** | {{Gender}} |
-| **Nationality** | {{Nationality}} |
-| **National ID / Passport** | {{NationalID}} |
-| **Marital Status** | {{MaritalStatus}} |
-| **Number of Dependants** | {{Dependants}} |
+| **الاسم الكامل (عربي) / Full Name (AR)** | {{FullNameAr}} |
+| **الاسم الكامل (إنجليزي) / Full Name (EN)** | {{FullNameEn}} |
+| **الجنسية / Nationality** | {{NationalityAr}} / {{Nationality}} |
+| **رقم الهوية / الإقامة / National ID or Iqama** | {{NationalID}} |
+| **رقم جواز السفر / Passport Number** | {{PassportNumber}} |
+| **تاريخ الميلاد / Date of Birth** | {{DateOfBirth}} |
+| **الجنس / Gender** | {{Gender}} |
+| **الحالة الاجتماعية / Marital Status** | {{MaritalStatus}} |
+| **عدد المعالين / Number of Dependants** | {{NumberOfDependants}} |
 
 ---
 
-## Contact Information
+## معلومات التواصل / Contact Information
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Address** | {{Address}} |
-| **City** | {{City}} |
-| **Phone** | {{Phone}} |
-| **Email** | {{Email}} |
-| **Emergency Contact Name** | {{EmergencyContactName}} |
-| **Emergency Contact Phone** | {{EmergencyContactPhone}} |
-| **Emergency Contact Relationship** | {{EmergencyContactRelationship}} |
+| **العنوان / Address** | {{Address}} |
+| **المدينة / City** | {{City}} |
+| **رقم الجوال / Mobile** | {{Mobile}} |
+| **البريد الإلكتروني / Email** | {{Email}} |
+| **جهة الاتصال في حالة الطوارئ / Emergency Contact Name** | {{EmergencyContactName}} |
+| **رقم الطوارئ / Emergency Phone** | {{EmergencyContactPhone}} |
+| **صلة القرابة / Relationship** | {{EmergencyContactRelationship}} |
 
 ---
 
-## Employment Information
+## معلومات التوظيف / Employment Information
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Position** | {{JobTitle}} |
-| **Department** | {{Department}} |
-| **Location** | {{WorkLocation}} |
-| **Start Date** | {{StartDate}} |
-| **Employment Type** | {{EmploymentType}} |
-| **Reporting To** | {{ReportingManager}} |
+| **المسمى الوظيفي / Job Title** | {{JobTitleAr}} / {{JobTitle}} |
+| **القسم / Department** | {{Department}} |
+| **الفرع / Branch** | {{Branch}} |
+| **تاريخ الالتحاق / Start Date** | {{StartDate}} |
+| **نوع التوظيف / Employment Type** | {{EmploymentType}} |
+| **المرجع المباشر / Reporting To** | {{ReportingManager}} |
 
 ---
 
-## Bank Details
+## المعلومات البنكية / Bank Details
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Bank Name** | {{BankName}} |
-| **Account Name** | {{AccountName}} |
-| **Account Number** | {{AccountNumber}} |
-| **IBAN** | {{IBAN}} |
+| **اسم البنك / Bank Name** | {{BankNameAr}} / {{BankName}} |
+| **رقم الآيبان / IBAN** | {{IBAN}} |
+| **اسم صاحب الحساب / Account Name** | {{AccountName}} |
 
 ---
 
-## Declaration
+## إقرار / Declaration
 
-I confirm that the information provided above is accurate and complete.
+أُقرّ بأن جميع المعلومات الواردة أعلاه صحيحة ودقيقة.
 
-**Employee Name:** {{EmployeeName}}
-**Signature:** ___________________________
-**Date:** ___________________________
+I confirm that all information provided above is accurate and complete.
 
-**Received By:** {{PreparedBy}}
-**Signature:** ___________________________
-**Date:** ___________________________
+---
+
+## Signatures / التواقيع
+
+| توقيع الموظف / Employee Signature | استلم بواسطة / Received By |
+|---|---|
+| {{FullNameEn}} | {{ReceivedBy}} |
+| Signature / التوقيع: ___________________________ | {{ReceivedByTitle}} / {{ReceivedByTitleAr}} |
+| Date / التاريخ: ___________________________ | Signature / التوقيع: ___________________________ |
+| | Date / التاريخ: ___________________________ |

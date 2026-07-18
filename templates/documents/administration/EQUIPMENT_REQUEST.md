@@ -1,53 +1,59 @@
 ---
 template: Equipment Request
 category: Administration
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# EQUIPMENT REQUEST FORM
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# نموذج طلب معدات وأجهزة &nbsp;/&nbsp; EQUIPMENT REQUEST FORM
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Reference No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Requested By** | {{RequestedBy}} |
-| **Department** | {{Department}} |
-| **Priority** | {{Priority}} |
+| **رقم المرجع / Reference No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **الأولوية / Priority** | {{Priority}} |
+| **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
+| **القسم / Department** | {{Department}} |
+| **التاريخ المطلوب / Required By Date** | {{RequiredByDate}} |
 
 ---
 
-## Equipment Requested
+## المعدات المطلوبة / Equipment Requested
 
-| # | Item Description | Quantity | Specification / Model | Reason |
+| # | البيان / Item | الكمية / Qty | المواصفات / Specification | السبب / Reason |
 |---|---|---|---|---|
-| 1 | {{ItemDescription}} | {{Quantity}} | {{Specification}} | {{Reason}} |
-| 2 | | | | |
+| 1 | {{ItemDescription1}} | {{Quantity1}} | {{Specification1}} | {{Reason1}} |
+| 2 | {{ItemDescription2}} | {{Quantity2}} | {{Specification2}} | {{Reason2}} |
+| 3 | | | | |
 
 ---
 
-**Required By Date:** {{RequiredByDate}}
+**الغرض / Justification:** {{JustificationAr}} / {{Justification}}
 
-**Purpose / Justification:** {{Justification}}
-
-**Budget Code / Cost Centre:** {{CostCentre}}
+**مركز التكلفة / Cost Centre:** {{CostCentre}}
 
 ---
 
-## Approvals
+## الاعتمادات / Approvals
 
-| Role | Name | Signature | Date | Decision |
+| الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
 |---|---|---|---|---|
-| Requested By | {{RequestedBy}} | ___________ | | |
-| Line Manager | {{LineManager}} | ___________ | | Approved / Rejected |
-| Procurement | {{ProcurementApprover}} | ___________ | | Approved / Rejected |
-| Finance | {{FinanceApprover}} | ___________ | | Approved / Rejected |
+| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| المشتريات / Procurement | {{ProcurementApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| المالية / Finance | {{FinanceApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
 
 ---
 
-**Remarks:** {{Remarks}}
+**ملاحظات / Remarks:** {{Remarks}}
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

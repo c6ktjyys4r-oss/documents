@@ -1,58 +1,69 @@
 ---
 template: Payment Voucher
 category: Finance
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# PAYMENT VOUCHER
+**{{CompanyName}}**
 
 ---
 
-**Company:** {{CompanyName}}
+# سند صرف &nbsp;/&nbsp; PAYMENT VOUCHER
 
-| Field | Value |
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Voucher No.** | {{VoucherNumber}} |
-| **Date** | {{Date}} |
-| **Pay To** | {{Payee}} |
-| **Payment Method** | {{PaymentMethod}} |
-| **Reference** | {{ReferenceNumber}} |
-| **Currency** | {{Currency}} |
+| **رقم السند / Voucher No.** | {{VoucherNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **مركز التكلفة / Cost Centre** | {{CostCentre}} |
+| **العملة / Currency** | {{Currency}} |
 
 ---
 
-## Payment Breakdown
+## يُصرف إلى / Pay To
 
-| # | Description | Amount |
+| البيان / Field | القيمة / Value |
+|---|---|
+| **الاسم / Name** | {{PayeeName}} |
+| **رقم الهوية / ID No.** | {{PayeeID}} |
+| **الجهة / Organization** | {{PayeeOrganization}} |
+| **رقم الآيبان / IBAN** | {{IBAN}} |
+| **اسم البنك / Bank Name** | {{BankNameAr}} / {{BankName}} |
+
+---
+
+## تفاصيل المبلغ / Payment Details
+
+| البيان / Description | المبلغ / Amount (SAR) |
+|---|---|
+| {{PaymentDescription}} | {{Amount}} |
+| {{PaymentDescription2}} | {{Amount2}} |
+| **الإجمالي / Total** | **{{TotalAmount}}** |
+
+**المبلغ كتابةً / Amount in Words (AR):** {{AmountInWordsAr}}
+
+**Amount in Words (EN):** {{AmountInWords}}
+
+**طريقة الدفع / Payment Method:** {{PaymentMethod}}
+
+**الغرض / Purpose:** {{PurposeAr}} / {{Purpose}}
+
+**ملاحظات / Notes:** {{Notes}}
+
+---
+
+## Signatures / التواقيع
+
+| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Authorised By | استُلم بواسطة / Received By |
 |---|---|---|
-| 1 | {{Description}} | {{Amount}} |
-| 2 | | |
+| {{PreparedBy}} | {{AuthorisedBy}} | {{ReceivedBy}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | |
+| Signature: ___________ | Signature: ___________ | Signature: ___________ |
+| Date: ___________ | Date: ___________ | Date: ___________ |
 
----
-
-| | |
-|---|---|
-| **Subtotal** | {{Subtotal}} |
-| **Tax** | {{Tax}} |
-| **Deductions** | {{Deductions}} |
-| **Total Payment** | {{TotalPayment}} |
-
----
-
-**Bank / Account Details:** {{BankDetails}}
-
-**Notes:** {{Notes}}
-
----
-
-**Prepared By:** {{PreparedBy}}
-**Signature:** ___________________________
-
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
-
-**Received By:** {{ReceivedBy}}
-**Signature:** ___________________________
-**Date:** ___________________________
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

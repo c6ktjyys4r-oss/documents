@@ -1,62 +1,79 @@
 ---
 template: Quotation
 category: Finance
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# QUOTATION
-
----
-
-**From:**
-{{CompanyName}}
+**{{CompanyName}}**
 {{CompanyAddress}}
-{{CompanyPhone}} | {{CompanyEmail}}
-
-**To:**
-{{ClientName}}
-{{ClientAddress}}
-{{ClientContactPerson}}
+{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 
 ---
 
-| Field | Value |
+# عرض سعر &nbsp;/&nbsp; QUOTATION
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Quotation No.** | {{QuotationNumber}} |
-| **Date** | {{Date}} |
-| **Valid Until** | {{ValidUntil}} |
-| **Currency** | {{Currency}} |
+| **رقم عرض السعر / Quotation No.** | {{QuotationNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **صالح حتى / Valid Until** | {{ValidUntil}} |
+| **العملة / Currency** | {{Currency}} |
 
 ---
 
-## Items
+## من / From
 
-| # | Description | Qty | Unit Price | Total |
+**{{CompanyName}}**
+{{CompanyAddress}}
+
+## إلى / To
+
+**{{ClientName}}**
+{{ClientAddress}}
+للاهتمام: {{ClientContactPerson}}
+
+---
+
+## البنود / Line Items
+
+| # | الوصف / Description | الكمية / Qty | سعر الوحدة / Unit Price | الإجمالي / Total |
 |---|---|---|---|---|
 | 1 | {{ItemDescription}} | {{Qty}} | {{UnitPrice}} | {{LineTotal}} |
-| 2 | | | | |
+| 2 | {{ItemDescription2}} | {{Qty2}} | {{UnitPrice2}} | {{LineTotal2}} |
+| 3 | | | | |
 
 ---
 
 | | |
 |---|---|
-| **Subtotal** | {{Subtotal}} |
-| **Tax ({{TaxRate}}%)** | {{TaxAmount}} |
-| **Discount** | {{Discount}} |
-| **Total** | {{Total}} |
+| **المجموع / Subtotal** | {{Subtotal}} |
+| **الضريبة / Tax ({{TaxRate}}%)** | {{TaxAmount}} |
+| **الخصم / Discount** | {{Discount}} |
+| **الإجمالي / Total** | **{{Total}}** |
 
 ---
 
-**Terms and Conditions:** {{TermsAndConditions}}
+**الشروط والأحكام / Terms and Conditions:** {{TermsAndConditions}}
 
-**Delivery / Timeline:** {{DeliveryTimeline}}
+**التسليم / Delivery Timeline:** {{DeliveryTimeline}}
 
-**Notes:** {{Notes}}
+**ملاحظات / Notes:** {{Notes}}
 
 ---
 
-**Prepared By:** {{PreparedBy}}
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+## Signatures / التواقيع
+
+| أُعِدَّت بواسطة / Prepared By | اعتمد بواسطة / Approved By |
+|---|---|
+| {{PreparedBy}} | {{ApprovedBy}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

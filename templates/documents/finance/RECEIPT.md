@@ -1,52 +1,59 @@
 ---
 template: Receipt
 category: Finance
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# RECEIPT
-
----
-
-**From:**
-{{CompanyName}}
+**{{CompanyName}}**
 {{CompanyAddress}}
-{{CompanyPhone}} | {{CompanyEmail}}
+{{CompanyPhone}} &nbsp;|&nbsp; {{CompanyEmail}}
 
 ---
 
-| Field | Value |
+# إيصال استلام &nbsp;/&nbsp; RECEIPT
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Receipt No.** | {{ReceiptNumber}} |
-| **Date** | {{Date}} |
-| **Received From** | {{ReceivedFrom}} |
-| **Reference / Invoice No.** | {{ReferenceNumber}} |
+| **رقم الإيصال / Receipt No.** | {{ReceiptNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **العملة / Currency** | {{Currency}} |
 
 ---
 
-## Payment Details
+## استُلم من / Received From
 
-| Field | Value |
+**{{PayerName}}**
+{{PayerAddress}}
+
+---
+
+## تفاصيل الدفع / Payment Details
+
+| البيان / Description | المبلغ / Amount |
 |---|---|
-| **Description** | {{PaymentDescription}} |
-| **Payment Method** | {{PaymentMethod}} |
-| **Amount Received** | {{AmountReceived}} |
-| **Currency** | {{Currency}} |
+| {{PaymentDescription}} | {{Amount}} |
+| {{PaymentDescription2}} | {{Amount2}} |
+| **الإجمالي / Total** | **{{TotalAmount}}** |
+
+**طريقة الدفع / Payment Method:** {{PaymentMethod}}
+
+**رقم المرجع / Reference No.:** {{PaymentReference}}
 
 ---
 
-**Notes:** {{Notes}}
+**ملاحظات / Notes:** {{Notes}}
 
 ---
 
-**Received By:** {{PreparedBy}}
-**Title:** {{PreparedByTitle}}
-**Department:** {{Department}}
+## Signatures / التواقيع
 
-**Signature:** ___________________________
-
-**Official Stamp:** ___________________________
-
-**Date:** {{Date}}
+| استُلم بواسطة / Received By | الختم الرسمي / Official Stamp |
+|---|---|
+| {{ReceivedBy}} | *(Stamp here / ختم هنا)* |
+| {{ReceivedByTitle}} / {{ReceivedByTitleAr}} | |
+| Signature / التوقيع: ___________________________ | |
+| Date / التاريخ: ___________________________ | |

@@ -1,49 +1,71 @@
 ---
 template: Circular
 category: General
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-# CIRCULAR
-
-**Company:** {{CompanyName}}
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# تعميم &nbsp;/&nbsp; CIRCULAR
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Circular No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **To** | {{Recipient}} |
-| **Subject** | {{Subject}} |
-| **Effective Date** | {{EffectiveDate}} |
+| **رقم التعميم / Circular No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **إلى / To** | {{Recipient}} |
+| **الموضوع / Subject** | {{Subject}} |
+| **تاريخ النفاذ / Effective Date** | {{EffectiveDate}} |
 
 ---
 
-## Notice
+## الإشعار / Notice
+
+**عربي:**
+
+{{BodyAr}}
+
+**English:**
 
 {{Body}}
 
-## Instructions
+---
 
-{{Instructions}}
+## التعليمات / Instructions
 
-## Compliance
+**عربي:** {{InstructionsAr}}
 
-{{ComplianceRequirements}}
+**English:** {{Instructions}}
 
-## Contact
+---
+
+## الالتزام / Compliance
+
+**عربي:** {{ComplianceRequirementsAr}}
+
+**English:** {{ComplianceRequirements}}
+
+---
+
+## الاستفسارات / Contact
+
+للاستفسار، يُرجى التواصل مع {{ContactPerson}} على {{ContactDetails}}.
 
 For questions, contact {{ContactPerson}} at {{ContactDetails}}.
 
 ---
 
-**Issued By:** {{PreparedBy}}
-**Title:** {{PreparedByTitle}}
-**Department:** {{Department}}
+## Signatures / التواقيع
 
-**Authorized By:** {{ApprovedBy}}
-**Signature:** ___________________________
-**Date:** {{Date}}
+| صادر عن / Issued By | اعتمد بواسطة / Authorised By |
+|---|---|
+| {{PreparedBy}} | {{ApprovedBy}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ApprovedByTitle}} / {{ApprovedByTitleAr}} |
+| {{Department}} | |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |

@@ -1,76 +1,92 @@
 ---
 template: Meeting Minutes
 category: Operations
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# MEETING MINUTES
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# محضر اجتماع &nbsp;/&nbsp; MEETING MINUTES
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Reference No.** | {{ReferenceNumber}} |
-| **Meeting Title** | {{MeetingTitle}} |
-| **Date** | {{Date}} |
-| **Time** | {{StartTime}} — {{EndTime}} |
-| **Location** | {{Location}} |
-| **Chairperson** | {{Chairperson}} |
-| **Minutes Recorded By** | {{PreparedBy}} |
+| **رقم المرجع / Reference No.** | {{ReferenceNumber}} |
+| **عنوان الاجتماع / Meeting Title** | {{MeetingTitle}} |
+| **التاريخ / Date** | {{Date}} |
+| **الوقت / Time** | {{StartTime}} — {{EndTime}} |
+| **الموقع / Location** | {{Location}} |
+| **رئيس الاجتماع / Chairperson** | {{Chairperson}} |
+| **محرر المحضر / Minutes Recorded By** | {{PreparedBy}} |
 
 ---
 
-## Attendees
+## الحاضرون / Attendees
 
-| Name | Title / Role | Department | Present |
+| الاسم / Name | المسمى / Title | القسم / Department | حضور / Present |
 |---|---|---|---|
-| {{Name}} | {{Title}} | {{Department}} | Yes / No |
+| {{Name1}} | {{Title1}} | {{Department1}} | نعم / Yes &nbsp;·&nbsp; لا / No |
+| {{Name2}} | {{Title2}} | {{Department2}} | نعم / Yes &nbsp;·&nbsp; لا / No |
+| {{Name3}} | {{Title3}} | {{Department3}} | نعم / Yes &nbsp;·&nbsp; لا / No |
 
 ---
 
-## Agenda
+## جدول الأعمال / Agenda
 
-| # | Item | Presenter |
+| # | البند / Item | المقدِّم / Presenter |
 |---|---|---|
-| 1 | {{AgendaItem}} | {{Presenter}} |
+| 1 | {{AgendaItem1}} | {{Presenter1}} |
+| 2 | {{AgendaItem2}} | {{Presenter2}} |
 
 ---
 
-## Discussion
+## مناقشات وقرارات / Discussion & Decisions
 
-### Item 1 — {{AgendaItem}}
+### البند 1 — {{AgendaItem1}}
 
-{{Discussion}}
+**المناقشة / Discussion:** {{Discussion1}}
 
-**Decision:** {{Decision}}
+**القرار / Decision:** {{Decision1}}
 
-**Action:** {{Action}} — Owner: {{Owner}}, Due: {{DueDate}}
+**الإجراء / Action:** {{Action1}} &nbsp;—&nbsp; المسؤول / Owner: {{Owner1}} &nbsp;|&nbsp; الموعد / Due: {{DueDate1}}
 
 ---
 
-## Action Items Summary
+### البند 2 — {{AgendaItem2}}
 
-| # | Action | Owner | Due Date | Status |
+**المناقشة / Discussion:** {{Discussion2}}
+
+**القرار / Decision:** {{Decision2}}
+
+**الإجراء / Action:** {{Action2}} &nbsp;—&nbsp; المسؤول / Owner: {{Owner2}} &nbsp;|&nbsp; الموعد / Due: {{DueDate2}}
+
+---
+
+## ملخص الإجراءات / Action Items Summary
+
+| # | الإجراء / Action | المسؤول / Owner | الموعد / Due Date | الحالة / Status |
 |---|---|---|---|---|
-| 1 | {{Action}} | {{Owner}} | {{DueDate}} | Open |
+| 1 | {{Action1}} | {{Owner1}} | {{DueDate1}} | مفتوح / Open |
+| 2 | {{Action2}} | {{Owner2}} | {{DueDate2}} | مفتوح / Open |
 
 ---
 
-## Next Meeting
+## الاجتماع القادم / Next Meeting
 
-**Date:** {{NextMeetingDate}}
-**Time:** {{NextMeetingTime}}
-**Location:** {{NextMeetingLocation}}
-**Agenda Preview:** {{NextMeetingAgenda}}
+**التاريخ / Date:** {{NextMeetingDate}} &nbsp;&nbsp; **الوقت / Time:** {{NextMeetingTime}} &nbsp;&nbsp; **الموقع / Location:** {{NextMeetingLocation}}
 
 ---
 
-**Minutes Prepared By:** {{PreparedBy}}
-**Signature:** ___________________________
+## Signatures / التواقيع
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+| محرر المحضر / Minutes Prepared By | رئيس الاجتماع / Chairperson |
+|---|---|
+| {{PreparedBy}} | {{Chairperson}} |
+| {{PreparedByTitle}} / {{PreparedByTitleAr}} | {{ChairpersonTitle}} / {{ChairpersonTitleAr}} |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |

@@ -1,77 +1,74 @@
 ---
 template: Maintenance Request
 category: Operations
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# MAINTENANCE REQUEST
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# طلب صيانة &nbsp;/&nbsp; MAINTENANCE REQUEST
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Request No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Requested By** | {{RequestedBy}} |
-| **Department** | {{Department}} |
-| **Location** | {{Location}} |
-| **Priority** | {{Priority}} |
+| **رقم الطلب / Request No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **الأولوية / Priority** | {{Priority}} |
+| **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
+| **القسم / Department** | {{Department}} |
+| **الموقع / Location** | {{Location}} |
 
 ---
 
-## Equipment / Area Details
+## تفاصيل الصيانة / Maintenance Details
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Item / Area** | {{ItemOrArea}} |
-| **Asset ID / Tag** | {{AssetID}} |
-| **Make / Model** | {{MakeModel}} |
+| **نوع الصيانة / Maintenance Type** | {{MaintenanceType}} |
+| **الأصل / Asset / Item** | {{AssetDescription}} |
+| **رقم الأصل / Asset ID** | {{AssetID}} |
+| **تاريخ الاكتشاف / Date Noticed** | {{DateNoticed}} |
+| **التاريخ المطلوب / Required By** | {{RequiredByDate}} |
 
 ---
 
-## Issue Description
+**وصف المشكلة / Problem Description:**
 
-{{IssueDescription}}
+**عربي:** {{ProblemDescriptionAr}}
 
----
-
-## Impact
-
-{{ImpactDescription}}
+**English:** {{ProblemDescription}}
 
 ---
 
-## Requested Action
+**الإجراء المقترح / Suggested Action:**
 
-{{RequestedAction}}
+**عربي:** {{SuggestedActionAr}}
 
-**Requested Completion Date:** {{RequestedCompletionDate}}
-
----
-
-## For Maintenance Use
-
-| Field | Value |
-|---|---|
-| **Assigned To** | {{AssignedTo}} |
-| **Scheduled Date** | {{ScheduledDate}} |
-| **Completed Date** | {{CompletedDate}} |
-| **Work Performed** | {{WorkPerformed}} |
-| **Parts Used** | {{PartsUsed}} |
-| **Status** | {{Status}} |
+**English:** {{SuggestedAction}}
 
 ---
 
-**Requested By:** {{RequestedBy}}
-**Signature:** ___________________________
+## الاعتمادات / Approvals
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+| الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
+|---|---|---|---|---|
+| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| الصيانة / Maintenance | {{MaintenanceApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
 
-**Completed By:** {{CompletedBy}}
-**Signature:** ___________________________
-**Date:** ___________________________
+---
+
+## للاستخدام الداخلي فقط / For Internal Use Only
+
+**تاريخ البدء / Start Date:** {{StartDate}} &nbsp;&nbsp; **تاريخ الإنجاز / Completion Date:** {{CompletionDate}}
+
+**الملاحظات / Remarks:** {{Remarks}}
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

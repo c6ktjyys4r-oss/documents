@@ -1,59 +1,70 @@
 ---
 template: Transfer Letter
 category: HR
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
+**{{CompanyName}}**
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
-
-**To:**
-{{EmployeeName}}
-{{JobTitle}} — {{CurrentDepartment}}
-
-**Subject:** Transfer Notification
-
-Dear {{EmployeeName}},
-
-This letter confirms your transfer, effective **{{EffectiveDate}}**.
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-## Transfer Details
+# خطاب نقل &nbsp;/&nbsp; TRANSFER LETTER
 
-| Field | Current | New |
+---
+
+## معلومات الموظف / Employee Details
+
+| البيان / Field | القيمة / Value |
+|---|---|
+| **اسم الموظف / Employee Name** | {{EmployeeNameAr}} / {{EmployeeNameEn}} |
+| **رقم الموظف / Employee Code** | {{EmployeeCode}} |
+| **رقم الهوية / الإقامة / National ID or Iqama** | {{NationalID}} |
+| **الجنسية / Nationality** | {{Nationality}} |
+| **المسمى الوظيفي / Job Title** | {{JobTitleAr}} / {{JobTitle}} |
+
+---
+
+## تفاصيل النقل / Transfer Details
+
+| البيان / Field | الحالي / Current | الجديد / New |
 |---|---|---|
-| **Department** | {{CurrentDepartment}} | {{NewDepartment}} |
-| **Location** | {{CurrentLocation}} | {{NewLocation}} |
-| **Reporting To** | {{CurrentManager}} | {{NewManager}} |
+| **القسم / Department** | {{CurrentDepartment}} | {{NewDepartment}} |
+| **الموقع / Location** | {{CurrentLocation}} | {{NewLocation}} |
+| **الفرع / Branch** | {{CurrentBranch}} | {{NewBranch}} |
+| **المرجع المباشر / Reporting To** | {{CurrentManager}} | {{NewManager}} |
+
+**تاريخ النفاذ / Effective Date:** {{EffectiveDate}}
 
 ---
 
-**Reason for Transfer:** {{TransferReason}}
+**Arabic:**
 
-**Terms and Conditions:** All other terms of your engagement remain unchanged unless stated otherwise.
+يُرجى التفضل بالعلم بأنه تقرر نقلكم من **{{CurrentDepartment}}** إلى **{{NewDepartment}}** اعتبارًا من **{{EffectiveDate}}**.
+
+{{AdditionalNotesAr}}
+
+---
+
+**English:**
+
+Please be advised that your transfer from **{{CurrentDepartment}}** to **{{NewDepartment}}** has been approved, effective **{{EffectiveDate}}**.
 
 {{AdditionalNotes}}
 
 ---
 
-**Prepared By:** {{PreparedBy}}
+## Signatures / التواقيع
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
-
----
-
-**Employee Acknowledgement**
-
-I confirm receipt of this transfer notification.
-
-**Employee Name:** {{EmployeeName}}
-**Signature:** ___________________________
-**Date:** ___________________________
+| المفوّض بالتوقيع والختم / Authorised Signatory & Stamp | إقرار الموظف / Employee Acknowledgement |
+|---|---|
+| {{AuthorisedBy}} | {{EmployeeNameEn}} |
+| {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | {{JobTitle}} |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| التوقيع والختم / Signature & Stamp | Date / التاريخ: ___________________________ |
+| Date / التاريخ: ___________________________ | |

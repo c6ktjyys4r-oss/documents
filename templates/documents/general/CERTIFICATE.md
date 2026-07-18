@@ -1,38 +1,47 @@
 ---
 template: Certificate
 category: General
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
----
-
-# CERTIFICATE OF {{CertificateType}}
+**{{CompanyName}}**
 
 ---
 
-**This is to certify that**
-
-## {{RecipientName}}
-
-{{CertificationStatement}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-**Issued By:** {{CompanyName}}
-
-**Reference Number:** {{ReferenceNumber}}
-
-**Date of Issue:** {{Date}}
-
-**Valid Until:** {{ValidUntil}}
+# شهادة &nbsp;/&nbsp; CERTIFICATE
 
 ---
 
-**Authorized Signatory:** {{ApprovedBy}}
-**Title:** {{ApprovedByTitle}}
+**Arabic (يُمنح هذا الإشهاد لـ):**
 
-**Signature:** ___________________________
+يُشهد بأن **{{RecipientNameAr}}** قد استوفى/استوفت جميع المتطلبات المحددة وتستحق/يستحق منحه هذه الشهادة في **{{CertificateSubjectAr}}**.
 
-**Official Stamp:** ___________________________
+صُدِرت هذه الشهادة بناءً على {{IssuanceReasonAr}}.
+
+---
+
+**English (This is to certify that):**
+
+This is to certify that **{{RecipientName}}** has fulfilled all specified requirements and is hereby awarded this certificate in **{{CertificateSubject}}**.
+
+This certificate is issued on the basis of {{IssuanceReason}}.
+
+---
+
+## Signatures / التواقيع
+
+| المفوّض بالتوقيع والختم / Authorised Signatory & Stamp | التاريخ / Date |
+|---|---|
+| {{AuthorisedBy}} | {{Date}} |
+| {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | |
+| Signature / التوقيع: ___________________________ | |
+
+| *(Official Stamp / الختم الرسمي)* |
+|---|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |

@@ -1,57 +1,63 @@
 ---
-template: Expense Approval
+template: Expense Approval Form
 category: Finance
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# EXPENSE APPROVAL FORM
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# نموذج اعتماد مصروفات &nbsp;/&nbsp; EXPENSE APPROVAL FORM
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Reference No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Requested By** | {{RequestedBy}} |
-| **Department** | {{Department}} |
-| **Cost Centre** | {{CostCentre}} |
+| **رقم المرجع / Reference No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
+| **القسم / Department** | {{Department}} |
+| **مركز التكلفة / Cost Centre** | {{CostCentre}} |
+| **المشروع / Project Reference** | {{ProjectReference}} |
 
 ---
 
-## Expense Details
+## تفاصيل المصروفات / Expense Details
 
-| # | Description | Date | Amount | Receipt Attached |
+| # | البيان / Description | التاريخ / Date | المبلغ / Amount | إيصال مرفق / Receipt |
 |---|---|---|---|---|
-| 1 | {{ExpenseDescription}} | {{ExpenseDate}} | {{Amount}} | Yes / No |
-| 2 | | | | |
+| 1 | {{ExpenseDescription}} | {{ExpenseDate}} | {{Amount}} | نعم / Yes &nbsp;·&nbsp; لا / No |
+| 2 | {{ExpenseDescription2}} | {{ExpenseDate2}} | {{Amount2}} | نعم / Yes &nbsp;·&nbsp; لا / No |
+| 3 | | | | |
 
 ---
 
 | | |
 |---|---|
-| **Total Amount** | {{TotalAmount}} |
-| **Currency** | {{Currency}} |
+| **الإجمالي / Total Amount** | {{TotalAmount}} |
+| **العملة / Currency** | {{Currency}} |
 
 ---
 
-**Purpose / Business Justification:** {{Justification}}
-
-**Project / Reference:** {{ProjectReference}}
+**المبرر التجاري / Business Justification:** {{JustificationAr}} / {{Justification}}
 
 ---
 
-## Approvals
+## الاعتمادات / Approvals
 
-| Role | Name | Signature | Date | Decision |
+| الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
 |---|---|---|---|---|
-| Requested By | {{RequestedBy}} | ___________ | | |
-| Line Manager | {{LineManager}} | ___________ | | Approved / Rejected |
-| Finance | {{FinanceApprover}} | ___________ | | Approved / Rejected |
+| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| المالية / Finance | {{FinanceApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
 
 ---
 
-**Remarks:** {{Remarks}}
+**ملاحظات / Remarks:** {{Remarks}}
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

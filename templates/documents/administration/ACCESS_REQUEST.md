@@ -1,62 +1,67 @@
 ---
 template: Access Request
 category: Administration
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# ACCESS REQUEST FORM
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# نموذج طلب صلاحية وصول &nbsp;/&nbsp; ACCESS REQUEST FORM
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Reference No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Requested By** | {{RequestedBy}} |
-| **Department** | {{Department}} |
+| **رقم المرجع / Reference No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **مقدم الطلب / Requested By** | {{RequestedByAr}} / {{RequestedBy}} |
+| **القسم / Department** | {{Department}} |
 
 ---
 
-## Access Required For
+## الوصول المطلوب لـ / Access Required For
 
-| Field | Value |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Name** | {{AccessForName}} |
-| **Title** | {{AccessForTitle}} |
-| **Department** | {{AccessForDepartment}} |
-| **Employment Type** | {{EmploymentType}} |
+| **الاسم / Name** | {{AccessForNameAr}} / {{AccessForName}} |
+| **المسمى / Title** | {{AccessForTitleAr}} / {{AccessForTitle}} |
+| **القسم / Department** | {{AccessForDepartment}} |
+| **نوع التوظيف / Employment Type** | {{EmploymentType}} |
 
 ---
 
-## Access Details
+## تفاصيل الوصول / Access Details
 
-| # | System / Location / Resource | Access Level | Reason |
+| # | النظام / الموقع / المورد | مستوى الوصول / Access Level | السبب / Reason |
 |---|---|---|---|
-| 1 | {{Resource}} | {{AccessLevel}} | {{Reason}} |
-| 2 | | | |
+| 1 | {{Resource1}} | {{AccessLevel1}} | {{Reason1}} |
+| 2 | {{Resource2}} | {{AccessLevel2}} | {{Reason2}} |
+
+**تاريخ البدء / Access Start Date:** {{AccessStartDate}}
+
+**تاريخ الانتهاء / Access End Date:** {{AccessEndDate}} *(اتركه فارغًا إذا كان دائمًا / leave blank if permanent)*
+
+**المبرر / Justification:** {{JustificationAr}} / {{Justification}}
 
 ---
 
-**Access Start Date:** {{AccessStartDate}}
-**Access End Date:** {{AccessEndDate}} *(leave blank if permanent)*
+## الاعتمادات / Approvals
 
-**Justification:** {{Justification}}
-
----
-
-## Approvals
-
-| Role | Name | Signature | Date | Decision |
+| الدور / Role | الاسم / Name | التوقيع / Signature | التاريخ / Date | القرار / Decision |
 |---|---|---|---|---|
-| Requested By | {{RequestedBy}} | ___________ | | |
-| Line Manager | {{LineManager}} | ___________ | | Approved / Rejected |
-| IT / Security | {{ITApprover}} | ___________ | | Approved / Rejected |
-| Administration | {{AdminApprover}} | ___________ | | Approved / Rejected |
+| مقدم الطلب / Requested By | {{RequestedBy}} | ___________ | | |
+| المدير المباشر / Line Manager | {{LineManager}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| تقنية المعلومات / IT | {{ITApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
+| الإدارة / Administration | {{AdminApprover}} | ___________ | | اعتمد / معلق &nbsp;·&nbsp; Approved / Rejected |
 
 ---
 
-**Remarks:** {{Remarks}}
+**ملاحظات / Remarks:** {{Remarks}}
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |

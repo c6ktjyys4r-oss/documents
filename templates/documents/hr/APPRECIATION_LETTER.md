@@ -1,42 +1,58 @@
 ---
 template: Appreciation Letter
 category: HR
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
+**{{CompanyName}}**
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
-**To:**
-{{EmployeeName}}
-{{JobTitle}} — {{Department}}
+---
 
-**Subject:** Letter of Appreciation
+# خطاب شكر وتقدير &nbsp;/&nbsp; LETTER OF APPRECIATION
 
-Dear {{EmployeeName}},
+---
 
-{{OpeningLine}}
+## معلومات الموظف / Employee Details
+
+| البيان / Field | القيمة / Value |
+|---|---|
+| **اسم الموظف / Employee Name** | {{EmployeeNameAr}} / {{EmployeeNameEn}} |
+| **المسمى الوظيفي / Job Title** | {{JobTitleAr}} / {{JobTitle}} |
+| **القسم / Department** | {{Department}} |
+
+---
+
+**Arabic:**
+
+نتقدم إليكم بأسمى عبارات الشكر والتقدير على {{AppreciationReasonAr}}.
+
+{{AppreciationBodyAr}}
+
+إننا نُقدِّر عاليًا جهودكم وتفانيكم في العمل، ونتطلع إلى استمرار عطائكم المميز.
+
+---
+
+**English:**
+
+We extend our sincere appreciation for {{AppreciationReason}}.
 
 {{AppreciationBody}}
 
-{{ClosingLine}}
+Your dedication and commitment are highly valued, and we look forward to your continued contributions.
 
-We look forward to your continued contributions.
+---
 
-Sincerely,
+## Signatures / التواقيع
 
-**Issued By:** {{PreparedBy}}
-**Title:** {{PreparedByTitle}}
-**Department:** {{Department}}
-**Company:** {{CompanyName}}
-
-**Signature:** ___________________________
-
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+| المفوّض بالتوقيع والختم / Authorised Signatory & Stamp | |
+|---|---|
+| {{AuthorisedBy}} | *(Official Stamp / الختم الرسمي)* |
+| {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | |
+| Signature / التوقيع: ___________________________ | |
+| Date / التاريخ: ___________________________ | |

@@ -1,66 +1,81 @@
 ---
 template: Promotion Letter
 category: HR
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
+**{{CompanyName}}**
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
-
-**To:**
-{{EmployeeName}}
-{{CurrentJobTitle}} — {{Department}}
-
-**Subject:** Promotion Notification
-
-Dear {{EmployeeName}},
-
-We are pleased to inform you of your promotion, effective **{{EffectiveDate}}**.
+**Ref / المرجع:** {{ReferenceNumber}} &nbsp;&nbsp; **Date / التاريخ:** {{Date}}
 
 ---
 
-## Promotion Details
-
-| Field | Before | After |
-|---|---|---|
-| **Position** | {{CurrentJobTitle}} | {{NewJobTitle}} |
-| **Department** | {{CurrentDepartment}} | {{NewDepartment}} |
-| **Reporting To** | {{CurrentManager}} | {{NewManager}} |
+# خطاب ترقية &nbsp;/&nbsp; PROMOTION LETTER
 
 ---
 
-## Revised Compensation
+## معلومات الموظف / Employee Details
 
-| Component | Amount |
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Basic** | {{NewBasicAmount}} |
-| **Allowances** | {{NewAllowancesAmount}} |
-| **Total** | {{NewTotalCompensation}} |
+| **اسم الموظف / Employee Name** | {{EmployeeNameAr}} / {{EmployeeNameEn}} |
+| **رقم الموظف / Employee Code** | {{EmployeeCode}} |
+| **الجنسية / Nationality** | {{Nationality}} |
+| **رقم الهوية / الإقامة / National ID or Iqama** | {{NationalID}} |
 
 ---
+
+## تفاصيل الترقية / Promotion Details
+
+| البيان / Field | قبل الترقية / Before | بعد الترقية / After |
+|---|---|---|
+| **المسمى الوظيفي / Job Title** | {{CurrentJobTitleAr}} / {{CurrentJobTitle}} | {{NewJobTitleAr}} / {{NewJobTitle}} |
+| **القسم / Department** | {{CurrentDepartment}} | {{NewDepartment}} |
+| **المرجع المباشر / Reporting To** | {{CurrentManager}} | {{NewManager}} |
+| **الموقع / Location** | {{CurrentLocation}} | {{NewLocation}} |
+
+**تاريخ النفاذ / Effective Date:** {{EffectiveDate}}
+
+---
+
+## الراتب المعدَّل / Revised Compensation
+
+| البند / Component | المبلغ / Amount (SAR) |
+|---|---|
+| الراتب الأساسي / Basic Salary | {{NewBasicSalary}} |
+| بدل السكن / Housing Allowance | {{NewHousingAllowance}} |
+| بدل النقل / Transportation Allowance | {{NewTransportationAllowance}} |
+| بدلات أخرى / Other Allowances | {{NewOtherAllowances}} |
+| **الإجمالي / Total** | **{{NewTotalSalary}}** |
+
+---
+
+**Arabic:**
+
+يسعدنا إبلاغكم بترقيتكم إلى منصب **{{NewJobTitleAr}}** اعتبارًا من **{{EffectiveDate}}**، وذلك تقديرًا لجهودكم ومساهماتكم المتميزة.
+
+{{AdditionalNotesAr}}
+
+---
+
+**English:**
+
+We are pleased to inform you of your promotion to **{{NewJobTitle}}**, effective **{{EffectiveDate}}**, in recognition of your outstanding contributions and dedication.
 
 {{AdditionalNotes}}
 
-Please sign below to confirm your acceptance of this promotion.
-
 ---
 
-**Prepared By:** {{PreparedBy}}
+## Signatures / التواقيع
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
-
----
-
-**Employee Acceptance**
-
-I, {{EmployeeName}}, accept the above promotion.
-
-**Signature:** ___________________________
-**Date:** ___________________________
+| المفوّض بالتوقيع والختم / Authorised Signatory & Stamp | إقرار الموظف / Employee Acknowledgement |
+|---|---|
+| {{AuthorisedBy}} | {{EmployeeNameEn}} |
+| {{AuthorisedTitle}} / {{AuthorisedTitleAr}} | {{NewJobTitle}} |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| التوقيع والختم / Signature & Stamp | Date / التاريخ: ___________________________ |
+| Date / التاريخ: ___________________________ | |

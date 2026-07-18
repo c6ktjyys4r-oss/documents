@@ -1,73 +1,85 @@
 ---
 template: Inspection Report
 category: Operations
-version: 1.0
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-
-# INSPECTION REPORT
+**{{CompanyName}}**
 
 ---
 
-| Field | Value |
+# تقرير فحص وتفتيش &nbsp;/&nbsp; INSPECTION REPORT
+
+---
+
+| البيان / Field | القيمة / Value |
 |---|---|
-| **Report No.** | {{ReferenceNumber}} |
-| **Date** | {{Date}} |
-| **Inspection Type** | {{InspectionType}} |
-| **Location / Area** | {{Location}} |
-| **Inspector** | {{InspectorName}} |
-| **Inspection Date** | {{InspectionDate}} |
+| **رقم التقرير / Report No.** | {{ReferenceNumber}} |
+| **التاريخ / Date** | {{Date}} |
+| **نوع الفحص / Inspection Type** | {{InspectionType}} |
+| **الموقع / Location** | {{Location}} |
+| **المفتِّش / Inspector** | {{InspectorName}} |
+| **تاريخ الفحص / Inspection Date** | {{InspectionDate}} |
 
 ---
 
-## Scope of Inspection
+## نطاق الفحص / Scope of Inspection
 
-{{InspectionScope}}
+{{InspectionScopeAr}} / {{InspectionScope}}
 
 ---
 
-## Checklist
+## قائمة الفحص / Checklist
 
-| # | Item Inspected | Status | Remarks |
+| # | البند / Item | الحالة / Status | الملاحظات / Remarks |
 |---|---|---|---|
-| 1 | {{InspectionItem}} | Pass / Fail / N/A | {{Remarks}} |
-| 2 | | | |
+| 1 | {{InspectionItem1}} | مقبول / اخفاق / لا ينطبق &nbsp;·&nbsp; Pass / Fail / N/A | {{Remarks1}} |
+| 2 | {{InspectionItem2}} | مقبول / اخفاق / لا ينطبق &nbsp;·&nbsp; Pass / Fail / N/A | {{Remarks2}} |
+| 3 | {{InspectionItem3}} | مقبول / اخفاق / لا ينطبق &nbsp;·&nbsp; Pass / Fail / N/A | {{Remarks3}} |
 
 ---
 
-## Findings
+## المخالفات / Findings
 
-### Finding 1
+### المخالفة 1 / Finding 1
 
-**Area:** {{Area}}
-**Observation:** {{Observation}}
-**Severity:** {{Severity}}
-**Recommendation:** {{Recommendation}}
+**المنطقة / Area:** {{Area1}}
 
----
+**الملاحظة / Observation:** {{Observation1}}
 
-## Summary
+**الخطورة / Severity:** {{Severity1}}
 
-**Overall Status:** {{OverallStatus}}
-
-{{SummaryNotes}}
+**التوصية / Recommendation:** {{Recommendation1}}
 
 ---
 
-## Action Required
+## الخلاصة / Summary
 
-| Action | Owner | Priority | Due Date |
+**الحالة العامة / Overall Status:** {{OverallStatus}}
+
+{{SummaryNotesAr}} / {{SummaryNotes}}
+
+---
+
+## الإجراءات المطلوبة / Actions Required
+
+| الإجراء / Action | المسؤول / Owner | الأولوية / Priority | الموعد / Due Date |
 |---|---|---|---|
-| {{Action}} | {{Owner}} | {{Priority}} | {{DueDate}} |
+| {{Action1}} | {{Owner1}} | {{Priority1}} | {{DueDate1}} |
 
 ---
 
-**Prepared By:** {{InspectorName}}
-**Signature:** ___________________________
+## Signatures / التواقيع
 
-**Reviewed By:** {{ApprovedBy}}
-**Signature:** ___________________________
-**Date:** {{Date}}
+| المفتِّش / Inspector | مراجعة بواسطة / Reviewed By |
+|---|---|
+| {{InspectorName}} | {{ReviewedBy}} |
+| {{InspectorTitle}} / {{InspectorTitleAr}} | {{ReviewedByTitle}} / {{ReviewedByTitleAr}} |
+| Signature / التوقيع: ___________________________ | Signature / التوقيع: ___________________________ |
+| Date / التاريخ: ___________________________ | Date / التاريخ: ___________________________ |
+
+| الختم الرسمي / Official Stamp |
+|---|
+| *(Stamp here / ختم هنا)* |
