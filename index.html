@@ -182,6 +182,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .lh-upload{cursor:pointer}
 .lh-upload input[type="file"]{display:none}
 
+/* ── Fill mode ── */
+.fill-layout{display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:start}
+@media(max-width:900px){.fill-layout{grid-template-columns:1fr}}
+.fill-form{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow-y:auto;box-shadow:var(--shadow)}
+.fill-form-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:16px}
+.fill-field{margin-bottom:12px}
+.fill-label{display:block;font-size:.8rem;font-weight:600;color:var(--text-soft);margin-bottom:4px}
+.fill-input{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);font-size:.85rem;outline:none;transition:border-color var(--transition);font-family:inherit}
+.fill-input:focus{border-color:var(--amber);box-shadow:0 0 0 2px rgba(212,160,0,.12)}
+.fill-textarea{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);font-size:.85rem;outline:none;resize:vertical;min-height:68px;font-family:inherit;transition:border-color var(--transition)}
+.fill-textarea:focus{border-color:var(--amber);box-shadow:0 0 0 2px rgba(212,160,0,.12)}
+.fill-section-heading{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin:18px 0 8px;padding-top:14px;border-top:1px solid var(--border)}
+.fill-logo-note{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.fill-logo-note a{color:var(--amber);text-decoration:none}
+.fill-count-badge{display:inline-block;font-size:.72rem;background:var(--amber);color:#fff;border-radius:10px;padding:1px 8px;font-weight:700;margin-left:6px}
+.doc-preview .ph{background:rgba(212,160,0,.15);border-bottom:1.5px dashed var(--amber);color:var(--amber);font-style:normal;border-radius:2px;padding:0 2px}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -321,6 +338,7 @@ function route() {
   if (parts[0] === 'template') return renderTemplate(parts.slice(1).join('/'));
   if (parts[0] === 'search') return renderSearch(decodeURIComponent(parts[1] || ''));
   if (parts[0] === 'settings' && parts[1] === 'letterhead') return renderLetterhead();
+  if (parts[0] === 'fill') return renderFillMode(parts.slice(1).join('/'));
   renderHome();
 }
 
@@ -438,6 +456,10 @@ function renderTemplate(id) {
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
           Print
         </button>
+        <a class="btn btn-amber" href="#/fill/${id}">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Fill Template
+        </a>
       </div>
     </div>
     <div class="doc-preview" id="doc-preview">${rendered}</div>
@@ -566,6 +588,146 @@ function applyLetterheadPrintStyle(dataUrl) {
   el.textContent = dataUrl
     ? '@media print { #doc-preview { position: relative; } #doc-preview::before { content: ""; position: fixed; inset: 0; background-image: url("' + dataUrl + '"); background-size: 100% 100%; background-repeat: no-repeat; opacity: 0.15; z-index: -1; pointer-events: none; } }'
     : '';
+}
+
+
+// ── Generic Template Engine ───────────────────────────────────────────────
+
+function extractPlaceholders(body) {
+  const seen = new Set();
+  const out = [];
+  for (const m of body.matchAll(/\{\{([^}]+)\}\}/g)) {
+    const key = m[1].trim();
+    if (!seen.has(key)) { seen.add(key); out.push(key); }
+  }
+  return out;
+}
+
+function toLabel(key) {
+  return key
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .trim();
+}
+
+const MULTILINE_RE = /^(Body|Opening|Closing|Additional|Terms|Description|Reason|Notes|Paragraph|Process|Clearance|Scope|Requirements|Impact|Detail|Complaint|Observation|Summary|Remark|Agenda|Action|Appreciation|Authorization)/i;
+
+function isMultiline(key) {
+  const base = key.endsWith('Ar') ? key.slice(0, -2) : key;
+  return MULTILINE_RE.test(base);
+}
+
+function renderFillMode(id) {
+  scrollTop();
+  const t = TEMPLATES.find(x => x.id === id);
+  if (!t) { document.getElementById('main').innerHTML = '<p>Template not found.</p>'; return; }
+  const cat = CATEGORIES[t.category] || { label: t.category, icon: '📄' };
+  const keys = extractPlaceholders(t.body);
+  const fillKeys = keys.filter(k => k !== 'Logo');
+  const hasLogo = keys.includes('Logo');
+
+  const logoHtml = hasLogo
+    ? `<div class="fill-field">
+        <div class="fill-label">Logo</div>
+        <p class="fill-logo-note">Uses your uploaded letterhead image.
+          <a href="#/settings/letterhead">Manage in Settings →</a></p>
+       </div>`
+    : '';
+
+  const fields = fillKeys.map(key => {
+    const label = toLabel(key);
+    const inputEl = isMultiline(key)
+      ? `<textarea class="fill-textarea" id="ff-${key}" placeholder="${label}…" oninput="livePreview('${id}')"></textarea>`
+      : `<input class="fill-input" id="ff-${key}" type="text" placeholder="${label}" oninput="livePreview('${id}')">`;
+    return `<div class="fill-field"><label class="fill-label" for="ff-${key}">${label}</label>${inputEl}</div>`;
+  }).join('');
+
+  document.getElementById('main').innerHTML = `
+    <div class="viewer-header">
+      <div class="breadcrumb">
+        <a href="#/">Home</a> ›
+        <a href="#/category/${t.category}">${cat.label}</a> ›
+        <a href="#/template/${id}">${t.name}</a> ›
+        <span>Fill</span>
+      </div>
+      <h1 class="viewer-title">${t.name}</h1>
+      <div class="viewer-actions">
+        <button class="btn btn-primary" onclick="printTemplate()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Filled
+        </button>
+        <button class="btn btn-outline" onclick="downloadFilled('${id}')">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Filled .md
+        </button>
+        <a class="btn btn-outline" href="#/template/${id}">← Back</a>
+      </div>
+    </div>
+    <div class="fill-layout">
+      <div class="fill-form">
+        <div class="fill-form-title">
+          Fill fields <span class="fill-count-badge">${fillKeys.length}</span>
+        </div>
+        ${logoHtml}
+        ${fields}
+      </div>
+      <div>
+        <div class="doc-preview" id="doc-preview"></div>
+      </div>
+    </div>
+  `;
+
+  livePreview(id);
+}
+
+function livePreview(id) {
+  const t = TEMPLATES.find(x => x.id === id);
+  if (!t) return;
+  const preview = document.getElementById('doc-preview');
+  if (!preview) return;
+
+  let body = getBody(id);
+  const keys = extractPlaceholders(t.body);
+
+  if (keys.includes('Logo')) {
+    const lh = localStorage.getItem('letterhead');
+    const logoImg = lh
+      ? `<img src="${lh}" style="max-height:72px;max-width:180px;opacity:.85;display:block">`
+      : '';
+    body = body.replace(/\{\{Logo\}\}/g, logoImg);
+  }
+
+  keys.forEach(key => {
+    if (key === 'Logo') return;
+    const el = document.getElementById('ff-' + key);
+    const val = el ? el.value : '';
+    const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\// Restore letterhead print style on page load');
+    const regex = new RegExp('\\{\\{' + escaped + '\\}\\}', 'g');
+    body = body.replace(regex, val.trim()
+      ? val
+      : `<span class="ph">{{${key}}}</span>`);
+  });
+
+  preview.innerHTML = marked.parse(body);
+}
+
+function downloadFilled(id) {
+  const t = TEMPLATES.find(x => x.id === id);
+  if (!t) return;
+  let body = getBody(id);
+  const keys = extractPlaceholders(t.body);
+  keys.forEach(key => {
+    const el = document.getElementById('ff-' + key);
+    const val = el ? el.value.trim() : '';
+    const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\// Restore letterhead print style on page load');
+    const regex = new RegExp('\\{\\{' + escaped + '\\}\\}', 'g');
+    body = body.replace(regex, val);
+  });
+  body = body.replace(/\{\{Logo\}\}/g, '');
+  const a = document.createElement('a');
+  a.href = 'data:text/markdown;charset=utf-8,' + encodeURIComponent(body);
+  a.download = (t.slug || id) + '-filled.md';
+  a.click();
 }
 
 // Restore letterhead print style on page load
