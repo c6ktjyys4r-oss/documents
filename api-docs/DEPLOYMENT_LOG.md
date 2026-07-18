@@ -1,5 +1,22 @@
 # Deployment Log
 
+## 2026-07-18 — Render Cleanup + Documents Deployment (Session 3)
+
+### Actions Taken
+
+1. **Deleted Alba ERP from Render** — `srv-d8gskvurnols73c3pm30` removed
+2. **Made `documents` repo public** — required for Render static site deployment (repo contains only documentation and templates; no credentials)
+3. **Deployed Documents as Render Static Site** — `https://documents-12j3.onrender.com`, deployed from `main` branch, live in under 15 seconds
+
+### Documents Site Notes
+
+- Pure static HTML — no build command, `publishPath: .`
+- SPA rewrite: `/* → /index.html`
+- No database (static site has no backend)
+- The target architecture listed "Neon — Documents Database" — not applicable; this is a client-side-only static site with no server or database
+
+---
+
 ## 2026-07-18 — Alba ERP → Tarout (Session 2)
 
 ### What was completed before this session
@@ -8,23 +25,17 @@
 - Tarout API reference documented (`api-docs/TAROUT_API.md`, commit `b0a7e70`)
 - Alba ERP Tarout application created (`bu468icMx3mQOn6tRVpc_`) with status `error`
 - Neon "Alba" PostgreSQL project created (`long-scene-74280324`, region `aws-us-east-1`)
-- Env vars set (5 variables — first import attempt at 18:17 UTC)
 
 ### What was completed this session
 
 1. **Verified Tarout API connectivity** — health returned `{"status":"ok"}`, org authenticated
 2. **Diagnosed build failure** — install command `npm install -g pnpm@10` collided with pnpm already present in railpack environment
 3. **Fixed install command** — changed to `pnpm install --no-frozen-lockfile` via `application.saveBuildConfig`
-4. **Configured env vars** — 5 variables imported via `envVariable.import` (dotenv format, merge=true):
-   - `NODE_ENV`
-   - `DATABASE_URL` (Neon pooled connection)
-   - `JWT_SECRET`
-   - `SESSION_SECRET`
-   - `ENCRYPTION_SECRET`
+4. **Configured env vars** — 5 variables imported (dotenv format, merge=true): `NODE_ENV`, `DATABASE_URL`, `JWT_SECRET`, `SESSION_SECRET`, `ENCRYPTION_SECRET`
 5. **Triggered deployment** — deployment ID `tb_5pOtX5WQ0RNOWxfs0P`, finished at 18:59 UTC
 6. **Verified deployment** — all checks passed
 
-### Verification Results
+### Verification Results (Session 2)
 
 | Check | Result |
 |-------|--------|
@@ -33,33 +44,33 @@
 | Login page | ✅ HTTP 200 |
 | Database | ✅ Connected (Neon PostgreSQL, migrations applied) |
 
-### Deployment Details
+---
 
-| Field | Value |
-|-------|-------|
-| URL | `https://alba-erp-ivb0rx.tarout.app` |
-| Tarout App ID | `bu468icMx3mQOn6tRVpc_` |
-| Deployment ID | `tb_5pOtX5WQ0RNOWxfs0P` |
-| Alba GitHub HEAD | `28c9e2e` (fix: audit remediation — all 5 findings) |
-| Neon project | `long-scene-74280324` (Alba, aws-us-east-1) |
-| Region | `me-central2` |
-| Plan | FREE |
-| Build type | railpack |
+## Final Infrastructure State
 
-### Known Background Errors (non-blocking)
+### Tarout
 
-These exist in runtime logs but do not affect serving or database connectivity:
+| Service | Status | URL |
+|---------|--------|-----|
+| Alba ERP | ✅ done | https://alba-erp-ivb0rx.tarout.app |
 
-1. **Email queue** — `ERR_INVALID_ARG_TYPE` when serializing a `Date` to postgres driver. Pre-existing code bug.
-2. **Notification queue** — Drizzle SQL syntax error `where IS NULL` in `performance_reviews` query. Pre-existing code bug.
-3. **Branch management migration** — data migration step skipped (not schema migration). Non-blocking.
+### Render
 
-### Render Comparison (not yet done)
+| Service | Type | URL |
+|---------|------|-----|
+| taj-finance | static_site | https://taj-finance.onrender.com |
+| taj-finance-api | web_service | https://taj-finance-api.onrender.com |
+| documents | static_site | https://documents-12j3.onrender.com |
 
-Per the handoff instructions, Render vs Tarout comparison should only happen after Alba is confirmed working. Alba is now confirmed working. This comparison is the next step.
+### Render Databases
 
-### Next Steps
+| Name | Status | Plan |
+|------|--------|------|
+| taj-finance-db | available | basic_256mb |
 
-1. Compare Tarout vs Render for Alba
-2. Recommend minimal Render cleanup (do not delete until verified)
-3. Optionally fix the email queue and notification queue background bugs
+### Neon Databases
+
+| Name | Project ID | Region |
+|------|-----------|--------|
+| Alba | long-scene-74280324 | aws-us-east-1 |
+| api-server | red-art-58862536 | aws-us-east-2 |
