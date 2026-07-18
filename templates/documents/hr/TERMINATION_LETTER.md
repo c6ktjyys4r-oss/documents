@@ -1,70 +1,81 @@
 ---
-template: Termination Letter
+template: Contract Termination Form
 category: HR
-version: 1.0
+reference: Alba A5
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
+---
+
+# نموذج إنهاء العقد &nbsp;/&nbsp; CONTRACT TERMINATION FORM
+
+**Issue Date / تاريخ الإصدار:** {{IssueDate}}
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
-**Confidential**
+## بيانات الجهة المُصدِرة / Issuing Company Details
 
-**To:**
-{{EmployeeName}}
-{{JobTitle}} — {{Department}}
-
-**Subject:** Termination of Employment
-
-Dear {{EmployeeName}},
-
-This letter formally notifies you that your employment with {{CompanyName}} is terminated, effective **{{TerminationDate}}**.
+| البيان / Field | القيمة / Value |
+|---|---|
+| **اسم المنشأة / Company Name** | {{CompanyNameAr}} / {{CompanyNameEn}} |
+| **رقم السجل التجاري / CR Number** | {{CRNumber}} |
+| **العنوان / Address** | {{CompanyAddress}} |
+| **الهاتف / Phone** | {{CompanyPhone}} |
+| **البريد الإلكتروني / Email** | {{CompanyEmail}} |
 
 ---
 
-**Reason:** {{TerminationReason}}
+## معلومات الموظف / Employee Information
 
-**Last Working Day:** {{LastWorkingDay}}
-
-**Notice Period:** {{NoticePeriod}}
-
----
-
-## Clearance and Handover
-
-{{HandoverInstructions}}
-
-## Final Entitlements
-
-{{EntitlementsDescription}}
-
-## Return of Company Property
-
-Please return the following before your last working day:
-
-{{PropertyToReturn}}
+| البيان / Field | القيمة / Value |
+|---|---|
+| **اسم الموظف / Employee Name** | {{EmployeeNameAr}} / {{EmployeeNameEn}} |
+| **رقم الموظف / Employee Code** | {{EmployeeCode}} |
+| **رقم الهوية / الإقامة / National ID or Iqama** | {{NationalID}} |
+| **الجنسية / Nationality** | {{Nationality}} |
+| **رقم الجوال / Mobile Number** | {{MobileNumber}} |
+| **البريد الإلكتروني / Email Address** | {{EmployeeEmail}} |
 
 ---
 
-{{AdditionalNotes}}
+## تفاصيل التوظيف / Employment Details
+
+| البيان / Field | القيمة / Value |
+|---|---|
+| **المسمى الوظيفي / Job Title** | {{JobTitle}} |
+| **تاريخ الالتحاق / Date of Joining** | {{DateOfJoining}} |
+| **نوع العقد / Contract Type** | {{ContractType}} *(Fixed Term / Non-Fixed Term / Open-Ended)* |
+| **الفرع / Branch** | {{Branch}} |
+| **مدة الخدمة / Length of Service** | {{LengthOfService}} |
 
 ---
 
-**Prepared By:** {{PreparedBy}}
+## تفاصيل إنهاء العقد / Termination Details
 
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
+| البيان / Field | القيمة / Value |
+|---|---|
+| **تاريخ إنهاء العقد / Termination Date** | {{TerminationDate}} |
+| **آخر يوم عمل / Last Working Day** | {{LastWorkingDay}} |
+| **سبب إنهاء العقد / Termination Reason** | {{TerminationReason}} |
 
 ---
 
-**Employee Acknowledgement**
+تُقرّ **{{CompanyNameAr}}** بأن عقد عمل الموظف/ة المذكور/ة أعلاه قد تمّ إنهاؤه اعتباراً من التاريخ المحدد، وذلك وفقاً لأحكام نظام العمل والاتفاقية المبرمة بين الطرفين.
 
-I confirm receipt of this letter.
+**{{CompanyNameEn}}** hereby confirms that the employment contract of the above-named employee has been terminated effective the date stated herein, in accordance with the applicable Labour Law and the terms agreed between both parties.
 
-**Employee Name:** {{EmployeeName}}
-**Signature:** ___________________________
-**Date:** ___________________________
+*يُحتفظ بهذا النموذج في ملف الموظف للأغراض الإدارية. / This form is retained in the employee's file for administrative purposes.*
+
+---
+
+## Signatures / التواقيع
+
+| المفوّض بالتوقيع والختم / Authorised Signatory & Stamp | إقرار الموظف / Employee Acknowledgement |
+|---|---|
+| {{RepresentativeName}} | {{EmployeeNameEn}} |
+| {{RepresentativeTitle}} / {{RepresentativeTitleAr}} | {{JobTitle}} |
+| التوقيع والختم / Signature & Stamp | التوقيع / Signature |
+| ___________________________ | ___________________________ |
+| التاريخ / Date: ___________________________ | التاريخ / Date: ___________________________ |

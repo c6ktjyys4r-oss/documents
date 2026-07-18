@@ -1,83 +1,56 @@
 ---
 template: Job Offer
 category: HR
-version: 1.0
+reference: Alba A2
+version: 2.0
 ---
 
 {{Logo}}
 
-{{CompanyName}}
-{{CompanyAddress}}
+**{{CompanyName}}**
 
 ---
 
-**Reference Number:** {{ReferenceNumber}}
-**Date:** {{Date}}
-
-**To:**
-{{CandidateName}}
-{{CandidateAddress}}
-
-**Subject:** Job Offer — {{JobTitle}}
-
-Dear {{CandidateName}},
-
-We are pleased to offer you the position of **{{JobTitle}}** at {{CompanyName}}.
+**Ref:** {{ReferenceNumber}} &nbsp;|&nbsp; **Date:** {{IssueDate}}
 
 ---
 
-## Offer Details
+# الـعرض الوظيفي &nbsp;/&nbsp; Job Offer Letter
 
-| Field | Value |
+---
+
+| الوصف / Field | القيمة / Value |
 |---|---|
-| **Position** | {{JobTitle}} |
-| **Department** | {{Department}} |
-| **Location** | {{WorkLocation}} |
-| **Reporting To** | {{ReportingManager}} |
-| **Start Date** | {{StartDate}} |
-| **Employment Type** | {{EmploymentType}} |
-| **Working Hours** | {{WorkingHours}} |
+| **التاريخ / Date** | {{IssueDate}} |
+| **الاسم / Name** | {{CandidateNameAr}} / {{CandidateNameEn}} |
+| **الجنسية / Nationality** | {{NationalityAr}} / {{Nationality}} |
+| **رقم الجواز / الإقامة / Passport or ID No.** | {{IDNumber}} |
+| **المسمى الوظيفي / Job Title** | {{JobTitleAr}} / {{JobTitle}} |
+| | **تفاصيل العرض الوظيفي / Details of the Job Offer** |
+| **مدة العقد / Contract Duration** | {{ContractType}} *(Fixed Term / Non-Fixed Term)* |
+| **تاريخ انتهاء العقد / Contract End Date** | {{ContractEndDate}} *(for Fixed Term only)* |
+| **الراتب الأساسي / Basic Salary** | {{BasicSalary}} |
+| **بدل السكن / Housing Allowance** | {{HousingAllowance}} |
+| **بدل النقل / Transportation Allowance** | {{TransportationAllowance}} |
+| **بدلات أخرى / Other Allowances** | {{OtherAllowanceDescription}}: {{OtherAllowanceAmount}} |
+| **الراتب الإجمالي / Total Salary** | {{TotalSalary}} |
+| **فترة التجربة / Probation Period** | {{ProbationDays}} Days / أيام |
+| **أيام الإجازة السنوية / Annual Leave Days** | {{AnnualLeaveDays}} Days / أيام |
+| **عدد أيام العمل / Working Days** | {{WorkingDaysPerWeek}} Days / Week |
+| **عدد ساعات العمل / Working Hours** | {{WorkingHoursPerDay}} Hours / Day |
+| **التأمين الطبي / Medical Insurance** | {{MedicalInsurance}} |
+| **صلاحية العرض / Offer Validity** | {{OfferValidityDays}} Days from Sending |
+| **تاريخ مباشرة العمل / Joining Date** | {{StartDate}} |
+| **الفرع / Branch / Location** | {{Branch}} |
 
 ---
 
-## Compensation
-
-| Component | Amount |
-|---|---|
-| **Basic** | {{BasicAmount}} |
-| **Allowances** | {{AllowancesAmount}} |
-| **Total** | {{TotalCompensation}} |
-| **Payment Frequency** | {{PaymentFrequency}} |
+| التوقيع عند قبول العرض الوظيفي / Signature upon Accepting the Job Offer |
+|---|
+| ___________________________ |
 
 ---
 
-## Benefits
-
-{{Benefits}}
-
----
-
-## Conditions
-
-{{Conditions}}
-
-## Offer Expiry
-
-This offer is valid until **{{OfferExpiryDate}}**. Please sign and return by this date to confirm your acceptance.
-
----
-
-**Prepared By:** {{PreparedBy}}
-**Title:** {{PreparedByTitle}}
-
-**Approved By:** {{ApprovedBy}}
-**Signature:** ___________________________
-
----
-
-**Candidate Acceptance**
-
-I, {{CandidateName}}, accept the above offer.
-
-**Signature:** ___________________________
-**Date:** ___________________________
+| يعتمد مدير إدارة الموارد البشرية / Approved by the Chief Human Resources Officer |
+|---|
+| {{ApprovedBy}} &nbsp;&nbsp; Signature: ___________________________ |

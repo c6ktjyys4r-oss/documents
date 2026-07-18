@@ -63,3 +63,7 @@ Update this file whenever a document is created, revised, approved, or archived.
 | T-041 | Equipment Request | Administration | 1.0 | `templates/documents/administration/EQUIPMENT_REQUEST.md` |
 | T-042 | IT Request | Administration | 1.0 | `templates/documents/administration/IT_REQUEST.md` |
 | T-043 | Training Request | Administration | 1.0 | `templates/documents/administration/TRAINING_REQUEST.md` |
+| T-044 | Salary Certificate | HR | 1.0 | `templates/documents/hr/SALARY_CERTIFICATE.md` |
+| T-045 | Loan Acknowledgement | HR | 1.0 | `templates/documents/hr/LOAN_ACKNOWLEDGEMENT.md` |
+| T-046 | Final Settlement Form | HR | 1.0 | `templates/documents/hr/FINAL_SETTLEMENT.md` |
+| T-047 | Payslip | HR | 1.0 | `templates/documents/hr/PAYSLIP.md` |
