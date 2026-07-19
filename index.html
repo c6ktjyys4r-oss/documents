@@ -489,6 +489,20 @@ button, input, select, textarea { font-family: inherit; }
 .fill-logo-note a:hover { text-decoration: underline; }
 .fill-required-star { color: var(--amber-ui); font-weight: 700; margin-left: 1px; font-size: .85em; }
 .fill-helper { font-size: .72rem; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+.fill-error-msg { font-size: .73rem; color: #dc2626; margin-top: 3px; min-height: 0; line-height: 1.35; }
+.fill-field.has-error .fill-input,
+.fill-field.has-error .fill-select,
+.fill-field.has-error .fill-textarea {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220,38,38,.15);
+}
+[data-theme="dark"] .fill-error-msg { color: #f87171; }
+[data-theme="dark"] .fill-field.has-error .fill-input,
+[data-theme="dark"] .fill-field.has-error .fill-select,
+[data-theme="dark"] .fill-field.has-error .fill-textarea {
+  border-color: #f87171;
+  box-shadow: 0 0 0 2px rgba(248,113,113,.15);
+}
 
 /* ── Autosave indicator ──────────────────────────────────────────────────── */
 .fill-saved-indicator {
@@ -1693,8 +1707,8 @@ function renderField(def, templateId) {
   const star = def.required ? `<span class="fill-required-star" title="Required field">*</span>` : '';
   const ph   = def.placeholder || def.label;
   const id   = 'ff-' + def.key;
-  const change = `onchange="onFieldChange('${escapeHtml(templateId)}')"`;
-  const input_  = `oninput="onFieldChange('${escapeHtml(templateId)}')"`;
+  const change = `onchange="clearFieldError('${escapeHtml(def.key)}');onFieldChange('${escapeHtml(templateId)}')"`;
+  const input_  = `oninput="clearFieldError('${escapeHtml(def.key)}');onFieldChange('${escapeHtml(templateId)}')"`;
   let input;
 
   if (def.type === 'select') {
@@ -1715,9 +1729,10 @@ function renderField(def, templateId) {
   const helper = def.placeholder
     ? `<div class="fill-helper">${escapeHtml(def.placeholder)}</div>` : '';
 
-  return `<div class="fill-field">
+  return `<div class="fill-field" id="ff-wrap-${def.key}">
     <label class="fill-label" for="${id}">${escapeHtml(def.label)}${star}</label>
     ${input}${helper}
+    <div class="fill-error-msg" id="ff-err-${def.key}" role="alert" aria-live="polite"></div>
   </div>`;
 }
 
@@ -1756,8 +1771,56 @@ function persistDraft(templateId) {
   }
 }
 
+/**
+ * Clear the validation error state for a single field.
+ * Called by inline oninput/onchange handlers when the user edits a field.
+ */
+function clearFieldError(key) {
+  const wrap  = document.getElementById('ff-wrap-' + key);
+  const errEl = document.getElementById('ff-err-' + key);
+  if (wrap)  wrap.classList.remove('has-error');
+  if (errEl) errEl.textContent = '';
+}
+
+/**
+ * Validate all required fields in the current form.
+ * Marks empty required fields with red border + inline error message,
+ * scrolls to the first violation, and shows a toast.
+ * Returns true if all required fields are filled, false otherwise.
+ */
+function validateRequiredFields() {
+  if (!_currentFieldDefs) return true;
+  const required = _currentFieldDefs.filter(f => f.required);
+  if (required.length === 0) return true;
+
+  let firstViolation = null;
+  let errorCount = 0;
+
+  required.forEach(def => {
+    const el  = document.getElementById('ff-' + def.key);
+    const val = el ? el.value.trim() : '';
+    if (!val) {
+      errorCount++;
+      const wrap  = document.getElementById('ff-wrap-' + def.key);
+      const errEl = document.getElementById('ff-err-' + def.key);
+      if (wrap)  wrap.classList.add('has-error');
+      if (errEl) errEl.textContent = 'This field is required before publishing';
+      if (!firstViolation && wrap) firstViolation = wrap;
+    }
+  });
+
+  if (firstViolation) {
+    firstViolation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const plural = errorCount === 1 ? 'field' : 'fields';
+    showToast(`${errorCount} required ${plural} must be filled before publishing`, 'error');
+    return false;
+  }
+  return true;
+}
+
 /** Save the current form state to the document store with the given status. */
 function saveDocAs(templateId, status) {
+  if (status === 'published' && !validateRequiredFields()) return;
   const t = TEMPLATES.find(x => x.id === templateId);
   if (!t) return;
   const fields    = collectFields();
