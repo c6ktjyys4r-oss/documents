@@ -207,3 +207,33 @@ Full UX parity audit comparing standalone `index.html` against Alba ERP Document
 
 ### Estimated UX Parity After This Phase
 Overall: ~90% (up from ~62% before this phase)
+
+---
+
+## Phase 8 — Remaining UX Gap Closure (2026-07-19)
+
+Closed all remaining fixable parity gaps identified after Phase 7.
+
+### Issues Fixed
+
+| # | Area | Change |
+|---|---|---|
+| 1 | Sidebar collapse | Refactored from inline-style mutations to a CSS-class–driven icon-rail. `.sidebar.collapsed` CSS class controls all collapsed state (width: 56px, icons centred, labels/counts hidden, chevron rotated). `applyCollapse()` simplified to toggle the class + set tooltip `title` attrs for accessibility in collapsed mode. |
+| 2 | Archive action | Added Archive / Unarchive button to every My Documents item. Archive sets `status: 'archived'`; Unarchive restores to `'draft'`. Archived items now filterable via the existing Archived tab. |
+| 3 | Appearance settings | New `#/settings/appearance` page with Light / Dark / System theme cards. `setThemePref()` applies the choice immediately and persists to `localStorage`. System removes the persisted key so the OS preference is honoured on next load. |
+| 4 | Data & Storage settings | New `#/settings/data` page with live storage-usage bar (KB used, doc + draft counts). Three management actions: Clear autosaved drafts, Delete all documents (with count-aware confirm), Reset everything (full localStorage clear + system-theme re-apply). |
+| 5 | Settings sidebar expansion | Added Appearance and Data & Storage links to the sidebar Settings section (with matching icons). Router updated to serve new routes. |
+
+### Files Changed
+- `index.html` — all implementation (250 lines net)
+- `ROADMAP_NEXT.md` — updated (this entry)
+
+### Estimated UX Parity After This Phase
+Overall: ~95% (up from ~90% after Phase 7)
+
+Remaining intentional differences (all by design):
+1. ERP auto-fill → standalone requires manual entry throughout
+2. Live preview panel — standalone enhancement not present in Alba
+3. Version history — standalone-only localStorage feature
+4. Import / Export JSON — standalone-only backup/restore feature
+5. No server-side Archived workflow (archive action now implemented client-side)

@@ -841,6 +841,58 @@ button, input, select, textarea { font-family: inherit; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Sidebar icon-rail (CSS-class collapsed) ─────────────────────────────── */
+.sidebar.collapsed { width: 56px; }
+.sidebar.collapsed .sidebar-heading,
+.sidebar.collapsed .cat-count,
+.sidebar.collapsed #collapse-label { display: none !important; }
+.sidebar.collapsed .sidebar-link { justify-content: center; padding: 8px 0; }
+.sidebar.collapsed .sidebar-collapse-btn { justify-content: center; padding: 9px 0; }
+.sidebar.collapsed #collapse-icon { transform: rotate(180deg); }
+
+/* ── Settings pages ──────────────────────────────────────────────────────── */
+.settings-section {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  max-width: 560px; margin-top: 16px;
+}
+.settings-section-title {
+  font-size: .9375rem; font-weight: 700; color: var(--text);
+  margin-bottom: 4px; letter-spacing: -.01em;
+}
+.settings-section-sub {
+  font-size: .82rem; color: var(--text-soft); margin-bottom: 18px; line-height: 1.5;
+}
+.theme-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.theme-option {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 14px 18px; border: 2px solid var(--border);
+  border-radius: var(--radius); cursor: pointer; background: var(--bg3);
+  font-size: .8rem; font-weight: 600; color: var(--text-soft);
+  font-family: inherit;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+  min-width: 90px;
+}
+.theme-option:hover { border-color: var(--amber-ui); color: var(--text); }
+.theme-option.selected { border-color: var(--amber-ui); background: var(--header-bg); color: var(--navy); }
+[data-theme="dark"] .theme-option.selected { color: var(--amber-light); }
+.theme-option-icon { color: var(--text-muted); }
+.theme-option.selected .theme-option-icon { color: inherit; }
+.storage-bar-wrap { margin-bottom: 16px; }
+.storage-bar-label {
+  font-size: .78rem; color: var(--text-soft); margin-bottom: 6px;
+  display: flex; justify-content: space-between;
+}
+.storage-bar { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.storage-bar-fill { height: 100%; border-radius: 3px; background: var(--amber-ui); transition: width .4s ease; }
+.settings-action-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 0; border-bottom: 1px solid var(--border-light); gap: 16px;
+}
+.settings-action-row:last-child { border-bottom: none; padding-bottom: 0; }
+.settings-action-label { font-size: .875rem; color: var(--text); font-weight: 500; }
+.settings-action-sub { font-size: .78rem; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
 </style>
 </head>
 <body>
@@ -1009,6 +1061,25 @@ button, input, select, textarea { font-family: inherit; }
           </svg>
         </span>
         Stationery
+      </a>
+      <a class="sidebar-link" href="#/settings/appearance" onclick="closeSidebar()">
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+        </span>
+        Appearance
+      </a>
+      <a class="sidebar-link" href="#/settings/data" onclick="closeSidebar()">
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+            <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>
+          </svg>
+        </span>
+        Data &amp; Storage
       </a>
     </div>
     <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()"
@@ -1192,32 +1263,17 @@ function toggleSidebarCollapse() {
 
 function applyCollapse(collapse, persist) {
   const sidebar = document.getElementById('sidebar');
-  const icon    = document.getElementById('collapse-icon');
-  const label   = document.getElementById('collapse-label');
-
-  if (collapse) {
-    sidebar.classList.add('collapsed');
-    sidebar.querySelectorAll('.sidebar-heading,.cat-count').forEach(el => el.style.display = 'none');
-    sidebar.querySelectorAll('.sidebar-link').forEach(el => {
-      el.style.justifyContent = 'center';
-      el.style.padding = '8px 0';
-      el.title = el.textContent.trim();
-    });
-    sidebar.style.width = '50px';
-    if (icon)  icon.style.transform = 'rotate(180deg)';
-    if (label) label.style.display  = 'none';
-  } else {
-    sidebar.classList.remove('collapsed');
-    sidebar.querySelectorAll('.sidebar-heading,.cat-count').forEach(el => el.style.display = '');
-    sidebar.querySelectorAll('.sidebar-link').forEach(el => {
-      el.style.justifyContent = '';
-      el.style.padding = '';
+  sidebar.classList.toggle('collapsed', collapse);
+  // Tooltips so links are usable in icon-rail mode
+  sidebar.querySelectorAll('.sidebar-link').forEach(el => {
+    if (collapse) {
+      const clone = el.cloneNode(true);
+      clone.querySelectorAll('.cat-count').forEach(n => n.remove());
+      el.title = clone.textContent.replace(/\s+/g, ' ').trim();
+    } else {
       el.title = '';
-    });
-    sidebar.style.width = '';
-    if (icon)  icon.style.transform = '';
-    if (label) { label.style.display = ''; label.textContent = 'Collapse'; }
-  }
+    }
+  });
   if (persist) localStorage.setItem('sidebar-collapsed', String(collapse));
 }
 
@@ -1257,7 +1313,9 @@ function route() {
   if (parts[0] === 'category' && parts[1])           return renderCategory(parts[1]);
   if (parts[0] === 'template')                       { location.replace('#/fill/' + parts.slice(1).join('/')); return; }
   if (parts[0] === 'search')                         return renderSearch(decodeURIComponent(parts[1] || ''));
-  if (parts[0] === 'settings' && parts[1] === 'letterhead') return renderLetterhead();
+  if (parts[0] === 'settings' && parts[1] === 'letterhead')  return renderLetterhead();
+  if (parts[0] === 'settings' && parts[1] === 'appearance') return renderAppearanceSettings();
+  if (parts[0] === 'settings' && parts[1] === 'data')       return renderDataSettings();
   if (parts[0] === 'fill')                           return renderFillMode(parts.slice(1).join('/'));
   renderHome();
 }
@@ -1609,6 +1667,17 @@ function renderMyDocuments() {
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
         </button>
+        ${doc.status === 'archived'
+          ? `<button class="btn btn-outline btn-sm" onclick="unarchiveSavedDoc('${escapeHtml(doc.id)}')" title="Restore to Drafts" aria-label="Restore ${escapeHtml(doc.templateName)}">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+              </svg>
+             </button>`
+          : `<button class="btn btn-outline btn-sm" onclick="archiveSavedDoc('${escapeHtml(doc.id)}')" title="Archive document" aria-label="Archive ${escapeHtml(doc.templateName)}">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>
+              </svg>
+             </button>`}
         <button class="btn btn-danger btn-sm" onclick="deleteSavedDoc('${escapeHtml(doc.id)}')" title="Delete document" aria-label="Delete ${escapeHtml(doc.templateName)}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="3 6 5 6 21 6"/>
@@ -1764,6 +1833,161 @@ function deleteSavedDoc(docId) {
   DB.delete(docId);
   showToast(`"${name}" deleted`, 'info');
   renderMyDocuments();
+}
+
+function archiveSavedDoc(docId) {
+  const doc = DB.getById(docId);
+  if (!doc) return;
+  DB.save({ ...doc, status: 'archived', updatedAt: new Date().toISOString() });
+  showToast(`"${doc.templateName}" archived`, 'info');
+  renderMyDocuments();
+}
+
+function unarchiveSavedDoc(docId) {
+  const doc = DB.getById(docId);
+  if (!doc) return;
+  DB.save({ ...doc, status: 'draft', updatedAt: new Date().toISOString() });
+  showToast(`"${doc.templateName}" restored to Drafts`, 'info');
+  renderMyDocuments();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: Appearance settings
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function renderAppearanceSettings() {
+  scrollTop();
+  document.title = 'Appearance — Alba Docs';
+  const saved = localStorage.getItem('theme') || 'system';
+  const main  = document.getElementById('main');
+
+  const opt = (val, label, iconPath) => {
+    const sel = (val === 'system' ? (saved !== 'light' && saved !== 'dark') : saved === val);
+    return `<button class="theme-option${sel ? ' selected' : ''}" onclick="setThemePref('${val}')" aria-pressed="${sel}">
+      <span class="theme-option-icon">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">${iconPath}</svg>
+      </span>
+      ${label}
+    </button>`;
+  };
+
+  main.innerHTML = `
+    <div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> Settings <span class="breadcrumb-sep">›</span> Appearance</div>
+    <div class="page-header">
+      <h1 class="page-title">Appearance</h1>
+      <p class="page-sub">Choose how Alba Docs looks on this device.</p>
+    </div>
+    <div class="settings-section">
+      <div class="settings-section-title">Theme</div>
+      <div class="settings-section-sub">Select a colour scheme or let the system decide automatically.</div>
+      <div class="theme-options">
+        ${opt('light', 'Light', '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>')}
+        ${opt('dark',  'Dark',  '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>')}
+        ${opt('system','System','<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>')}
+      </div>
+    </div>`;
+}
+
+function setThemePref(pref) {
+  const prefersDark = matchMedia('(prefers-color-scheme:dark)').matches;
+  const isDark = pref === 'dark' || (pref === 'system' && prefersDark);
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+  if (pref === 'system') {
+    localStorage.removeItem('theme');
+  } else {
+    localStorage.setItem('theme', pref);
+  }
+  renderAppearanceSettings();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: Data & Storage settings
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function renderDataSettings() {
+  scrollTop();
+  document.title = 'Data & Storage — Alba Docs';
+  const main = document.getElementById('main');
+
+  // Estimate localStorage usage
+  let usedBytes = 0;
+  try {
+    for (const key of Object.keys(localStorage)) {
+      usedBytes += ((localStorage.getItem(key) || '').length + key.length) * 2;
+    }
+  } catch (e) { /* ignore */ }
+  const usedKb   = (usedBytes / 1024).toFixed(1);
+  const quotaKb  = 5120; // 5 MB typical quota
+  const pct      = Math.min(100, Math.round(usedBytes / 1024 / quotaKb * 100));
+  const docCount = DB.getAll().length;
+  const draftKeys = Object.keys(localStorage).filter(k => k.startsWith('draft_'));
+
+  main.innerHTML = `
+    <div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> Settings <span class="breadcrumb-sep">›</span> Data &amp; Storage</div>
+    <div class="page-header">
+      <h1 class="page-title">Data &amp; Storage</h1>
+      <p class="page-sub">All data is stored locally in this browser. Nothing is sent to a server.</p>
+    </div>
+    <div class="settings-section">
+      <div class="settings-section-title">Storage Usage</div>
+      <div class="settings-section-sub">Approximate browser storage used by Alba Docs on this device.</div>
+      <div class="storage-bar-wrap">
+        <div class="storage-bar-label">
+          <span>${usedKb} KB used</span>
+          <span>${docCount} document${docCount !== 1 ? 's' : ''} · ${draftKeys.length} draft${draftKeys.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="storage-bar"><div class="storage-bar-fill" style="width:${pct}%"></div></div>
+      </div>
+    </div>
+    <div class="settings-section">
+      <div class="settings-section-title">Manage Data</div>
+      <div class="settings-section-sub">These actions cannot be undone. Export your documents first if you need a backup.</div>
+      <div class="settings-action-row">
+        <div>
+          <div class="settings-action-label">Clear autosaved drafts</div>
+          <div class="settings-action-sub">${draftKeys.length} draft${draftKeys.length !== 1 ? 's' : ''} stored. Removes autosaved form data; saved documents are not affected.</div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="settingsClearDrafts()" ${draftKeys.length === 0 ? 'disabled' : ''}>Clear</button>
+      </div>
+      <div class="settings-action-row">
+        <div>
+          <div class="settings-action-label">Delete all saved documents</div>
+          <div class="settings-action-sub">Permanently removes all ${docCount} document${docCount !== 1 ? 's' : ''} from My Documents.</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="settingsClearDocuments()" ${docCount === 0 ? 'disabled' : ''}>Delete All</button>
+      </div>
+      <div class="settings-action-row">
+        <div>
+          <div class="settings-action-label">Reset everything</div>
+          <div class="settings-action-sub">Clears all documents, drafts, letterhead, and preferences. Resets to factory defaults.</div>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="settingsResetAll()">Reset</button>
+      </div>
+    </div>`;
+}
+
+function settingsClearDrafts() {
+  const keys = Object.keys(localStorage).filter(k => k.startsWith('draft_'));
+  keys.forEach(k => localStorage.removeItem(k));
+  showToast(`${keys.length} draft${keys.length !== 1 ? 's' : ''} cleared`, 'info');
+  renderDataSettings();
+}
+
+function settingsClearDocuments() {
+  const count = DB.getAll().length;
+  if (!count) return;
+  if (!confirm(`Delete all ${count} saved document${count !== 1 ? 's' : ''}? This cannot be undone.`)) return;
+  DB.getAll().forEach(d => DB.delete(d.id));
+  Object.keys(localStorage).filter(k => k.startsWith('history_')).forEach(k => localStorage.removeItem(k));
+  showToast('All documents deleted', 'info');
+  renderDataSettings();
+}
+
+function settingsResetAll() {
+  if (!confirm('Reset everything? This deletes all documents, drafts, letterhead, and preferences. This cannot be undone.')) return;
+  localStorage.clear();
+  document.documentElement.setAttribute('data-theme',
+    matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : '');
+  showToast('All data cleared', 'info');
+  renderDataSettings();
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
