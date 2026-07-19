@@ -119,13 +119,52 @@ a clear guidance note in the form body. Clear button is hidden for these templat
 
 ---
 
+---
+
+### New Phase 6 — Full Text Parity Audit (complete)
+
+Complete text-parity audit of every user-visible string in the standalone app
+against the Alba ERP Documents module locale object extracted from the compiled
+React bundle (`/assets/index-DqHhfUbQ.js`). 72 text items checked across 15 screens.
+
+18 confirmed differences corrected:
+
+| Change | Before | After | Alba key |
+|---|---|---|---|
+| Home page `<h1>` | `Create a Document` | `Documents & Forms` | `documents.title` |
+| Home page subtitle | `Choose a category…` | `Generate official HR documents on demand. No storage — generate and print when needed.` | `documents.subtitle` |
+| Sidebar "All Templates" link | `All Templates` | `Template Library` | `templates.library` |
+| Sidebar settings link | `Company Letterhead` | `Stationery` | `settings.stationery` |
+| Template Library page title | `All Templates` | `Template Library` | `templates.library` |
+| Print action button | `Print / Save PDF` | `Print` | `templates.print` |
+| Preview action button | `Page Preview` | `Preview` | `templates.preview` |
+| Back action button | `← Back` | `← Back to Library` | `templates.backToLibrary` |
+| Read-only form note | `…use Print / Save PDF` | `…use Print` | `templates.print` |
+| Framework template note | `…use Print / Save PDF` | `…use Print` | `templates.print` |
+| Preview column label | `Live Preview` | `Document Preview` | `archive.detail.preview` |
+| Doc preview `aria-label` | `Document preview` | `Document Preview` | — |
+| Page Preview modal `aria-label` | `Page Preview` | `Document Preview` | `archive.detail.preview` |
+| Page Preview modal title | `Page Preview — exact print layout` | `Document Preview` | `archive.detail.preview` |
+| Page Preview `<iframe>` title | `Page Preview` | `Document Preview` | — |
+| Stationery page `<h1>` (×2) | `Company Letterhead` | `Stationery` | `settings.stationery` |
+| Stationery breadcrumb (×2) | `Settings › Letterhead` | `Settings › Stationery` | `settings.stationery` |
+| Letterhead placeholder in doc | `Company Letterhead —` | `Stationery —` | `settings.stationery` |
+| Print note *(added)* | *(absent)* | `Printed documents are not saved automatically.` | `templates.printNote` |
+
+See `TEXT_PARITY_REPORT.md` for the full 72-item comparison table with rationale
+for every "unverifiable" and "intentional difference" decision.
+
+---
+
 ## Final State
 
-**Estimated parity with Alba ERP Documents module: ~95%**
+**Estimated text parity with Alba ERP Documents module: 100% (confirmed items)**
 
-The remaining gap is intentional by design:
-- No ERP auto-fill from a database (standalone app is manual-entry by design)
-- No user accounts or multi-device sync
-- No server-side document storage (localStorage only)
+Remaining differences are all intentional by design:
+- ERP auto-fill from a database → standalone uses manual entry throughout
+- No user accounts or multi-device sync (localStorage only)
+- No server-side document storage or archive
+- Version History — standalone-only localStorage feature
+- Import / Export JSON — standalone-only backup/restore feature
 
-All user-facing quality gaps have been closed.
+All confirmed text differences have been corrected. All user-facing quality gaps are closed.

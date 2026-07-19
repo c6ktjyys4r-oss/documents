@@ -394,6 +394,7 @@ button, input, select, textarea { font-family: inherit; }
 }
 [data-theme="dark"] .doc-title { color: var(--amber-light); }
 .doc-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.doc-print-note { font-size: .75rem; color: var(--text-muted); margin: 6px 0 0; }
 
 /* ── Fill layout ─────────────────────────────────────────────────────────── */
 .fill-layout {
@@ -868,18 +869,18 @@ button, input, select, textarea { font-family: inherit; }
 </div>
 
 <!-- Page Preview Modal -->
-<div class="page-preview-backdrop" id="page-preview-backdrop" onclick="handlePagePreviewBackdropClick(event)" role="dialog" aria-modal="true" aria-label="Page Preview">
+<div class="page-preview-backdrop" id="page-preview-backdrop" onclick="handlePagePreviewBackdropClick(event)" role="dialog" aria-modal="true" aria-label="Document Preview">
   <div class="page-preview-dialog">
     <div class="page-preview-toolbar">
       <div class="page-preview-toolbar-title">
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
         </svg>
-        Page Preview — exact print layout
+        Document Preview
       </div>
-      <button class="page-preview-close" onclick="closePagePreview()" aria-label="Close page preview" title="Close (Esc)">✕</button>
+      <button class="page-preview-close" onclick="closePagePreview()" aria-label="Close document preview" title="Close (Esc)">✕</button>
     </div>
-    <iframe id="page-preview-iframe" title="Page Preview" sandbox="allow-same-origin"></iframe>
+    <iframe id="page-preview-iframe" title="Document Preview" sandbox="allow-same-origin"></iframe>
   </div>
 </div>
 
@@ -909,7 +910,7 @@ button, input, select, textarea { font-family: inherit; }
             <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
           </svg>
         </span>
-        All Templates
+        Template Library
         <span class="cat-count">48</span>
       </a>
     </div>
@@ -984,7 +985,7 @@ button, input, select, textarea { font-family: inherit; }
             <circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
           </svg>
         </span>
-        Company Letterhead
+        Stationery
       </a>
     </div>
     <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()"
@@ -1228,7 +1229,7 @@ function route() {
 
   if (!parts.length)                                 return renderHome();
   if (parts[0] === 'my-documents')                   return renderMyDocuments();
-  if (parts[0] === 'all')                            return renderList(TEMPLATES, 'All Templates', '');
+  if (parts[0] === 'all')                            return renderList(TEMPLATES, 'Template Library', '');
   if (parts[0] === 'category' && parts[1])           return renderCategory(parts[1]);
   if (parts[0] === 'template')                       { location.replace('#/fill/' + parts.slice(1).join('/')); return; }
   if (parts[0] === 'search')                         return renderSearch(decodeURIComponent(parts[1] || ''));
@@ -1329,7 +1330,7 @@ function substituteFields(body, keys, getValue, forPrint) {
   if (keys.includes('Logo')) {
     const logoHtml = lh
       ? `<img src="${lh}" class="doc-letterhead" alt="Company Letterhead">`
-      : (forPrint ? '' : `<div class="doc-letterhead-ph"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Company Letterhead — <a href="#/settings/letterhead">upload to see it here</a></div>`);
+      : (forPrint ? '' : `<div class="doc-letterhead-ph"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Stationery — <a href="#/settings/letterhead">upload to see it here</a></div>`);
     body = body.replace(/\{\{Logo\}\}/g, logoHtml);
   }
 
@@ -1502,8 +1503,8 @@ function renderHome() {
   document.getElementById('main').innerHTML = `
     ${banner}
     <div class="page-header">
-      <h1 class="page-title">Create a Document</h1>
-      <p class="page-sub">Choose a category to browse templates, fill in the form, and generate a professional document.</p>
+      <h1 class="page-title">Documents &amp; Forms</h1>
+      <p class="page-sub">Generate official HR documents on demand. No storage — generate and print when needed.</p>
     </div>
     <div class="category-grid">${cards}</div>`;
 }
@@ -1789,18 +1790,18 @@ function renderSearch(q) {
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function renderLetterhead() {
   scrollTop();
-  document.title = 'Company Letterhead — Alba Docs';
+  document.title = 'Stationery — Alba Docs';
   const dataUrl = localStorage.getItem('letterhead');
   const name    = localStorage.getItem('letterhead_name') || '';
   const main    = document.getElementById('main');
 
-  const breadcrumb = `<div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> Settings <span class="breadcrumb-sep">›</span> Letterhead</div>`;
+  const breadcrumb = `<div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> Settings <span class="breadcrumb-sep">›</span> Stationery</div>`;
 
   if (dataUrl) {
     main.innerHTML = `
       ${breadcrumb}
       <div class="page-header">
-        <h1 class="page-title">Company Letterhead</h1>
+        <h1 class="page-title">Stationery</h1>
         <p class="page-sub">This image appears at the top of every document you generate.</p>
       </div>
       <div class="lh-preview">
@@ -1818,7 +1819,7 @@ function renderLetterhead() {
     main.innerHTML = `
       ${breadcrumb}
       <div class="page-header">
-        <h1 class="page-title">Company Letterhead</h1>
+        <h1 class="page-title">Stationery</h1>
         <p class="page-sub">Upload your company letterhead — it will appear at the top of every generated document, exactly as in print.</p>
       </div>
       <div class="lh-empty">
@@ -2251,13 +2252,13 @@ async function renderFillMode(id) {
             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
             <rect x="6" y="14" width="12" height="8"/>
           </svg>
-          Print / Save PDF
+          Print
         </button>
         <button class="btn btn-outline" onclick="openPagePreview('${escapeHtml(id)}')" title="Preview exact page layout before printing">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
           </svg>
-          Page Preview
+          Preview
         </button>
         <button class="btn btn-outline" onclick="saveDocAs('${escapeHtml(id)}','draft')">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -2272,8 +2273,9 @@ async function renderFillMode(id) {
           </svg>
           Publish
         </button>
-        <a class="btn btn-outline" href="#/category/${escapeHtml(t.category)}">← Back</a>
+        <a class="btn btn-outline" href="#/category/${escapeHtml(t.category)}">← Back to Library</a>
       </div>
+      <p class="doc-print-note">Printed documents are not saved automatically.</p>
     </div>
 
     <div class="fill-layout">
@@ -2286,7 +2288,7 @@ async function renderFillMode(id) {
               <div class="fill-form-header-sub">${
                 fieldDefs.length > 0
                   ? `${fieldDefs.length} field${fieldDefs.length !== 1 ? 's' : ''} — preview updates live`
-                  : 'Read-only template — use Print / Save PDF'
+                  : 'Read-only template — use Print'
               }</div>
             </div>
             ${fieldDefs.length > 0 ? `<button class="btn-clear-draft" onclick="clearDraftAndReset('${escapeHtml(id)}')" title="Clear saved draft">Clear</button>` : ''}
@@ -2299,7 +2301,7 @@ async function renderFillMode(id) {
         <div class="fill-form-body">
           ${lhWarning}${logoHtml}${formHtml || `<p style="color:var(--text-muted);font-size:.85rem;padding:8px 0 4px">
             This is a structured reference template with no fillable fields.<br>
-            Review the document in the preview, then use <strong>Print / Save PDF</strong> to export it.
+            Review the document in the preview, then use <strong>Print</strong> to export it.
           </p>`}
         </div>
       </div>
@@ -2310,10 +2312,10 @@ async function renderFillMode(id) {
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
           </svg>
-          Live Preview
+          Document Preview
         </div>
         <div class="preview-page-wrap">
-          <div class="doc-preview" id="doc-preview" aria-label="Document preview" dir="${dir}"></div>
+          <div class="doc-preview" id="doc-preview" aria-label="Document Preview" dir="${dir}"></div>
         </div>
       </div>
     </div>`;
