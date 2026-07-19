@@ -1923,9 +1923,13 @@ async function renderFillMode(id) {
           <div class="fill-form-header-row">
             <div>
               <div class="fill-form-header-title">Document Fields</div>
-              <div class="fill-form-header-sub">${fieldDefs.length} field${fieldDefs.length !== 1 ? 's' : ''} — preview updates live</div>
+              <div class="fill-form-header-sub">${
+                fieldDefs.length > 0
+                  ? `${fieldDefs.length} field${fieldDefs.length !== 1 ? 's' : ''} — preview updates live`
+                  : 'Read-only template — use Print / Save PDF'
+              }</div>
             </div>
-            <button class="btn-clear-draft" onclick="clearDraftAndReset('${escapeHtml(id)}')" title="Clear saved draft">Clear</button>
+            ${fieldDefs.length > 0 ? `<button class="btn-clear-draft" onclick="clearDraftAndReset('${escapeHtml(id)}')" title="Clear saved draft">Clear</button>` : ''}
           </div>
           <div class="fill-saved-indicator" id="saved-indicator">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1933,7 +1937,10 @@ async function renderFillMode(id) {
           </div>
         </div>
         <div class="fill-form-body">
-          ${lhWarning}${logoHtml}${formHtml}
+          ${lhWarning}${logoHtml}${formHtml || `<p style="color:var(--text-muted);font-size:.85rem;padding:8px 0 4px">
+            This is a structured reference template with no fillable fields.<br>
+            Review the document in the preview, then use <strong>Print / Save PDF</strong> to export it.
+          </p>`}
         </div>
       </div>
 
