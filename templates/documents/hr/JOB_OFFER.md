@@ -1,8 +1,197 @@
 ---
-template: Job Offer
-category: HR
-reference: Alba A2
-version: 2.0
+document:
+  name: Job Offer
+  category: hr
+  reference: Alba A2
+  version: 2.0
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  IssueDate:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+
+  CandidateNameEn:
+    label: Candidate Name (English)
+    type: text
+    required: true
+    group: Candidate
+    order: 10
+
+  CandidateNameAr:
+    label: Candidate Name (Arabic)
+    type: text
+    required: true
+    group: Candidate
+    order: 11
+
+  Nationality:
+    label: Nationality (English)
+    type: text
+    required: true
+    group: Candidate
+    order: 12
+
+  NationalityAr:
+    label: Nationality (Arabic)
+    type: text
+    group: Candidate
+    order: 13
+
+  IDNumber:
+    label: Passport / Iqama Number
+    type: text
+    required: true
+    group: Candidate
+    order: 14
+
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Offer Details
+    order: 20
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Offer Details
+    order: 21
+
+  ContractType:
+    label: Contract Type
+    type: select
+    required: true
+    group: Offer Details
+    order: 22
+    options:
+      - Fixed Term
+      - Non-Fixed Term
+
+  ContractEndDate:
+    label: Contract End Date
+    type: date
+    group: Offer Details
+    order: 23
+    placeholder: For Fixed Term contracts only
+
+  Branch:
+    label: Branch / Location
+    type: text
+    group: Offer Details
+    order: 24
+
+  StartDate:
+    label: Joining Date
+    type: date
+    required: true
+    group: Offer Details
+    order: 25
+
+  BasicSalary:
+    label: Basic Salary (SAR)
+    type: currency
+    required: true
+    group: Compensation
+    order: 30
+    placeholder: e.g. 10000.00
+
+  HousingAllowance:
+    label: Housing Allowance (SAR)
+    type: currency
+    group: Compensation
+    order: 31
+
+  TransportationAllowance:
+    label: Transportation Allowance (SAR)
+    type: currency
+    group: Compensation
+    order: 32
+
+  OtherAllowanceDescription:
+    label: Other Allowance Description
+    type: text
+    group: Compensation
+    order: 33
+
+  OtherAllowanceAmount:
+    label: Other Allowance Amount (SAR)
+    type: currency
+    group: Compensation
+    order: 34
+
+  TotalSalary:
+    label: Total Salary (SAR)
+    type: currency
+    required: true
+    group: Compensation
+    order: 35
+
+  ProbationDays:
+    label: Probation Period (Days)
+    type: number
+    group: Terms
+    order: 40
+    placeholder: e.g. 90
+
+  AnnualLeaveDays:
+    label: Annual Leave Days
+    type: number
+    group: Terms
+    order: 41
+
+  WorkingDaysPerWeek:
+    label: Working Days per Week
+    type: number
+    group: Terms
+    order: 42
+
+  WorkingHoursPerDay:
+    label: Working Hours per Day
+    type: number
+    group: Terms
+    order: 43
+
+  MedicalInsurance:
+    label: Medical Insurance
+    type: text
+    group: Terms
+    order: 44
+    placeholder: e.g. Class A / Included
+
+  OfferValidityDays:
+    label: Offer Validity (Days)
+    type: number
+    group: Terms
+    order: 45
+
+  ApprovedBy:
+    label: Approved by (HR Officer Name)
+    type: text
+    required: true
+    group: Approval
+    order: 50
+
 ---
 
 <style>

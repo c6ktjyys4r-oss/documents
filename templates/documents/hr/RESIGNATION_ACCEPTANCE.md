@@ -1,7 +1,147 @@
 ---
-template: Resignation Acceptance
-category: HR
-version: 2.1
+document:
+  name: Resignation Acceptance
+  category: hr
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  CompanyNameAr:
+    label: Company Name (Arabic)
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 3
+
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 4
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  EmployeeCode:
+    label: Employee Code
+    type: text
+    group: Employee
+    order: 12
+
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee
+    order: 13
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee
+    order: 14
+
+  Department:
+    label: Department
+    type: text
+    group: Employee
+    order: 15
+
+  ResignationDate:
+    label: Resignation Letter Date
+    type: date
+    required: true
+    group: Resignation
+    order: 20
+
+  LastWorkingDay:
+    label: Last Working Day
+    type: date
+    required: true
+    group: Resignation
+    order: 21
+
+  NoticePeriod:
+    label: Notice Period
+    type: text
+    group: Resignation
+    order: 22
+    placeholder: e.g. 30 days / 60 days
+
+  HandoverInstructions:
+    label: Handover Instructions (English)
+    type: textarea
+    group: Instructions
+    order: 30
+    placeholder: Optional handover or transition notes
+
+  HandoverInstructionsAr:
+    label: Handover Instructions (Arabic)
+    type: textarea
+    group: Instructions
+    order: 31
+
+  ClearanceProcess:
+    label: Clearance Process (English)
+    type: textarea
+    group: Instructions
+    order: 32
+    placeholder: Optional clearance or exit procedure notes
+
+  ClearanceProcessAr:
+    label: Clearance Process (Arabic)
+    type: textarea
+    group: Instructions
+    order: 33
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 41
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+
 ---
 
 <style>

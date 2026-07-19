@@ -1,8 +1,184 @@
 ---
-template: Contract Termination Form
-category: HR
-reference: Alba A5
-version: 2.0
+document:
+  name: Contract Termination Letter
+  category: hr
+  reference: Alba A5
+  version: 2.0
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyNameEn:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Company
+    order: 1
+
+  CompanyNameAr:
+    label: Company Name (Arabic)
+    type: text
+    required: true
+    group: Company
+    order: 2
+
+  CRNumber:
+    label: Commercial Registration Number
+    type: text
+    group: Company
+    order: 3
+
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Company
+    order: 4
+
+  CompanyPhone:
+    label: Company Phone
+    type: phone
+    group: Company
+    order: 5
+
+  CompanyEmail:
+    label: Company Email
+    type: email
+    group: Company
+    order: 6
+
+  IssueDate:
+    label: Issue Date
+    type: date
+    required: true
+    group: Company
+    order: 7
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  EmployeeCode:
+    label: Employee Code
+    type: text
+    group: Employee
+    order: 12
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    required: true
+    group: Employee
+    order: 13
+
+  Nationality:
+    label: Nationality
+    type: text
+    group: Employee
+    order: 14
+
+  MobileNumber:
+    label: Mobile Number
+    type: phone
+    group: Employee
+    order: 15
+
+  EmployeeEmail:
+    label: Employee Email
+    type: email
+    group: Employee
+    order: 16
+
+  JobTitle:
+    label: Job Title
+    type: text
+    required: true
+    group: Employment
+    order: 20
+
+  DateOfJoining:
+    label: Date of Joining
+    type: date
+    required: true
+    group: Employment
+    order: 21
+
+  ContractType:
+    label: Contract Type
+    type: select
+    required: true
+    group: Employment
+    order: 22
+    options:
+      - Fixed Term
+      - Non-Fixed Term
+      - Open-Ended
+
+  Branch:
+    label: Branch
+    type: text
+    group: Employment
+    order: 23
+
+  LengthOfService:
+    label: Length of Service
+    type: text
+    group: Employment
+    order: 24
+    placeholder: e.g. 2 years 6 months
+
+  TerminationDate:
+    label: Termination Date
+    type: date
+    required: true
+    group: Termination
+    order: 30
+
+  LastWorkingDay:
+    label: Last Working Day
+    type: date
+    required: true
+    group: Termination
+    order: 31
+
+  TerminationReason:
+    label: Termination Reason
+    type: text
+    required: true
+    group: Termination
+    order: 32
+    placeholder: e.g. End of contract / Mutual agreement / Resignation
+
+  RepresentativeName:
+    label: Company Representative Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+
+  RepresentativeTitle:
+    label: Representative Title (English)
+    type: text
+    group: Signatory
+    order: 41
+
+  RepresentativeTitleAr:
+    label: Representative Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+
 ---
 
 <style>

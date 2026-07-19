@@ -1,8 +1,150 @@
 ---
-template: Warning Letter
-category: HR
-reference: Alba A7
-version: 2.0
+document:
+  name: Warning Letter
+  category: hr
+  reference: Alba A7
+  version: 2.0
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  SerialNumber:
+    label: Reference / Serial Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  IssueDate:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+
+  WarningType:
+    label: Warning Type
+    type: select
+    required: true
+    group: Document
+    order: 4
+    options:
+      - Verbal Warning
+      - Written Warning
+      - Final Warning
+
+  WarningDate:
+    label: Warning Date
+    type: date
+    required: true
+    group: Document
+    order: 5
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  EmployeeCode:
+    label: Employee Code
+    type: text
+    group: Employee
+    order: 12
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    group: Employee
+    order: 13
+
+  Nationality:
+    label: Nationality
+    type: text
+    group: Employee
+    order: 14
+
+  JobTitle:
+    label: Job Title
+    type: text
+    required: true
+    group: Employee
+    order: 15
+
+  ViolationReasonEn:
+    label: Violation / Reason (English)
+    type: textarea
+    required: true
+    group: Violation
+    order: 20
+
+  ViolationReasonAr:
+    label: Violation / Reason (Arabic)
+    type: textarea
+    required: true
+    group: Violation
+    order: 21
+
+  AdditionalNotes:
+    label: Additional Notes
+    type: textarea
+    group: Notes
+    order: 30
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 41
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+
+  PreparedBy:
+    label: Prepared by (HR Manager Name)
+    type: text
+    group: Signatory
+    order: 43
+
+  PreparedTitle:
+    label: HR Manager Title (English)
+    type: text
+    group: Signatory
+    order: 44
+
+  PreparedTitleAr:
+    label: HR Manager Title (Arabic)
+    type: text
+    group: Signatory
+    order: 45
+
 ---
 
 <style>

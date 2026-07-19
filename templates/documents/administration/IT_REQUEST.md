@@ -1,7 +1,147 @@
 ---
-template: IT Request
-category: Administration
-version: 2.1
+document:
+  name: IT Request
+  category: administration
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  RequestedBy:
+    label: Requested by (English)
+    type: text
+    required: true
+    group: Requester
+    order: 10
+  RequestedByAr:
+    label: Requested by (Arabic)
+    type: text
+    group: Requester
+    order: 11
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Requester
+    order: 12
+  Location:
+    label: Location
+    type: text
+    group: Requester
+    order: 13
+  RequestType:
+    label: Request Type
+    type: select
+    required: true
+    group: Request
+    order: 20
+    options:
+      - New Equipment
+      - Repair / Maintenance
+      - Software Installation
+      - Network / Connectivity
+      - Account / Access
+      - Other
+  SystemOrDevice:
+    label: System / Device
+    type: text
+    group: Request
+    order: 21
+    placeholder: e.g. Laptop Model / Software Name
+  Priority:
+    label: Priority
+    type: select
+    required: true
+    group: Request
+    order: 22
+    options:
+      - Low
+      - Normal
+      - High
+      - Critical
+  RequiredByDate:
+    label: Required by Date
+    type: date
+    group: Request
+    order: 23
+  StartDate:
+    label: Start Date
+    type: date
+    group: Request
+    order: 24
+  Description:
+    label: Problem / Request Description (English)
+    type: textarea
+    required: true
+    group: Details
+    order: 30
+  DescriptionAr:
+    label: Problem / Request Description (Arabic)
+    type: textarea
+    group: Details
+    order: 31
+  BusinessImpact:
+    label: Business Impact (English)
+    type: textarea
+    group: Details
+    order: 32
+  BusinessImpactAr:
+    label: Business Impact (Arabic)
+    type: textarea
+    group: Details
+    order: 33
+  LineManager:
+    label: Line Manager Name
+    type: text
+    required: true
+    group: Approval
+    order: 40
+  ITManager:
+    label: IT Manager Name
+    type: text
+    group: Approval
+    order: 41
+  AssignedTo:
+    label: Assigned To (IT Staff)
+    type: text
+    group: Resolution
+    order: 50
+  Resolution:
+    label: Resolution Details
+    type: textarea
+    group: Resolution
+    order: 51
+  ClosureDate:
+    label: Closure Date
+    type: date
+    group: Resolution
+    order: 52
+  Remarks:
+    label: Remarks
+    type: textarea
+    group: Resolution
+    order: 53
+
 ---
 
 <style>

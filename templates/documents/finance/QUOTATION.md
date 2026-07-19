@@ -1,7 +1,195 @@
 ---
-template: Quotation
-category: Finance
-version: 2.1
+document:
+  name: Quotation
+  category: finance
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Seller
+    order: 1
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Seller
+    order: 2
+  CompanyPhone:
+    label: Company Phone
+    type: phone
+    group: Seller
+    order: 3
+  CompanyEmail:
+    label: Company Email
+    type: email
+    group: Seller
+    order: 4
+  QuotationNumber:
+    label: Quotation Number
+    type: text
+    required: true
+    group: Quote
+    order: 10
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Quote
+    order: 11
+  ValidUntil:
+    label: Valid Until
+    type: date
+    required: true
+    group: Quote
+    order: 12
+  Currency:
+    label: Currency
+    type: text
+    group: Quote
+    order: 13
+    placeholder: SAR
+  ClientName:
+    label: Client Name
+    type: text
+    required: true
+    group: Client
+    order: 20
+  ClientAddress:
+    label: Client Address
+    type: text
+    group: Client
+    order: 21
+  ClientTaxNumber:
+    label: Client Tax Number
+    type: text
+    group: Client
+    order: 22
+  ItemDescription1:
+    label: Item 1 — Description
+    type: text
+    required: true
+    group: Line Items
+    order: 30
+  Qty1:
+    label: Item 1 — Quantity
+    type: number
+    group: Line Items
+    order: 31
+  UnitPrice1:
+    label: Item 1 — Unit Price
+    type: currency
+    group: Line Items
+    order: 32
+  LineTotal1:
+    label: Item 1 — Line Total
+    type: currency
+    group: Line Items
+    order: 33
+  ItemDescription2:
+    label: Item 2 — Description
+    type: text
+    group: Line Items
+    order: 34
+  Qty2:
+    label: Item 2 — Quantity
+    type: number
+    group: Line Items
+    order: 35
+  UnitPrice2:
+    label: Item 2 — Unit Price
+    type: currency
+    group: Line Items
+    order: 36
+  LineTotal2:
+    label: Item 2 — Line Total
+    type: currency
+    group: Line Items
+    order: 37
+  ItemDescription3:
+    label: Item 3 — Description
+    type: text
+    group: Line Items
+    order: 38
+  Qty3:
+    label: Item 3 — Quantity
+    type: number
+    group: Line Items
+    order: 39
+  UnitPrice3:
+    label: Item 3 — Unit Price
+    type: currency
+    group: Line Items
+    order: 40
+  LineTotal3:
+    label: Item 3 — Line Total
+    type: currency
+    group: Line Items
+    order: 41
+  Subtotal:
+    label: Subtotal
+    type: currency
+    required: true
+    group: Totals
+    order: 50
+  TaxRate:
+    label: Tax Rate (%)
+    type: number
+    group: Totals
+    order: 51
+  TaxAmount:
+    label: Tax Amount
+    type: currency
+    group: Totals
+    order: 52
+  Discount:
+    label: Discount
+    type: currency
+    group: Totals
+    order: 53
+  Total:
+    label: Total
+    type: currency
+    required: true
+    group: Totals
+    order: 54
+  PaymentTerms:
+    label: Payment Terms
+    type: text
+    group: Terms
+    order: 60
+  TermsAndConditions:
+    label: Terms & Conditions
+    type: textarea
+    group: Terms
+    order: 61
+  Notes:
+    label: Notes
+    type: textarea
+    group: Terms
+    order: 62
+  PreparedBy:
+    label: Prepared by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 70
+  PreparedByTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 71
+  PreparedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 72
+
 ---
 
 <style>

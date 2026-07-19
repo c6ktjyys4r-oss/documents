@@ -1,7 +1,183 @@
 ---
-template: Employment Verification Letter
-category: HR
-version: 2.1
+document:
+  name: Employment Verification Letter
+  category: hr
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  CompanyNameAr:
+    label: Company Name (Arabic)
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Document
+    order: 3
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 4
+
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 5
+
+  Purpose:
+    label: Purpose (English)
+    type: select
+    required: true
+    group: Document
+    order: 6
+    options:
+      - General
+      - To the Bank
+      - To the Embassy
+      - Rental Purposes
+      - Other
+
+  PurposeAr:
+    label: Purpose (Arabic)
+    type: text
+    required: true
+    group: Document
+    order: 7
+    placeholder: e.g. عام / إلى البنك / للسفارة
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    required: true
+    group: Employee
+    order: 12
+
+  Nationality:
+    label: Nationality (English)
+    type: text
+    required: true
+    group: Employee
+    order: 13
+
+  NationalityAr:
+    label: Nationality (Arabic)
+    type: text
+    group: Employee
+    order: 14
+
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee
+    order: 15
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee
+    order: 16
+
+  Department:
+    label: Department (English)
+    type: text
+    group: Employee
+    order: 17
+
+  DepartmentAr:
+    label: Department (Arabic)
+    type: text
+    group: Employee
+    order: 18
+
+  DateOfJoining:
+    label: Date of Joining
+    type: date
+    required: true
+    group: Employee
+    order: 19
+
+  EmploymentStatus:
+    label: Employment Status (English)
+    type: select
+    required: true
+    group: Employee
+    order: 20
+    options:
+      - Currently Employed
+      - On Probation
+      - On Notice Period
+
+  EmploymentStatusAr:
+    label: Employment Status (Arabic)
+    type: text
+    group: Employee
+    order: 21
+
+  AdditionalDetails:
+    label: Additional Details (English)
+    type: textarea
+    group: Additional
+    order: 30
+
+  AdditionalDetailsAr:
+    label: Additional Details (Arabic)
+    type: textarea
+    group: Additional
+    order: 31
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 41
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+
 ---
 
 <style>

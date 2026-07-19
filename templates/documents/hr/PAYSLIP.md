@@ -1,8 +1,194 @@
 ---
-template: Payslip
-category: HR
-reference: Alba A6
-version: 1.0
+document:
+  name: Payslip
+  category: hr
+  reference: Alba A6
+  version: 1.0
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  IssueDate:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 2
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  JobTitle:
+    label: Job Title
+    type: text
+    required: true
+    group: Employee
+    order: 12
+
+  Branch:
+    label: Branch
+    type: text
+    group: Employee
+    order: 13
+
+  PayPeriod:
+    label: Pay Period
+    type: text
+    required: true
+    group: Employee
+    order: 14
+    placeholder: e.g. January 2025 / 01-31 Jan 2025
+
+  BasicSalary:
+    label: Basic Salary (SAR)
+    type: currency
+    required: true
+    group: Earnings
+    order: 20
+
+  HousingAllowance:
+    label: Housing Allowance (SAR)
+    type: currency
+    group: Earnings
+    order: 21
+
+  TransportationAllowance:
+    label: Transportation Allowance (SAR)
+    type: currency
+    group: Earnings
+    order: 22
+
+  OtherAllowance1Description:
+    label: Other Allowance 1 — Name (EN)
+    type: text
+    group: Earnings
+    order: 23
+
+  OtherAllowance1DescriptionAr:
+    label: Other Allowance 1 — Name (AR)
+    type: text
+    group: Earnings
+    order: 24
+
+  OtherAllowance1Amount:
+    label: Other Allowance 1 — Amount (SAR)
+    type: currency
+    group: Earnings
+    order: 25
+
+  OtherAllowance2Description:
+    label: Other Allowance 2 — Name (EN)
+    type: text
+    group: Earnings
+    order: 26
+
+  OtherAllowance2DescriptionAr:
+    label: Other Allowance 2 — Name (AR)
+    type: text
+    group: Earnings
+    order: 27
+
+  OtherAllowance2Amount:
+    label: Other Allowance 2 — Amount (SAR)
+    type: currency
+    group: Earnings
+    order: 28
+
+  TotalEarnings:
+    label: Total Earnings (SAR)
+    type: currency
+    required: true
+    group: Earnings
+    order: 29
+
+  Deduction1Description:
+    label: Deduction 1 — Name (EN)
+    type: text
+    group: Deductions
+    order: 30
+
+  Deduction1DescriptionAr:
+    label: Deduction 1 — Name (AR)
+    type: text
+    group: Deductions
+    order: 31
+
+  Deduction1Amount:
+    label: Deduction 1 — Amount (SAR)
+    type: currency
+    group: Deductions
+    order: 32
+
+  Deduction2Description:
+    label: Deduction 2 — Name (EN)
+    type: text
+    group: Deductions
+    order: 33
+
+  Deduction2DescriptionAr:
+    label: Deduction 2 — Name (AR)
+    type: text
+    group: Deductions
+    order: 34
+
+  Deduction2Amount:
+    label: Deduction 2 — Amount (SAR)
+    type: currency
+    group: Deductions
+    order: 35
+
+  TotalDeductions:
+    label: Total Deductions (SAR)
+    type: currency
+    group: Deductions
+    order: 36
+
+  NetSalary:
+    label: Net Salary (SAR)
+    type: currency
+    required: true
+    group: Net Pay
+    order: 40
+
+  PreparedBy:
+    label: HR Manager Name
+    type: text
+    required: true
+    group: Signatory
+    order: 50
+
+  PreparedTitle:
+    label: HR Manager Title (English)
+    type: text
+    group: Signatory
+    order: 51
+
+  PreparedTitleAr:
+    label: HR Manager Title (Arabic)
+    type: text
+    group: Signatory
+    order: 52
+
 ---
 
 <style>

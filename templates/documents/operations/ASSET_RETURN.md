@@ -1,7 +1,188 @@
 ---
-template: Asset Return
-category: Operations
-version: 2.1
+document:
+  name: Asset Return
+  category: operations
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Return Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  OriginalHandoverReference:
+    label: Original Handover Reference
+    type: text
+    group: Document
+    order: 4
+  ReturnedByName:
+    label: Returned by Name (English)
+    type: text
+    required: true
+    group: Returner
+    order: 10
+  ReturnedByNameAr:
+    label: Returned by Name (Arabic)
+    type: text
+    group: Returner
+    order: 11
+  ReturnedByTitle:
+    label: Title (English)
+    type: text
+    group: Returner
+    order: 12
+  ReturnedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Returner
+    order: 13
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Returner
+    order: 14
+  AssetID1:
+    label: Asset 1 — ID / Serial Number
+    type: text
+    required: true
+    group: Assets
+    order: 20
+  AssetDescription1:
+    label: Asset 1 — Description
+    type: text
+    required: true
+    group: Assets
+    order: 21
+  ConditionAtReturn1:
+    label: Asset 1 — Condition at Return
+    type: select
+    group: Assets
+    order: 22
+    options:
+      - Good
+      - Fair
+      - Damaged
+      - Lost
+  Accessories1:
+    label: Asset 1 — Accessories Returned
+    type: text
+    group: Assets
+    order: 23
+  Notes1:
+    label: Asset 1 — Notes
+    type: text
+    group: Assets
+    order: 24
+  AssetID2:
+    label: Asset 2 — ID / Serial Number
+    type: text
+    group: Assets
+    order: 25
+  AssetDescription2:
+    label: Asset 2 — Description
+    type: text
+    group: Assets
+    order: 26
+  ConditionAtReturn2:
+    label: Asset 2 — Condition at Return
+    type: select
+    group: Assets
+    order: 27
+    options:
+      - Good
+      - Fair
+      - Damaged
+      - Lost
+  Accessories2:
+    label: Asset 2 — Accessories Returned
+    type: text
+    group: Assets
+    order: 28
+  Notes2:
+    label: Asset 2 — Notes
+    type: text
+    group: Assets
+    order: 29
+  AssetID3:
+    label: Asset 3 — ID / Serial Number
+    type: text
+    group: Assets
+    order: 30
+  AssetDescription3:
+    label: Asset 3 — Description
+    type: text
+    group: Assets
+    order: 31
+  ConditionAtReturn3:
+    label: Asset 3 — Condition at Return
+    type: select
+    group: Assets
+    order: 32
+    options:
+      - Good
+      - Fair
+      - Damaged
+      - Lost
+  Notes3:
+    label: Asset 3 — Notes
+    type: text
+    group: Assets
+    order: 33
+  Remarks:
+    label: Overall Remarks
+    type: textarea
+    group: Notes
+    order: 40
+  ReceivedBy:
+    label: Received by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 50
+  ReceivedByTitle:
+    label: Received by Title (English)
+    type: text
+    group: Signatory
+    order: 51
+  ReceivedByTitleAr:
+    label: Received by Title (Arabic)
+    type: text
+    group: Signatory
+    order: 52
+  VerifiedBy:
+    label: Verified by Name
+    type: text
+    group: Signatory
+    order: 53
+  VerifiedByTitle:
+    label: Verified by Title (English)
+    type: text
+    group: Signatory
+    order: 54
+  VerifiedByTitleAr:
+    label: Verified by Title (Arabic)
+    type: text
+    group: Signatory
+    order: 55
+
 ---
 
 <style>

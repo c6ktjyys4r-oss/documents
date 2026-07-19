@@ -1,7 +1,165 @@
 ---
-template: Expense Approval Form
-category: Finance
-version: 2.1
+document:
+  name: Expense Approval Form
+  category: finance
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Requester
+    order: 10
+  CostCentre:
+    label: Cost Centre
+    type: text
+    group: Requester
+    order: 11
+  ProjectReference:
+    label: Project Reference
+    type: text
+    group: Requester
+    order: 12
+  Currency:
+    label: Currency
+    type: text
+    group: Requester
+    order: 13
+    placeholder: SAR
+  ExpenseDate1:
+    label: Expense 1 — Date
+    type: date
+    group: Expenses
+    order: 20
+  ExpenseDescription1:
+    label: Expense 1 — Description
+    type: text
+    required: true
+    group: Expenses
+    order: 21
+  Amount1:
+    label: Expense 1 — Amount
+    type: currency
+    required: true
+    group: Expenses
+    order: 22
+  ExpenseDate2:
+    label: Expense 2 — Date
+    type: date
+    group: Expenses
+    order: 23
+  ExpenseDescription2:
+    label: Expense 2 — Description
+    type: text
+    group: Expenses
+    order: 24
+  Amount2:
+    label: Expense 2 — Amount
+    type: currency
+    group: Expenses
+    order: 25
+  ExpenseDate3:
+    label: Expense 3 — Date
+    type: date
+    group: Expenses
+    order: 26
+  ExpenseDescription3:
+    label: Expense 3 — Description
+    type: text
+    group: Expenses
+    order: 27
+  Amount3:
+    label: Expense 3 — Amount
+    type: currency
+    group: Expenses
+    order: 28
+  Justification:
+    label: Justification (English)
+    type: textarea
+    group: Notes
+    order: 30
+  JustificationAr:
+    label: Justification (Arabic)
+    type: textarea
+    group: Notes
+    order: 31
+  LineManager:
+    label: Line Manager Name
+    type: text
+    required: true
+    group: Approval
+    order: 40
+  FinanceApprover:
+    label: Finance Approver Name
+    type: text
+    group: Approval
+    order: 41
+  PreparedBy:
+    label: Prepared by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 50
+  PreparedByTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 51
+  PreparedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 52
+  Purpose:
+    label: Purpose (English)
+    type: text
+    group: Signatory
+    order: 53
+  PurposeAr:
+    label: Purpose (Arabic)
+    type: text
+    group: Signatory
+    order: 54
+  ReceivedBy:
+    label: Received by Name
+    type: text
+    group: Signatory
+    order: 55
+  TotalAmount:
+    label: Total Amount
+    type: currency
+    required: true
+    group: Totals
+    order: 60
+  VoucherNumber:
+    label: Voucher Number
+    type: text
+    group: Document
+    order: 4
+
 ---
 
 <style>

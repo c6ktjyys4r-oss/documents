@@ -1,7 +1,257 @@
 ---
-template: Meeting Minutes
-category: Operations
-version: 2.1
+document:
+  name: Meeting Minutes
+  category: operations
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    group: Document
+    order: 2
+
+  Date:
+    label: Meeting Date
+    type: date
+    required: true
+    group: Meeting
+    order: 10
+
+  MeetingTitle:
+    label: Meeting Title / Subject
+    type: text
+    required: true
+    group: Meeting
+    order: 11
+
+  StartTime:
+    label: Start Time
+    type: text
+    group: Meeting
+    order: 12
+    placeholder: e.g. 10:00 AM
+
+  EndTime:
+    label: End Time
+    type: text
+    group: Meeting
+    order: 13
+
+  Location:
+    label: Location / Platform
+    type: text
+    group: Meeting
+    order: 14
+    placeholder: e.g. Board Room / Microsoft Teams
+
+  Chairperson:
+    label: Chairperson Name
+    type: text
+    required: true
+    group: Meeting
+    order: 15
+
+  PreparedBy:
+    label: Minutes Recorded by Name
+    type: text
+    required: true
+    group: Meeting
+    order: 16
+
+  AttendeeName1:
+    label: Attendee 1 — Name
+    type: text
+    group: Attendees
+    order: 20
+
+  AttendeeTitle1:
+    label: Attendee 1 — Title
+    type: text
+    group: Attendees
+    order: 21
+
+  AttendeeDept1:
+    label: Attendee 1 — Department
+    type: text
+    group: Attendees
+    order: 22
+
+  AttendeeName2:
+    label: Attendee 2 — Name
+    type: text
+    group: Attendees
+    order: 23
+
+  AttendeeTitle2:
+    label: Attendee 2 — Title
+    type: text
+    group: Attendees
+    order: 24
+
+  AttendeeDept2:
+    label: Attendee 2 — Department
+    type: text
+    group: Attendees
+    order: 25
+
+  AttendeeName3:
+    label: Attendee 3 — Name
+    type: text
+    group: Attendees
+    order: 26
+
+  AttendeeTitle3:
+    label: Attendee 3 — Title
+    type: text
+    group: Attendees
+    order: 27
+
+  AttendeeDept3:
+    label: Attendee 3 — Department
+    type: text
+    group: Attendees
+    order: 28
+
+  AgendaItem1:
+    label: Agenda Item 1
+    type: text
+    required: true
+    group: Agenda
+    order: 30
+
+  Presenter1:
+    label: Item 1 — Presenter
+    type: text
+    group: Agenda
+    order: 31
+
+  AgendaItem2:
+    label: Agenda Item 2
+    type: text
+    group: Agenda
+    order: 32
+
+  Presenter2:
+    label: Item 2 — Presenter
+    type: text
+    group: Agenda
+    order: 33
+
+  Discussion1:
+    label: Item 1 — Discussion Summary
+    type: textarea
+    required: true
+    group: Decisions
+    order: 40
+
+  Decision1:
+    label: Item 1 — Decision
+    type: textarea
+    group: Decisions
+    order: 41
+
+  Action1:
+    label: Item 1 — Action Required
+    type: text
+    group: Decisions
+    order: 42
+
+  Owner1:
+    label: Item 1 — Owner
+    type: text
+    group: Decisions
+    order: 43
+
+  DueDate1:
+    label: Item 1 — Due Date
+    type: date
+    group: Decisions
+    order: 44
+
+  Discussion2:
+    label: Item 2 — Discussion Summary
+    type: textarea
+    group: Decisions
+    order: 45
+
+  Decision2:
+    label: Item 2 — Decision
+    type: textarea
+    group: Decisions
+    order: 46
+
+  Action2:
+    label: Item 2 — Action Required
+    type: text
+    group: Decisions
+    order: 47
+
+  Owner2:
+    label: Item 2 — Owner
+    type: text
+    group: Decisions
+    order: 48
+
+  DueDate2:
+    label: Item 2 — Due Date
+    type: date
+    group: Decisions
+    order: 49
+
+  NextMeetingDate:
+    label: Next Meeting Date
+    type: date
+    group: Next Meeting
+    order: 50
+
+  NextMeetingTime:
+    label: Next Meeting Time
+    type: text
+    group: Next Meeting
+    order: 51
+
+  NextMeetingLocation:
+    label: Next Meeting Location
+    type: text
+    group: Next Meeting
+    order: 52
+
+  PreparedByTitle:
+    label: Minutes Recorder Title (English)
+    type: text
+    group: Signatory
+    order: 60
+
+  PreparedByTitleAr:
+    label: Minutes Recorder Title (Arabic)
+    type: text
+    group: Signatory
+    order: 61
+
+  ChairpersonTitle:
+    label: Chairperson Title (English)
+    type: text
+    group: Signatory
+    order: 62
+
+  ChairpersonTitleAr:
+    label: Chairperson Title (Arabic)
+    type: text
+    group: Signatory
+    order: 63
+
 ---
 
 <style>

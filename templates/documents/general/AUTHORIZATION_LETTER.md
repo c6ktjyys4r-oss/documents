@@ -1,7 +1,140 @@
 ---
-template: Authorization Letter
-category: General
-version: 2.1
+document:
+  name: Authorization Letter
+  category: general
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Document
+    order: 1
+  CompanyNameAr:
+    label: Company Name (Arabic)
+    type: text
+    required: true
+    group: Document
+    order: 2
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Document
+    order: 3
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 4
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 5
+  AuthorizerName:
+    label: Authorizer Name (English)
+    type: text
+    required: true
+    group: Authorizer
+    order: 10
+  AuthorizerNameAr:
+    label: Authorizer Name (Arabic)
+    type: text
+    group: Authorizer
+    order: 11
+  AuthorizerTitle:
+    label: Authorizer Title (English)
+    type: text
+    group: Authorizer
+    order: 12
+  AuthorizerTitleAr:
+    label: Authorizer Title (Arabic)
+    type: text
+    group: Authorizer
+    order: 13
+  Department:
+    label: Department
+    type: text
+    group: Authorizer
+    order: 14
+  AuthorizedPersonName:
+    label: Authorized Person Name (English)
+    type: text
+    required: true
+    group: Authorized Person
+    order: 20
+  AuthorizedPersonNameAr:
+    label: Authorized Person Name (Arabic)
+    type: text
+    group: Authorized Person
+    order: 21
+  AuthorizedPersonTitle:
+    label: Authorized Person Title (English)
+    type: text
+    group: Authorized Person
+    order: 22
+  AuthorizedPersonTitleAr:
+    label: Authorized Person Title (Arabic)
+    type: text
+    group: Authorized Person
+    order: 23
+  AuthorizedPersonID:
+    label: Authorized Person ID Number
+    type: text
+    required: true
+    group: Authorized Person
+    order: 24
+  AuthorizationPurpose:
+    label: Authorization Purpose (English)
+    type: textarea
+    required: true
+    group: Authorization
+    order: 30
+  AuthorizationPurposeAr:
+    label: Authorization Purpose (Arabic)
+    type: textarea
+    group: Authorization
+    order: 31
+  AuthorizationScope:
+    label: Scope of Authorization (English)
+    type: textarea
+    group: Authorization
+    order: 32
+  AuthorizationScopeAr:
+    label: Scope of Authorization (Arabic)
+    type: textarea
+    group: Authorization
+    order: 33
+  ValidFrom:
+    label: Valid From
+    type: date
+    required: true
+    group: Validity
+    order: 40
+  ValidUntil:
+    label: Valid Until
+    type: date
+    required: true
+    group: Validity
+    order: 41
+  AdditionalConditions:
+    label: Additional Conditions (English)
+    type: textarea
+    group: Validity
+    order: 42
+  AdditionalConditionsAr:
+    label: Additional Conditions (Arabic)
+    type: textarea
+    group: Validity
+    order: 43
+
 ---
 
 <style>

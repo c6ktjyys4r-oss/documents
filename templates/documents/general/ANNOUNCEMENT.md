@@ -1,7 +1,102 @@
 ---
-template: Announcement
-category: General
-version: 2.1
+document:
+  name: Announcement
+  category: general
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  Subject:
+    label: Subject / Title
+    type: text
+    required: true
+    group: Announcement
+    order: 10
+  Audience:
+    label: Audience
+    type: text
+    required: true
+    group: Announcement
+    order: 11
+    placeholder: e.g. All Staff / Finance Team / Management
+  Department:
+    label: Issuing Department
+    type: text
+    group: Announcement
+    order: 12
+  EffectiveDate:
+    label: Effective Date
+    type: date
+    group: Announcement
+    order: 13
+  Body:
+    label: Announcement Body (English)
+    type: textarea
+    required: true
+    group: Content
+    order: 20
+  BodyAr:
+    label: Announcement Body (Arabic)
+    type: textarea
+    group: Content
+    order: 21
+  AdditionalDetails:
+    label: Additional Details (English)
+    type: textarea
+    group: Content
+    order: 22
+  AdditionalDetailsAr:
+    label: Additional Details (Arabic)
+    type: textarea
+    group: Content
+    order: 23
+  ContactPerson:
+    label: Contact Person
+    type: text
+    group: Contact
+    order: 30
+  ContactDetails:
+    label: Contact Details
+    type: text
+    group: Contact
+    order: 31
+  PreparedBy:
+    label: Prepared by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+  PreparedByTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 41
+  PreparedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+
 ---
 
 <style>

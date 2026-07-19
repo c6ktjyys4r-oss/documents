@@ -1,7 +1,214 @@
 ---
-template: Annual Leave Encashment
-category: HR
-version: 1.0
+document:
+  name: Annual Leave Encashment
+  category: hr
+  version: 1.0
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  CompanyNameEn:
+    label: Company Name (English — full)
+    type: text
+    group: Document
+    order: 2
+
+  CompanyNameAr:
+    label: Company Name (Arabic)
+    type: text
+    required: true
+    group: Document
+    order: 3
+
+  CRNumber:
+    label: Commercial Registration Number
+    type: text
+    group: Document
+    order: 4
+
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Document
+    order: 5
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 6
+
+  IssueDate:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 7
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  EmployeeCode:
+    label: Employee Code
+    type: text
+    group: Employee
+    order: 12
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    required: true
+    group: Employee
+    order: 13
+
+  Nationality:
+    label: Nationality
+    type: text
+    group: Employee
+    order: 14
+
+  JobTitle:
+    label: Job Title
+    type: text
+    required: true
+    group: Employee
+    order: 15
+
+  Department:
+    label: Department
+    type: text
+    group: Employee
+    order: 16
+
+  Branch:
+    label: Branch
+    type: text
+    group: Employee
+    order: 17
+
+  IBAN:
+    label: IBAN
+    type: text
+    required: true
+    group: Bank
+    order: 20
+
+  BankNameEn:
+    label: Bank Name (English)
+    type: text
+    required: true
+    group: Bank
+    order: 21
+
+  BankNameAr:
+    label: Bank Name (Arabic)
+    type: text
+    group: Bank
+    order: 22
+
+  LeaveType:
+    label: Leave Type
+    type: select
+    required: true
+    group: Leave Details
+    order: 30
+    options:
+      - Annual Leave
+      - Accumulated Leave
+      - Other
+
+  LeaveDays:
+    label: Number of Leave Days
+    type: number
+    required: true
+    group: Leave Details
+    order: 31
+
+  AmountPerDay:
+    label: Daily Rate (SAR)
+    type: currency
+    required: true
+    group: Leave Details
+    order: 32
+
+  TotalAmount:
+    label: Total Amount (SAR)
+    type: currency
+    required: true
+    group: Leave Details
+    order: 33
+
+  Currency:
+    label: Currency
+    type: text
+    group: Leave Details
+    order: 34
+    placeholder: SAR
+
+  ReasonOrNotes:
+    label: Reason / Notes
+    type: textarea
+    group: Notes
+    order: 40
+
+  HRSignatoryName:
+    label: HR Signatory Name
+    type: text
+    required: true
+    group: Signatories
+    order: 50
+
+  HRSignatoryTitle:
+    label: HR Signatory Title (English)
+    type: text
+    group: Signatories
+    order: 51
+
+  HRSignatoryTitleAr:
+    label: HR Signatory Title (Arabic)
+    type: text
+    group: Signatories
+    order: 52
+
+  FinanceSignatoryName:
+    label: Finance Signatory Name
+    type: text
+    group: Signatories
+    order: 53
+
+  FinanceSignatoryTitle:
+    label: Finance Signatory Title (English)
+    type: text
+    group: Signatories
+    order: 54
+
+  FinanceSignatoryTitleAr:
+    label: Finance Signatory Title (Arabic)
+    type: text
+    group: Signatories
+    order: 55
+
 ---
 
 <style>

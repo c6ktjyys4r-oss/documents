@@ -1,7 +1,158 @@
 ---
-template: Asset Handover
-category: Operations
-version: 2.1
+document:
+  name: Asset Handover
+  category: operations
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Handover Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  RecipientName:
+    label: Recipient Name (English)
+    type: text
+    required: true
+    group: Recipient
+    order: 10
+  RecipientNameAr:
+    label: Recipient Name (Arabic)
+    type: text
+    group: Recipient
+    order: 11
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Recipient
+    order: 12
+  JobTitle:
+    label: Job Title
+    type: text
+    group: Recipient
+    order: 13
+  AssetID1:
+    label: Asset 1 — ID / Serial Number
+    type: text
+    required: true
+    group: Assets
+    order: 20
+  AssetDescription1:
+    label: Asset 1 — Description
+    type: text
+    required: true
+    group: Assets
+    order: 21
+  Condition1:
+    label: Asset 1 — Condition
+    type: select
+    group: Assets
+    order: 22
+    options:
+      - New
+      - Good
+      - Fair
+      - Poor
+  Accessories1:
+    label: Asset 1 — Accessories
+    type: text
+    group: Assets
+    order: 23
+  AssetID2:
+    label: Asset 2 — ID / Serial Number
+    type: text
+    group: Assets
+    order: 24
+  AssetDescription2:
+    label: Asset 2 — Description
+    type: text
+    group: Assets
+    order: 25
+  Condition2:
+    label: Asset 2 — Condition
+    type: select
+    group: Assets
+    order: 26
+    options:
+      - New
+      - Good
+      - Fair
+      - Poor
+  Accessories2:
+    label: Asset 2 — Accessories
+    type: text
+    group: Assets
+    order: 27
+  AssetID3:
+    label: Asset 3 — ID / Serial Number
+    type: text
+    group: Assets
+    order: 28
+  AssetDescription3:
+    label: Asset 3 — Description
+    type: text
+    group: Assets
+    order: 29
+  Condition3:
+    label: Asset 3 — Condition
+    type: select
+    group: Assets
+    order: 30
+    options:
+      - New
+      - Good
+      - Fair
+      - Poor
+  Accessories3:
+    label: Asset 3 — Accessories
+    type: text
+    group: Assets
+    order: 31
+  Notes1:
+    label: Notes
+    type: textarea
+    group: Notes
+    order: 40
+  IssuedBy:
+    label: Issued by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 50
+  IssuedByTitle:
+    label: Issued by Title (English)
+    type: text
+    group: Signatory
+    order: 51
+  IssuedByTitleAr:
+    label: Issued by Title (Arabic)
+    type: text
+    group: Signatory
+    order: 52
+  WitnessName:
+    label: Witness Name
+    type: text
+    group: Signatory
+    order: 53
+
 ---
 
 <style>

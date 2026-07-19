@@ -1,7 +1,168 @@
 ---
-template: Access Request
-category: Administration
-version: 2.1
+document:
+  name: Access Request
+  category: administration
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  AccessForName:
+    label: Access For — Name (English)
+    type: text
+    required: true
+    group: Requestee
+    order: 10
+  AccessForNameAr:
+    label: Access For — Name (Arabic)
+    type: text
+    group: Requestee
+    order: 11
+  AccessForTitle:
+    label: Job Title (English)
+    type: text
+    group: Requestee
+    order: 12
+  AccessForTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Requestee
+    order: 13
+  AccessForDepartment:
+    label: Department
+    type: text
+    group: Requestee
+    order: 14
+  EmploymentType:
+    label: Employment Type
+    type: select
+    group: Requestee
+    order: 15
+    options:
+      - Full-Time
+      - Part-Time
+      - Contractor
+      - Visitor
+  Resource1:
+    label: System / Resource 1
+    type: text
+    group: Access Details
+    order: 20
+  AccessLevel1:
+    label: Access Level 1
+    type: text
+    group: Access Details
+    order: 21
+    placeholder: e.g. Read-Only / Edit / Admin
+  Reason1:
+    label: Reason 1
+    type: text
+    group: Access Details
+    order: 22
+  Resource2:
+    label: System / Resource 2
+    type: text
+    group: Access Details
+    order: 23
+  AccessLevel2:
+    label: Access Level 2
+    type: text
+    group: Access Details
+    order: 24
+  Reason2:
+    label: Reason 2
+    type: text
+    group: Access Details
+    order: 25
+  Resource3:
+    label: System / Resource 3
+    type: text
+    group: Access Details
+    order: 26
+  AccessLevel3:
+    label: Access Level 3
+    type: text
+    group: Access Details
+    order: 27
+  Reason3:
+    label: Reason 3
+    type: text
+    group: Access Details
+    order: 28
+  AccessStartDate:
+    label: Access Start Date
+    type: date
+    required: true
+    group: Period
+    order: 30
+  AccessEndDate:
+    label: Access End Date
+    type: date
+    group: Period
+    order: 31
+  Justification:
+    label: Justification (English)
+    type: textarea
+    group: Justification
+    order: 40
+  JustificationAr:
+    label: Justification (Arabic)
+    type: textarea
+    group: Justification
+    order: 41
+  Remarks:
+    label: Remarks
+    type: textarea
+    group: Justification
+    order: 42
+  RequestedBy:
+    label: Requested by Name (English)
+    type: text
+    required: true
+    group: Approval
+    order: 50
+  RequestedByAr:
+    label: Requested by Name (Arabic)
+    type: text
+    group: Approval
+    order: 51
+  LineManager:
+    label: Line Manager Name
+    type: text
+    required: true
+    group: Approval
+    order: 52
+  ITApprover:
+    label: IT Approver Name
+    type: text
+    group: Approval
+    order: 53
+  AdminApprover:
+    label: Admin Approver Name
+    type: text
+    group: Approval
+    order: 54
+
 ---
 
 <style>

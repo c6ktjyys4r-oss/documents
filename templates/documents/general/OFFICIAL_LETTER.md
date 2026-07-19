@@ -1,7 +1,169 @@
 ---
-template: Official Letter
-category: General
-version: 2.1
+document:
+  name: Official Letter
+  category: general
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Document
+    order: 2
+
+  CompanyPhone:
+    label: Company Phone
+    type: phone
+    group: Document
+    order: 3
+
+  CompanyEmail:
+    label: Company Email
+    type: email
+    group: Document
+    order: 4
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 5
+
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 6
+
+  RecipientName:
+    label: Recipient Name
+    type: text
+    required: true
+    group: Recipient
+    order: 10
+
+  RecipientTitle:
+    label: Recipient Title
+    type: text
+    group: Recipient
+    order: 11
+
+  RecipientOrganization:
+    label: Recipient Organization
+    type: text
+    group: Recipient
+    order: 12
+
+  RecipientAddress:
+    label: Recipient Address
+    type: text
+    group: Recipient
+    order: 13
+
+  RecipientSalutation:
+    label: Salutation (English)
+    type: text
+    group: Recipient
+    order: 14
+    placeholder: e.g. Mr. / Ms. / Dr.
+
+  RecipientSalutationAr:
+    label: Salutation (Arabic)
+    type: text
+    group: Recipient
+    order: 15
+    placeholder: e.g. السيد / السيدة / الدكتور
+
+  DeliveryMethod:
+    label: Delivery Method
+    type: text
+    group: Document
+    order: 7
+    placeholder: e.g. Hand delivery / Email / Courier
+
+  Subject:
+    label: Subject
+    type: text
+    required: true
+    group: Content
+    order: 20
+
+  OpeningParagraph:
+    label: Opening Paragraph (English)
+    type: textarea
+    group: Content
+    order: 21
+
+  OpeningParagraphAr:
+    label: Opening Paragraph (Arabic)
+    type: textarea
+    group: Content
+    order: 22
+
+  Body:
+    label: Letter Body (English)
+    type: textarea
+    required: true
+    group: Content
+    order: 23
+
+  BodyAr:
+    label: Letter Body (Arabic)
+    type: textarea
+    required: true
+    group: Content
+    order: 24
+
+  ClosingParagraph:
+    label: Closing Paragraph (English)
+    type: textarea
+    group: Content
+    order: 25
+
+  ClosingParagraphAr:
+    label: Closing Paragraph (Arabic)
+    type: textarea
+    group: Content
+    order: 26
+
+  PreparedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 30
+
+  PreparedByTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 31
+
+  PreparedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 32
+
+  Department:
+    label: Department
+    type: text
+    group: Signatory
+    order: 33
+
 ---
 
 <style>

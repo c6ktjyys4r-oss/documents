@@ -1,8 +1,96 @@
 ---
-template: Loan Acknowledgement (Employee Loan / Salary Advance Receipt)
-category: HR
-reference: Alba A3
-version: 1.0
+document:
+  name: Loan Acknowledgement
+  category: hr
+  reference: Alba A3
+  version: 1.0
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  IssueDate:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 2
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    required: true
+    group: Employee
+    order: 12
+
+  JobTitleEn:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee
+    order: 13
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee
+    order: 14
+
+  LoanAmount:
+    label: Loan Amount (SAR)
+    type: currency
+    required: true
+    group: Loan Details
+    order: 20
+
+  DisbursementDate:
+    label: Disbursement Date
+    type: date
+    required: true
+    group: Loan Details
+    order: 21
+
+  PreparedBy:
+    label: HR Manager Name
+    type: text
+    required: true
+    group: Signatory
+    order: 30
+
+  PreparedTitle:
+    label: HR Manager Title (English)
+    type: text
+    group: Signatory
+    order: 31
+
+  PreparedTitleAr:
+    label: HR Manager Title (Arabic)
+    type: text
+    group: Signatory
+    order: 32
+
 ---
 
 <style>

@@ -1,7 +1,206 @@
 ---
-template: Purchase Order
-category: Finance
-version: 2.1
+document:
+  name: Purchase Order
+  category: finance
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Buyer
+    order: 1
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Buyer
+    order: 2
+  CompanyPhone:
+    label: Company Phone
+    type: phone
+    group: Buyer
+    order: 3
+  CompanyEmail:
+    label: Company Email
+    type: email
+    group: Buyer
+    order: 4
+  PONumber:
+    label: PO Number
+    type: text
+    required: true
+    group: Order
+    order: 10
+  Date:
+    label: Order Date
+    type: date
+    required: true
+    group: Order
+    order: 11
+  DeliveryDate:
+    label: Required Delivery Date
+    type: date
+    group: Order
+    order: 12
+  Currency:
+    label: Currency
+    type: text
+    group: Order
+    order: 13
+    placeholder: SAR
+  CostCentre:
+    label: Cost Centre
+    type: text
+    group: Order
+    order: 14
+  SupplierName:
+    label: Supplier Name
+    type: text
+    required: true
+    group: Supplier
+    order: 20
+  SupplierAddress:
+    label: Supplier Address
+    type: text
+    group: Supplier
+    order: 21
+  SupplierContact:
+    label: Supplier Contact
+    type: text
+    group: Supplier
+    order: 22
+  SupplierTaxNumber:
+    label: Supplier Tax Number
+    type: text
+    group: Supplier
+    order: 23
+  ItemDescription1:
+    label: Item 1 — Description
+    type: text
+    required: true
+    group: Line Items
+    order: 30
+  Unit1:
+    label: Item 1 — Unit
+    type: text
+    group: Line Items
+    order: 31
+  Qty1:
+    label: Item 1 — Quantity
+    type: number
+    group: Line Items
+    order: 32
+  ItemDescription2:
+    label: Item 2 — Description
+    type: text
+    group: Line Items
+    order: 33
+  Qty2:
+    label: Item 2 — Quantity
+    type: number
+    group: Line Items
+    order: 34
+  ItemDescription3:
+    label: Item 3 — Description
+    type: text
+    group: Line Items
+    order: 35
+  Qty3:
+    label: Item 3 — Quantity
+    type: number
+    group: Line Items
+    order: 36
+  Subtotal:
+    label: Subtotal
+    type: currency
+    required: true
+    group: Totals
+    order: 40
+  TaxRate:
+    label: Tax Rate (%)
+    type: number
+    group: Totals
+    order: 41
+  TaxAmount:
+    label: Tax Amount
+    type: currency
+    group: Totals
+    order: 42
+  TotalAmount:
+    label: Total Amount
+    type: currency
+    required: true
+    group: Totals
+    order: 43
+  PaymentTerms:
+    label: Payment Terms
+    type: text
+    group: Terms
+    order: 50
+    placeholder: e.g. Net 30 / Upon Delivery
+  DeliveryTerms:
+    label: Delivery Terms
+    type: text
+    group: Terms
+    order: 51
+  Notes:
+    label: Notes
+    type: textarea
+    group: Terms
+    order: 52
+  RequestedBy:
+    label: Requested by Name
+    type: text
+    required: true
+    group: Approval
+    order: 60
+  RequestedByTitle:
+    label: Requester Title (English)
+    type: text
+    group: Approval
+    order: 61
+  RequestedByTitleAr:
+    label: Requester Title (Arabic)
+    type: text
+    group: Approval
+    order: 62
+  FinanceApprover:
+    label: Finance Approver Name
+    type: text
+    group: Approval
+    order: 63
+  FinanceTitle:
+    label: Finance Title (English)
+    type: text
+    group: Approval
+    order: 64
+  FinanceTitleAr:
+    label: Finance Title (Arabic)
+    type: text
+    group: Approval
+    order: 65
+  AuthorisedBy:
+    label: Authorised by Name
+    type: text
+    required: true
+    group: Approval
+    order: 66
+  AuthorisedTitle:
+    label: Authoriser Title (English)
+    type: text
+    group: Approval
+    order: 67
+  AuthorisedTitleAr:
+    label: Authoriser Title (Arabic)
+    type: text
+    group: Approval
+    order: 68
+
 ---
 
 <style>

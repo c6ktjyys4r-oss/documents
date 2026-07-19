@@ -1,7 +1,232 @@
 ---
-template: Inspection Report
-category: Operations
-version: 2.1
+document:
+  name: Inspection Report
+  category: operations
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Report Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Report Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  InspectionDate:
+    label: Inspection Date
+    type: date
+    required: true
+    group: Inspection
+    order: 10
+  InspectionType:
+    label: Inspection Type
+    type: select
+    required: true
+    group: Inspection
+    order: 11
+    options:
+      - Safety
+      - Quality
+      - Compliance
+      - Equipment
+      - Site
+      - Other
+  Location:
+    label: Inspection Location
+    type: text
+    required: true
+    group: Inspection
+    order: 12
+  InspectionScope:
+    label: Scope of Inspection (English)
+    type: textarea
+    required: true
+    group: Inspection
+    order: 13
+  InspectionScopeAr:
+    label: Scope of Inspection (Arabic)
+    type: textarea
+    group: Inspection
+    order: 14
+  InspectorName:
+    label: Inspector Name
+    type: text
+    required: true
+    group: Inspector
+    order: 20
+  InspectorTitle:
+    label: Inspector Title (English)
+    type: text
+    group: Inspector
+    order: 21
+  InspectorTitleAr:
+    label: Inspector Title (Arabic)
+    type: text
+    group: Inspector
+    order: 22
+  InspectionItem1:
+    label: Inspection Item 1
+    type: text
+    required: true
+    group: Findings
+    order: 30
+  Area1:
+    label: Item 1 — Area / Location
+    type: text
+    group: Findings
+    order: 31
+  Observation1:
+    label: Item 1 — Observation
+    type: textarea
+    group: Findings
+    order: 32
+  Severity1:
+    label: Item 1 — Severity
+    type: select
+    group: Findings
+    order: 33
+    options:
+      - Low
+      - Medium
+      - High
+      - Critical
+  Recommendation1:
+    label: Item 1 — Recommendation
+    type: text
+    group: Findings
+    order: 34
+  CorrectiveAction1:
+    label: Item 1 — Corrective Action
+    type: text
+    group: Findings
+    order: 35
+  Owner1:
+    label: Item 1 — Owner
+    type: text
+    group: Findings
+    order: 36
+  DueDate1:
+    label: Item 1 — Due Date
+    type: date
+    group: Findings
+    order: 37
+  InspectionItem2:
+    label: Inspection Item 2
+    type: text
+    group: Findings
+    order: 38
+  Area2:
+    label: Item 2 — Area / Location
+    type: text
+    group: Findings
+    order: 39
+  Observation2:
+    label: Item 2 — Observation
+    type: textarea
+    group: Findings
+    order: 40
+  Severity2:
+    label: Item 2 — Severity
+    type: select
+    group: Findings
+    order: 41
+    options:
+      - Low
+      - Medium
+      - High
+      - Critical
+  Recommendation2:
+    label: Item 2 — Recommendation
+    type: text
+    group: Findings
+    order: 42
+  CorrectiveAction2:
+    label: Item 2 — Corrective Action
+    type: text
+    group: Findings
+    order: 43
+  Owner2:
+    label: Item 2 — Owner
+    type: text
+    group: Findings
+    order: 44
+  DueDate2:
+    label: Item 2 — Due Date
+    type: date
+    group: Findings
+    order: 45
+  InspectionItem3:
+    label: Inspection Item 3
+    type: text
+    group: Findings
+    order: 46
+  Remarks1:
+    label: Item 1 — Remarks
+    type: text
+    group: Findings
+    order: 47
+  Remarks2:
+    label: Item 2 — Remarks
+    type: text
+    group: Findings
+    order: 48
+  Remarks3:
+    label: Item 3 — Remarks
+    type: text
+    group: Findings
+    order: 49
+  OverallStatus:
+    label: Overall Status
+    type: select
+    required: true
+    group: Summary
+    order: 50
+    options:
+      - Satisfactory
+      - Requires Attention
+      - Unsatisfactory
+  SummaryNotes:
+    label: Summary Notes (English)
+    type: textarea
+    required: true
+    group: Summary
+    order: 51
+  SummaryNotesAr:
+    label: Summary Notes (Arabic)
+    type: textarea
+    group: Summary
+    order: 52
+  ReviewedBy:
+    label: Reviewed by Name
+    type: text
+    group: Signatory
+    order: 60
+  ReviewedByTitle:
+    label: Reviewer Title (English)
+    type: text
+    group: Signatory
+    order: 61
+  ReviewedByTitleAr:
+    label: Reviewer Title (Arabic)
+    type: text
+    group: Signatory
+    order: 62
+
 ---
 
 <style>

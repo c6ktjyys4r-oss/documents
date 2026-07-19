@@ -1,7 +1,168 @@
 ---
-template: Transfer Letter
-category: HR
-version: 2.1
+document:
+  name: Transfer Letter
+  category: hr
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  EmployeeCode:
+    label: Employee Code
+    type: text
+    group: Employee
+    order: 12
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    group: Employee
+    order: 13
+
+  Nationality:
+    label: Nationality
+    type: text
+    group: Employee
+    order: 14
+
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee
+    order: 15
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee
+    order: 16
+
+  CurrentDepartment:
+    label: Current Department
+    type: text
+    required: true
+    group: Transfer Details
+    order: 20
+
+  NewDepartment:
+    label: New Department
+    type: text
+    required: true
+    group: Transfer Details
+    order: 21
+
+  CurrentLocation:
+    label: Current Location
+    type: text
+    group: Transfer Details
+    order: 22
+
+  NewLocation:
+    label: New Location
+    type: text
+    group: Transfer Details
+    order: 23
+
+  CurrentBranch:
+    label: Current Branch
+    type: text
+    group: Transfer Details
+    order: 24
+
+  NewBranch:
+    label: New Branch
+    type: text
+    group: Transfer Details
+    order: 25
+
+  CurrentManager:
+    label: Current Reporting Manager
+    type: text
+    group: Transfer Details
+    order: 26
+
+  NewManager:
+    label: New Reporting Manager
+    type: text
+    group: Transfer Details
+    order: 27
+
+  EffectiveDate:
+    label: Effective Date
+    type: date
+    required: true
+    group: Transfer Details
+    order: 28
+
+  AdditionalNotes:
+    label: Additional Notes (English)
+    type: textarea
+    group: Notes
+    order: 30
+
+  AdditionalNotesAr:
+    label: Additional Notes (Arabic)
+    type: textarea
+    group: Notes
+    order: 31
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 41
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+
 ---
 
 <style>

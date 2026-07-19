@@ -1,7 +1,116 @@
 ---
-template: Acknowledgement
-category: General
-version: 2.1
+document:
+  name: Acknowledgement
+  category: general
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  RecipientName:
+    label: Recipient Name (English)
+    type: text
+    required: true
+    group: Recipient
+    order: 10
+  RecipientNameAr:
+    label: Recipient Name (Arabic)
+    type: text
+    group: Recipient
+    order: 11
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    group: Recipient
+    order: 12
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Recipient
+    order: 13
+  Department:
+    label: Department
+    type: text
+    group: Recipient
+    order: 14
+  ItemDescription1:
+    label: Item 1 — Description (English)
+    type: text
+    required: true
+    group: Acknowledgement Items
+    order: 20
+  ItemDescription1Ar:
+    label: Item 1 — Description (Arabic)
+    type: text
+    group: Acknowledgement Items
+    order: 21
+  ItemDate1:
+    label: Item 1 — Date
+    type: date
+    group: Acknowledgement Items
+    order: 22
+  Notes1:
+    label: Item 1 — Notes
+    type: text
+    group: Acknowledgement Items
+    order: 23
+  ItemDescription2:
+    label: Item 2 — Description (English)
+    type: text
+    group: Acknowledgement Items
+    order: 24
+  ItemDescription2Ar:
+    label: Item 2 — Description (Arabic)
+    type: text
+    group: Acknowledgement Items
+    order: 25
+  ItemDate2:
+    label: Item 2 — Date
+    type: date
+    group: Acknowledgement Items
+    order: 26
+  Notes2:
+    label: Item 2 — Notes
+    type: text
+    group: Acknowledgement Items
+    order: 27
+  IssuedBy:
+    label: Issued by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 30
+  IssuedByTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 31
+  IssuedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 32
+
 ---
 
 <style>

@@ -1,7 +1,199 @@
 ---
-template: Promotion Letter
-category: HR
-version: 2.1
+document:
+  name: Promotion Letter
+  category: hr
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  EmployeeCode:
+    label: Employee Code
+    type: text
+    group: Employee
+    order: 12
+
+  Nationality:
+    label: Nationality
+    type: text
+    group: Employee
+    order: 13
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    group: Employee
+    order: 14
+
+  CurrentJobTitle:
+    label: Current Job Title (English)
+    type: text
+    required: true
+    group: Promotion Details
+    order: 20
+
+  CurrentJobTitleAr:
+    label: Current Job Title (Arabic)
+    type: text
+    group: Promotion Details
+    order: 21
+
+  NewJobTitle:
+    label: New Job Title (English)
+    type: text
+    required: true
+    group: Promotion Details
+    order: 22
+
+  NewJobTitleAr:
+    label: New Job Title (Arabic)
+    type: text
+    group: Promotion Details
+    order: 23
+
+  CurrentDepartment:
+    label: Current Department
+    type: text
+    group: Promotion Details
+    order: 24
+
+  NewDepartment:
+    label: New Department
+    type: text
+    group: Promotion Details
+    order: 25
+
+  CurrentManager:
+    label: Current Reporting Manager
+    type: text
+    group: Promotion Details
+    order: 26
+
+  NewManager:
+    label: New Reporting Manager
+    type: text
+    group: Promotion Details
+    order: 27
+
+  CurrentLocation:
+    label: Current Location
+    type: text
+    group: Promotion Details
+    order: 28
+
+  NewLocation:
+    label: New Location
+    type: text
+    group: Promotion Details
+    order: 29
+
+  EffectiveDate:
+    label: Effective Date
+    type: date
+    required: true
+    group: Promotion Details
+    order: 30
+
+  NewBasicSalary:
+    label: New Basic Salary (SAR)
+    type: currency
+    required: true
+    group: Revised Compensation
+    order: 40
+
+  NewHousingAllowance:
+    label: New Housing Allowance (SAR)
+    type: currency
+    group: Revised Compensation
+    order: 41
+
+  NewTransportationAllowance:
+    label: New Transportation Allowance (SAR)
+    type: currency
+    group: Revised Compensation
+    order: 42
+
+  NewOtherAllowances:
+    label: New Other Allowances (SAR)
+    type: currency
+    group: Revised Compensation
+    order: 43
+
+  NewTotalSalary:
+    label: New Total Salary (SAR)
+    type: currency
+    required: true
+    group: Revised Compensation
+    order: 44
+
+  AdditionalNotes:
+    label: Additional Notes (English)
+    type: textarea
+    group: Notes
+    order: 50
+
+  AdditionalNotesAr:
+    label: Additional Notes (Arabic)
+    type: textarea
+    group: Notes
+    order: 51
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 60
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 61
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 62
+
 ---
 
 <style>

@@ -1,7 +1,156 @@
 ---
-template: Internal Memo
-category: General
-version: 2.1
+document:
+  name: Internal Memo
+  category: general
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+
+  Recipient:
+    label: To (Recipient Name / Department)
+    type: text
+    required: true
+    group: Memo Header
+    order: 10
+
+  PreparedBy:
+    label: From (Sender Name)
+    type: text
+    required: true
+    group: Memo Header
+    order: 11
+
+  Department:
+    label: Sender Department
+    type: text
+    group: Memo Header
+    order: 12
+
+  Subject:
+    label: Subject
+    type: text
+    required: true
+    group: Memo Header
+    order: 13
+
+  Priority:
+    label: Priority
+    type: select
+    group: Memo Header
+    order: 14
+    options:
+      - Normal
+      - High
+      - Urgent
+
+  ConfidentialityLevel:
+    label: Confidentiality
+    type: select
+    group: Memo Header
+    order: 15
+    options:
+      - Internal
+      - Confidential
+      - Strictly Confidential
+
+  Purpose:
+    label: Purpose (English)
+    type: textarea
+    required: true
+    group: Content
+    order: 20
+
+  PurposeAr:
+    label: Purpose (Arabic)
+    type: textarea
+    group: Content
+    order: 21
+
+  Body:
+    label: Details (English)
+    type: textarea
+    required: true
+    group: Content
+    order: 22
+
+  BodyAr:
+    label: Details (Arabic)
+    type: textarea
+    group: Content
+    order: 23
+
+  ActionRequired:
+    label: Action Required (English)
+    type: textarea
+    group: Action
+    order: 30
+
+  ActionRequiredAr:
+    label: Action Required (Arabic)
+    type: textarea
+    group: Action
+    order: 31
+
+  Deadline:
+    label: Deadline
+    type: date
+    group: Action
+    order: 32
+
+  PreparedByTitle:
+    label: Sender Title (English)
+    type: text
+    group: Signatory
+    order: 40
+
+  PreparedByTitleAr:
+    label: Sender Title (Arabic)
+    type: text
+    group: Signatory
+    order: 41
+
+  ApprovedBy:
+    label: Approved by Name
+    type: text
+    group: Signatory
+    order: 42
+
+  ApprovedByTitle:
+    label: Approver Title (English)
+    type: text
+    group: Signatory
+    order: 43
+
+  ApprovedByTitleAr:
+    label: Approver Title (Arabic)
+    type: text
+    group: Signatory
+    order: 44
+
 ---
 
 <style>

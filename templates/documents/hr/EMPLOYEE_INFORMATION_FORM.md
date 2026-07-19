@@ -1,8 +1,249 @@
 ---
-template: Employee Information Form
-category: HR
-version: 2.1
-note: All fields must be completed in full. Incomplete forms will be returned.
+document:
+  name: Employee Information Form
+  category: hr
+  version: 2.1
+  note: All fields must be completed in full. Incomplete forms will be returned.
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    group: Document
+    order: 2
+
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+
+  FullNameEn:
+    label: Full Name (English)
+    type: text
+    required: true
+    group: Personal
+    order: 10
+
+  FullNameAr:
+    label: Full Name (Arabic)
+    type: text
+    required: true
+    group: Personal
+    order: 11
+
+  Nationality:
+    label: Nationality (English)
+    type: text
+    required: true
+    group: Personal
+    order: 12
+
+  NationalityAr:
+    label: Nationality (Arabic)
+    type: text
+    group: Personal
+    order: 13
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    required: true
+    group: Personal
+    order: 14
+
+  PassportNumber:
+    label: Passport Number
+    type: text
+    group: Personal
+    order: 15
+
+  DateOfBirth:
+    label: Date of Birth
+    type: date
+    required: true
+    group: Personal
+    order: 16
+
+  Gender:
+    label: Gender
+    type: select
+    required: true
+    group: Personal
+    order: 17
+    options:
+      - Male
+      - Female
+
+  MaritalStatus:
+    label: Marital Status
+    type: select
+    group: Personal
+    order: 18
+    options:
+      - Single
+      - Married
+      - Divorced
+      - Widowed
+
+  NumberOfDependants:
+    label: Number of Dependants
+    type: number
+    group: Personal
+    order: 19
+
+  Address:
+    label: Residential Address
+    type: text
+    required: true
+    group: Contact
+    order: 20
+
+  City:
+    label: City
+    type: text
+    group: Contact
+    order: 21
+
+  Mobile:
+    label: Mobile Number
+    type: phone
+    required: true
+    group: Contact
+    order: 22
+
+  Email:
+    label: Email Address
+    type: email
+    required: true
+    group: Contact
+    order: 23
+
+  EmergencyContactName:
+    label: Emergency Contact Name
+    type: text
+    required: true
+    group: Contact
+    order: 24
+
+  EmergencyContactPhone:
+    label: Emergency Contact Phone
+    type: phone
+    required: true
+    group: Contact
+    order: 25
+
+  EmergencyContactRelationship:
+    label: Relationship to Employee
+    type: text
+    group: Contact
+    order: 26
+
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employment
+    order: 30
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employment
+    order: 31
+
+  Department:
+    label: Department
+    type: text
+    group: Employment
+    order: 32
+
+  Branch:
+    label: Branch
+    type: text
+    group: Employment
+    order: 33
+
+  StartDate:
+    label: Start Date
+    type: date
+    required: true
+    group: Employment
+    order: 34
+
+  EmploymentType:
+    label: Employment Type
+    type: select
+    group: Employment
+    order: 35
+    options:
+      - Full-Time
+      - Part-Time
+      - Contract
+
+  ReportingManager:
+    label: Reporting Manager
+    type: text
+    group: Employment
+    order: 36
+
+  BankName:
+    label: Bank Name (English)
+    type: text
+    required: true
+    group: Bank Details
+    order: 40
+
+  BankNameAr:
+    label: Bank Name (Arabic)
+    type: text
+    group: Bank Details
+    order: 41
+
+  IBAN:
+    label: IBAN
+    type: text
+    required: true
+    group: Bank Details
+    order: 42
+
+  AccountName:
+    label: Account Holder Name
+    type: text
+    required: true
+    group: Bank Details
+    order: 43
+
+  ReceivedBy:
+    label: Received by (HR Name)
+    type: text
+    group: Signatory
+    order: 50
+
+  ReceivedByTitle:
+    label: HR Title (English)
+    type: text
+    group: Signatory
+    order: 51
+
+  ReceivedByTitleAr:
+    label: HR Title (Arabic)
+    type: text
+    group: Signatory
+    order: 52
+
 ---
 
 <style>

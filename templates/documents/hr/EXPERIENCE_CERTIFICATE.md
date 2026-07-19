@@ -1,7 +1,141 @@
 ---
-template: Experience Certificate
-category: HR
-version: 2.1
+document:
+  name: Experience Certificate
+  category: hr
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  CompanyNameAr:
+    label: Company Name (Arabic)
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Document
+    order: 3
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 4
+
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 5
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee
+    order: 12
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee
+    order: 13
+
+  Department:
+    label: Department (English)
+    type: text
+    group: Employee
+    order: 14
+
+  DepartmentAr:
+    label: Department (Arabic)
+    type: text
+    group: Employee
+    order: 15
+
+  StartDate:
+    label: Employment Start Date
+    type: date
+    required: true
+    group: Service Period
+    order: 20
+
+  EndDate:
+    label: Employment End Date
+    type: date
+    required: true
+    group: Service Period
+    order: 21
+
+  Duration:
+    label: Duration of Service
+    type: text
+    required: true
+    group: Service Period
+    order: 22
+    placeholder: e.g. 3 years 4 months
+
+  PerformanceSummary:
+    label: Performance Summary (English)
+    type: textarea
+    group: Performance
+    order: 30
+    placeholder: Optional note on performance, conduct, or achievements
+
+  PerformanceSummaryAr:
+    label: Performance Summary (Arabic)
+    type: textarea
+    group: Performance
+    order: 31
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 41
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+
 ---
 
 <style>

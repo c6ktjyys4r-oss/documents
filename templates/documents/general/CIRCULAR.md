@@ -1,7 +1,127 @@
 ---
-template: Circular
-category: General
-version: 2.1
+document:
+  name: Circular
+  category: general
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Circular Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  Recipient:
+    label: To (Recipient / Distribution List)
+    type: text
+    required: true
+    group: Circular
+    order: 10
+  Department:
+    label: Issuing Department
+    type: text
+    group: Circular
+    order: 11
+  Subject:
+    label: Subject
+    type: text
+    required: true
+    group: Circular
+    order: 12
+  EffectiveDate:
+    label: Effective Date
+    type: date
+    group: Circular
+    order: 13
+  Body:
+    label: Body (English)
+    type: textarea
+    required: true
+    group: Content
+    order: 20
+  BodyAr:
+    label: Body (Arabic)
+    type: textarea
+    group: Content
+    order: 21
+  Instructions:
+    label: Instructions (English)
+    type: textarea
+    group: Content
+    order: 22
+  InstructionsAr:
+    label: Instructions (Arabic)
+    type: textarea
+    group: Content
+    order: 23
+  ComplianceRequirements:
+    label: Compliance Requirements (English)
+    type: textarea
+    group: Content
+    order: 24
+  ComplianceRequirementsAr:
+    label: Compliance Requirements (Arabic)
+    type: textarea
+    group: Content
+    order: 25
+  ContactPerson:
+    label: Contact Person
+    type: text
+    group: Contact
+    order: 30
+  ContactDetails:
+    label: Contact Details
+    type: text
+    group: Contact
+    order: 31
+  PreparedBy:
+    label: Prepared by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 40
+  PreparedByTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 41
+  PreparedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 42
+  ApprovedBy:
+    label: Approved by Name
+    type: text
+    group: Signatory
+    order: 43
+  ApprovedByTitle:
+    label: Approver Title (English)
+    type: text
+    group: Signatory
+    order: 44
+  ApprovedByTitleAr:
+    label: Approver Title (Arabic)
+    type: text
+    group: Signatory
+    order: 45
+
 ---
 
 <style>

@@ -1,7 +1,146 @@
 ---
-template: Maintenance Request
-category: Operations
-version: 2.1
+document:
+  name: Maintenance Request
+  category: operations
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Request Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  RequestedBy:
+    label: Requested by (English)
+    type: text
+    required: true
+    group: Requester
+    order: 10
+  RequestedByAr:
+    label: Requested by (Arabic)
+    type: text
+    group: Requester
+    order: 11
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Requester
+    order: 12
+  Location:
+    label: Location / Area
+    type: text
+    required: true
+    group: Requester
+    order: 13
+  LineManager:
+    label: Line Manager Name
+    type: text
+    group: Requester
+    order: 14
+  AssetID:
+    label: Asset ID / Equipment ID
+    type: text
+    group: Asset
+    order: 20
+  AssetDescription:
+    label: Asset / Equipment Description
+    type: text
+    required: true
+    group: Asset
+    order: 21
+  MaintenanceType:
+    label: Maintenance Type
+    type: select
+    required: true
+    group: Asset
+    order: 22
+    options:
+      - Corrective
+      - Preventive
+      - Emergency
+      - Routine
+  Priority:
+    label: Priority
+    type: select
+    required: true
+    group: Asset
+    order: 23
+    options:
+      - Low
+      - Normal
+      - High
+      - Critical
+  DateNoticed:
+    label: Date Problem Noticed
+    type: date
+    group: Asset
+    order: 24
+  RequiredByDate:
+    label: Required by Date
+    type: date
+    group: Asset
+    order: 25
+  ProblemDescription:
+    label: Problem Description (English)
+    type: textarea
+    required: true
+    group: Problem
+    order: 30
+  ProblemDescriptionAr:
+    label: Problem Description (Arabic)
+    type: textarea
+    group: Problem
+    order: 31
+  SuggestedAction:
+    label: Suggested Action (English)
+    type: textarea
+    group: Problem
+    order: 32
+  SuggestedActionAr:
+    label: Suggested Action (Arabic)
+    type: textarea
+    group: Problem
+    order: 33
+  Remarks:
+    label: Remarks
+    type: textarea
+    group: Problem
+    order: 34
+  MaintenanceApprover:
+    label: Maintenance Approver Name
+    type: text
+    required: true
+    group: Approval
+    order: 40
+  StartDate:
+    label: Scheduled Start Date
+    type: date
+    group: Resolution
+    order: 50
+  CompletionDate:
+    label: Completion Date
+    type: date
+    group: Resolution
+    order: 51
+
 ---
 
 <style>

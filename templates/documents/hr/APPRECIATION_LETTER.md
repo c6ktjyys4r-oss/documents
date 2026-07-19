@@ -1,7 +1,116 @@
 ---
-template: Appreciation Letter
-category: HR
-version: 2.1
+document:
+  name: Appreciation Letter
+  category: hr
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee
+    order: 12
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee
+    order: 13
+
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Employee
+    order: 14
+
+  AppreciationReason:
+    label: Reason for Appreciation (English)
+    type: text
+    required: true
+    group: Content
+    order: 20
+    placeholder: e.g. outstanding performance in Q4 / completion of the XYZ project
+
+  AppreciationReasonAr:
+    label: Reason for Appreciation (Arabic)
+    type: text
+    required: true
+    group: Content
+    order: 21
+
+  AppreciationBody:
+    label: Appreciation Message (English)
+    type: textarea
+    group: Content
+    order: 22
+    placeholder: Optional extended message or specific achievements to highlight
+
+  AppreciationBodyAr:
+    label: Appreciation Message (Arabic)
+    type: textarea
+    group: Content
+    order: 23
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 30
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 31
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 32
+
 ---
 
 <style>

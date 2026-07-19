@@ -1,7 +1,81 @@
 ---
-template: Certificate
-category: General
-version: 2.1
+document:
+  name: Certificate
+  category: general
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Issuing Organization
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    group: Document
+    order: 2
+  Date:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  RecipientName:
+    label: Recipient Name (English)
+    type: text
+    required: true
+    group: Recipient
+    order: 10
+  RecipientNameAr:
+    label: Recipient Name (Arabic)
+    type: text
+    group: Recipient
+    order: 11
+  CertificateSubject:
+    label: Certificate Subject (English)
+    type: text
+    required: true
+    group: Certificate
+    order: 20
+    placeholder: e.g. Completion of Leadership Program
+  CertificateSubjectAr:
+    label: Certificate Subject (Arabic)
+    type: text
+    group: Certificate
+    order: 21
+  IssuanceReason:
+    label: Reason / Details (English)
+    type: textarea
+    group: Certificate
+    order: 22
+  IssuanceReasonAr:
+    label: Reason / Details (Arabic)
+    type: textarea
+    group: Certificate
+    order: 23
+  AuthorisedBy:
+    label: Authorised by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 30
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 31
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 32
+
 ---
 
 <style>

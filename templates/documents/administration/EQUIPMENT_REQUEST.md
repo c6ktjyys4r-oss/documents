@@ -1,7 +1,162 @@
 ---
-template: Equipment Request
-category: Administration
-version: 2.1
+document:
+  name: Equipment Request
+  category: administration
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  RequestedBy:
+    label: Requested by (English)
+    type: text
+    required: true
+    group: Requester
+    order: 10
+  RequestedByAr:
+    label: Requested by (Arabic)
+    type: text
+    group: Requester
+    order: 11
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Requester
+    order: 12
+  CostCentre:
+    label: Cost Centre
+    type: text
+    group: Requester
+    order: 13
+  Priority:
+    label: Priority
+    type: select
+    required: true
+    group: Requester
+    order: 14
+    options:
+      - Normal
+      - High
+      - Urgent
+  RequiredByDate:
+    label: Required by Date
+    type: date
+    group: Requester
+    order: 15
+  ItemDescription1:
+    label: Item 1 — Description
+    type: text
+    required: true
+    group: Items Requested
+    order: 20
+  Quantity1:
+    label: Item 1 — Quantity
+    type: number
+    group: Items Requested
+    order: 21
+  Specification1:
+    label: Item 1 — Specification
+    type: text
+    group: Items Requested
+    order: 22
+  Reason1:
+    label: Item 1 — Reason
+    type: text
+    group: Items Requested
+    order: 23
+  ItemDescription2:
+    label: Item 2 — Description
+    type: text
+    group: Items Requested
+    order: 24
+  Quantity2:
+    label: Item 2 — Quantity
+    type: number
+    group: Items Requested
+    order: 25
+  Specification2:
+    label: Item 2 — Specification
+    type: text
+    group: Items Requested
+    order: 26
+  Reason2:
+    label: Item 2 — Reason
+    type: text
+    group: Items Requested
+    order: 27
+  ItemDescription3:
+    label: Item 3 — Description
+    type: text
+    group: Items Requested
+    order: 28
+  Quantity3:
+    label: Item 3 — Quantity
+    type: number
+    group: Items Requested
+    order: 29
+  Specification3:
+    label: Item 3 — Specification
+    type: text
+    group: Items Requested
+    order: 30
+  Reason3:
+    label: Item 3 — Reason
+    type: text
+    group: Items Requested
+    order: 31
+  Justification:
+    label: Justification (English)
+    type: textarea
+    group: Notes
+    order: 40
+  JustificationAr:
+    label: Justification (Arabic)
+    type: textarea
+    group: Notes
+    order: 41
+  Remarks:
+    label: Remarks
+    type: textarea
+    group: Notes
+    order: 42
+  LineManager:
+    label: Line Manager Name
+    type: text
+    required: true
+    group: Approval
+    order: 50
+  ProcurementApprover:
+    label: Procurement Approver Name
+    type: text
+    group: Approval
+    order: 51
+  FinanceApprover:
+    label: Finance Approver Name
+    type: text
+    group: Approval
+    order: 52
+
 ---
 
 <style>

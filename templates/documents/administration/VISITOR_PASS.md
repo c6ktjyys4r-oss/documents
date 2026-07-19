@@ -1,7 +1,130 @@
 ---
-template: Visitor Pass
-category: Administration
-version: 2.1
+document:
+  name: Visitor Pass
+  category: administration
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  PassNumber:
+    label: Pass Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date of Visit
+    type: date
+    required: true
+    group: Document
+    order: 3
+  ValidForDate:
+    label: Valid For Date
+    type: date
+    required: true
+    group: Document
+    order: 4
+  VisitorName:
+    label: Visitor Name (English)
+    type: text
+    required: true
+    group: Visitor
+    order: 10
+  VisitorNameAr:
+    label: Visitor Name (Arabic)
+    type: text
+    group: Visitor
+    order: 11
+  VisitorOrganization:
+    label: Visitor's Organization
+    type: text
+    group: Visitor
+    order: 12
+  VisitorNationality:
+    label: Visitor Nationality
+    type: text
+    group: Visitor
+    order: 13
+  VisitorID:
+    label: Visitor ID / Passport Number
+    type: text
+    group: Visitor
+    order: 14
+  VisitorPhone:
+    label: Visitor Phone
+    type: phone
+    group: Visitor
+    order: 15
+  HostName:
+    label: Host Name (English)
+    type: text
+    required: true
+    group: Visit
+    order: 20
+  HostNameAr:
+    label: Host Name (Arabic)
+    type: text
+    group: Visit
+    order: 21
+  HostDepartment:
+    label: Host Department
+    type: text
+    required: true
+    group: Visit
+    order: 22
+  VisitPurpose:
+    label: Purpose of Visit (English)
+    type: text
+    required: true
+    group: Visit
+    order: 23
+  VisitPurposeAr:
+    label: Purpose of Visit (Arabic)
+    type: text
+    group: Visit
+    order: 24
+  PermittedArea:
+    label: Permitted Area(s)
+    type: text
+    group: Visit
+    order: 25
+  CheckInTime:
+    label: Check-in Time
+    type: text
+    group: Visit
+    order: 26
+    placeholder: e.g. 09:30 AM
+  CheckOutTime:
+    label: Check-out Time
+    type: text
+    group: Visit
+    order: 27
+  PreparedBy:
+    label: Issued by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 30
+  PreparedByTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 31
+  PreparedByTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 32
+
 ---
 
 <style>

@@ -1,7 +1,263 @@
 ---
-template: Invoice
-category: Finance
-version: 2.1
+document:
+  name: Invoice
+  category: finance
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Seller
+    order: 1
+
+  CompanyAddress:
+    label: Company Address
+    type: text
+    group: Seller
+    order: 2
+
+  CompanyPhone:
+    label: Company Phone
+    type: phone
+    group: Seller
+    order: 3
+
+  CompanyEmail:
+    label: Company Email
+    type: email
+    group: Seller
+    order: 4
+
+  TaxRegistrationNumber:
+    label: Tax Registration Number
+    type: text
+    group: Seller
+    order: 5
+
+  InvoiceNumber:
+    label: Invoice Number
+    type: text
+    required: true
+    group: Invoice
+    order: 10
+
+  Date:
+    label: Invoice Date
+    type: date
+    required: true
+    group: Invoice
+    order: 11
+
+  DueDate:
+    label: Due Date
+    type: date
+    required: true
+    group: Invoice
+    order: 12
+
+  Currency:
+    label: Currency
+    type: text
+    group: Invoice
+    order: 13
+    placeholder: SAR
+
+  ClientName:
+    label: Client / Customer Name
+    type: text
+    required: true
+    group: Client
+    order: 20
+
+  ClientAddress:
+    label: Client Address
+    type: text
+    group: Client
+    order: 21
+
+  ClientTaxNumber:
+    label: Client Tax Registration Number
+    type: text
+    group: Client
+    order: 22
+
+  ItemDescription1:
+    label: Item 1 — Description
+    type: text
+    required: true
+    group: Line Items
+    order: 30
+
+  Qty1:
+    label: Item 1 — Quantity
+    type: number
+    required: true
+    group: Line Items
+    order: 31
+
+  UnitPrice1:
+    label: Item 1 — Unit Price
+    type: currency
+    required: true
+    group: Line Items
+    order: 32
+
+  LineTotal1:
+    label: Item 1 — Line Total
+    type: currency
+    required: true
+    group: Line Items
+    order: 33
+
+  ItemDescription2:
+    label: Item 2 — Description
+    type: text
+    group: Line Items
+    order: 34
+
+  Qty2:
+    label: Item 2 — Quantity
+    type: number
+    group: Line Items
+    order: 35
+
+  UnitPrice2:
+    label: Item 2 — Unit Price
+    type: currency
+    group: Line Items
+    order: 36
+
+  LineTotal2:
+    label: Item 2 — Line Total
+    type: currency
+    group: Line Items
+    order: 37
+
+  ItemDescription3:
+    label: Item 3 — Description
+    type: text
+    group: Line Items
+    order: 38
+
+  Qty3:
+    label: Item 3 — Quantity
+    type: number
+    group: Line Items
+    order: 39
+
+  UnitPrice3:
+    label: Item 3 — Unit Price
+    type: currency
+    group: Line Items
+    order: 40
+
+  LineTotal3:
+    label: Item 3 — Line Total
+    type: currency
+    group: Line Items
+    order: 41
+
+  Subtotal:
+    label: Subtotal
+    type: currency
+    required: true
+    group: Totals
+    order: 50
+
+  TaxRate:
+    label: Tax Rate (%)
+    type: number
+    group: Totals
+    order: 51
+    placeholder: e.g. 15
+
+  TaxAmount:
+    label: Tax Amount
+    type: currency
+    group: Totals
+    order: 52
+
+  Discount:
+    label: Discount Amount
+    type: currency
+    group: Totals
+    order: 53
+
+  TotalDue:
+    label: Total Due
+    type: currency
+    required: true
+    group: Totals
+    order: 54
+
+  PaymentMethod:
+    label: Payment Method
+    type: text
+    group: Payment
+    order: 60
+    placeholder: e.g. Bank Transfer / Cheque
+
+  BankName:
+    label: Bank Name
+    type: text
+    group: Payment
+    order: 61
+
+  IBAN:
+    label: IBAN
+    type: text
+    group: Payment
+    order: 62
+
+  Notes:
+    label: Notes
+    type: textarea
+    group: Notes
+    order: 70
+
+  PreparedBy:
+    label: Prepared by Name
+    type: text
+    required: true
+    group: Signatory
+    order: 80
+
+  PreparedByTitle:
+    label: Preparer Title (English)
+    type: text
+    group: Signatory
+    order: 81
+
+  PreparedByTitleAr:
+    label: Preparer Title (Arabic)
+    type: text
+    group: Signatory
+    order: 82
+
+  ApprovedBy:
+    label: Authorised by Name
+    type: text
+    group: Signatory
+    order: 83
+
+  ApprovedByTitle:
+    label: Authoriser Title (English)
+    type: text
+    group: Signatory
+    order: 84
+
+  ApprovedByTitleAr:
+    label: Authoriser Title (Arabic)
+    type: text
+    group: Signatory
+    order: 85
+
 ---
 
 <style>

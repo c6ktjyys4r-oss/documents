@@ -1,7 +1,197 @@
 ---
-template: Training Request
-category: Administration
-version: 2.1
+document:
+  name: Training Request
+  category: administration
+  version: 2.1
+
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  CompanyName:
+    label: Company Name
+    type: text
+    required: true
+    group: Document
+    order: 1
+  ReferenceNumber:
+    label: Reference Number
+    type: text
+    required: true
+    group: Document
+    order: 2
+  Date:
+    label: Date
+    type: date
+    required: true
+    group: Document
+    order: 3
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee
+    order: 10
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee
+    order: 11
+  JobTitle:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee
+    order: 12
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee
+    order: 13
+  Department:
+    label: Department
+    type: text
+    required: true
+    group: Employee
+    order: 14
+  Branch:
+    label: Branch
+    type: text
+    group: Employee
+    order: 15
+  CostCentre:
+    label: Cost Centre
+    type: text
+    group: Employee
+    order: 16
+  TrainingTitle:
+    label: Training Course Title
+    type: text
+    required: true
+    group: Training Details
+    order: 20
+  TrainingProvider:
+    label: Training Provider / Institution
+    type: text
+    required: true
+    group: Training Details
+    order: 21
+  TrainingType:
+    label: Training Type
+    type: select
+    group: Training Details
+    order: 22
+    options:
+      - Internal
+      - External
+      - Online
+      - Conference
+  Location:
+    label: Location
+    type: text
+    group: Training Details
+    order: 23
+  ProposedDates:
+    label: Proposed Dates
+    type: text
+    required: true
+    group: Training Details
+    order: 24
+    placeholder: e.g. 15–17 March 2025
+  Duration:
+    label: Duration
+    type: text
+    group: Training Details
+    order: 25
+    placeholder: e.g. 3 days / 24 hours
+  TrainingFee:
+    label: Training Fee
+    type: currency
+    group: Costs
+    order: 30
+  TravelCost:
+    label: Travel Cost
+    type: currency
+    group: Costs
+    order: 31
+  AccommodationCost:
+    label: Accommodation Cost
+    type: currency
+    group: Costs
+    order: 32
+  OtherCosts:
+    label: Other Costs
+    type: currency
+    group: Costs
+    order: 33
+  TotalCost:
+    label: Total Cost
+    type: currency
+    required: true
+    group: Costs
+    order: 34
+  Currency:
+    label: Currency
+    type: text
+    group: Costs
+    order: 35
+    placeholder: SAR
+  ExpectedBenefit:
+    label: Expected Benefit (English)
+    type: textarea
+    required: true
+    group: Justification
+    order: 40
+  ExpectedBenefitAr:
+    label: Expected Benefit (Arabic)
+    type: textarea
+    group: Justification
+    order: 41
+  Justification:
+    label: Justification (English)
+    type: textarea
+    group: Justification
+    order: 42
+  JustificationAr:
+    label: Justification (Arabic)
+    type: textarea
+    group: Justification
+    order: 43
+  Remarks:
+    label: Remarks
+    type: textarea
+    group: Justification
+    order: 44
+  RequestedBy:
+    label: Requested by (English)
+    type: text
+    required: true
+    group: Approval
+    order: 50
+  RequestedByAr:
+    label: Requested by (Arabic)
+    type: text
+    group: Approval
+    order: 51
+  LineManager:
+    label: Line Manager Name
+    type: text
+    required: true
+    group: Approval
+    order: 52
+  HRApprover:
+    label: HR Approver Name
+    type: text
+    group: Approval
+    order: 53
+  FinanceApprover:
+    label: Finance Approver Name
+    type: text
+    group: Approval
+    order: 54
+
 ---
 
 <style>
