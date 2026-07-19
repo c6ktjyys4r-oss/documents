@@ -322,24 +322,27 @@ button, input, select, textarea { font-family: inherit; }
 }
 .template-item:hover .template-item-cta { opacity: 1; }
 
-/* ── Badges ──────────────────────────────────────────────────────────────── */
+/* ── Badges — token-based: one variable pair per category ────────────────── */
 .cat-badge {
   display: inline-block; font-size: .68rem; font-weight: 600;
   padding: 2px 7px; border-radius: 3px;
   text-transform: uppercase; letter-spacing: .05em;
+  background: var(--badge-bg, #e5e7eb); color: var(--badge-fg, #374151);
 }
-.badge-hr           { background: #dbeafe; color: #1e40af; }
-.badge-finance      { background: #dcfce7; color: #166534; }
-.badge-operations   { background: #fef9c3; color: #854d0e; }
-.badge-administration { background: #f3e8ff; color: #6b21a8; }
-.badge-general      { background: #e0f2fe; color: #0369a1; }
-.badge-framework    { background: #f1f5f9; color: #475569; }
-[data-theme="dark"] .badge-hr           { background: #1e3a6e; color: #93c5fd; }
-[data-theme="dark"] .badge-finance      { background: #14532d; color: #86efac; }
-[data-theme="dark"] .badge-operations   { background: #431407; color: #fde68a; }
-[data-theme="dark"] .badge-administration { background: #2e1065; color: #d8b4fe; }
-[data-theme="dark"] .badge-general      { background: #082f49; color: #7dd3fc; }
-[data-theme="dark"] .badge-framework    { background: #1e293b; color: #94a3b8; }
+/* Light-mode badge tokens */
+.badge-hr           { --badge-bg: #dbeafe; --badge-fg: #1e40af; }
+.badge-finance      { --badge-bg: #dcfce7; --badge-fg: #166534; }
+.badge-operations   { --badge-bg: #fef9c3; --badge-fg: #854d0e; }
+.badge-administration { --badge-bg: #f3e8ff; --badge-fg: #6b21a8; }
+.badge-general      { --badge-bg: #e0f2fe; --badge-fg: #0369a1; }
+.badge-framework    { --badge-bg: #f1f5f9; --badge-fg: #475569; }
+/* Dark-mode badge tokens — only the variables change, not the rule structure */
+[data-theme="dark"] .badge-hr           { --badge-bg: #1e3a6e; --badge-fg: #93c5fd; }
+[data-theme="dark"] .badge-finance      { --badge-bg: #14532d; --badge-fg: #86efac; }
+[data-theme="dark"] .badge-operations   { --badge-bg: #431407; --badge-fg: #fde68a; }
+[data-theme="dark"] .badge-administration { --badge-bg: #2e1065; --badge-fg: #d8b4fe; }
+[data-theme="dark"] .badge-general      { --badge-bg: #082f49; --badge-fg: #7dd3fc; }
+[data-theme="dark"] .badge-framework    { --badge-bg: #1e293b; --badge-fg: #94a3b8; }
 
 /* ── Breadcrumb ──────────────────────────────────────────────────────────── */
 .breadcrumb {
@@ -1667,6 +1670,11 @@ function renderMyDocuments() {
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
         </button>
+        <button class="btn btn-outline btn-sm" onclick="duplicateSavedDoc('${escapeHtml(doc.id)}')" title="Duplicate document" aria-label="Duplicate ${escapeHtml(doc.templateName)}">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
         ${doc.status === 'archived'
           ? `<button class="btn btn-outline btn-sm" onclick="unarchiveSavedDoc('${escapeHtml(doc.id)}')" title="Restore to Drafts" aria-label="Restore ${escapeHtml(doc.templateName)}">
               <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -1848,6 +1856,24 @@ function unarchiveSavedDoc(docId) {
   if (!doc) return;
   DB.save({ ...doc, status: 'draft', updatedAt: new Date().toISOString() });
   showToast(`"${doc.templateName}" restored to Drafts`, 'info');
+  renderMyDocuments();
+}
+
+function duplicateSavedDoc(docId) {
+  const doc = DB.getById(docId);
+  if (!doc) return;
+  const now = new Date().toISOString();
+  DB.save({
+    id:           genDocId(),
+    templateId:   doc.templateId,
+    templateName: doc.templateName,
+    category:     doc.category,
+    fields:       { ...doc.fields },
+    status:       'draft',
+    createdAt:    now,
+    updatedAt:    now,
+  });
+  showToast(`"${doc.templateName}" duplicated`, 'success');
   renderMyDocuments();
 }
 
@@ -2290,21 +2316,22 @@ function renderField(def, templateId) {
   const id   = 'ff-' + def.key;
   const change = `onchange="clearFieldError('${escapeHtml(def.key)}');onFieldChange('${escapeHtml(templateId)}')"`;
   const input_  = `oninput="clearFieldError('${escapeHtml(def.key)}');onFieldChange('${escapeHtml(templateId)}')"`;
+  const blur_   = def.required ? `onblur="validateFieldOnBlur('${escapeHtml(def.key)}')"` : '';
   let input;
 
   if (def.type === 'select') {
     const opts = def.options.map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join('');
-    input = `<select class="fill-select" id="${id}" ${change}>
+    input = `<select class="fill-select" id="${id}" ${change} ${blur_}>
       <option value="" disabled selected>— select —</option>${opts}
     </select>`;
   } else if (def.type === 'textarea') {
-    input = `<textarea class="fill-textarea" id="${id}" placeholder="${escapeHtml(ph)}…" rows="3" ${input_}>${escapeHtml(def.default)}</textarea>`;
+    input = `<textarea class="fill-textarea" id="${id}" placeholder="${escapeHtml(ph)}…" rows="3" ${input_} ${blur_}>${escapeHtml(def.default)}</textarea>`;
   } else {
     const htmlType  = { date:'date', number:'number', currency:'text', email:'email', phone:'tel' }[def.type] || 'text';
     const extraAttr = def.type === 'currency' ? ' inputmode="decimal"'
                     : def.type === 'phone'    ? ' inputmode="tel"'
                     : '';
-    input = `<input class="fill-input" id="${id}" type="${htmlType}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(def.default)}"${extraAttr} ${input_}>`;
+    input = `<input class="fill-input" id="${id}" type="${htmlType}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(def.default)}"${extraAttr} ${input_} ${blur_}>`;
   }
 
   const helper = def.placeholder
@@ -2361,6 +2388,23 @@ function clearFieldError(key) {
   const errEl = document.getElementById('ff-err-' + key);
   if (wrap)  wrap.classList.remove('has-error');
   if (errEl) errEl.textContent = '';
+}
+
+/**
+ * Validate a single required field on blur.
+ * Shows an inline error if the field is empty; clears it once the user fills it.
+ */
+function validateFieldOnBlur(key) {
+  if (!_currentFieldDefs) return;
+  const def = _currentFieldDefs.find(f => f.key === key);
+  if (!def || !def.required) return;
+  const el = document.getElementById('ff-' + key);
+  if (!el) return;
+  if (el.value.trim()) { clearFieldError(key); return; }
+  const wrap  = document.getElementById('ff-wrap-' + key);
+  const errEl = document.getElementById('ff-err-' + key);
+  if (wrap)  wrap.classList.add('has-error');
+  if (errEl) errEl.textContent = 'This field is required before publishing';
 }
 
 /**
@@ -2826,6 +2870,14 @@ function docShell(bodyHtml, title, dir) {
 @page {
   size: A4 portrait;
   margin: 25mm 20mm 20mm 20mm;
+}
+@page {
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #999;
+  }
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
