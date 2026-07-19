@@ -1258,6 +1258,24 @@ const DB = {
       return true;
     } catch (e) { showToast('Export failed', 'error'); return false; }
   },
+  /**
+   * Merge documents from a parsed JSON array into the store.
+   * Existing documents with the same id are overwritten (import wins).
+   * Returns { imported, skipped } counts.
+   */
+  importDocs(parsed) {
+    if (!Array.isArray(parsed)) throw new Error('Expected a JSON array');
+    const docs = this._load();
+    const byId = Object.fromEntries(docs.map(d => [d.id, d]));
+    let imported = 0, skipped = 0;
+    for (const doc of parsed) {
+      if (!doc || typeof doc !== 'object' || !doc.id || !doc.templateId) { skipped++; continue; }
+      byId[doc.id] = doc;
+      imported++;
+    }
+    this._save(Object.values(byId));
+    return { imported, skipped };
+  },
 };
 
 function genDocId() {
@@ -1389,8 +1407,40 @@ function renderMyDocuments() {
         </svg>
         Export JSON
       </button>
+      <label class="btn btn-outline btn-sm" title="Restore documents from a previously exported JSON file">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 14 12 9 17 14"/><line x1="12" y1="9" x2="12" y2="21"/>
+        </svg>
+        Import JSON
+        <input type="file" accept=".json,application/json" style="display:none" onchange="importJsonFile(this)">
+      </label>
     </div>
     <div class="my-docs-list">${items}</div>`;
+}
+
+/**
+ * Handle the Import JSON file-input change event.
+ * Reads the selected file, parses it, merges into the store, re-renders.
+ */
+function importJsonFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  // Reset so the same file can be re-selected if needed
+  input.value = '';
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      const { imported, skipped } = DB.importDocs(parsed);
+      const skipNote = skipped > 0 ? ` (${skipped} skipped — invalid)` : '';
+      showToast(`Imported ${imported} document${imported !== 1 ? 's' : ''}${skipNote}`, 'success');
+      renderMyDocuments();
+    } catch (err) {
+      showToast('Import failed — file does not appear to be a valid Alba Docs JSON export', 'error');
+    }
+  };
+  reader.readAsText(file);
 }
 
 function openSavedDoc(docId) {
