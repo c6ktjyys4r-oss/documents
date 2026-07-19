@@ -792,8 +792,10 @@ button, input, select, textarea { font-family: inherit; }
 }
 .status-draft     { background: #fef3c7; color: #92400e; }
 .status-published { background: #dcfce7; color: #166534; }
+.status-archived  { background: #f3f4f6; color: #6b7280; }
 [data-theme="dark"] .status-draft     { background: #451a03; color: #fde68a; }
 [data-theme="dark"] .status-published { background: #14532d; color: #86efac; }
+[data-theme="dark"] .status-archived  { background: #1f2937; color: #9ca3af; }
 .my-docs-empty { text-align: center; padding: 64px 24px; color: var(--text-muted); }
 .my-docs-empty svg { margin: 0 auto 18px; opacity: .28; display: block; }
 .my-docs-empty-title { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
@@ -1534,8 +1536,12 @@ function renderMyDocuments() {
   }
 
   const items = docs.map(doc => {
-    const statusClass = doc.status === 'published' ? 'status-published' : 'status-draft';
-    const statusLabel = doc.status === 'published' ? 'Published' : 'Draft';
+    const statusClass = doc.status === 'published' ? 'status-published'
+                      : doc.status === 'archived'  ? 'status-archived'
+                      : 'status-draft';
+    const statusLabel = doc.status === 'published' ? 'Published'
+                      : doc.status === 'archived'  ? 'Archived'
+                      : 'Draft';
     return `<div class="my-doc-item">
       <div style="color:var(--text-muted);flex-shrink:0">${catIconSvg(doc.category, 20)}</div>
       <div class="my-doc-item-info">
@@ -2051,7 +2057,7 @@ function persistDraft(templateId) {
   const indicator = document.getElementById('saved-indicator');
   const span      = document.getElementById('saved-indicator-text');
   if (indicator && span) {
-    span.textContent = 'Saved ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    span.textContent = 'Saved';
     indicator.classList.add('visible');
   }
 }
@@ -2124,8 +2130,8 @@ function saveDocAs(templateId, status) {
   };
   DB.save(doc);
   sessionStorage.setItem('editing_doc_id', doc.id);
-  const label = status === 'published' ? 'published' : 'saved as draft';
-  showToast(`"${t.name}" ${label}`, 'success');
+  const label = status === 'published' ? 'Document published' : 'Document saved';
+  showToast(label, 'success');
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2322,7 +2328,7 @@ async function renderFillMode(id) {
     const indicator = document.getElementById('saved-indicator');
     const span      = document.getElementById('saved-indicator-text');
     if (indicator && span && draft.savedAt) {
-      span.textContent = 'Saved ' + new Date(draft.savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      span.textContent = 'Saved';
       indicator.classList.add('visible');
     }
   }
