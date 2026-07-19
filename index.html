@@ -523,10 +523,12 @@ button, input, select, textarea { font-family: inherit; }
 [data-theme="dark"] .preview-page-wrap { background: #0a0a12; }
 
 /* ── Live preview page (A4 proportioned) ─────────────────────────────────── */
+/* Padding approximates @page margins: 25mm top, 20mm sides, 20mm bottom.    */
+/* At screen resolution (96dpi), 1mm ≈ 3.78px.                               */
 .doc-preview {
   background: #fff;
   border-radius: 3px;
-  padding: 32px 36px 40px;
+  padding: 48px 38px 42px;
   box-shadow: var(--shadow-page);
   font-family: 'Arial', Helvetica, sans-serif;
   font-size: 10.5pt;
@@ -1155,7 +1157,12 @@ async function loadTemplate(id) {
   return text;
 }
 
-/** Strip YAML front-matter and any embedded <style> blocks from raw markdown. */
+/**
+ * Strip YAML front-matter and any embedded <style> blocks from raw markdown.
+ * Template files contain their own <style> block for "direct file viewing" only —
+ * the app uses docShell() CSS for printing and .doc-preview CSS for the live preview,
+ * so template-embedded styles are intentionally discarded here.
+ */
 function getBody(rawText) {
   return rawText
     .replace(/^---[\s\S]*?\n---\r?\n?/, '')
@@ -1234,7 +1241,8 @@ const DB = {
       a.download = 'alba-docs-' + new Date().toISOString().slice(0, 10) + '.json';
       a.click();
       URL.revokeObjectURL(a.href);
-    } catch (e) { showToast('Export failed', 'error'); }
+      return true;
+    } catch (e) { showToast('Export failed', 'error'); return false; }
   },
 };
 
@@ -1360,7 +1368,7 @@ function renderMyDocuments() {
       <p class="page-sub">${docs.length} saved document${docs.length !== 1 ? 's' : ''}</p>
     </div>
     <div class="my-docs-toolbar">
-      <button class="btn btn-outline btn-sm" onclick="DB.exportJson();showToast('Documents exported','success')">
+      <button class="btn btn-outline btn-sm" onclick="if(DB.exportJson())showToast('Documents exported','success')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
@@ -1697,8 +1705,11 @@ function renderField(def, templateId) {
   } else if (def.type === 'textarea') {
     input = `<textarea class="fill-textarea" id="${id}" placeholder="${escapeHtml(ph)}…" rows="3" ${input_}>${escapeHtml(def.default)}</textarea>`;
   } else {
-    const htmlType = { date:'date', number:'number', currency:'text', email:'email', phone:'tel' }[def.type] || 'text';
-    input = `<input class="fill-input" id="${id}" type="${htmlType}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(def.default)}" ${input_}>`;
+    const htmlType  = { date:'date', number:'number', currency:'text', email:'email', phone:'tel' }[def.type] || 'text';
+    const extraAttr = def.type === 'currency' ? ' inputmode="decimal"'
+                    : def.type === 'phone'    ? ' inputmode="tel"'
+                    : '';
+    input = `<input class="fill-input" id="${id}" type="${htmlType}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(def.default)}"${extraAttr} ${input_}>`;
   }
 
   const helper = def.placeholder
@@ -1738,8 +1749,9 @@ function onFieldChange(templateId) {
 function persistDraft(templateId) {
   Drafts.save(templateId, collectFields());
   const indicator = document.getElementById('saved-indicator');
-  if (indicator) {
-    indicator.textContent = 'Saved ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const span      = document.getElementById('saved-indicator-text');
+  if (indicator && span) {
+    span.textContent = 'Saved ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     indicator.classList.add('visible');
   }
 }
@@ -1769,6 +1781,51 @@ function saveDocAs(templateId, status) {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Fill-mode helpers (extracted for readability)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Build the grouped form HTML from field definitions.
+ * Inserts a section heading before each named group.
+ */
+function buildFormHtml(fieldDefs, templateId) {
+  const groupOrder = [];
+  const groups     = {};
+  fieldDefs.forEach(def => {
+    const g = def.group || '';
+    if (!groups[g]) { groups[g] = []; groupOrder.push(g); }
+    groups[g].push(def);
+  });
+  return groupOrder.map(g => {
+    const heading = g ? `<div class="fill-section-heading">${escapeHtml(g)}</div>` : '';
+    return heading + groups[g].map(def => renderField(def, templateId)).join('');
+  }).join('');
+}
+
+/**
+ * Build the letterhead note displayed inside the form panel.
+ * Shows the current state and a link to the letterhead settings.
+ */
+function buildLogoNote(lhSet) {
+  const note = lhSet ? 'Using your uploaded company letterhead.' : 'No letterhead uploaded.';
+  const link = lhSet ? 'Change →' : 'Set up →';
+  return `<div class="fill-field">
+    <div class="fill-label">Letterhead</div>
+    <p class="fill-logo-note">${note} <a href="#/settings/letterhead">${link}</a></p>
+  </div>`;
+}
+
+/**
+ * Build the amber warning banner shown when a template uses {{Logo}}
+ * but no letterhead has been uploaded yet.
+ */
+function buildLhWarning() {
+  return `<div style="background:#fff8dc;border:1px solid #e5c84a;border-radius:5px;padding:9px 11px;font-size:.78rem;color:#7a5800;margin-bottom:12px">
+    No letterhead configured. <a href="#/settings/letterhead" style="color:var(--amber-ui);font-weight:600">Upload one →</a>
+  </div>`;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Render: Fill mode
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function renderFillMode(id) {
@@ -1780,7 +1837,7 @@ async function renderFillMode(id) {
   const cat  = CATEGORIES[t.category] || { label: t.category };
   const main = document.getElementById('main');
 
-  // Show loading skeleton while fetching
+  // Show loading state while fetching the template markdown
   main.innerHTML = `<div class="loading-state">
     <div class="spinner"></div>
     <span style="font-size:.875rem;color:var(--text-muted)">Loading ${escapeHtml(t.name)}…</span>
@@ -1813,31 +1870,12 @@ async function renderFillMode(id) {
   const { meta } = parseFrontMatter(rawText);
   const dir     = meta?.form?.direction || 'ltr';
 
-  // Group fields
-  const groupOrder = [];
-  const groups     = {};
-  fieldDefs.forEach(def => {
-    const g = def.group || '';
-    if (!groups[g]) { groups[g] = []; groupOrder.push(g); }
-    groups[g].push(def);
-  });
+  // Use extracted helpers to build each section of the form panel
+  const formHtml  = buildFormHtml(fieldDefs, id);
+  const logoHtml  = hasLogo ? buildLogoNote(lhSet) : '';
+  const lhWarning = hasLogo && !lhSet ? buildLhWarning() : '';
 
-  const formHtml = groupOrder.map(g => {
-    const heading = g ? `<div class="fill-section-heading">${escapeHtml(g)}</div>` : '';
-    return heading + groups[g].map(def => renderField(def, id)).join('');
-  }).join('');
-
-  const logoHtml = hasLogo
-    ? `<div class="fill-field">
-        <div class="fill-label">Letterhead</div>
-        <p class="fill-logo-note">${lhSet ? 'Using your uploaded company letterhead.' : 'No letterhead uploaded.'} <a href="#/settings/letterhead">${lhSet ? 'Change →' : 'Set up →'}</a></p>
-       </div>` : '';
-
-  const lhWarning = hasLogo && !lhSet
-    ? `<div style="background:#fff8dc;border:1px solid #e5c84a;border-radius:5px;padding:9px 11px;font-size:.78rem;color:#7a5800;margin-bottom:12px">
-        No letterhead configured. <a href="#/settings/letterhead" style="color:var(--amber-ui);font-weight:600">Upload one →</a>
-       </div>` : '';
-
+  // Guard against a stale editing session from a different template
   const editingId = sessionStorage.getItem('editing_doc_id');
   const existingDoc = editingId ? DB.getById(editingId) : null;
   if (existingDoc && existingDoc.templateId !== id) sessionStorage.removeItem('editing_doc_id');
@@ -1891,7 +1929,7 @@ async function renderFillMode(id) {
           </div>
           <div class="fill-saved-indicator" id="saved-indicator">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            Autosaved
+            <span id="saved-indicator-text"></span>
           </div>
         </div>
         <div class="fill-form-body">
@@ -1908,7 +1946,7 @@ async function renderFillMode(id) {
           Live Preview
         </div>
         <div class="preview-page-wrap">
-          <div class="doc-preview" id="doc-preview" aria-label="Document preview"></div>
+          <div class="doc-preview" id="doc-preview" aria-label="Document preview" dir="${dir}"></div>
         </div>
       </div>
     </div>`;
@@ -1921,8 +1959,9 @@ async function renderFillMode(id) {
       if (el) el.value = val;
     });
     const indicator = document.getElementById('saved-indicator');
-    if (indicator && draft.savedAt) {
-      indicator.textContent = 'Saved ' + new Date(draft.savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const span      = document.getElementById('saved-indicator-text');
+    if (indicator && span && draft.savedAt) {
+      span.textContent = 'Saved ' + new Date(draft.savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       indicator.classList.add('visible');
     }
   }
@@ -1980,13 +2019,16 @@ async function printDocument(id) {
   }, true);
 
   const htmlContent = marked.parse(substituted);
+  const { meta: printMeta } = parseFrontMatter(rawText);
+  const printDir = printMeta?.form?.direction || 'ltr';
+
   const win = window.open('', '_blank');
   if (!win) {
     showToast('Allow pop-ups for this site to open the print window.', 'error');
     return;
   }
   win.onload = () => { win.focus(); win.print(); };
-  win.document.write(docShell(htmlContent, t.name));
+  win.document.write(docShell(htmlContent, t.name, printDir));
   win.document.close();
 }
 
@@ -2003,16 +2045,18 @@ document.addEventListener('keydown', e => {
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Print shell — generates the print-ready HTML page
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function docShell(bodyHtml, title) {
+function docShell(bodyHtml, title, dir) {
+  dir = dir || 'ltr';
+  const lang = dir === 'rtl' ? 'ar' : 'en';
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${lang}" dir="${dir}">
 <head>
 <meta charset="UTF-8">
 <title>${escapeHtml(title)}</title>
 <style>
 @page {
   size: A4 portrait;
-  margin: 22mm 20mm 25mm 22mm;
+  margin: 25mm 20mm 20mm 20mm;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
