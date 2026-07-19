@@ -1,6 +1,6 @@
 # Alba Docs — Roadmap
 
-## Status: All planned phases complete. ✅
+## Status: All planned phases complete. Pre-flight verified. ✅
 
 ---
 
@@ -74,6 +74,35 @@ End-to-end QA pass across all workflows:
 | `loadTemplate()` cache | ✅ | First call fetches; subsequent calls return cached value |
 
 No additional runtime bugs found. Estimated parity with Alba ERP: **~92–93%**.
+
+---
+
+### Pre-flight Verification (complete — commit `a1021a6`)
+
+Full pre-flight checks run before user testing:
+
+| Check | Result | Notes |
+|---|---|---|
+| API server startup | ✅ PASS | Starts cleanly, listens on port 8080 |
+| `/api/healthz` | ✅ PASS | `{"status":"ok"}` HTTP 200 |
+| TypeScript typecheck | ✅ PASS | Zero errors in api-server |
+| Database schema vs code | ✅ PASS | Schema intentionally empty; no routes use the DB |
+| Pending migrations | ✅ PASS | None; no tables defined |
+| Postgres connection | ✅ PASS | DB accessible; 0 tables (correct) |
+| JS syntax (SPA) | ✅ PASS | `node --check` on 1263-line inline script |
+| CDN assets (marked@15.0.4) | ✅ PASS | HTTP 200 |
+| CDN assets (Inter font CSS) | ✅ PASS | HTTP 200 |
+| All 56 templates — front-matter | ✅ PASS | 100% have YAML front-matter |
+| All 56 templates — non-empty body | ✅ PASS | 100% have document content |
+| Framework templates (0 placeholders) | ✅ FIXED | Now show "Read-only template" + guidance note instead of "0 fields" |
+| `render.yaml` | ✅ PASS | Correctly configured: static site with `/* → /index.html` SPA rewrite |
+| Server logs | ✅ PASS | Only expected GET / → 404; all health checks 200 |
+| api-server imports @workspace/db | ✅ PASS | Source does NOT import db — no crash risk |
+
+**Issue found and fixed:** 16 framework templates (ADR, Audit Report, Meeting Notes,
+Research, Specification, Sprint Report, Change Request, Decision Log) showed "0 fields"
+and an empty form panel. Fixed to show "Read-only template — use Print / Save PDF" with
+a clear guidance note in the form body. Clear button is hidden for these templates.
 
 ---
 
