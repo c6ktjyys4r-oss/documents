@@ -237,3 +237,36 @@ Remaining intentional differences (all by design):
 3. Version history — standalone-only localStorage feature
 4. Import / Export JSON — standalone-only backup/restore feature
 5. No server-side Archived workflow (archive action now implemented client-side)
+
+---
+
+## Phase 9 — Final parity polish (2026-07-19)
+
+Closed all remaining fixable gaps from COMPARISON_REPORT that had not been
+addressed in Phases 1–8.
+
+### Changes
+
+| # | Gap | Change |
+|---|---|---|
+| 1 | Document duplicate (COMPARISON_REPORT feature gap) | Duplicate button added to every My Documents item. Creates a copy with same fields, resets status to `draft`. `duplicateSavedDoc()` function. Matches Alba's duplicate document feature. |
+| 2 | Print page header/footer — page numbers (L-1) | Added `@page { @bottom-center { content: counter(page) " / " counter(pages) } }` to `docShell()`. Printed multi-page documents now show a page number in the bottom margin, matching Alba's printed output. |
+| 3 | Inline blur validation on required fields (H-4 in COMPARISON_REPORT) | Added `validateFieldOnBlur(key)` function. Required fields now show an inline error immediately when focus leaves an empty required field, not only at Publish time. Matches Alba's per-field validation UX. |
+| 4 | Badge colors as CSS tokens (M-2) | Replaced 12 hardcoded `background`/`color` values across `.badge-*` and `[data-theme="dark"] .badge-*` rules with `--badge-bg` / `--badge-fg` CSS custom properties. `.cat-badge` now reads `background: var(--badge-bg)` and `color: var(--badge-fg)`. Adding a new category requires one variable pair, not two separate rule blocks. |
+
+### Files Changed
+- `index.html` — all implementation (+69 / -17 lines net)
+- `ROADMAP_NEXT.md` — updated (this entry)
+
+### Estimated Parity After This Phase
+Overall: **~97–98%** (up from ~95% after Phase 8)
+
+### Remaining intentional differences (unchanged, all by design)
+1. ERP auto-fill → standalone requires manual entry throughout
+2. Live preview panel — standalone enhancement not in Alba
+3. Version history — standalone-only localStorage feature
+4. Import / Export JSON — standalone-only backup/restore feature
+5. Bulk actions, tagging — complex features, low value in standalone context
+
+### All meaningful fixable gaps are now closed.
+No further Alba parity work is required unless new gaps are identified.
