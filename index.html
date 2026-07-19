@@ -653,6 +653,43 @@ button, input, select, textarea { font-family: inherit; }
 .lh-setup-banner-sub { font-size: .78rem; color: #9a7000; }
 .lh-setup-banner-cta { flex-shrink: 0; }
 
+/* ── Page Preview Modal ──────────────────────────────────────────────────── */
+.page-preview-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 8000;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(3px);
+  align-items: center; justify-content: center;
+}
+.page-preview-backdrop.open { display: flex; }
+.page-preview-dialog {
+  position: relative;
+  width: min(900px, 96vw);
+  height: min(88vh, 1100px);
+  background: #3a3a4a;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 64px rgba(0,0,0,.55);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.page-preview-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: #2a2a3a; border-bottom: 1px solid rgba(255,255,255,.08);
+  flex-shrink: 0;
+}
+.page-preview-toolbar-title {
+  font-size: .82rem; font-weight: 600; color: #c8c8e0;
+  display: flex; align-items: center; gap: 7px;
+}
+.page-preview-close {
+  background: none; border: none; cursor: pointer;
+  color: #9090a8; padding: 4px 6px; border-radius: 4px;
+  font-size: 1rem; line-height: 1; transition: color .15s, background .15s;
+}
+.page-preview-close:hover { color: #fff; background: rgba(255,255,255,.12); }
+#page-preview-iframe {
+  flex: 1; width: 100%; border: none;
+  background: #4a4a5a;
+}
+
 /* ── Toast ───────────────────────────────────────────────────────────────── */
 #toast-root {
   position: fixed; bottom: 20px; right: 20px; z-index: 9999;
@@ -767,6 +804,22 @@ button, input, select, textarea { font-family: inherit; }
 
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 <div id="toast-root" role="region" aria-live="polite" aria-label="Notifications"></div>
+
+<!-- Page Preview Modal -->
+<div class="page-preview-backdrop" id="page-preview-backdrop" onclick="handlePagePreviewBackdropClick(event)" role="dialog" aria-modal="true" aria-label="Page Preview">
+  <div class="page-preview-dialog">
+    <div class="page-preview-toolbar">
+      <div class="page-preview-toolbar-title">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        </svg>
+        Page Preview — exact print layout
+      </div>
+      <button class="page-preview-close" onclick="closePagePreview()" aria-label="Close page preview" title="Close (Esc)">✕</button>
+    </div>
+    <iframe id="page-preview-iframe" title="Page Preview" sandbox="allow-same-origin"></iframe>
+  </div>
+</div>
 
 <div class="app-body">
   <nav class="sidebar" id="sidebar" aria-label="Main navigation">
@@ -2012,6 +2065,12 @@ async function renderFillMode(id) {
           </svg>
           Print / Save PDF
         </button>
+        <button class="btn btn-outline" onclick="openPagePreview('${escapeHtml(id)}')" title="Preview exact page layout before printing">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+          Page Preview
+        </button>
         <button class="btn btn-outline" onclick="saveDocAs('${escapeHtml(id)}','draft')">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
@@ -2153,12 +2212,74 @@ async function printDocument(id) {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Page Preview Modal — shows exact print layout in-browser (no print dialog)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _pagePreviewBlobUrl = null;
+
+async function openPagePreview(id) {
+  const t = TEMPLATES.find(x => x.id === id);
+  if (!t) return;
+  let rawText;
+  try {
+    rawText = await loadTemplate(id);
+  } catch (e) {
+    showToast('Could not load template for preview.', 'error');
+    return;
+  }
+
+  const body  = getBody(rawText);
+  const keys  = extractPlaceholders(rawText);
+  const substituted = substituteFields(body, keys, k => {
+    const el = document.getElementById('ff-' + k);
+    return el ? el.value.trim() : '';
+  }, true);
+  const htmlContent = marked.parse(substituted);
+  const { meta } = parseFrontMatter(rawText);
+  const dir = meta?.form?.direction || 'ltr';
+
+  // Build a self-contained preview page — same as print but without window.print()
+  // Override @page margins to screen-friendly values so pages visually stack
+  const shellHtml = docShell(htmlContent, t.name, dir).replace(
+    '@page {\n  size: A4 portrait;\n  margin: 25mm 20mm 20mm 20mm;\n}',
+    '@page {\n  size: A4 portrait;\n  margin: 18mm 16mm 18mm 16mm;\n}'
+  );
+
+  // Revoke previous blob to avoid memory leaks
+  if (_pagePreviewBlobUrl) URL.revokeObjectURL(_pagePreviewBlobUrl);
+  const blob = new Blob([shellHtml], { type: 'text/html' });
+  _pagePreviewBlobUrl = URL.createObjectURL(blob);
+
+  const iframe = document.getElementById('page-preview-iframe');
+  iframe.src = _pagePreviewBlobUrl;
+
+  const backdrop = document.getElementById('page-preview-backdrop');
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePagePreview() {
+  document.getElementById('page-preview-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+  const iframe = document.getElementById('page-preview-iframe');
+  iframe.src = 'about:blank';
+  if (_pagePreviewBlobUrl) { URL.revokeObjectURL(_pagePreviewBlobUrl); _pagePreviewBlobUrl = null; }
+}
+
+function handlePagePreviewBackdropClick(e) {
+  if (e.target === document.getElementById('page-preview-backdrop')) closePagePreview();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Keyboard shortcut: Ctrl/Cmd+P → document print (not browser page print)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 document.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'p' && _currentTemplateId) {
     e.preventDefault();
     printDocument(_currentTemplateId);
+  }
+  if (e.key === 'Escape') {
+    const backdrop = document.getElementById('page-preview-backdrop');
+    if (backdrop && backdrop.classList.contains('open')) closePagePreview();
   }
 });
 
