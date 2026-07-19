@@ -802,6 +802,29 @@ button, input, select, textarea { font-family: inherit; }
 .my-docs-empty-title { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
 .my-docs-empty-sub { font-size: .875rem; color: var(--text-soft); margin-bottom: 24px; max-width: 340px; margin-left: auto; margin-right: auto; line-height: 1.5; }
 
+/* ── My Documents header row ─────────────────────────────────────────────── */
+.my-docs-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.my-docs-header-row .btn { flex-shrink: 0; align-self: center; }
+
+/* ── My Documents filter tabs ────────────────────────────────────────────── */
+.doc-filter-tabs { display: flex; gap: 4px; margin-bottom: 18px; flex-wrap: wrap; }
+.doc-filter-tab {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--bg2);
+  color: var(--text-soft); font-size: .8rem; font-weight: 500;
+  cursor: pointer; font-family: inherit;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.doc-filter-tab:hover { background: var(--border-light); color: var(--text); }
+.doc-filter-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+[data-theme="dark"] .doc-filter-tab.active { background: var(--amber-ui); border-color: var(--amber-ui); color: #fff; }
+.doc-filter-tab-count {
+  font-size: .68rem; font-weight: 700; padding: 1px 6px;
+  border-radius: 9px; background: rgba(255,255,255,.22); min-width: 18px; text-align: center;
+}
+.doc-filter-tab:not(.active) .doc-filter-tab-count { background: var(--border-light); color: var(--text-muted); }
+
 /* ── Print media ─────────────────────────────────────────────────────────── */
 @media print {
   .site-header, .sidebar, .doc-actions, .overlay,
@@ -888,7 +911,7 @@ button, input, select, textarea { font-family: inherit; }
   <nav class="sidebar" id="sidebar" aria-label="Main navigation">
     <div class="sidebar-section">
       <div class="sidebar-heading">Documents</div>
-      <a class="sidebar-link" href="#/my-documents" onclick="closeSidebar()">
+      <a class="sidebar-link" href="#/" onclick="closeSidebar()">
         <span class="cat-icon" aria-hidden="true">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
@@ -896,10 +919,10 @@ button, input, select, textarea { font-family: inherit; }
         </span>
         My Documents
       </a>
-      <a class="sidebar-link" href="#/" onclick="closeSidebar()">
+      <a class="sidebar-link" href="#/home" onclick="closeSidebar()">
         <span class="cat-icon" aria-hidden="true">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 5v14M5 12l7 7 7-7"/>
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
         </span>
         New Document
@@ -1227,8 +1250,9 @@ function route() {
     active ? el.setAttribute('aria-current', 'page') : el.removeAttribute('aria-current');
   });
 
-  if (!parts.length)                                 return renderHome();
-  if (parts[0] === 'my-documents')                   return renderMyDocuments();
+  if (!parts.length)                                 return renderMyDocuments();
+  if (parts[0] === 'home')                           return renderHome();
+  if (parts[0] === 'my-documents')                   { location.replace('#/'); return; }
   if (parts[0] === 'all')                            return renderList(TEMPLATES, 'Template Library', '');
   if (parts[0] === 'category' && parts[1])           return renderCategory(parts[1]);
   if (parts[0] === 'template')                       { location.replace('#/fill/' + parts.slice(1).join('/')); return; }
@@ -1241,10 +1265,15 @@ function route() {
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Search
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _searchTimer = null;
 function handleSearch(q) {
+  clearTimeout(_searchTimer);
   q = q.trim();
   if (!q) { location.hash = '#/'; return; }
-  location.hash = '#/search/' + encodeURIComponent(q);
+  _searchTimer = setTimeout(() => {
+    const newHash = '#/search/' + encodeURIComponent(q);
+    if (location.hash !== newHash) location.hash = newHash;
+  }, 250);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1471,7 +1500,7 @@ const Drafts = {
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function renderHome() {
   scrollTop();
-  document.title = 'Alba Docs';
+  document.title = 'New Document — Alba Docs';
   const hasLH = !!localStorage.getItem('letterhead');
 
   const banner = hasLH ? '' : `
@@ -1515,14 +1544,24 @@ function renderHome() {
 function renderMyDocuments() {
   scrollTop();
   document.title = 'My Documents — Alba Docs';
-  const docs = DB.getAll();
+  // Sort newest-modified first (matches Alba behaviour)
+  const docs = DB.getAll().sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
   const main = document.getElementById('main');
+
+  const newDocBtn = `<a href="#/home" class="btn btn-primary" onclick="closeSidebar()">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
+    New Document
+  </a>`;
 
   if (!docs.length) {
     main.innerHTML = `
       <div class="page-header">
-        <h1 class="page-title">My Documents</h1>
-        <p class="page-sub">Documents you save will appear here.</p>
+        <div class="my-docs-header-row">
+          <div><h1 class="page-title">My Documents</h1><p class="page-sub">Documents you save will appear here.</p></div>
+          ${newDocBtn}
+        </div>
       </div>
       <div class="my-docs-empty">
         <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1531,10 +1570,17 @@ function renderMyDocuments() {
         </svg>
         <div class="my-docs-empty-title">No documents yet</div>
         <div class="my-docs-empty-sub">Open any template, fill in the form, then click "Save Draft" or "Publish" to keep a copy here.</div>
-        <a href="#/" class="btn btn-primary">Browse Templates</a>
+        <a href="#/home" class="btn btn-primary">Browse Templates</a>
       </div>`;
     return;
   }
+
+  const counts = {
+    all:       docs.length,
+    published: docs.filter(d => d.status === 'published').length,
+    draft:     docs.filter(d => d.status !== 'published' && d.status !== 'archived').length,
+    archived:  docs.filter(d => d.status === 'archived').length,
+  };
 
   const items = docs.map(doc => {
     const statusClass = doc.status === 'published' ? 'status-published'
@@ -1543,7 +1589,10 @@ function renderMyDocuments() {
     const statusLabel = doc.status === 'published' ? 'Published'
                       : doc.status === 'archived'  ? 'Archived'
                       : 'Draft';
-    return `<div class="my-doc-item">
+    const normStatus  = doc.status === 'published' ? 'published'
+                      : doc.status === 'archived'  ? 'archived'
+                      : 'draft';
+    return `<div class="my-doc-item" data-status="${normStatus}">
       <div style="color:var(--text-muted);flex-shrink:0">${catIconSvg(doc.category, 20)}</div>
       <div class="my-doc-item-info">
         <div class="my-doc-item-name">${escapeHtml(doc.templateName)}</div>
@@ -1573,10 +1622,22 @@ function renderMyDocuments() {
 
   main.innerHTML = `
     <div class="page-header">
-      <h1 class="page-title">My Documents</h1>
-      <p class="page-sub">${docs.length} saved document${docs.length !== 1 ? 's' : ''}</p>
+      <div class="my-docs-header-row">
+        <div>
+          <h1 class="page-title">My Documents</h1>
+          <p class="page-sub">${docs.length} saved document${docs.length !== 1 ? 's' : ''}</p>
+        </div>
+        ${newDocBtn}
+      </div>
     </div>
-    <div class="my-docs-toolbar">
+    <div class="doc-filter-tabs" id="doc-filter-tabs">
+      <button class="doc-filter-tab active" onclick="filterMyDocs('all')" data-filter="all">All <span class="doc-filter-tab-count">${counts.all}</span></button>
+      <button class="doc-filter-tab" onclick="filterMyDocs('published')" data-filter="published">Published <span class="doc-filter-tab-count">${counts.published}</span></button>
+      <button class="doc-filter-tab" onclick="filterMyDocs('draft')" data-filter="draft">Draft <span class="doc-filter-tab-count">${counts.draft}</span></button>
+      <button class="doc-filter-tab" onclick="filterMyDocs('archived')" data-filter="archived">Archived <span class="doc-filter-tab-count">${counts.archived}</span></button>
+    </div>
+    <div class="my-docs-list" id="my-docs-list">${items}</div>
+    <div class="my-docs-toolbar" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
       <button class="btn btn-outline btn-sm" onclick="if(DB.exportJson())showToast('Documents exported','success')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -1592,8 +1653,7 @@ function renderMyDocuments() {
         Import JSON
         <input type="file" accept=".json,application/json" style="display:none" onchange="importJsonFile(this)">
       </label>
-    </div>
-    <div class="my-docs-list">${items}</div>`;
+    </div>`;
 }
 
 /**
@@ -1632,13 +1692,18 @@ function openDocHistory(docId) {
     }).join('');
   }
 
-  document.getElementById('history-backdrop').classList.add('open');
+  const backdrop = document.getElementById('history-backdrop');
+  backdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
+  // Auto-focus close button and trap keyboard focus inside dialog
+  const dialog = document.querySelector('.history-dialog');
+  requestAnimationFrame(() => trapFocus(dialog, dialog.querySelector('.history-close')));
 }
 
 function closeDocHistory() {
   document.getElementById('history-backdrop').classList.remove('open');
   document.body.style.overflow = '';
+  releaseFocusTrap();
   _historyDocId = null;
 }
 
@@ -1733,7 +1798,7 @@ function renderList(list, title, catKey, showBreadcrumb) {
     ${breadcrumb}
     <div class="list-header">
       <div class="section-title">${iconHtml}${escapeHtml(title)}</div>
-      <div class="section-sub">${list.length} template${list.length !== 1 ? 's' : ''} — click any to fill and print</div>
+      <div class="section-sub">${list.length} template${list.length !== 1 ? 's' : ''}</div>
     </div>
     <div class="template-list">${items}</div>`;
 }
@@ -1746,7 +1811,7 @@ function documentItem(t) {
       <div class="template-item-name">${escapeHtml(t.name)}</div>
       <div class="template-item-meta">${badge(t.category)}</div>
     </div>
-    <div class="template-item-cta">Fill &amp; Print →</div>
+    <div class="template-item-cta">Use</div>
   </div>`;
 }
 
@@ -2445,11 +2510,15 @@ async function openPagePreview(id) {
   const backdrop = document.getElementById('page-preview-backdrop');
   backdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
+  // Auto-focus close button and trap keyboard focus inside dialog
+  const dialog = document.querySelector('.page-preview-dialog');
+  requestAnimationFrame(() => trapFocus(dialog, dialog.querySelector('.page-preview-close')));
 }
 
 function closePagePreview() {
   document.getElementById('page-preview-backdrop').classList.remove('open');
   document.body.style.overflow = '';
+  releaseFocusTrap();
   const iframe = document.getElementById('page-preview-iframe');
   iframe.src = 'about:blank';
   if (_pagePreviewBlobUrl) { URL.revokeObjectURL(_pagePreviewBlobUrl); _pagePreviewBlobUrl = null; }
@@ -2457,6 +2526,47 @@ function closePagePreview() {
 
 function handlePagePreviewBackdropClick(e) {
   if (e.target === document.getElementById('page-preview-backdrop')) closePagePreview();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Focus trap — keeps keyboard focus inside open modals
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _focusTrapCleanup = null;
+const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
+function trapFocus(containerEl, initialFocusEl) {
+  if (_focusTrapCleanup) _focusTrapCleanup();
+  const focusable = Array.from(containerEl.querySelectorAll(FOCUSABLE));
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last  = focusable[focusable.length - 1];
+  function handler(e) {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
+  }
+  containerEl.addEventListener('keydown', handler);
+  (initialFocusEl || first).focus();
+  _focusTrapCleanup = () => containerEl.removeEventListener('keydown', handler);
+}
+
+function releaseFocusTrap() {
+  if (_focusTrapCleanup) { _focusTrapCleanup(); _focusTrapCleanup = null; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   My Documents — client-side status filter
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function filterMyDocs(status) {
+  document.querySelectorAll('#doc-filter-tabs .doc-filter-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === status);
+  });
+  document.querySelectorAll('#my-docs-list .my-doc-item').forEach(item => {
+    item.style.display = (status === 'all' || item.dataset.status === status) ? '' : 'none';
+  });
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2468,8 +2578,12 @@ document.addEventListener('keydown', e => {
     printDocument(_currentTemplateId);
   }
   if (e.key === 'Escape') {
-    const backdrop = document.getElementById('page-preview-backdrop');
-    if (backdrop && backdrop.classList.contains('open')) closePagePreview();
+    const ppBackdrop = document.getElementById('page-preview-backdrop');
+    if (ppBackdrop && ppBackdrop.classList.contains('open')) { closePagePreview(); return; }
+    const histBackdrop = document.getElementById('history-backdrop');
+    if (histBackdrop && histBackdrop.classList.contains('open')) { closeDocHistory(); return; }
+    // Mobile sidebar
+    if (window.innerWidth <= 768 && document.getElementById('sidebar').classList.contains('open')) closeSidebar();
   }
 });
 

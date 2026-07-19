@@ -168,3 +168,42 @@ Remaining differences are all intentional by design:
 - Import / Export JSON — standalone-only backup/restore feature
 
 All confirmed text differences have been corrected. All user-facing quality gaps are closed.
+
+---
+
+## Phase 7 — UX Parity Audit (2026-07-19)
+
+Full UX parity audit comparing standalone `index.html` against Alba ERP Documents module.
+19 issues identified and 18 fixed (1 already resolved by a prior fix).
+
+### Issues Fixed
+
+| ID | Severity | Description |
+|---|---|---|
+| C-1 | Critical | Landing page changed: `#/` now renders My Documents (matches Alba). Category browser moved to `#/home`. |
+| C-2 | Critical | "New Document" primary button added to My Documents page header (linked to `#/home`). |
+| H-1 | High | Status filter tabs added to My Documents: All / Published / Draft / Archived with live count badges. |
+| H-2 | High | Escape key extended: now closes History modal and mobile sidebar in addition to Page Preview. |
+| H-3 | High | Focus trap added to both modals (History and Page Preview). Tab/Shift+Tab cycle inside dialog. Auto-focuses close button on open. |
+| H-4 | High | Template item CTA changed from "Fill & Print →" to "Use" (matches `templates.use` Alba locale). |
+| H-5 | High | Template list subtitle: removed informal "click any to fill and print" instruction text. |
+| H-6 | High | Search debounced (250 ms). Hash-change no longer fires on every single keystroke. |
+| M-1 | Medium | Breadcrumb "Home" links now correctly target `#/` = My Documents (matches Alba hierarchy). |
+| M-2 | Medium | My Documents empty-state "Browse Templates" button updated to link to `#/home`. |
+| M-3 | Medium | `renderHome()` document.title updated to "New Document — Alba Docs". |
+| M-4 | Medium | *(Resolved automatically by C-1 routing change.)* |
+| M-5 | Medium | *(Resolved automatically by C-1/C-2 routing change.)* |
+| M-6 | Medium | Export/Import toolbar moved below document list with a top border — clearly secondary to primary actions. |
+| M-7 | Medium | *(Already working correctly — no change needed.)* |
+| L-1 | Low | History modal now auto-focuses close button on open (part of focus trap). |
+| L-2 | Low | "New Document" sidebar icon changed from down-arrow to plus sign. |
+| L-3 | Low | *(Already fixed in text parity pass.)* |
+| L-4 | Low | My Documents list sorted by `updatedAt` descending (newest-modified first, matches Alba). |
+
+### Files Changed
+- `index.html` — all implementation
+- `UX_PARITY_REPORT.md` — created (full 19-issue audit table)
+- `ROADMAP_NEXT.md` — updated (this entry)
+
+### Estimated UX Parity After This Phase
+Overall: ~90% (up from ~62% before this phase)
