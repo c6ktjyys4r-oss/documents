@@ -1,10 +1,204 @@
 ---
-template: Salary Certificate
-category: HR
-reference: Alba A1
-version: 1.1
----
+document:
+  name: Salary Certificate
+  category: hr
+  version: 1.1
+  reference: Alba A1
 
+form:
+  direction: ltr
+  layout: grouped
+
+fields:
+  SerialNumber:
+    label: Reference / Serial Number
+    type: text
+    required: true
+    group: Document
+    order: 1
+
+  IssueDate:
+    label: Issue Date
+    type: date
+    required: true
+    group: Document
+    order: 2
+
+  CompanyName:
+    label: Company Name (English)
+    type: text
+    required: true
+    group: Document
+    order: 3
+
+  CompanyNameAr:
+    label: Company Name (Arabic)
+    type: text
+    required: true
+    group: Document
+    order: 4
+
+  Purpose:
+    label: Purpose (English)
+    type: select
+    required: true
+    group: Purpose
+    order: 10
+    options:
+      - General
+      - To the Bank
+      - To the Embassy
+      - Rental Purposes
+      - Other
+
+  PurposeAr:
+    label: Purpose (Arabic)
+    type: text
+    required: true
+    group: Purpose
+    order: 11
+    placeholder: e.g. عام / إلى البنك / للسفارة
+
+  CustomPurpose:
+    label: Custom Purpose
+    type: text
+    group: Purpose
+    order: 12
+    placeholder: Fill only when Purpose is "Other"
+
+  EmployeeNameEn:
+    label: Employee Name (English)
+    type: text
+    required: true
+    group: Employee Information
+    order: 20
+
+  EmployeeNameAr:
+    label: Employee Name (Arabic)
+    type: text
+    required: true
+    group: Employee Information
+    order: 21
+
+  JobTitleEn:
+    label: Job Title (English)
+    type: text
+    required: true
+    group: Employee Information
+    order: 22
+
+  JobTitleAr:
+    label: Job Title (Arabic)
+    type: text
+    group: Employee Information
+    order: 23
+
+  Nationality:
+    label: Nationality
+    type: select
+    required: true
+    group: Employee Information
+    order: 24
+    options:
+      - Saudi
+      - Non-Saudi
+
+  NationalID:
+    label: National ID / Iqama Number
+    type: text
+    required: true
+    group: Employee Information
+    order: 25
+
+  DateOfJoining:
+    label: Date of Joining
+    type: date
+    required: true
+    group: Employee Information
+    order: 26
+
+  BasicSalary:
+    label: Basic Salary (SAR)
+    type: currency
+    required: true
+    group: Monthly Salary
+    order: 30
+    placeholder: e.g. 10000.00
+
+  HousingAllowance:
+    label: Housing Allowance (SAR)
+    type: currency
+    group: Monthly Salary
+    order: 31
+    placeholder: e.g. 2000.00
+
+  TransportationAllowance:
+    label: Transportation Allowance (SAR)
+    type: currency
+    group: Monthly Salary
+    order: 32
+    placeholder: e.g. 500.00
+
+  OtherAllowances:
+    label: Other Allowances (SAR)
+    type: currency
+    group: Monthly Salary
+    order: 33
+    placeholder: e.g. 0.00
+
+  TotalSalary:
+    label: Total Monthly Salary (SAR)
+    type: currency
+    required: true
+    group: Monthly Salary
+    order: 34
+    placeholder: Sum of all components above
+
+  IBAN:
+    label: IBAN
+    type: text
+    group: Banking
+    order: 40
+    placeholder: e.g. SA00 0000 0000 0000 0000 0000
+
+  BankName:
+    label: Bank Name
+    type: text
+    group: Banking
+    order: 41
+
+  AuthorisedBy:
+    label: Authorised Signatory Name
+    type: text
+    required: true
+    group: Signatory
+    order: 50
+
+  AuthorisedTitle:
+    label: Title (English)
+    type: text
+    group: Signatory
+    order: 51
+
+  AuthorisedTitleAr:
+    label: Title (Arabic)
+    type: text
+    group: Signatory
+    order: 52
+
+  AdditionalNote:
+    label: Additional Note
+    type: textarea
+    group: Notes
+    order: 60
+    placeholder: Optional note printed in italics at the bottom
+
+computed:
+  TotalSalary:
+    label: Total Salary (computed)
+    expression: BasicSalary + HousingAllowance + TransportationAllowance + OtherAllowances
+
+---
 <style>
 @page { size: A4; margin: 25mm 20mm 20mm 20mm; }
 body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; color: #1a1a1a; max-width: 170mm; margin: 0 auto; line-height: 1.55; }
