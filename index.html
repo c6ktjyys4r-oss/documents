@@ -6,315 +6,750 @@
 <title>Alba Docs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.4/marked.min.js"></script>
 <style>
+/* ── Design tokens ───────────────────────────────────────────────────────── */
 :root {
-  --navy: #1a1a2e;
-  --navy-light: #252545;
-  --amber: #d4a000;
-  --amber-light: #f5c842;
-  --bg: #f0f2f5;
-  --bg2: #ffffff;
-  --border: #d0d4dc;
-  --border-light: #e8eaf2;
-  --text: #1a1a1a;
-  --text-soft: #555;
-  --text-muted: #888;
-  --header-bg: #e8eaf2;
-  --shadow: 0 1px 4px rgba(0,0,0,.08);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.12);
-  --shadow-page: 0 2px 20px rgba(0,0,0,.15);
-  --radius: 8px;
-  --sidebar-w: 240px;
-  --transition: .18s ease;
+  --navy:          #1a1a2e;
+  --navy-light:    #252545;
+  --navy-hover:    #1e1e38;
+  --amber:         #c89600;
+  --amber-ui:      #d4a000;
+  --amber-light:   #f5c842;
+  --amber-ring:    rgba(212,160,0,.35);
+  --bg:            #f0f2f5;
+  --bg2:           #ffffff;
+  --bg3:           #f8f9fb;
+  --border:        #d0d4dc;
+  --border-light:  #e8eaf0;
+  --text:          #111827;
+  --text-soft:     #4b5563;
+  --text-muted:    #9ca3af;
+  --header-bg:     #eef0f6;
+  --shadow-sm:     0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
+  --shadow:        0 2px 8px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:     0 4px 20px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.06);
+  --shadow-page:   0 4px 32px rgba(0,0,0,.13),0 1px 6px rgba(0,0,0,.07);
+  --radius-sm:     5px;
+  --radius:        8px;
+  --radius-lg:     12px;
+  --sidebar-w:     248px;
+  --header-h:      56px;
+  --transition:    .15s ease;
+  --transition-md: .22s ease;
 }
 [data-theme="dark"] {
-  --bg: #111118;
-  --bg2: #1c1c28;
-  --border: #2e2e42;
-  --border-light: #252538;
-  --text: #e8e8f0;
-  --text-soft: #aaa;
-  --text-muted: #666;
-  --header-bg: #252538;
-  --shadow: 0 1px 4px rgba(0,0,0,.4);
-  --shadow-md: 0 4px 20px rgba(0,0,0,.5);
-  --shadow-page: 0 2px 24px rgba(0,0,0,.5);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background var(--transition),color var(--transition)}
-
-/* ── Header ── */
-.site-header{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:16px;padding:0 20px;height:56px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-.logo{font-size:1.05rem;font-weight:700;letter-spacing:.04em;color:#fff;text-decoration:none;white-space:nowrap}
-.logo span{color:var(--amber)}
-.search-wrap{flex:1;max-width:480px;position:relative}
-.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#aaa;pointer-events:none}
-#search{width:100%;padding:8px 12px 8px 34px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.1);color:#fff;font-size:.875rem;outline:none;transition:background var(--transition)}
-#search::placeholder{color:rgba(255,255,255,.5)}
-#search:focus{background:rgba(255,255,255,.18);border-color:var(--amber)}
-.header-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
-.btn-icon{background:none;border:none;cursor:pointer;color:#ccc;padding:6px;border-radius:6px;display:flex;align-items:center;transition:color var(--transition),background var(--transition)}
-.btn-icon:hover{color:#fff;background:rgba(255,255,255,.1)}
-
-/* ── Layout ── */
-.app-body{display:flex;min-height:calc(100vh - 56px)}
-.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:16px 0;overflow-y:auto;position:sticky;top:56px;height:calc(100vh - 56px);transition:width var(--transition)}
-.main{flex:1;padding:28px 32px;max-width:960px}
-@media(max-width:768px){
-  .sidebar{position:fixed;left:-100%;top:56px;height:calc(100vh - 56px);z-index:90;transition:left .25s ease;box-shadow:var(--shadow-md)}
-  .sidebar.open{left:0}
-  .main{padding:20px 16px}
-  .site-header{padding:0 12px}
+  --bg:           #0f0f18;
+  --bg2:          #1a1a28;
+  --bg3:          #161622;
+  --border:       #2c2c42;
+  --border-light: #222236;
+  --text:         #e8e8f4;
+  --text-soft:    #9ea3b4;
+  --text-muted:   #5a5f74;
+  --header-bg:    #222236;
+  --shadow-sm:    0 1px 3px rgba(0,0,0,.5);
+  --shadow:       0 2px 8px rgba(0,0,0,.4);
+  --shadow-md:    0 4px 20px rgba(0,0,0,.55);
+  --shadow-page:  0 4px 32px rgba(0,0,0,.55);
 }
 
-/* ── Sidebar ── */
-.sidebar-section{padding:4px 0}
-.sidebar-heading{padding:6px 16px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)}
-.sidebar-link{display:flex;align-items:center;gap:10px;padding:9px 16px;font-size:.875rem;color:var(--text-soft);text-decoration:none;cursor:pointer;border-left:3px solid transparent;transition:all var(--transition)}
-.sidebar-link:hover{background:var(--border-light);color:var(--text);border-left-color:var(--border)}
-.sidebar-link.active{background:var(--header-bg);color:var(--navy);font-weight:600;border-left-color:var(--amber)}
-[data-theme="dark"] .sidebar-link.active{color:var(--amber-light)}
-.sidebar-link .cat-icon{width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--text-muted)}
-.sidebar-link:hover .cat-icon,.sidebar-link.active .cat-icon{color:inherit}
-.sidebar-link .cat-count{margin-left:auto;font-size:.75rem;color:var(--text-muted);background:var(--border-light);padding:1px 7px;border-radius:10px}
-.sidebar-divider{height:1px;background:var(--border);margin:8px 16px}
-
-/* ── Sidebar collapse ── */
-.sidebar-collapse-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px 16px;background:none;border:none;border-top:1px solid var(--border);cursor:pointer;color:var(--text-muted);font-size:.78rem;font-family:inherit;transition:color var(--transition),background var(--transition);margin-top:4px}
-.sidebar-collapse-btn:hover{color:var(--text);background:var(--border-light)}
-.sidebar-collapse-btn svg{flex-shrink:0;transition:transform .25s ease}
-@media(max-width:768px){.sidebar-collapse-btn{display:none}}
-
-/* ── Home / Cards ── */
-.page-title{font-size:1.6rem;font-weight:700;color:var(--navy);margin-bottom:6px}
-[data-theme="dark"] .page-title{color:var(--amber-light)}
-.page-sub{color:var(--text-soft);font-size:.9rem;margin-bottom:28px}
-.category-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.cat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:22px 20px;cursor:pointer;text-decoration:none;display:block;transition:all var(--transition)}
-.cat-card:hover{border-color:var(--amber);box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.cat-card-icon{width:36px;height:36px;margin-bottom:12px;color:var(--navy)}
-[data-theme="dark"] .cat-card-icon{color:var(--amber-light)}
-.cat-card-name{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:4px}
-.cat-card-count{font-size:.8rem;color:var(--text-muted)}
-
-/* ── Document list ── */
-.section-title{font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:8px}
-[data-theme="dark"] .section-title{color:var(--amber-light)}
-.section-sub{color:var(--text-muted);font-size:.82rem;margin-bottom:18px}
-.template-list{display:flex;flex-direction:column;gap:8px}
-.template-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all var(--transition)}
-.template-item:hover{border-color:var(--amber);box-shadow:var(--shadow);transform:translateX(2px)}
-.template-item-icon{width:24px;height:24px;flex-shrink:0;color:var(--text-muted)}
-.template-item-info{flex:1;min-width:0}
-.template-item-name{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:3px}
-.template-item-meta{font-size:.78rem;color:var(--text-muted)}
-.template-item-cta{font-size:.78rem;font-weight:600;color:var(--amber);flex-shrink:0;white-space:nowrap}
-.cat-badge{display:inline-block;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
-
-/* ── Search results ── */
-.search-results-header{margin-bottom:16px}
-.no-results{text-align:center;padding:48px 20px;color:var(--text-muted)}
-.no-results svg{margin-bottom:12px;opacity:.4}
-
-/* ── Badge colors ── */
-.badge-hr{background:#dbeafe;color:#1e40af}
-.badge-finance{background:#dcfce7;color:#166534}
-.badge-operations{background:#fef9c3;color:#854d0e}
-.badge-administration{background:#f3e8ff;color:#6b21a8}
-.badge-general{background:#e0f2fe;color:#0369a1}
-.badge-framework{background:#f1f5f9;color:#475569}
-[data-theme="dark"] .badge-hr{background:#1e3a6e;color:#93c5fd}
-[data-theme="dark"] .badge-finance{background:#14532d;color:#86efac}
-[data-theme="dark"] .badge-operations{background:#431407;color:#fde68a}
-[data-theme="dark"] .badge-administration{background:#2e1065;color:#d8b4fe}
-[data-theme="dark"] .badge-general{background:#082f49;color:#7dd3fc}
-[data-theme="dark"] .badge-framework{background:#1e293b;color:#94a3b8}
-
-/* ── Mobile menu toggle ── */
-.menu-toggle{display:none;background:none;border:none;cursor:pointer;color:#fff;padding:6px}
-@media(max-width:768px){.menu-toggle{display:flex;align-items:center}}
-.overlay{display:none;position:fixed;inset:0;top:56px;background:rgba(0,0,0,.4);z-index:80}
-.overlay.open{display:block}
-
-/* ── Buttons ── */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:6px;font-size:.875rem;font-weight:600;cursor:pointer;border:none;transition:all var(--transition);text-decoration:none;font-family:inherit}
-.btn-primary{background:var(--navy);color:#fff}
-.btn-primary:hover{background:var(--navy-light)}
-.btn-outline{background:var(--bg2);color:var(--text);border:1px solid var(--border)}
-.btn-outline:hover{border-color:var(--amber);color:var(--amber)}
-.btn-print{background:var(--navy);color:#fff;padding:10px 22px;font-size:.9rem}
-.btn-print:hover{background:var(--navy-light);box-shadow:0 2px 8px rgba(26,26,46,.3)}
-.btn-print svg{flex-shrink:0}
-
-/* ── Document fill screen ── */
-.doc-screen-header{margin-bottom:20px}
-.breadcrumb{font-size:.8rem;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
-.breadcrumb a{color:var(--text-muted);text-decoration:none}
-.breadcrumb a:hover{color:var(--amber)}
-.doc-title{font-size:1.35rem;font-weight:700;color:var(--navy);margin-bottom:14px}
-[data-theme="dark"] .doc-title{color:var(--amber-light)}
-.doc-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-
-/* ── Fill layout ── */
-.fill-layout{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
-@media(max-width:960px){.fill-layout{grid-template-columns:1fr}}
-
-/* ── Fill form panel ── */
-.fill-form{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:0;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow-y:auto;box-shadow:var(--shadow)}
-.fill-form-header{padding:16px 20px 12px;border-bottom:1px solid var(--border);background:var(--header-bg);border-radius:var(--radius) var(--radius) 0 0}
-.fill-form-header-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--navy)}
-[data-theme="dark"] .fill-form-header-title{color:var(--amber-light)}
-.fill-form-header-sub{font-size:.75rem;color:var(--text-muted);margin-top:2px}
-.fill-form-body{padding:16px 20px 20px}
-.fill-field{margin-bottom:14px}
-.fill-label{display:block;font-size:.8rem;font-weight:600;color:var(--text-soft);margin-bottom:4px}
-.fill-input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);font-size:.85rem;outline:none;transition:border-color var(--transition);font-family:inherit}
-.fill-input:focus{border-color:var(--amber);box-shadow:0 0 0 2px rgba(212,160,0,.12)}
-.fill-textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);font-size:.85rem;outline:none;resize:vertical;min-height:72px;font-family:inherit;transition:border-color var(--transition)}
-.fill-textarea:focus{border-color:var(--amber);box-shadow:0 0 0 2px rgba(212,160,0,.12)}
-.fill-section-heading{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin:18px 0 10px;padding-top:14px;border-top:1px solid var(--border)}
-.fill-logo-note{font-size:.8rem;color:var(--text-muted);line-height:1.4;padding:8px 10px;background:var(--border-light);border-radius:5px;border:1px solid var(--border)}
-.fill-logo-note a{color:var(--amber);text-decoration:none}
-.fill-select{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);font-size:.85rem;outline:none;transition:border-color var(--transition);cursor:pointer;appearance:none;font-family:inherit}
-.fill-select:focus{border-color:var(--amber);box-shadow:0 0 0 2px rgba(212,160,0,.12)}
-.fill-required-star{color:var(--amber);font-weight:700;margin-left:1px;font-size:.9em}
-.fill-helper{font-size:.74rem;color:var(--text-muted);margin-top:3px;line-height:1.4}
-
-/* ── Autosave indicator ── */
-.fill-saved-indicator{font-size:.72rem;color:#16a34a;display:flex;align-items:center;gap:4px;margin-top:4px;opacity:0;transition:opacity .3s}
-.fill-saved-indicator.visible{opacity:1}
-[data-theme="dark"] .fill-saved-indicator{color:#4ade80}
-.fill-form-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.btn-clear-draft{font-size:.72rem;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:2px 4px;border-radius:3px;font-family:inherit;transition:color var(--transition)}
-.btn-clear-draft:hover{color:var(--text)}
-
-/* ── Preview column ── */
-.preview-col-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.preview-page-wrap{background:var(--bg);border-radius:var(--radius);padding:12px}
-[data-theme="dark"] .preview-page-wrap{background:#0d0d15}
-
-/* ── Document preview (the A4-like page) ── */
-.doc-preview{
-  background:#fff;
-  border-radius:4px;
-  padding:28px 32px;
-  box-shadow:var(--shadow-page);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:11pt;
-  line-height:1.55;
-  color:#1a1a1a;
-  min-height:300px;
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--transition), color var(--transition);
 }
-.doc-preview h1{font-size:14pt;font-weight:700;text-align:center;border-bottom:2.5px solid #1a1a2e;padding-bottom:8px;margin:20px 0 16px;color:#1a1a2e}
-.doc-preview h2{font-size:9pt;font-weight:700;color:#1a1a2e;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid #c0c6d6;padding-bottom:3px;margin:20px 0 9px}
-.doc-preview h3{font-size:10pt;font-weight:700;color:#2a2a3e;margin:14px 0 6px}
-.doc-preview table{width:100%;border-collapse:collapse;margin:6px 0 14px;font-size:10pt}
-.doc-preview th{background:#e8eaf2;color:#1a1a2e;font-weight:700;padding:7px 10px;text-align:left;font-size:9pt;border:1px solid #c0c6d6}
-.doc-preview td{border:1px solid #d0d4dc;padding:6px 10px;vertical-align:top}
-.doc-preview hr{border:none;border-top:1px solid #d0d4dc;margin:14px 0}
-.doc-preview blockquote{border-left:3px solid #d4a000;padding:8px 14px;background:#fffcf0;margin:10px 0;font-size:10pt}
-.doc-preview p{margin:5px 0}
-.doc-preview code{background:#f4f5f7;padding:1px 5px;border-radius:3px;font-size:.85em;font-family:monospace}
-.doc-preview pre{background:#f4f5f7;padding:12px;border-radius:6px;overflow-x:auto;margin:10px 0}
-.doc-preview em{color:#555;font-size:9pt}
+button, input, select, textarea { font-family: inherit; }
 
-/* ── Letterhead inside preview ── */
-.doc-letterhead{display:block;max-width:100%;max-height:90px;object-fit:contain;object-position:left;margin-bottom:12px}
-.doc-letterhead-ph{height:52px;border:2px dashed var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:8.5pt;margin-bottom:12px;font-family:Arial,sans-serif;gap:6px}
-.doc-letterhead-ph a{color:var(--amber);text-decoration:none}
-
-/* ── Placeholder highlight ── */
-.doc-preview .ph{background:rgba(212,160,0,.12);border-bottom:1.5px dashed var(--amber);color:var(--amber);font-style:normal;border-radius:2px;padding:0 2px}
-
-/* ── Letterhead settings page ── */
-.lh-empty{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:60px 24px;border:2px dashed var(--border);border-radius:var(--radius);background:var(--bg2);margin-top:4px}
-.lh-empty svg{color:var(--text-muted)}
-.lh-empty-title{font-weight:600;color:var(--text);margin-bottom:2px}
-.lh-empty-sub{color:var(--text-soft);font-size:.875rem}
-.lh-preview{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);margin-top:4px;background:#fff}
-.lh-preview img{display:block;width:100%;max-height:800px;object-fit:contain}
-.lh-meta{color:var(--text-muted);font-size:.82rem;margin-top:8px}
-.lh-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;align-items:center}
-.lh-upload{cursor:pointer}
-.lh-upload input[type="file"]{display:none}
-.lh-setup-banner{background:linear-gradient(135deg,#fffcf0,#fff8dc);border:1px solid #e5c84a;border-radius:var(--radius);padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:14px}
-.lh-setup-banner-icon{flex-shrink:0;color:#d4a000;display:flex;align-items:center}
-.lh-setup-banner-text{flex:1}
-.lh-setup-banner-title{font-weight:700;font-size:.9rem;color:#7a5800;margin-bottom:2px}
-.lh-setup-banner-sub{font-size:.8rem;color:#9a7000}
-.lh-setup-banner-cta{flex-shrink:0}
-
-/* ── Toast ── */
-#toast-root{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:calc(100vw - 48px)}
-.toast{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:8px;background:var(--navy);color:#fff;font-size:.85rem;font-weight:500;box-shadow:0 4px 16px rgba(0,0,0,.25);pointer-events:all;animation:toast-in .22s ease;min-width:260px;max-width:360px;line-height:1.4}
-.toast.toast-success{background:#166534;border-left:3px solid #4ade80}
-.toast.toast-error{background:#991b1b;border-left:3px solid #f87171}
-.toast.toast-info{background:var(--navy);border-left:3px solid var(--amber)}
-.toast-icon{flex-shrink:0;margin-top:1px}
-.toast-dismiss{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.6);padding:0 0 0 8px;margin-left:auto;font-size:1rem;line-height:1;flex-shrink:0}
-.toast-dismiss:hover{color:#fff}
-@keyframes toast-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes toast-out{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(8px)}}
-.toast.removing{animation:toast-out .2s ease forwards}
-
-/* ── My Documents ── */
-.my-docs-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-.my-docs-list{display:flex;flex-direction:column;gap:8px}
-.my-doc-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:center;gap:14px;transition:all var(--transition)}
-.my-doc-item:hover{border-color:var(--amber);box-shadow:var(--shadow)}
-.my-doc-item-info{flex:1;min-width:0}
-.my-doc-item-name{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:4px}
-.my-doc-item-meta{font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.my-doc-item-actions{display:flex;gap:6px;flex-shrink:0}
-.btn-sm{padding:5px 12px;font-size:.78rem;border-radius:5px}
-.status-badge{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
-.status-draft{background:#fef3c7;color:#92400e}
-.status-published{background:#dcfce7;color:#166534}
-[data-theme="dark"] .status-draft{background:#451a03;color:#fde68a}
-[data-theme="dark"] .status-published{background:#14532d;color:#86efac}
-.my-docs-empty{text-align:center;padding:60px 24px;color:var(--text-muted)}
-.my-docs-empty svg{margin:0 auto 16px;opacity:.35;display:block}
-.my-docs-empty-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:6px}
-.my-docs-empty-sub{font-size:.875rem;color:var(--text-soft);margin-bottom:20px}
-
-/* ── Print media ── */
-@media print{
-  .site-header,.sidebar,.doc-actions,.overlay,.fill-form,.preview-col-label,.preview-page-wrap > *:not(.doc-preview),.doc-screen-header{display:none!important}
-  .main{padding:0;max-width:none}
-  .doc-preview{border:none;box-shadow:none;padding:0;background:#fff}
-  body{background:#fff;color:#000}
-  .fill-layout{display:block}
+/* ── Focus ring — amber, consistent across all interactive elements ──────── */
+:focus-visible {
+  outline: 2px solid var(--amber-ui);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy); color: #fff;
+  display: flex; align-items: center; gap: 14px;
+  padding: 0 24px; height: var(--header-h);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 2px 12px rgba(0,0,0,.28);
+}
+.logo {
+  font-size: 1rem; font-weight: 700; letter-spacing: .05em;
+  color: #fff; text-decoration: none; white-space: nowrap; flex-shrink: 0;
+}
+.logo span { color: var(--amber-light); }
+.search-wrap { flex: 1; max-width: 440px; position: relative; }
+.search-wrap svg {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  color: rgba(255,255,255,.4); pointer-events: none;
+}
+#search {
+  width: 100%; padding: 7px 12px 7px 34px;
+  border: 1px solid rgba(255,255,255,.13); border-radius: var(--radius-sm);
+  background: rgba(255,255,255,.08); color: #fff;
+  font-size: .875rem; outline: none;
+  transition: background var(--transition), border-color var(--transition);
+}
+#search::placeholder { color: rgba(255,255,255,.38); }
+#search:focus {
+  background: rgba(255,255,255,.14);
+  border-color: rgba(212,160,0,.7);
+  box-shadow: 0 0 0 3px rgba(212,160,0,.15);
+  outline: none;
+}
+.header-actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.btn-icon {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,.55); padding: 7px; border-radius: 6px;
+  display: flex; align-items: center; transition: color var(--transition), background var(--transition);
+}
+.btn-icon:hover { color: #fff; background: rgba(255,255,255,.1); }
+.btn-icon:active { background: rgba(255,255,255,.15); }
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.app-body { display: flex; min-height: calc(100vh - var(--header-h)); }
+.sidebar {
+  width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--bg2); border-right: 1px solid var(--border);
+  padding: 12px 0 0;
+  overflow-y: auto; overflow-x: hidden;
+  position: sticky; top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  transition: width var(--transition-md);
+}
+.main {
+  flex: 1; padding: 32px 40px;
+  max-width: 1020px; min-width: 0;
+}
+@media (max-width: 1024px) { .main { padding: 28px 28px; } }
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed; left: -100%; top: var(--header-h);
+    height: calc(100vh - var(--header-h)); z-index: 90;
+    transition: left .26s ease; box-shadow: var(--shadow-md);
+  }
+  .sidebar.open { left: 0; }
+  .main { padding: 20px 18px; }
+  .site-header { padding: 0 16px; }
+}
+
+/* ── Sidebar nav ─────────────────────────────────────────────────────────── */
+.sidebar-section { padding: 2px 0; }
+.sidebar-heading {
+  padding: 10px 16px 4px;
+  font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em;
+  color: var(--text-muted);
+}
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px;
+  font-size: .875rem; font-weight: 500;
+  color: var(--text-soft); text-decoration: none; cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition);
+  white-space: nowrap; overflow: hidden;
+}
+.sidebar-link:hover {
+  background: var(--border-light); color: var(--text);
+  border-left-color: var(--border);
+}
+.sidebar-link:active { background: var(--header-bg); }
+.sidebar-link.active {
+  background: var(--header-bg); color: var(--navy);
+  font-weight: 600; border-left-color: var(--amber-ui);
+}
+[data-theme="dark"] .sidebar-link.active { color: var(--amber-light); }
+.sidebar-link .cat-icon {
+  width: 18px; height: 18px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); opacity: .9;
+  transition: color var(--transition);
+}
+.sidebar-link:hover .cat-icon,
+.sidebar-link.active .cat-icon { color: inherit; opacity: 1; }
+.sidebar-link .cat-count {
+  margin-left: auto; flex-shrink: 0;
+  font-size: .72rem; font-weight: 500;
+  color: var(--text-muted); background: var(--border-light);
+  padding: 1px 6px; border-radius: 10px;
+  transition: background var(--transition);
+}
+.sidebar-divider { height: 1px; background: var(--border); margin: 6px 14px; }
+
+/* ── Sidebar collapse (desktop) ──────────────────────────────────────────── */
+.sidebar-collapse-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 9px 16px;
+  background: none; border: none; border-top: 1px solid var(--border);
+  cursor: pointer; color: var(--text-muted);
+  font-size: .75rem; font-family: inherit;
+  transition: color var(--transition), background var(--transition);
+  margin-top: 6px;
+}
+.sidebar-collapse-btn:hover { color: var(--text); background: var(--border-light); }
+.sidebar-collapse-btn svg { flex-shrink: 0; transition: transform .25s ease; }
+@media (max-width: 768px) { .sidebar-collapse-btn { display: none; } }
+
+/* ── Overlay ─────────────────────────────────────────────────────────────── */
+.menu-toggle {
+  display: none; background: none; border: none;
+  cursor: pointer; color: rgba(255,255,255,.8); padding: 7px;
+  border-radius: 6px;
+}
+.menu-toggle:hover { color: #fff; background: rgba(255,255,255,.1); }
+@media (max-width: 768px) { .menu-toggle { display: flex; align-items: center; } }
+.overlay {
+  display: none; position: fixed; inset: 0; top: var(--header-h);
+  background: rgba(0,0,0,.45); z-index: 80;
+  transition: opacity .26s ease;
+}
+.overlay.open { display: block; }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: var(--radius-sm);
+  font-size: .875rem; font-weight: 600; line-height: 1.4;
+  cursor: pointer; border: 1px solid transparent;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition), box-shadow var(--transition),
+              transform 80ms ease;
+  text-decoration: none; white-space: nowrap; font-family: inherit;
+  -webkit-user-select: none; user-select: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary {
+  background: var(--navy); color: #fff; border-color: var(--navy);
+}
+.btn-primary:hover { background: var(--navy-hover); }
+.btn-primary:active { background: var(--navy-light); }
+.btn-outline {
+  background: var(--bg2); color: var(--text-soft); border-color: var(--border);
+}
+.btn-outline:hover { border-color: var(--amber-ui); color: var(--amber-ui); }
+.btn-danger {
+  background: var(--bg2); color: #dc2626; border-color: #fca5a5;
+}
+.btn-danger:hover { background: #fef2f2; border-color: #dc2626; }
+.btn-print {
+  background: var(--navy); color: #fff; border-color: var(--navy);
+  padding: 8px 20px; font-size: .875rem;
+}
+.btn-print:hover { background: var(--navy-hover); box-shadow: 0 2px 8px rgba(26,26,46,.3); }
+.btn-sm { padding: 5px 12px; font-size: .8rem; }
+
+/* ── Home page ───────────────────────────────────────────────────────────── */
+.page-header { margin-bottom: 28px; }
+.page-title {
+  font-size: 1.5rem; font-weight: 700; color: var(--navy);
+  letter-spacing: -.02em; line-height: 1.2;
+  margin-bottom: 6px;
+}
+[data-theme="dark"] .page-title { color: var(--amber-light); }
+.page-sub { color: var(--text-soft); font-size: .875rem; line-height: 1.5; }
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+}
+.cat-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 20px;
+  cursor: pointer; text-decoration: none; display: block;
+  transition: border-color var(--transition), box-shadow var(--transition),
+              transform var(--transition-md);
+}
+.cat-card:hover {
+  border-color: var(--amber-ui);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.cat-card:active { transform: translateY(0); box-shadow: var(--shadow); }
+.cat-card-icon { width: 34px; height: 34px; margin-bottom: 14px; color: var(--navy); }
+[data-theme="dark"] .cat-card-icon { color: var(--amber-light); }
+.cat-card-name {
+  font-size: .9375rem; font-weight: 600; color: var(--text);
+  margin-bottom: 3px; letter-spacing: -.01em;
+}
+.cat-card-count { font-size: .78rem; color: var(--text-muted); }
+
+/* ── Template list ───────────────────────────────────────────────────────── */
+.list-header { margin-bottom: 20px; }
+.section-title {
+  font-size: 1.2rem; font-weight: 700; color: var(--navy);
+  letter-spacing: -.02em; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+[data-theme="dark"] .section-title { color: var(--amber-light); }
+.section-sub { color: var(--text-muted); font-size: .8125rem; }
+.template-list { display: flex; flex-direction: column; gap: 6px; }
+.template-item {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 13px 18px;
+  cursor: pointer; display: flex; align-items: center; gap: 14px;
+  transition: border-color var(--transition), box-shadow var(--transition),
+              transform var(--transition);
+}
+.template-item:hover {
+  border-color: var(--amber-ui); box-shadow: var(--shadow-sm);
+  transform: translateX(2px);
+}
+.template-item:active { transform: translateX(0); }
+.template-item-icon { width: 20px; height: 20px; flex-shrink: 0; color: var(--text-muted); }
+.template-item-info { flex: 1; min-width: 0; }
+.template-item-name {
+  font-size: .9rem; font-weight: 600; color: var(--text);
+  margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.template-item-meta { font-size: .75rem; color: var(--text-muted); }
+.template-item-cta {
+  font-size: .75rem; font-weight: 600; color: var(--amber-ui);
+  flex-shrink: 0; white-space: nowrap; opacity: 0;
+  transition: opacity var(--transition);
+}
+.template-item:hover .template-item-cta { opacity: 1; }
+
+/* ── Badges ──────────────────────────────────────────────────────────────── */
+.cat-badge {
+  display: inline-block; font-size: .68rem; font-weight: 600;
+  padding: 2px 7px; border-radius: 3px;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.badge-hr           { background: #dbeafe; color: #1e40af; }
+.badge-finance      { background: #dcfce7; color: #166534; }
+.badge-operations   { background: #fef9c3; color: #854d0e; }
+.badge-administration { background: #f3e8ff; color: #6b21a8; }
+.badge-general      { background: #e0f2fe; color: #0369a1; }
+.badge-framework    { background: #f1f5f9; color: #475569; }
+[data-theme="dark"] .badge-hr           { background: #1e3a6e; color: #93c5fd; }
+[data-theme="dark"] .badge-finance      { background: #14532d; color: #86efac; }
+[data-theme="dark"] .badge-operations   { background: #431407; color: #fde68a; }
+[data-theme="dark"] .badge-administration { background: #2e1065; color: #d8b4fe; }
+[data-theme="dark"] .badge-general      { background: #082f49; color: #7dd3fc; }
+[data-theme="dark"] .badge-framework    { background: #1e293b; color: #94a3b8; }
+
+/* ── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  font-size: .78rem; color: var(--text-muted);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+.breadcrumb a:hover { color: var(--amber-ui); }
+.breadcrumb-sep { opacity: .5; }
+
+/* ── Empty / No-results states ───────────────────────────────────────────── */
+.no-results {
+  text-align: center; padding: 56px 24px; color: var(--text-muted);
+}
+.no-results svg { margin: 0 auto 14px; display: block; opacity: .3; }
+.no-results p { font-size: .9rem; }
+
+/* ── Search results ──────────────────────────────────────────────────────── */
+.search-results-header { margin-bottom: 16px; }
+
+/* ── Loading spinner ─────────────────────────────────────────────────────── */
+.loading-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 80px 24px; color: var(--text-muted); gap: 14px;
+}
+.spinner {
+  width: 28px; height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--amber-ui);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Error state ─────────────────────────────────────────────────────────── */
+.error-state {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: var(--radius);
+  padding: 20px 24px; color: #991b1b;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+[data-theme="dark"] .error-state { background: #2d1515; border-color: #7f1d1d; color: #fca5a5; }
+.error-state svg { flex-shrink: 0; margin-top: 1px; }
+.error-state-text strong { display: block; margin-bottom: 4px; font-size: .9rem; }
+.error-state-text p { font-size: .82rem; opacity: .8; }
+
+/* ── Document fill screen ────────────────────────────────────────────────── */
+.doc-screen-header { margin-bottom: 22px; }
+.doc-title {
+  font-size: 1.375rem; font-weight: 700; color: var(--navy);
+  letter-spacing: -.02em; margin-bottom: 14px; line-height: 1.2;
+}
+[data-theme="dark"] .doc-title { color: var(--amber-light); }
+.doc-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* ── Fill layout ─────────────────────────────────────────────────────────── */
+.fill-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 980px) { .fill-layout { grid-template-columns: 1fr; } }
+
+/* ── Fill form panel ─────────────────────────────────────────────────────── */
+.fill-form {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 0;
+  position: sticky; top: calc(var(--header-h) + 16px);
+  max-height: calc(100vh - var(--header-h) - 32px);
+  overflow-y: auto; box-shadow: var(--shadow-sm);
+}
+.fill-form-header {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--header-bg);
+  border-radius: var(--radius) var(--radius) 0 0;
+  position: sticky; top: 0; z-index: 2;
+}
+.fill-form-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.fill-form-header-title {
+  font-size: .75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--navy); line-height: 1.3;
+}
+[data-theme="dark"] .fill-form-header-title { color: var(--amber-light); }
+.fill-form-header-sub { font-size: .73rem; color: var(--text-muted); margin-top: 2px; }
+.fill-form-body { padding: 18px 18px 22px; }
+.fill-field { margin-bottom: 14px; }
+.fill-label {
+  display: block; font-size: .78rem; font-weight: 600;
+  color: var(--text-soft); margin-bottom: 5px; line-height: 1.3;
+}
+.fill-input {
+  width: 100%; padding: 8px 11px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); color: var(--text);
+  font-size: .85rem; line-height: 1.4; outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  font-family: inherit;
+}
+.fill-input:hover { border-color: #b8bcc8; }
+.fill-input:focus {
+  border-color: var(--amber-ui);
+  box-shadow: 0 0 0 3px var(--amber-ring);
+  outline: none;
+}
+.fill-textarea {
+  width: 100%; padding: 8px 11px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); color: var(--text);
+  font-size: .85rem; line-height: 1.5; outline: none;
+  resize: vertical; min-height: 80px; font-family: inherit;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.fill-textarea:hover { border-color: #b8bcc8; }
+.fill-textarea:focus {
+  border-color: var(--amber-ui);
+  box-shadow: 0 0 0 3px var(--amber-ring);
+  outline: none;
+}
+.fill-select {
+  width: 100%; padding: 8px 32px 8px 11px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+  color: var(--text); font-size: .85rem; line-height: 1.4; outline: none;
+  cursor: pointer; appearance: none; font-family: inherit;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.fill-select:focus {
+  border-color: var(--amber-ui);
+  box-shadow: 0 0 0 3px var(--amber-ring);
+  outline: none;
+}
+.fill-section-heading {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .09em; color: var(--text-muted);
+  margin: 20px 0 10px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.fill-logo-note {
+  font-size: .78rem; color: var(--text-muted); line-height: 1.5;
+  padding: 9px 11px; background: var(--border-light);
+  border-radius: var(--radius-sm); border: 1px solid var(--border);
+}
+.fill-logo-note a { color: var(--amber-ui); text-decoration: none; }
+.fill-logo-note a:hover { text-decoration: underline; }
+.fill-required-star { color: var(--amber-ui); font-weight: 700; margin-left: 1px; font-size: .85em; }
+.fill-helper { font-size: .72rem; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+
+/* ── Autosave indicator ──────────────────────────────────────────────────── */
+.fill-saved-indicator {
+  font-size: .7rem; color: #16a34a;
+  display: flex; align-items: center; gap: 3px;
+  margin-top: 5px; opacity: 0;
+  transition: opacity .3s ease;
+}
+.fill-saved-indicator.visible { opacity: 1; }
+[data-theme="dark"] .fill-saved-indicator { color: #4ade80; }
+.btn-clear-draft {
+  font-size: .72rem; color: var(--text-muted);
+  background: none; border: none; cursor: pointer;
+  padding: 2px 6px; border-radius: 3px; font-family: inherit;
+  transition: color var(--transition), background var(--transition);
+  flex-shrink: 0;
+}
+.btn-clear-draft:hover { color: var(--text); background: var(--border-light); }
+
+/* ── Preview column ──────────────────────────────────────────────────────── */
+.preview-col-label {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text-muted);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+}
+.preview-page-wrap {
+  background: #dde0e8;
+  border-radius: var(--radius);
+  padding: 18px 14px;
+  min-height: 400px;
+}
+[data-theme="dark"] .preview-page-wrap { background: #0a0a12; }
+
+/* ── Live preview page (A4 proportioned) ─────────────────────────────────── */
+.doc-preview {
+  background: #fff;
+  border-radius: 3px;
+  padding: 32px 36px 40px;
+  box-shadow: var(--shadow-page);
+  font-family: 'Arial', Helvetica, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  color: #1a1a1a;
+  min-height: 320px;
+  max-width: 660px;
+  margin: 0 auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.doc-preview h1 {
+  font-size: 13.5pt; font-weight: 700; text-align: center;
+  border-bottom: 2px solid #1a1a2e; padding-bottom: 9px;
+  margin: 18px 0 16px; color: #1a1a2e; letter-spacing: .01em;
+}
+.doc-preview h2 {
+  font-size: 8.5pt; font-weight: 700; color: #1a1a2e;
+  text-transform: uppercase; letter-spacing: .11em;
+  border-bottom: 1px solid #c0c6d6; padding-bottom: 4px;
+  margin: 20px 0 9px;
+}
+.doc-preview h3 {
+  font-size: 10pt; font-weight: 700; color: #2a2a3e;
+  margin: 14px 0 6px;
+}
+.doc-preview h4 { font-size: 10pt; font-weight: 600; color: #333; margin: 10px 0 4px; }
+.doc-preview table {
+  width: 100%; border-collapse: collapse; margin: 6px 0 14px; font-size: 9.5pt;
+}
+.doc-preview th {
+  background: #e8eaf2; color: #1a1a2e; font-weight: 700;
+  padding: 7px 10px; text-align: left; font-size: 8.5pt; border: 1px solid #c0c6d6;
+}
+.doc-preview td { border: 1px solid #d0d4dc; padding: 6px 10px; vertical-align: top; }
+.doc-preview hr { border: none; border-top: 1px solid #d0d4dc; margin: 14px 0; }
+.doc-preview blockquote {
+  border-left: 3px solid #c89600; padding: 8px 14px;
+  background: #fffcf0; margin: 10px 0; font-size: 9.5pt;
+}
+.doc-preview p { margin: 5px 0; }
+.doc-preview ul,
+.doc-preview ol { margin: 6px 0; padding-left: 22px; }
+.doc-preview li { margin: 3px 0; }
+.doc-preview code {
+  background: #f4f5f7; padding: 1px 5px; border-radius: 3px;
+  font-size: .85em; font-family: 'Courier New', monospace;
+}
+.doc-preview pre {
+  background: #f4f5f7; padding: 12px; border-radius: 4px;
+  overflow-x: auto; margin: 10px 0; font-size: 9pt;
+}
+.doc-preview em { color: #555; font-size: 9pt; }
+
+/* ── Letterhead in preview ───────────────────────────────────────────────── */
+.doc-letterhead {
+  display: block; width: 100%; max-height: 80px;
+  object-fit: contain; object-position: left;
+  margin-bottom: 14px;
+}
+.doc-letterhead-ph {
+  height: 48px; border: 2px dashed var(--border);
+  border-radius: 4px; display: flex; align-items: center;
+  justify-content: center; color: var(--text-muted);
+  font-size: 8pt; margin-bottom: 14px;
+  font-family: Arial, sans-serif; gap: 6px;
+}
+.doc-letterhead-ph a { color: var(--amber-ui); text-decoration: none; }
+.doc-letterhead-ph a:hover { text-decoration: underline; }
+
+/* ── Placeholder highlight ───────────────────────────────────────────────── */
+.doc-preview .ph {
+  background: rgba(212,160,0,.1); border-bottom: 1.5px dashed var(--amber-ui);
+  color: #9a6e00; font-style: normal; border-radius: 2px; padding: 0 2px;
+}
+[data-theme="dark"] .doc-preview .ph { color: var(--amber-light); background: rgba(245,200,66,.1); }
+
+/* ── Letterhead settings ─────────────────────────────────────────────────── */
+.lh-empty {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  text-align: center; padding: 60px 28px;
+  border: 2px dashed var(--border); border-radius: var(--radius);
+  background: var(--bg2);
+}
+.lh-empty svg { color: var(--text-muted); }
+.lh-empty-title { font-weight: 600; color: var(--text); font-size: .9375rem; }
+.lh-empty-sub { color: var(--text-soft); font-size: .875rem; max-width: 380px; line-height: 1.5; }
+.lh-preview {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow-md); background: #fff;
+}
+.lh-preview img { display: block; width: 100%; max-height: 600px; object-fit: contain; }
+.lh-meta { color: var(--text-muted); font-size: .8rem; margin-top: 8px; }
+.lh-actions { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; align-items: center; }
+.lh-upload { cursor: pointer; }
+.lh-upload input[type="file"] { display: none; }
+
+/* ── Letterhead setup banner ─────────────────────────────────────────────── */
+.lh-setup-banner {
+  background: linear-gradient(135deg, #fffcf0, #fff8dc);
+  border: 1px solid #e5c84a; border-radius: var(--radius);
+  padding: 14px 18px; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.lh-setup-banner-icon { flex-shrink: 0; color: var(--amber-ui); display: flex; align-items: center; }
+.lh-setup-banner-text { flex: 1; min-width: 0; }
+.lh-setup-banner-title { font-weight: 700; font-size: .875rem; color: #7a5800; margin-bottom: 1px; }
+.lh-setup-banner-sub { font-size: .78rem; color: #9a7000; }
+.lh-setup-banner-cta { flex-shrink: 0; }
+
+/* ── Toast ───────────────────────────────────────────────────────────────── */
+#toast-root {
+  position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 8px;
+  pointer-events: none; max-width: calc(100vw - 40px);
+}
+.toast {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 11px 14px; border-radius: var(--radius);
+  color: #fff; font-size: .84rem; font-weight: 500; line-height: 1.4;
+  box-shadow: 0 4px 20px rgba(0,0,0,.25), 0 1px 4px rgba(0,0,0,.15);
+  pointer-events: all;
+  animation: toast-in .22s cubic-bezier(.34,1.1,.64,1);
+  min-width: 240px; max-width: 360px;
+  border-left: 3px solid transparent;
+}
+.toast-success { background: #14532d; border-left-color: #4ade80; }
+.toast-error   { background: #7f1d1d; border-left-color: #f87171; }
+.toast-info    { background: var(--navy); border-left-color: var(--amber-ui); }
+.toast-icon { flex-shrink: 0; margin-top: 1px; }
+.toast-msg { flex: 1; }
+.toast-dismiss {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,.5); padding: 0; margin-left: 6px;
+  font-size: 1.1rem; line-height: 1; flex-shrink: 0; font-family: inherit;
+}
+.toast-dismiss:hover { color: rgba(255,255,255,.9); }
+@keyframes toast-in  { from { opacity:0; transform:translateY(10px) scale(.97) } to { opacity:1; transform:none } }
+@keyframes toast-out { from { opacity:1; transform:none } to { opacity:0; transform:translateY(6px) scale(.97) } }
+.toast.removing { animation: toast-out .18s ease forwards; }
+
+/* ── My Documents ────────────────────────────────────────────────────────── */
+.my-docs-toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.my-docs-list { display: flex; flex-direction: column; gap: 6px; }
+.my-doc-item {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 13px 18px;
+  display: flex; align-items: center; gap: 14px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.my-doc-item:hover { border-color: var(--amber-ui); box-shadow: var(--shadow-sm); }
+.my-doc-item-info { flex: 1; min-width: 0; }
+.my-doc-item-name {
+  font-size: .9rem; font-weight: 600; color: var(--text);
+  margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.my-doc-item-meta {
+  font-size: .75rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.my-doc-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.status-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: .68rem; font-weight: 700; padding: 2px 7px;
+  border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;
+}
+.status-draft     { background: #fef3c7; color: #92400e; }
+.status-published { background: #dcfce7; color: #166534; }
+[data-theme="dark"] .status-draft     { background: #451a03; color: #fde68a; }
+[data-theme="dark"] .status-published { background: #14532d; color: #86efac; }
+.my-docs-empty { text-align: center; padding: 64px 24px; color: var(--text-muted); }
+.my-docs-empty svg { margin: 0 auto 18px; opacity: .28; display: block; }
+.my-docs-empty-title { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.my-docs-empty-sub { font-size: .875rem; color: var(--text-soft); margin-bottom: 24px; max-width: 340px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+
+/* ── Print media ─────────────────────────────────────────────────────────── */
+@media print {
+  .site-header, .sidebar, .doc-actions, .overlay,
+  .fill-form, .preview-col-label, .preview-page-wrap > *:not(.doc-preview),
+  .doc-screen-header { display: none !important; }
+  .main { padding: 0; max-width: none; }
+  .doc-preview { border: none; box-shadow: none; padding: 0; background: #fff; max-width: none; }
+  body { background: #fff; color: #000; }
+  .fill-layout { display: block; }
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menu">
-    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open menu">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
   </button>
   <a href="#/" class="logo">Alba <span>Docs</span></a>
   <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="search" id="search" placeholder="Find a document…" autocomplete="off" oninput="handleSearch(this.value)" aria-label="Search documents">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="search" id="search" placeholder="Find a document…" autocomplete="off"
+           oninput="handleSearch(this.value)" aria-label="Search documents">
   </div>
   <div class="header-actions">
     <button class="btn-icon" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
-      <svg id="theme-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="theme-icon" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
     </button>
   </div>
 </header>
 
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
 <div id="toast-root" role="region" aria-live="polite" aria-label="Notifications"></div>
 
 <div class="app-body">
@@ -322,15 +757,27 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
     <div class="sidebar-section">
       <div class="sidebar-heading">Documents</div>
       <a class="sidebar-link" href="#/my-documents" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </span>
         My Documents
       </a>
       <a class="sidebar-link" href="#/" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </span>
         New Document
       </a>
       <a class="sidebar-link" href="#/all" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+          </svg>
+        </span>
         All Templates
         <span class="cat-count">48</span>
       </a>
@@ -339,32 +786,59 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
     <div class="sidebar-section">
       <div class="sidebar-heading">By Category</div>
       <a class="sidebar-link" href="#/category/hr" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
         Human Resources
         <span class="cat-count" id="cnt-hr"></span>
       </a>
       <a class="sidebar-link" href="#/category/finance" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </span>
         Finance
         <span class="cat-count" id="cnt-finance"></span>
       </a>
       <a class="sidebar-link" href="#/category/operations" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+          </svg>
+        </span>
         Operations
         <span class="cat-count" id="cnt-operations"></span>
       </a>
       <a class="sidebar-link" href="#/category/administration" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/>
+            <path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>
+          </svg>
+        </span>
         Administration
         <span class="cat-count" id="cnt-administration"></span>
       </a>
       <a class="sidebar-link" href="#/category/general" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8M16 13H8M16 17H8"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8M16 13H8M16 17H8"/>
+          </svg>
+        </span>
         General
         <span class="cat-count" id="cnt-general"></span>
       </a>
       <a class="sidebar-link" href="#/category/framework" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </span>
         Framework
         <span class="cat-count" id="cnt-framework"></span>
       </a>
@@ -373,12 +847,22 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
     <div class="sidebar-section">
       <div class="sidebar-heading">Settings</div>
       <a class="sidebar-link" href="#/settings/letterhead" onclick="closeSidebar()">
-        <span class="cat-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></span>
+        <span class="cat-icon" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+            <circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+          </svg>
+        </span>
         Company Letterhead
       </a>
     </div>
-    <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()" id="sidebar-collapse-btn" title="Collapse sidebar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="collapse-icon" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="sidebar-collapse-btn" onclick="toggleSidebarCollapse()"
+            id="sidebar-collapse-btn" title="Collapse sidebar" aria-label="Collapse sidebar">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+           id="collapse-icon" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
       <span id="collapse-label">Collapse</span>
     </button>
   </nav>
@@ -387,7 +871,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
 </div>
 
 <script>
-// ── SVG Icon helpers ─────────────────────────────────────────────────────
+'use strict';
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SVG Icon helpers
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const CAT_ICON_PATHS = {
   hr:             `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
   finance:        `<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`,
@@ -397,357 +885,425 @@ const CAT_ICON_PATHS = {
   framework:      `<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>`,
 };
 
+/** Returns an inline Lucide SVG string for a category key. */
 function catIconSvg(cat, size) {
   size = size || 20;
   const p = CAT_ICON_PATHS[cat] || CAT_ICON_PATHS.general;
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 }
 
-// ── Data ──────────────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Static data
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const TEMPLATES = [
-  {"id":"administration/ACCESS_REQUEST","slug":"access-request","name":"Access Request","category":"administration","version":"2.1","path":"templates/documents/administration/ACCESS_REQUEST.md"},
-  {"id":"administration/EQUIPMENT_REQUEST","slug":"equipment-request","name":"Equipment Request","category":"administration","version":"2.1","path":"templates/documents/administration/EQUIPMENT_REQUEST.md"},
-  {"id":"administration/IT_REQUEST","slug":"it-request","name":"IT Request","category":"administration","version":"2.1","path":"templates/documents/administration/IT_REQUEST.md"},
-  {"id":"administration/TRAINING_REQUEST","slug":"training-request","name":"Training Request","category":"administration","version":"2.1","path":"templates/documents/administration/TRAINING_REQUEST.md"},
-  {"id":"administration/VISITOR_PASS","slug":"visitor-pass","name":"Visitor Pass","category":"administration","version":"2.1","path":"templates/documents/administration/VISITOR_PASS.md"},
-  {"id":"finance/EXPENSE_APPROVAL","slug":"expense-approval","name":"Expense Approval Form","category":"finance","version":"2.1","path":"templates/documents/finance/EXPENSE_APPROVAL.md"},
-  {"id":"finance/INVOICE","slug":"invoice","name":"Invoice","category":"finance","version":"2.1","path":"templates/documents/finance/INVOICE.md"},
-  {"id":"finance/PAYMENT_VOUCHER","slug":"payment-voucher","name":"Payment Voucher","category":"finance","version":"2.1","path":"templates/documents/finance/PAYMENT_VOUCHER.md"},
-  {"id":"finance/PURCHASE_ORDER","slug":"purchase-order","name":"Purchase Order","category":"finance","version":"2.1","path":"templates/documents/finance/PURCHASE_ORDER.md"},
-  {"id":"finance/QUOTATION","slug":"quotation","name":"Quotation","category":"finance","version":"2.1","path":"templates/documents/finance/QUOTATION.md"},
-  {"id":"finance/RECEIPT","slug":"receipt","name":"Receipt","category":"finance","version":"2.1","path":"templates/documents/finance/RECEIPT.md"},
-  {"id":"general/ACKNOWLEDGEMENT","slug":"acknowledgement","name":"Acknowledgement","category":"general","version":"2.1","path":"templates/documents/general/ACKNOWLEDGEMENT.md"},
-  {"id":"general/ANNOUNCEMENT","slug":"announcement","name":"Announcement","category":"general","version":"2.1","path":"templates/documents/general/ANNOUNCEMENT.md"},
-  {"id":"general/AUTHORIZATION_LETTER","slug":"authorization-letter","name":"Authorization Letter","category":"general","version":"2.1","path":"templates/documents/general/AUTHORIZATION_LETTER.md"},
-  {"id":"general/CERTIFICATE","slug":"certificate","name":"Certificate","category":"general","version":"2.1","path":"templates/documents/general/CERTIFICATE.md"},
-  {"id":"general/CIRCULAR","slug":"circular","name":"Circular","category":"general","version":"2.1","path":"templates/documents/general/CIRCULAR.md"},
-  {"id":"general/COMPANY_LETTER","slug":"company-letter","name":"Company Letter","category":"general","version":"2.1","path":"templates/documents/general/COMPANY_LETTER.md"},
-  {"id":"general/INTERNAL_MEMO","slug":"internal-memo","name":"Internal Memo","category":"general","version":"2.1","path":"templates/documents/general/INTERNAL_MEMO.md"},
-  {"id":"general/OFFICIAL_LETTER","slug":"official-letter","name":"Official Letter","category":"general","version":"2.1","path":"templates/documents/general/OFFICIAL_LETTER.md"},
-  {"id":"hr/ANNUAL_LEAVE_ENCASHMENT","slug":"annual-leave-encashment","name":"Annual Leave Encashment","category":"hr","version":"1.0","path":"templates/documents/hr/ANNUAL_LEAVE_ENCASHMENT.md"},
-  {"id":"hr/APPRECIATION_LETTER","slug":"appreciation-letter","name":"Appreciation Letter","category":"hr","version":"2.1","path":"templates/documents/hr/APPRECIATION_LETTER.md"},
-  {"id":"hr/EMPLOYEE_INFORMATION_FORM","slug":"employee-information-form","name":"Employee Information Form","category":"hr","version":"2.1","path":"templates/documents/hr/EMPLOYEE_INFORMATION_FORM.md"},
-  {"id":"hr/EMPLOYMENT_VERIFICATION_LETTER","slug":"employment-verification-letter","name":"Employment Verification Letter","category":"hr","version":"2.1","path":"templates/documents/hr/EMPLOYMENT_VERIFICATION_LETTER.md"},
-  {"id":"hr/EXPERIENCE_CERTIFICATE","slug":"experience-certificate","name":"Experience Certificate","category":"hr","version":"2.1","path":"templates/documents/hr/EXPERIENCE_CERTIFICATE.md"},
-  {"id":"hr/FINAL_SETTLEMENT","slug":"final-settlement","name":"Final Settlement Form","category":"hr","version":"1.0","path":"templates/documents/hr/FINAL_SETTLEMENT.md"},
-  {"id":"hr/JOB_OFFER","slug":"job-offer","name":"Job Offer","category":"hr","version":"2.0","path":"templates/documents/hr/JOB_OFFER.md"},
-  {"id":"hr/LOAN_ACKNOWLEDGEMENT","slug":"loan-acknowledgement","name":"Loan Acknowledgement","category":"hr","version":"1.0","path":"templates/documents/hr/LOAN_ACKNOWLEDGEMENT.md"},
-  {"id":"hr/PAYSLIP","slug":"payslip","name":"Payslip","category":"hr","version":"1.0","path":"templates/documents/hr/PAYSLIP.md"},
-  {"id":"hr/PROMOTION_LETTER","slug":"promotion-letter","name":"Promotion Letter","category":"hr","version":"2.1","path":"templates/documents/hr/PROMOTION_LETTER.md"},
-  {"id":"hr/RESIGNATION_ACCEPTANCE","slug":"resignation-acceptance","name":"Resignation Acceptance","category":"hr","version":"2.1","path":"templates/documents/hr/RESIGNATION_ACCEPTANCE.md"},
-  {"id":"hr/SALARY_CERTIFICATE","slug":"salary-certificate","name":"Salary Certificate","category":"hr","version":"1.1","path":"templates/documents/hr/SALARY_CERTIFICATE.md"},
-  {"id":"hr/TERMINATION_LETTER","slug":"termination-letter","name":"Contract Termination Letter","category":"hr","version":"2.0","path":"templates/documents/hr/TERMINATION_LETTER.md"},
-  {"id":"hr/TRANSFER_LETTER","slug":"transfer-letter","name":"Transfer Letter","category":"hr","version":"2.1","path":"templates/documents/hr/TRANSFER_LETTER.md"},
-  {"id":"hr/WARNING_LETTER","slug":"warning-letter","name":"Warning Letter","category":"hr","version":"2.0","path":"templates/documents/hr/WARNING_LETTER.md"},
-  {"id":"operations/ASSET_HANDOVER","slug":"asset-handover","name":"Asset Handover","category":"operations","version":"2.1","path":"templates/documents/operations/ASSET_HANDOVER.md"},
-  {"id":"operations/ASSET_RETURN","slug":"asset-return","name":"Asset Return","category":"operations","version":"2.1","path":"templates/documents/operations/ASSET_RETURN.md"},
-  {"id":"operations/INCIDENT_REPORT","slug":"incident-report","name":"Incident Report","category":"operations","version":"2.1","path":"templates/documents/operations/INCIDENT_REPORT.md"},
-  {"id":"operations/INSPECTION_REPORT","slug":"inspection-report","name":"Inspection Report","category":"operations","version":"2.1","path":"templates/documents/operations/INSPECTION_REPORT.md"},
-  {"id":"operations/MAINTENANCE_REQUEST","slug":"maintenance-request","name":"Maintenance Request","category":"operations","version":"2.1","path":"templates/documents/operations/MAINTENANCE_REQUEST.md"},
-  {"id":"operations/MEETING_MINUTES","slug":"meeting-minutes","name":"Meeting Minutes","category":"operations","version":"2.1","path":"templates/documents/operations/MEETING_MINUTES.md"},
-  {"id":"framework/ADR_TEMPLATE","slug":"adr-template","name":"ADR","category":"framework","version":"1.0","path":"templates/documents/framework/ADR_TEMPLATE.md"},
-  {"id":"framework/AUDIT_REPORT_TEMPLATE","slug":"audit-report-template","name":"Audit Report","category":"framework","version":"1.0","path":"templates/documents/framework/AUDIT_REPORT_TEMPLATE.md"},
-  {"id":"framework/CHANGE_REQUEST_TEMPLATE","slug":"change-request-template","name":"Change Request","category":"framework","version":"1.0","path":"templates/documents/framework/CHANGE_REQUEST_TEMPLATE.md"},
-  {"id":"framework/DECISION_LOG_TEMPLATE","slug":"decision-log-template","name":"Decision Log","category":"framework","version":"1.0","path":"templates/documents/framework/DECISION_LOG_TEMPLATE.md"},
-  {"id":"framework/MEETING_NOTES_TEMPLATE","slug":"meeting-notes-template","name":"Meeting Notes","category":"framework","version":"1.0","path":"templates/documents/framework/MEETING_NOTES_TEMPLATE.md"},
-  {"id":"framework/RESEARCH_TEMPLATE","slug":"research-template","name":"Research","category":"framework","version":"1.0","path":"templates/documents/framework/RESEARCH_TEMPLATE.md"},
-  {"id":"framework/SPECIFICATION_TEMPLATE","slug":"specification-template","name":"Specification","category":"framework","version":"1.0","path":"templates/documents/framework/SPECIFICATION_TEMPLATE.md"},
-  {"id":"framework/SPRINT_REPORT_TEMPLATE","slug":"sprint-report-template","name":"Sprint Report","category":"framework","version":"1.0","path":"templates/documents/framework/SPRINT_REPORT_TEMPLATE.md"}
+  {id:'administration/ACCESS_REQUEST',    slug:'access-request',    name:'Access Request',          category:'administration',version:'2.1',path:'templates/documents/administration/ACCESS_REQUEST.md'},
+  {id:'administration/EQUIPMENT_REQUEST', slug:'equipment-request', name:'Equipment Request',       category:'administration',version:'2.1',path:'templates/documents/administration/EQUIPMENT_REQUEST.md'},
+  {id:'administration/IT_REQUEST',        slug:'it-request',        name:'IT Request',              category:'administration',version:'2.1',path:'templates/documents/administration/IT_REQUEST.md'},
+  {id:'administration/TRAINING_REQUEST',  slug:'training-request',  name:'Training Request',        category:'administration',version:'2.1',path:'templates/documents/administration/TRAINING_REQUEST.md'},
+  {id:'administration/VISITOR_PASS',      slug:'visitor-pass',      name:'Visitor Pass',            category:'administration',version:'2.1',path:'templates/documents/administration/VISITOR_PASS.md'},
+  {id:'finance/EXPENSE_APPROVAL',   slug:'expense-approval',  name:'Expense Approval Form', category:'finance',version:'2.1',path:'templates/documents/finance/EXPENSE_APPROVAL.md'},
+  {id:'finance/INVOICE',            slug:'invoice',           name:'Invoice',               category:'finance',version:'2.1',path:'templates/documents/finance/INVOICE.md'},
+  {id:'finance/PAYMENT_VOUCHER',    slug:'payment-voucher',   name:'Payment Voucher',       category:'finance',version:'2.1',path:'templates/documents/finance/PAYMENT_VOUCHER.md'},
+  {id:'finance/PURCHASE_ORDER',     slug:'purchase-order',    name:'Purchase Order',        category:'finance',version:'2.1',path:'templates/documents/finance/PURCHASE_ORDER.md'},
+  {id:'finance/QUOTATION',          slug:'quotation',         name:'Quotation',             category:'finance',version:'2.1',path:'templates/documents/finance/QUOTATION.md'},
+  {id:'finance/RECEIPT',            slug:'receipt',           name:'Receipt',               category:'finance',version:'2.1',path:'templates/documents/finance/RECEIPT.md'},
+  {id:'general/ACKNOWLEDGEMENT',    slug:'acknowledgement',   name:'Acknowledgement',       category:'general',version:'2.1',path:'templates/documents/general/ACKNOWLEDGEMENT.md'},
+  {id:'general/ANNOUNCEMENT',       slug:'announcement',      name:'Announcement',          category:'general',version:'2.1',path:'templates/documents/general/ANNOUNCEMENT.md'},
+  {id:'general/AUTHORIZATION_LETTER',slug:'authorization-letter',name:'Authorization Letter',category:'general',version:'2.1',path:'templates/documents/general/AUTHORIZATION_LETTER.md'},
+  {id:'general/CERTIFICATE',        slug:'certificate',       name:'Certificate',           category:'general',version:'2.1',path:'templates/documents/general/CERTIFICATE.md'},
+  {id:'general/CIRCULAR',           slug:'circular',          name:'Circular',              category:'general',version:'2.1',path:'templates/documents/general/CIRCULAR.md'},
+  {id:'general/COMPANY_LETTER',     slug:'company-letter',    name:'Company Letter',        category:'general',version:'2.1',path:'templates/documents/general/COMPANY_LETTER.md'},
+  {id:'general/INTERNAL_MEMO',      slug:'internal-memo',     name:'Internal Memo',         category:'general',version:'2.1',path:'templates/documents/general/INTERNAL_MEMO.md'},
+  {id:'general/OFFICIAL_LETTER',    slug:'official-letter',   name:'Official Letter',       category:'general',version:'2.1',path:'templates/documents/general/OFFICIAL_LETTER.md'},
+  {id:'hr/ANNUAL_LEAVE_ENCASHMENT',    slug:'annual-leave-encashment',    name:'Annual Leave Encashment',    category:'hr',version:'1.0',path:'templates/documents/hr/ANNUAL_LEAVE_ENCASHMENT.md'},
+  {id:'hr/APPRECIATION_LETTER',        slug:'appreciation-letter',        name:'Appreciation Letter',        category:'hr',version:'2.1',path:'templates/documents/hr/APPRECIATION_LETTER.md'},
+  {id:'hr/EMPLOYEE_INFORMATION_FORM',  slug:'employee-information-form',  name:'Employee Information Form',  category:'hr',version:'2.1',path:'templates/documents/hr/EMPLOYEE_INFORMATION_FORM.md'},
+  {id:'hr/EMPLOYMENT_VERIFICATION_LETTER',slug:'employment-verification-letter',name:'Employment Verification Letter',category:'hr',version:'2.1',path:'templates/documents/hr/EMPLOYMENT_VERIFICATION_LETTER.md'},
+  {id:'hr/EXPERIENCE_CERTIFICATE',     slug:'experience-certificate',     name:'Experience Certificate',     category:'hr',version:'2.1',path:'templates/documents/hr/EXPERIENCE_CERTIFICATE.md'},
+  {id:'hr/FINAL_SETTLEMENT',           slug:'final-settlement',           name:'Final Settlement Form',      category:'hr',version:'1.0',path:'templates/documents/hr/FINAL_SETTLEMENT.md'},
+  {id:'hr/JOB_OFFER',                  slug:'job-offer',                  name:'Job Offer',                  category:'hr',version:'2.0',path:'templates/documents/hr/JOB_OFFER.md'},
+  {id:'hr/LOAN_ACKNOWLEDGEMENT',       slug:'loan-acknowledgement',       name:'Loan Acknowledgement',       category:'hr',version:'1.0',path:'templates/documents/hr/LOAN_ACKNOWLEDGEMENT.md'},
+  {id:'hr/PAYSLIP',                    slug:'payslip',                    name:'Payslip',                    category:'hr',version:'1.0',path:'templates/documents/hr/PAYSLIP.md'},
+  {id:'hr/PROMOTION_LETTER',           slug:'promotion-letter',           name:'Promotion Letter',           category:'hr',version:'2.1',path:'templates/documents/hr/PROMOTION_LETTER.md'},
+  {id:'hr/RESIGNATION_ACCEPTANCE',     slug:'resignation-acceptance',     name:'Resignation Acceptance',     category:'hr',version:'2.1',path:'templates/documents/hr/RESIGNATION_ACCEPTANCE.md'},
+  {id:'hr/SALARY_CERTIFICATE',         slug:'salary-certificate',         name:'Salary Certificate',         category:'hr',version:'1.1',path:'templates/documents/hr/SALARY_CERTIFICATE.md'},
+  {id:'hr/TERMINATION_LETTER',         slug:'termination-letter',         name:'Contract Termination Letter',category:'hr',version:'2.0',path:'templates/documents/hr/TERMINATION_LETTER.md'},
+  {id:'hr/TRANSFER_LETTER',            slug:'transfer-letter',            name:'Transfer Letter',            category:'hr',version:'2.1',path:'templates/documents/hr/TRANSFER_LETTER.md'},
+  {id:'hr/WARNING_LETTER',             slug:'warning-letter',             name:'Warning Letter',             category:'hr',version:'2.0',path:'templates/documents/hr/WARNING_LETTER.md'},
+  {id:'operations/ASSET_HANDOVER',    slug:'asset-handover',    name:'Asset Handover',     category:'operations',version:'2.1',path:'templates/documents/operations/ASSET_HANDOVER.md'},
+  {id:'operations/ASSET_RETURN',      slug:'asset-return',      name:'Asset Return',       category:'operations',version:'2.1',path:'templates/documents/operations/ASSET_RETURN.md'},
+  {id:'operations/INCIDENT_REPORT',   slug:'incident-report',   name:'Incident Report',    category:'operations',version:'2.1',path:'templates/documents/operations/INCIDENT_REPORT.md'},
+  {id:'operations/INSPECTION_REPORT', slug:'inspection-report', name:'Inspection Report',  category:'operations',version:'2.1',path:'templates/documents/operations/INSPECTION_REPORT.md'},
+  {id:'operations/MAINTENANCE_REQUEST',slug:'maintenance-request',name:'Maintenance Request',category:'operations',version:'2.1',path:'templates/documents/operations/MAINTENANCE_REQUEST.md'},
+  {id:'operations/MEETING_MINUTES',   slug:'meeting-minutes',   name:'Meeting Minutes',    category:'operations',version:'2.1',path:'templates/documents/operations/MEETING_MINUTES.md'},
+  {id:'framework/ADR_TEMPLATE',          slug:'adr-template',          name:'ADR',           category:'framework',version:'1.0',path:'templates/documents/framework/ADR_TEMPLATE.md'},
+  {id:'framework/AUDIT_REPORT_TEMPLATE', slug:'audit-report-template', name:'Audit Report',  category:'framework',version:'1.0',path:'templates/documents/framework/AUDIT_REPORT_TEMPLATE.md'},
+  {id:'framework/CHANGE_REQUEST_TEMPLATE',slug:'change-request-template',name:'Change Request',category:'framework',version:'1.0',path:'templates/documents/framework/CHANGE_REQUEST_TEMPLATE.md'},
+  {id:'framework/DECISION_LOG_TEMPLATE', slug:'decision-log-template', name:'Decision Log',  category:'framework',version:'1.0',path:'templates/documents/framework/DECISION_LOG_TEMPLATE.md'},
+  {id:'framework/MEETING_NOTES_TEMPLATE',slug:'meeting-notes-template',name:'Meeting Notes', category:'framework',version:'1.0',path:'templates/documents/framework/MEETING_NOTES_TEMPLATE.md'},
+  {id:'framework/RESEARCH_TEMPLATE',     slug:'research-template',     name:'Research',      category:'framework',version:'1.0',path:'templates/documents/framework/RESEARCH_TEMPLATE.md'},
+  {id:'framework/SPECIFICATION_TEMPLATE',slug:'specification-template',name:'Specification', category:'framework',version:'1.0',path:'templates/documents/framework/SPECIFICATION_TEMPLATE.md'},
+  {id:'framework/SPRINT_REPORT_TEMPLATE',slug:'sprint-report-template',name:'Sprint Report', category:'framework',version:'1.0',path:'templates/documents/framework/SPRINT_REPORT_TEMPLATE.md'},
 ];
 
 const CATEGORIES = {
   hr:             { label: 'Human Resources'  },
-  finance:        { label: 'Finance'           },
-  operations:     { label: 'Operations'        },
-  administration: { label: 'Administration'    },
-  general:        { label: 'General'           },
-  framework:      { label: 'Framework'         },
+  finance:        { label: 'Finance'          },
+  operations:     { label: 'Operations'       },
+  administration: { label: 'Administration'   },
+  general:        { label: 'General'          },
+  framework:      { label: 'Framework'        },
 };
 
-// Fill sidebar counts
+// Populate sidebar counts
 Object.keys(CATEGORIES).forEach(cat => {
   const el = document.getElementById('cnt-' + cat);
   if (el) el.textContent = TEMPLATES.filter(t => t.category === cat).length;
 });
 
-// ── Theme ─────────────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Theme
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function toggleTheme() {
-  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.documentElement.setAttribute('data-theme', dark ? '' : 'dark');
-  localStorage.setItem('theme', dark ? 'light' : 'dark');
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
 }
-if (localStorage.getItem('theme') === 'dark' ||
-    (!localStorage.getItem('theme') && matchMedia('(prefers-color-scheme:dark)').matches)) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-}
+(function initTheme() {
+  const saved = localStorage.getItem('theme');
+  const prefersDark = !saved && matchMedia('(prefers-color-scheme:dark)').matches;
+  if (saved === 'dark' || prefersDark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
 
-// ── Toast ─────────────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Toast notifications
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const TOAST_ICONS = {
+  success: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`,
+  error:   `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  info:    `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+};
+
 function showToast(message, type) {
   type = type || 'info';
   const root = document.getElementById('toast-root');
-  const icons = {
-    success: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`,
-    error:   `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
-    info:    `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
-  };
-  const toast = document.createElement('div');
-  toast.className = `toast toast-${type}`;
-  toast.setAttribute('role', 'status');
-  toast.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span>${message}</span><button class="toast-dismiss" aria-label="Dismiss">×</button>`;
-  toast.querySelector('.toast-dismiss').onclick = () => dismissToast(toast);
-  root.appendChild(toast);
-  setTimeout(() => dismissToast(toast), 4000);
+  const el = document.createElement('div');
+  el.className = 'toast toast-' + type;
+  el.setAttribute('role', 'status');
+  el.innerHTML = `<span class="toast-icon">${TOAST_ICONS[type] || TOAST_ICONS.info}</span><span class="toast-msg">${message}</span><button class="toast-dismiss" aria-label="Dismiss">×</button>`;
+  el.querySelector('.toast-dismiss').onclick = () => dismissToast(el);
+  root.appendChild(el);
+  setTimeout(() => dismissToast(el), 4500);
+  return el;
 }
 
-function dismissToast(toast) {
-  if (!toast.parentNode) return;
-  toast.classList.add('removing');
-  setTimeout(() => toast.remove(), 200);
+function dismissToast(el) {
+  if (!el || !el.parentNode) return;
+  el.classList.add('removing');
+  setTimeout(() => el.remove(), 200);
 }
 
-// ── Sidebar ───────────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Sidebar + mobile overlay
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function toggleSidebar() {
-  const s = document.getElementById('sidebar');
-  const o = document.getElementById('overlay');
-  const isOpen = s.classList.toggle('open');
-  o.classList.toggle('open');
-  // Focus trap: inert on main content when sidebar is open (mobile)
-  const main = document.getElementById('main');
-  const header = document.querySelector('.site-header');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const isOpen  = sidebar.classList.toggle('open');
+  overlay.classList.toggle('open', isOpen);
   if (window.innerWidth <= 768) {
-    if (isOpen) {
-      main.inert = true;
-      header.inert = true;
-    } else {
-      main.inert = false;
-      header.inert = false;
-    }
+    document.getElementById('main').inert  = isOpen;
+    document.querySelector('.site-header').inert = isOpen;
   }
 }
 
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('overlay').classList.remove('open');
-  const main = document.getElementById('main');
-  const header = document.querySelector('.site-header');
-  main.inert = false;
-  header.inert = false;
+  document.getElementById('main').inert = false;
+  document.querySelector('.site-header').inert = false;
 }
 
-// ── Sidebar Collapse (desktop) ────────────────────────────────────────────
+/* ── Sidebar collapse (desktop) ─────────────────────────────────────────── */
 (function initSidebarCollapse() {
-  if (localStorage.getItem('sidebar-collapsed') === 'true') {
-    applyCollapse(true, false);
-  }
+  if (localStorage.getItem('sidebar-collapsed') === 'true') applyCollapse(true, false);
 })();
 
 function toggleSidebarCollapse() {
-  const sidebar = document.getElementById('sidebar');
-  const collapsed = sidebar.classList.contains('collapsed');
-  applyCollapse(!collapsed, true);
+  applyCollapse(!document.getElementById('sidebar').classList.contains('collapsed'), true);
 }
 
 function applyCollapse(collapse, persist) {
   const sidebar = document.getElementById('sidebar');
-  const icon = document.getElementById('collapse-icon');
-  const label = document.getElementById('collapse-label');
-  const appBody = document.querySelector('.app-body');
+  const icon    = document.getElementById('collapse-icon');
+  const label   = document.getElementById('collapse-label');
 
   if (collapse) {
     sidebar.classList.add('collapsed');
-    // hide text, keep icons
-    sidebar.querySelectorAll('.sidebar-heading, .cat-count, #collapse-label').forEach(el => {
-      el.style.display = 'none';
-    });
+    sidebar.querySelectorAll('.sidebar-heading,.cat-count').forEach(el => el.style.display = 'none');
     sidebar.querySelectorAll('.sidebar-link').forEach(el => {
       el.style.justifyContent = 'center';
-      el.style.padding = '9px 0';
+      el.style.padding = '8px 0';
       el.title = el.textContent.trim();
     });
-    sidebar.style.width = '52px';
-    icon.style.transform = 'rotate(180deg)';
-    if (label) label.style.display = 'none';
+    sidebar.style.width = '50px';
+    if (icon)  icon.style.transform = 'rotate(180deg)';
+    if (label) label.style.display  = 'none';
   } else {
     sidebar.classList.remove('collapsed');
-    sidebar.querySelectorAll('.sidebar-heading').forEach(el => el.style.display = '');
-    sidebar.querySelectorAll('.cat-count').forEach(el => el.style.display = '');
+    sidebar.querySelectorAll('.sidebar-heading,.cat-count').forEach(el => el.style.display = '');
     sidebar.querySelectorAll('.sidebar-link').forEach(el => {
       el.style.justifyContent = '';
       el.style.padding = '';
       el.title = '';
     });
     sidebar.style.width = '';
-    icon.style.transform = '';
+    if (icon)  icon.style.transform = '';
     if (label) { label.style.display = ''; label.textContent = 'Collapse'; }
   }
   if (persist) localStorage.setItem('sidebar-collapsed', String(collapse));
 }
 
-// ── Router ────────────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Router
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 window.addEventListener('hashchange', route);
 window.addEventListener('load', route);
 
 function route() {
-  const hash = location.hash || '#/';
+  const hash  = location.hash || '#/';
   const parts = hash.slice(2).split('/').filter(Boolean);
 
-  // Update active sidebar link + aria-current
+  // Active link + aria-current
   document.querySelectorAll('.sidebar-link').forEach(el => {
-    const isActive = el.getAttribute('href') === hash;
-    el.classList.toggle('active', isActive);
-    if (isActive) {
-      el.setAttribute('aria-current', 'page');
-    } else {
-      el.removeAttribute('aria-current');
+    const href = el.getAttribute('href');
+    // Match exact OR category prefix (e.g. fill mode should highlight category link)
+    let active = href === hash;
+    // For fill mode, highlight the category link
+    if (!active && parts[0] === 'fill' && parts[1]) {
+      const tpl = TEMPLATES.find(t => t.id === parts.slice(1).join('/'));
+      if (tpl && href === '#/category/' + tpl.category) active = true;
     }
+    el.classList.toggle('active', active);
+    active ? el.setAttribute('aria-current', 'page') : el.removeAttribute('aria-current');
   });
 
-  if (!parts.length || parts[0] === '') return renderHome();
-  if (parts[0] === 'my-documents') return renderMyDocuments();
-  if (parts[0] === 'all') return renderList(TEMPLATES, 'All Templates', '');
-  if (parts[0] === 'category' && parts[1]) return renderCategory(parts[1]);
-  if (parts[0] === 'template') { location.replace('#/fill/' + parts.slice(1).join('/')); return; }
-  if (parts[0] === 'search') return renderSearch(decodeURIComponent(parts[1] || ''));
+  if (!parts.length)                                 return renderHome();
+  if (parts[0] === 'my-documents')                   return renderMyDocuments();
+  if (parts[0] === 'all')                            return renderList(TEMPLATES, 'All Templates', '');
+  if (parts[0] === 'category' && parts[1])           return renderCategory(parts[1]);
+  if (parts[0] === 'template')                       { location.replace('#/fill/' + parts.slice(1).join('/')); return; }
+  if (parts[0] === 'search')                         return renderSearch(decodeURIComponent(parts[1] || ''));
   if (parts[0] === 'settings' && parts[1] === 'letterhead') return renderLetterhead();
-  if (parts[0] === 'fill') return renderFillMode(parts.slice(1).join('/'));
+  if (parts[0] === 'fill')                           return renderFillMode(parts.slice(1).join('/'));
   renderHome();
 }
 
-// ── Search ────────────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Search
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function handleSearch(q) {
   q = q.trim();
   if (!q) { location.hash = '#/'; return; }
   location.hash = '#/search/' + encodeURIComponent(q);
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────
-function badge(cat) {
-  const c = CATEGORIES[cat] || {};
-  return `<span class="cat-badge badge-${cat}">${c.label || cat}</span>`;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   General helpers
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/** Escape HTML special chars for safe innerHTML injection. */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function scrollTop() { window.scrollTo(0, 0); }
-
+/** Escape a string for use inside a RegExp constructor. */
 function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+/** Format an ISO date string to a locale-sensitive short date. */
 function formatDate(iso) {
-  try {
-    return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-  } catch(e) { return iso; }
+  try { return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }); }
+  catch (e) { return iso; }
 }
 
-// ── Template loader ───────────────────────────────────────────────────────
+/** Render a category badge chip. */
+function badge(cat) {
+  const c = CATEGORIES[cat] || {};
+  return `<span class="cat-badge badge-${escapeHtml(cat)}">${escapeHtml(c.label || cat)}</span>`;
+}
+
+function scrollTop() { window.scrollTo({ top: 0, behavior: 'instant' }); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Template loader (cached)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const _templateCache = new Map();
+
 async function loadTemplate(id) {
   if (_templateCache.has(id)) return _templateCache.get(id);
   const t = TEMPLATES.find(x => x.id === id);
-  if (!t) return '';
+  if (!t) throw new Error('Unknown template id: ' + id);
   const resp = await fetch(t.path);
-  if (!resp.ok) throw new Error('Failed to load template: ' + t.path + ' (' + resp.status + ')');
+  if (!resp.ok) throw new Error('Template file not found: ' + t.path + ' (HTTP ' + resp.status + ')');
   const text = await resp.text();
   _templateCache.set(id, text);
   return text;
 }
 
+/** Strip YAML front-matter and any embedded <style> blocks from raw markdown. */
 function getBody(rawText) {
-  let body = rawText.replace(/^---[\s\S]*?\n---\r?\n?/, '');
-  return body.replace(/<style[\s\S]*?<\/style>/gi, '').trim();
+  return rawText
+    .replace(/^---[\s\S]*?\n---\r?\n?/, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .trim();
 }
 
-// ── Document Store (localStorage) ─────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Field substitution engine (shared by live preview and print)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function extractPlaceholders(body) {
+  const seen = new Set();
+  const out  = [];
+  for (const m of body.matchAll(/\{\{([^}]+)\}\}/g)) {
+    const key = m[1].trim();
+    if (!seen.has(key)) { seen.add(key); out.push(key); }
+  }
+  return out;
+}
+
+/**
+ * Substitute all {{Key}} placeholders in `body`.
+ * `getValue(key)` returns the current field value (string).
+ * `forPrint` — when true, empty values produce an empty string instead of a styled span.
+ * The {{Logo}} key is handled specially from localStorage.
+ */
+function substituteFields(body, keys, getValue, forPrint) {
+  const lh = localStorage.getItem('letterhead');
+
+  if (keys.includes('Logo')) {
+    const logoHtml = lh
+      ? `<img src="${lh}" class="doc-letterhead" alt="Company Letterhead">`
+      : (forPrint ? '' : `<div class="doc-letterhead-ph"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Company Letterhead — <a href="#/settings/letterhead">upload to see it here</a></div>`);
+    body = body.replace(/\{\{Logo\}\}/g, logoHtml);
+  }
+
+  keys.forEach(key => {
+    if (key === 'Logo') return;
+    const val = getValue(key);
+    body = body.replace(
+      new RegExp('\\{\\{' + escapeRegex(key) + '\\}\\}', 'g'),
+      val.trim()
+        ? val
+        : (forPrint ? '' : `<span class="ph">{{${key}}}</span>`)
+    );
+  });
+
+  return body;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Document store (localStorage)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const DB = {
   _key: 'alba_docs_store',
   _load() {
-    try { return JSON.parse(localStorage.getItem(this._key) || '[]'); }
-    catch(e) { return []; }
+    try { return JSON.parse(localStorage.getItem(this._key) || '[]'); } catch (e) { return []; }
   },
   _save(docs) {
-    try { localStorage.setItem(this._key, JSON.stringify(docs)); } catch(e) {}
+    try { localStorage.setItem(this._key, JSON.stringify(docs)); } catch (e) {}
   },
-  getAll() { return this._load(); },
+  getAll()    { return this._load(); },
   getById(id) { return this._load().find(d => d.id === id) || null; },
   save(doc) {
     const docs = this._load();
-    const idx = docs.findIndex(d => d.id === doc.id);
-    if (idx >= 0) docs[idx] = doc;
-    else docs.unshift(doc);
+    const idx  = docs.findIndex(d => d.id === doc.id);
+    if (idx >= 0) docs[idx] = doc; else docs.unshift(doc);
     this._save(docs);
   },
-  delete(id) {
-    this._save(this._load().filter(d => d.id !== id));
-  },
+  delete(id) { this._save(this._load().filter(d => d.id !== id)); },
   exportJson() {
-    const blob = new Blob([JSON.stringify(this._load(), null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'alba-docs-export-' + new Date().toISOString().slice(0,10) + '.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-  }
+    try {
+      const blob = new Blob([JSON.stringify(this._load(), null, 2)], { type: 'application/json' });
+      const a    = document.createElement('a');
+      a.href     = URL.createObjectURL(blob);
+      a.download = 'alba-docs-' + new Date().toISOString().slice(0, 10) + '.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    } catch (e) { showToast('Export failed', 'error'); }
+  },
 };
 
 function genDocId() {
   return 'doc_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
 }
 
-// ── Draft Store ───────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Draft store (per-template autosave)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const Drafts = {
   key(id) { return 'draft_' + id; },
   save(templateId, fields) {
     try {
       localStorage.setItem(this.key(templateId), JSON.stringify({ fields, savedAt: new Date().toISOString() }));
-    } catch(e) {}
+    } catch (e) {}
   },
   load(templateId) {
-    try { return JSON.parse(localStorage.getItem(this.key(templateId)) || 'null'); }
-    catch(e) { return null; }
+    try { return JSON.parse(localStorage.getItem(this.key(templateId)) || 'null'); } catch (e) { return null; }
   },
-  clear(templateId) {
-    localStorage.removeItem(this.key(templateId));
-  }
+  clear(templateId) { localStorage.removeItem(this.key(templateId)); },
 };
 
-// ── Render: Home ──────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: Home
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function renderHome() {
   scrollTop();
   document.title = 'Alba Docs';
-  const main = document.getElementById('main');
   const hasLH = !!localStorage.getItem('letterhead');
 
-  const banner = !hasLH ? `
+  const banner = hasLH ? '' : `
     <div class="lh-setup-banner">
       <div class="lh-setup-banner-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/>
+          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+        </svg>
       </div>
       <div class="lh-setup-banner-text">
         <div class="lh-setup-banner-title">Set up your company letterhead</div>
-        <div class="lh-setup-banner-sub">Upload once and it will appear on every document you generate.</div>
+        <div class="lh-setup-banner-sub">Upload once — it appears on every document you generate.</div>
       </div>
       <div class="lh-setup-banner-cta">
-        <a href="#/settings/letterhead" class="btn btn-outline" style="font-size:.82rem;padding:7px 14px">Set Up →</a>
+        <a href="#/settings/letterhead" class="btn btn-outline btn-sm">Set Up →</a>
       </div>
-    </div>` : '';
+    </div>`;
 
-  const catCards = Object.entries(CATEGORIES).map(([key, cat]) => {
+  const cards = Object.entries(CATEGORIES).map(([key, cat]) => {
     const count = TEMPLATES.filter(t => t.category === key).length;
     return `<a class="cat-card" href="#/category/${key}">
-      <div class="cat-card-icon">${catIconSvg(key, 36)}</div>
-      <div class="cat-card-name">${cat.label}</div>
+      <div class="cat-card-icon">${catIconSvg(key, 32)}</div>
+      <div class="cat-card-name">${escapeHtml(cat.label)}</div>
       <div class="cat-card-count">${count} document${count !== 1 ? 's' : ''}</div>
     </a>`;
   }).join('');
 
-  main.innerHTML = `
+  document.getElementById('main').innerHTML = `
     ${banner}
-    <h1 class="page-title">Create a Document</h1>
-    <p class="page-sub">Select a document type to fill in the form and generate a professional PDF.</p>
-    <div class="category-grid">${catCards}</div>
-  `;
+    <div class="page-header">
+      <h1 class="page-title">Create a Document</h1>
+      <p class="page-sub">Choose a category to browse templates, fill in the form, and generate a professional document.</p>
+    </div>
+    <div class="category-grid">${cards}</div>`;
 }
 
-// ── Render: My Documents ───────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: My Documents
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function renderMyDocuments() {
   scrollTop();
   document.title = 'My Documents — Alba Docs';
@@ -756,12 +1312,17 @@ function renderMyDocuments() {
 
   if (!docs.length) {
     main.innerHTML = `
-      <h1 class="page-title">My Documents</h1>
-      <p class="page-sub">Documents you save will appear here.</p>
+      <div class="page-header">
+        <h1 class="page-title">My Documents</h1>
+        <p class="page-sub">Documents you save will appear here.</p>
+      </div>
       <div class="my-docs-empty">
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8M16 13H8M16 17H8"/></svg>
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8M16 13H8M16 17H8"/>
+        </svg>
         <div class="my-docs-empty-title">No documents yet</div>
-        <div class="my-docs-empty-sub">Fill out a template and click "Save Draft" or "Publish" to keep a copy here.</div>
+        <div class="my-docs-empty-sub">Open any template, fill in the form, then click "Save Draft" or "Publish" to keep a copy here.</div>
         <a href="#/" class="btn btn-primary">Browse Templates</a>
       </div>`;
     return;
@@ -770,9 +1331,8 @@ function renderMyDocuments() {
   const items = docs.map(doc => {
     const statusClass = doc.status === 'published' ? 'status-published' : 'status-draft';
     const statusLabel = doc.status === 'published' ? 'Published' : 'Draft';
-    const catLabel = (CATEGORIES[doc.category] || {}).label || doc.category;
     return `<div class="my-doc-item">
-      <div style="color:var(--text-muted);flex-shrink:0">${catIconSvg(doc.category, 22)}</div>
+      <div style="color:var(--text-muted);flex-shrink:0">${catIconSvg(doc.category, 20)}</div>
       <div class="my-doc-item-info">
         <div class="my-doc-item-name">${escapeHtml(doc.templateName)}</div>
         <div class="my-doc-item-meta">
@@ -782,20 +1342,29 @@ function renderMyDocuments() {
         </div>
       </div>
       <div class="my-doc-item-actions">
-        <button class="btn btn-outline btn-sm" onclick="openSavedDoc('${doc.id}')">Open</button>
-        <button class="btn btn-outline btn-sm" onclick="deleteSavedDoc('${doc.id}')" style="color:#dc2626;border-color:#dc2626" title="Delete">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        <button class="btn btn-outline btn-sm" onclick="openSavedDoc('${escapeHtml(doc.id)}')">Open</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSavedDoc('${escapeHtml(doc.id)}')" title="Delete document" aria-label="Delete ${escapeHtml(doc.templateName)}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+          </svg>
         </button>
       </div>
     </div>`;
   }).join('');
 
   main.innerHTML = `
-    <h1 class="page-title">My Documents</h1>
-    <p class="page-sub">${docs.length} saved document${docs.length !== 1 ? 's' : ''}</p>
+    <div class="page-header">
+      <h1 class="page-title">My Documents</h1>
+      <p class="page-sub">${docs.length} saved document${docs.length !== 1 ? 's' : ''}</p>
+    </div>
     <div class="my-docs-toolbar">
       <button class="btn btn-outline btn-sm" onclick="DB.exportJson();showToast('Documents exported','success')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
         Export JSON
       </button>
     </div>
@@ -805,20 +1374,22 @@ function renderMyDocuments() {
 function openSavedDoc(docId) {
   const doc = DB.getById(docId);
   if (!doc) return;
-  // Store the field values as a draft so renderFillMode can restore them
   Drafts.save(doc.templateId, doc.fields);
-  // Store the docId so the form knows it's editing an existing document
   sessionStorage.setItem('editing_doc_id', docId);
   location.hash = '#/fill/' + doc.templateId;
 }
 
 function deleteSavedDoc(docId) {
+  const doc = DB.getById(docId);
+  const name = doc ? doc.templateName : 'document';
   DB.delete(docId);
-  showToast('Document deleted', 'info');
+  showToast(`"${name}" deleted`, 'info');
   renderMyDocuments();
 }
 
-// ── Render: Category ──────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: Category list / All templates
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function renderCategory(cat) {
   const list = TEMPLATES.filter(t => t.category === cat);
   const info = CATEGORIES[cat] || { label: cat };
@@ -828,36 +1399,46 @@ function renderCategory(cat) {
 function renderList(list, title, catKey, showBreadcrumb) {
   scrollTop();
   document.title = title + ' — Alba Docs';
-  const iconHtml = catKey ? catIconSvg(catKey, 22) : '';
+
   const breadcrumb = showBreadcrumb
-    ? `<div class="breadcrumb"><a href="#/">Home</a> › <span>${title}</span></div>`
+    ? `<div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> <span>${escapeHtml(title)}</span></div>`
     : '';
+
+  const iconHtml = catKey ? `<span style="color:var(--text-muted);display:flex;align-items:center">${catIconSvg(catKey, 20)}</span>` : '';
+
   const items = list.length
     ? list.map(t => documentItem(t)).join('')
     : `<div class="no-results">
-        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
         <p>No documents found.</p>
       </div>`;
+
   document.getElementById('main').innerHTML = `
     ${breadcrumb}
-    <div class="section-title">${iconHtml ? `<span style="color:var(--text-muted)">${iconHtml}</span>` : ''}${title}</div>
-    <div class="section-sub">${list.length} document${list.length !== 1 ? 's' : ''} — click to start filling</div>
-    <div class="template-list">${items}</div>
-  `;
+    <div class="list-header">
+      <div class="section-title">${iconHtml}${escapeHtml(title)}</div>
+      <div class="section-sub">${list.length} template${list.length !== 1 ? 's' : ''} — click any to fill and print</div>
+    </div>
+    <div class="template-list">${items}</div>`;
 }
 
 function documentItem(t) {
-  return `<div class="template-item" onclick="location.hash='#/fill/${t.id}'">
-    <div class="template-item-icon">${catIconSvg(t.category, 22)}</div>
+  return `<div class="template-item" onclick="location.hash='#/fill/${escapeHtml(t.id)}'" role="button" tabindex="0"
+    onkeydown="if(event.key==='Enter'||event.key===' ')location.hash='#/fill/${escapeHtml(t.id)}'">
+    <div class="template-item-icon">${catIconSvg(t.category, 20)}</div>
     <div class="template-item-info">
-      <div class="template-item-name">${t.name}</div>
+      <div class="template-item-name">${escapeHtml(t.name)}</div>
       <div class="template-item-meta">${badge(t.category)}</div>
     </div>
     <div class="template-item-cta">Fill &amp; Print →</div>
   </div>`;
 }
 
-// ── Render: Search ────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: Search
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function renderSearch(q) {
   const ql = q.toLowerCase();
   const results = TEMPLATES.filter(t =>
@@ -867,25 +1448,32 @@ function renderSearch(q) {
   );
   scrollTop();
   document.title = 'Search: ' + q + ' — Alba Docs';
+
   const items = results.length
     ? results.map(t => documentItem(t)).join('')
     : `<div class="no-results">
-        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-        <p>No documents match "<strong>${escapeHtml(q)}</strong>".</p>
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+        <p>No results for "<strong>${escapeHtml(q)}</strong>".</p>
       </div>`;
+
   document.getElementById('main').innerHTML = `
-    <div class="breadcrumb"><a href="#/">Home</a> › Search</div>
-    <div class="search-results-header">
+    <div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> Search</div>
+    <div class="list-header search-results-header">
       <div class="section-title">Results for: ${escapeHtml(q)}</div>
       <div class="section-sub">${results.length} result${results.length !== 1 ? 's' : ''}</div>
     </div>
-    <div class="template-list">${items}</div>
-  `;
+    <div class="template-list">${items}</div>`;
+
   const box = document.getElementById('search');
   if (box && box.value !== q) box.value = q;
 }
 
-// ── Official Letterhead ───────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: Letterhead settings
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function renderLetterhead() {
   scrollTop();
   document.title = 'Company Letterhead — Alba Docs';
@@ -893,11 +1481,15 @@ function renderLetterhead() {
   const name    = localStorage.getItem('letterhead_name') || '';
   const main    = document.getElementById('main');
 
+  const breadcrumb = `<div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> Settings <span class="breadcrumb-sep">›</span> Letterhead</div>`;
+
   if (dataUrl) {
     main.innerHTML = `
-      <div class="breadcrumb"><a href="#/">Home</a> › Settings › Letterhead</div>
-      <h1 class="page-title">Company Letterhead</h1>
-      <p class="page-sub">This letterhead appears at the top of every document you generate.</p>
+      ${breadcrumb}
+      <div class="page-header">
+        <h1 class="page-title">Company Letterhead</h1>
+        <p class="page-sub">This image appears at the top of every document you generate.</p>
+      </div>
       <div class="lh-preview">
         <img src="${dataUrl}" alt="Company letterhead">
       </div>
@@ -905,16 +1497,17 @@ function renderLetterhead() {
       <div class="lh-actions">
         <label class="btn btn-primary lh-upload">
           Replace Letterhead
-          <input type="file" accept="image/png,image/jpeg" onchange="uploadLetterhead(this)">
+          <input type="file" accept="image/png,image/jpeg,image/webp" onchange="uploadLetterhead(this)">
         </label>
         <button class="btn btn-outline" onclick="deleteLetterhead()">Remove</button>
-      </div>
-    `;
+      </div>`;
   } else {
     main.innerHTML = `
-      <div class="breadcrumb"><a href="#/">Home</a> › Settings › Letterhead</div>
-      <h1 class="page-title">Company Letterhead</h1>
-      <p class="page-sub">Upload your company letterhead — it will appear at the top of every generated document, exactly as it does in print.</p>
+      ${breadcrumb}
+      <div class="page-header">
+        <h1 class="page-title">Company Letterhead</h1>
+        <p class="page-sub">Upload your company letterhead — it will appear at the top of every generated document, exactly as in print.</p>
+      </div>
       <div class="lh-empty">
         <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="3" y="3" width="18" height="18" rx="2"/>
@@ -922,26 +1515,33 @@ function renderLetterhead() {
         </svg>
         <div>
           <p class="lh-empty-title">No letterhead uploaded</p>
-          <p class="lh-empty-sub">Upload a PNG or JPEG (e.g. your company letterhead scan). It will display as a proper image at the top of every document — not as a background watermark.</p>
+          <p class="lh-empty-sub">Upload a PNG, JPEG, or WebP image. It will appear as a proper image at the top of every document — not as a background watermark.</p>
         </div>
         <label class="btn btn-primary lh-upload">
           Upload Letterhead
-          <input type="file" accept="image/png,image/jpeg" onchange="uploadLetterhead(this)">
+          <input type="file" accept="image/png,image/jpeg,image/webp" onchange="uploadLetterhead(this)">
         </label>
-      </div>
-    `;
+      </div>`;
   }
 }
 
 function uploadLetterhead(input) {
   const file = input.files[0];
   if (!file) return;
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('Image too large. Please use an image under 5 MB.', 'error');
+    return;
+  }
   const reader = new FileReader();
-  reader.onload = function(e) {
-    localStorage.setItem('letterhead', e.target.result);
-    localStorage.setItem('letterhead_name', file.name);
-    showToast('Letterhead saved', 'success');
-    renderLetterhead();
+  reader.onload = e => {
+    try {
+      localStorage.setItem('letterhead', e.target.result);
+      localStorage.setItem('letterhead_name', file.name);
+      showToast('Letterhead saved', 'success');
+      renderLetterhead();
+    } catch (err) {
+      showToast('Storage full — try a smaller image.', 'error');
+    }
   };
   reader.readAsDataURL(file);
 }
@@ -953,49 +1553,21 @@ function deleteLetterhead() {
   renderLetterhead();
 }
 
-// ── Generic Template Engine ───────────────────────────────────────────────
-
-function extractPlaceholders(body) {
-  const seen = new Set();
-  const out = [];
-  for (const m of body.matchAll(/\{\{([^}]+)\}\}/g)) {
-    const key = m[1].trim();
-    if (!seen.has(key)) { seen.add(key); out.push(key); }
-  }
-  return out;
-}
-
-function toLabel(key) {
-  return key
-    .replace(/([a-z])([A-Z])/g, '$1 $2')
-    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
-    .trim();
-}
-
-const MULTILINE_RE = /^(Body|Opening|Closing|Additional|Terms|Description|Reason|Notes|Paragraph|Process|Clearance|Scope|Requirements|Impact|Detail|Complaint|Observation|Summary|Remark|Agenda|Action|Appreciation|Authorization)/i;
-
-function isMultiline(key) {
-  const base = key.endsWith('Ar') ? key.slice(0, -2) : key;
-  return MULTILINE_RE.test(base);
-}
-
-// ── Metadata Engine ────────────────────────────────────────────────────────
-
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Front-matter / field definition parser
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function parseScalar(v) {
-  if (v === 'true') return true;
+  if (v === 'true')  return true;
   if (v === 'false') return false;
   if (v !== '' && !isNaN(v)) return Number(v);
-  if ((v.startsWith('"') && v.endsWith('"')) ||
-      (v.startsWith("'") && v.endsWith("'"))) return v.slice(1, -1);
+  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) return v.slice(1, -1);
   return v;
 }
 
 function parseYamlSubset(text) {
   const lines = text.split('\n');
-  const root = {};
-  let section = null;
-  let field   = null;
-  let listKey = null;
+  const root  = {};
+  let section = null, field = null, listKey = null;
 
   for (const raw of lines) {
     const trimmed = raw.trim();
@@ -1024,12 +1596,8 @@ function parseYamlSubset(text) {
         root[section][key] = val ? parseScalar(val) : {};
       }
     } else if (indent >= 4 && section && field) {
-      if (!val) {
-        root[section][field][key] = [];
-        listKey = key;
-      } else {
-        root[section][field][key] = parseScalar(val);
-      }
+      if (!val) { root[section][field][key] = []; listKey = key; }
+      else root[section][field][key] = parseScalar(val);
     }
   }
   return root;
@@ -1041,176 +1609,213 @@ function parseFrontMatter(rawBody) {
   return { meta: parseYamlSubset(m[1]), body: rawBody.slice(m[0].length) };
 }
 
+/** Convert a camelCase / PascalCase / snake_case key to a human label. */
+function toLabel(key) {
+  return key
+    .replace(/_/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .trim();
+}
+
+/** Heuristic: should this key produce a textarea? */
+const MULTILINE_RE = /^(Body|Opening|Closing|Additional|Terms|Description|Reason|Notes|Paragraph|Process|Clearance|Scope|Requirements|Impact|Detail|Complaint|Observation|Summary|Remark|Agenda|Action|Appreciation|Authorization|Content|Text|Message|Comment)/i;
+function isMultiline(key) {
+  return MULTILINE_RE.test(key.replace(/Ar$/, ''));
+}
+
+/** Heuristic: should this key be a date input? */
+const DATE_RE = /Date|DOB|Dob|dob|Since|From|To|Expiry|Expir/;
+function isDateKey(key) { return DATE_RE.test(key); }
+
+/** Heuristic: should this key be a number input? */
+const NUMBER_RE = /Amount|Salary|Total|Gross|Net|Tax|Loan|Balance|Rate|Days|Hours|Quantity|Qty/i;
+function isNumberKey(key) { return NUMBER_RE.test(key); }
+
+/**
+ * Return an ordered array of field definition objects for a template.
+ * Uses YAML front-matter `fields:` block when present; falls back to
+ * placeholder heuristics otherwise.
+ */
 function getFieldDefs(rawText) {
   const { meta } = parseFrontMatter(rawText);
-  const fieldsMap = (meta && meta.fields) ? meta.fields : null;
+  const fieldsMap = meta?.fields || null;
 
   if (fieldsMap) {
     const defs = Object.entries(fieldsMap).map(([key, f], idx) => ({
       key,
-      label:       (f && f.label)       || toLabel(key),
-      type:        (f && f.type)        || 'text',
-      required:    (f && f.required)    || false,
-      default:     (f && f.default != null) ? String(f.default) : '',
-      placeholder: (f && f.placeholder) || '',
-      group:       (f && f.group)       || '',
-      options:     (f && Array.isArray(f.options)) ? f.options : [],
-      order:       (f && typeof f.order === 'number') ? f.order : 9000 + idx,
+      label:       f?.label       || toLabel(key),
+      type:        f?.type        || (isDateKey(key) ? 'date' : isNumberKey(key) ? 'number' : isMultiline(key) ? 'textarea' : 'text'),
+      required:    f?.required    || false,
+      default:     f?.default != null ? String(f.default) : '',
+      placeholder: f?.placeholder || '',
+      group:       f?.group       || '',
+      options:     Array.isArray(f?.options) ? f.options : [],
+      order:       typeof f?.order === 'number' ? f.order : 9000 + idx,
     })).filter(d => d.key !== 'Logo');
 
     defs.sort((a, b) => a.order - b.order);
 
+    // Add any placeholder keys that aren't in the YAML definition
     const metaKeys = new Set(defs.map(d => d.key));
     extractPlaceholders(rawText).forEach(key => {
       if (key !== 'Logo' && !metaKeys.has(key)) {
-        defs.push({ key, label: toLabel(key),
-          type: isMultiline(key) ? 'textarea' : 'text',
-          required: false, default: '', placeholder: '',
-          group: '', options: [], order: 9999 });
+        defs.push({
+          key, label: toLabel(key),
+          type: isDateKey(key) ? 'date' : isNumberKey(key) ? 'number' : isMultiline(key) ? 'textarea' : 'text',
+          required: false, default: '', placeholder: '', group: '', options: [], order: 9999,
+        });
       }
     });
     return defs;
   }
 
+  // No YAML fields block — derive from placeholders
   return extractPlaceholders(rawText)
     .filter(k => k !== 'Logo')
     .map((key, idx) => ({
       key, label: toLabel(key),
-      type: isMultiline(key) ? 'textarea' : 'text',
-      required: false, default: '', placeholder: '', group: '', options: [], order: idx
+      type: isDateKey(key) ? 'date' : isNumberKey(key) ? 'number' : isMultiline(key) ? 'textarea' : 'text',
+      required: false, default: '', placeholder: '', group: '', options: [], order: idx,
     }));
 }
 
+/** Render a single form field. */
 function renderField(def, templateId) {
-  const star = def.required
-    ? '<span class="fill-required-star" title="Required">*</span>' : '';
-  const ph = def.placeholder || def.label;
+  const star = def.required ? `<span class="fill-required-star" title="Required field">*</span>` : '';
+  const ph   = def.placeholder || def.label;
+  const id   = 'ff-' + def.key;
+  const change = `onchange="onFieldChange('${escapeHtml(templateId)}')"`;
+  const input_  = `oninput="onFieldChange('${escapeHtml(templateId)}')"`;
   let input;
 
   if (def.type === 'select') {
-    const opts = def.options.map(o =>
-      `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`
-    ).join('');
-    input = `<select class="fill-select" id="ff-${def.key}"` +
-      ` onchange="onFieldChange('${templateId}')">` +
-      `<option value="" disabled selected>— select —</option>${opts}</select>`;
+    const opts = def.options.map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join('');
+    input = `<select class="fill-select" id="${id}" ${change}>
+      <option value="" disabled selected>— select —</option>${opts}
+    </select>`;
   } else if (def.type === 'textarea') {
-    input = `<textarea class="fill-textarea" id="ff-${def.key}"` +
-      ` placeholder="${escapeHtml(ph)}\u2026" oninput="onFieldChange('${templateId}')"` +
-      `>${escapeHtml(def.default)}</textarea>`;
+    input = `<textarea class="fill-textarea" id="${id}" placeholder="${escapeHtml(ph)}…" rows="3" ${input_}>${escapeHtml(def.default)}</textarea>`;
   } else {
-    const htmlType = {date:'date',number:'number',currency:'text',
-      email:'email',phone:'tel'}[def.type] || 'text';
-    input = `<input class="fill-input" id="ff-${def.key}" type="${htmlType}"` +
-      ` placeholder="${escapeHtml(ph)}" value="${escapeHtml(def.default)}"` +
-      ` oninput="onFieldChange('${templateId}')">`;
+    const htmlType = { date:'date', number:'number', currency:'text', email:'email', phone:'tel' }[def.type] || 'text';
+    input = `<input class="fill-input" id="${id}" type="${htmlType}" placeholder="${escapeHtml(ph)}" value="${escapeHtml(def.default)}" ${input_}>`;
   }
 
   const helper = def.placeholder
     ? `<div class="fill-helper">${escapeHtml(def.placeholder)}</div>` : '';
-  return `<div class="fill-field">` +
-    `<label class="fill-label" for="ff-${def.key}">${escapeHtml(def.label)}${star}</label>` +
-    `${input}${helper}</div>`;
+
+  return `<div class="fill-field">
+    <label class="fill-label" for="${id}">${escapeHtml(def.label)}${star}</label>
+    ${input}${helper}
+  </div>`;
 }
 
-// ── Field change handler (preview + autosave) ─────────────────────────────
-let _saveTimer = null;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Fill mode state (module-level, reset on each renderFillMode call)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _currentFieldDefs  = null;
+let _currentTemplateId = null;
+let _saveTimer         = null;
+
+/** Collect current field values from the DOM into a plain object. */
+function collectFields() {
+  if (!_currentFieldDefs) return {};
+  const out = {};
+  _currentFieldDefs.forEach(def => {
+    const el = document.getElementById('ff-' + def.key);
+    if (el) out[def.key] = el.value;
+  });
+  return out;
+}
+
+/** Called on every keystroke — debounce autosave, trigger live preview. */
 function onFieldChange(templateId) {
   livePreview(templateId);
   clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(() => {
-    saveDraft(templateId);
-  }, 600);
+  _saveTimer = setTimeout(() => persistDraft(templateId), 700);
 }
 
-function saveDraft(templateId) {
-  const fieldDefs = _currentFieldDefs;
-  if (!fieldDefs) return;
-  const fields = {};
-  fieldDefs.forEach(def => {
-    const el = document.getElementById('ff-' + def.key);
-    if (el) fields[def.key] = el.value;
-  });
-  Drafts.save(templateId, fields);
-  // Update saved indicator
+function persistDraft(templateId) {
+  Drafts.save(templateId, collectFields());
   const indicator = document.getElementById('saved-indicator');
   if (indicator) {
-    indicator.textContent = 'Saved ' + new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    indicator.textContent = 'Saved ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     indicator.classList.add('visible');
   }
 }
 
-function collectFields(fieldDefs) {
-  const fields = {};
-  fieldDefs.forEach(def => {
-    const el = document.getElementById('ff-' + def.key);
-    if (el) fields[def.key] = el.value;
-  });
-  return fields;
-}
-
-let _currentFieldDefs = null;
-let _currentTemplateId = null;
-
+/** Save the current form state to the document store with the given status. */
 function saveDocAs(templateId, status) {
   const t = TEMPLATES.find(x => x.id === templateId);
   if (!t) return;
-  const fields = collectFields(_currentFieldDefs || []);
+  const fields    = collectFields();
   const editingId = sessionStorage.getItem('editing_doc_id');
-  const existing = editingId ? DB.getById(editingId) : null;
-  const now = new Date().toISOString();
+  const existing  = editingId ? DB.getById(editingId) : null;
+  const now       = new Date().toISOString();
   const doc = {
-    id: existing ? existing.id : genDocId(),
+    id:           existing ? existing.id : genDocId(),
     templateId,
     templateName: t.name,
-    category: t.category,
+    category:     t.category,
     fields,
     status,
-    createdAt: existing ? existing.createdAt : now,
-    updatedAt: now,
+    createdAt:    existing ? existing.createdAt : now,
+    updatedAt:    now,
   };
   DB.save(doc);
   sessionStorage.setItem('editing_doc_id', doc.id);
   const label = status === 'published' ? 'published' : 'saved as draft';
-  showToast('Document ' + label, 'success');
-  // Update sidebar My Docs indicator
-  refreshMyDocsCount();
+  showToast(`"${t.name}" ${label}`, 'success');
 }
 
-function refreshMyDocsCount() {
-  const count = DB.getAll().length;
-  // No count badge in sidebar for My Documents, but could add later
-}
-
-// ── Render: Fill Mode ─────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Render: Fill mode
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function renderFillMode(id) {
   scrollTop();
   const t = TEMPLATES.find(x => x.id === id);
-  if (!t) { document.getElementById('main').innerHTML = '<p>Document not found.</p>'; return; }
-  document.title = t.name + ' — Alba Docs';
-  const cat = CATEGORIES[t.category] || { label: t.category };
-  const rawText = await loadTemplate(id);
+  if (!t) { document.getElementById('main').innerHTML = '<p style="color:var(--text-muted);padding:40px 0">Template not found.</p>'; return; }
 
-  const hasLogo = extractPlaceholders(rawText).includes('Logo');
+  document.title = t.name + ' — Alba Docs';
+  const cat  = CATEGORIES[t.category] || { label: t.category };
+  const main = document.getElementById('main');
+
+  // Show loading skeleton while fetching
+  main.innerHTML = `<div class="loading-state">
+    <div class="spinner"></div>
+    <span style="font-size:.875rem;color:var(--text-muted)">Loading ${escapeHtml(t.name)}…</span>
+  </div>`;
+
+  let rawText;
+  try {
+    rawText = await loadTemplate(id);
+  } catch (err) {
+    main.innerHTML = `
+      <div class="breadcrumb"><a href="#/">Home</a> <span class="breadcrumb-sep">›</span> <a href="#/category/${escapeHtml(t.category)}">${escapeHtml(cat.label)}</a> <span class="breadcrumb-sep">›</span> ${escapeHtml(t.name)}</div>
+      <div class="error-state">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <div class="error-state-text">
+          <strong>Could not load template</strong>
+          <p>${escapeHtml(err.message)}</p>
+        </div>
+      </div>`;
+    return;
+  }
+
   const fieldDefs = getFieldDefs(rawText);
-  _currentFieldDefs = fieldDefs;
+  _currentFieldDefs  = fieldDefs;
   _currentTemplateId = id;
 
+  const hasLogo = extractPlaceholders(rawText).includes('Logo');
+  const lhSet   = !!localStorage.getItem('letterhead');
   const { meta } = parseFrontMatter(rawText);
-  const formMeta = (meta && meta.form) || {};
-  const dir = formMeta.direction || 'ltr';
-
-  const logoHtml = hasLogo
-    ? `<div class="fill-field">
-        <div class="fill-label">Letterhead</div>
-        <p class="fill-logo-note">Using your uploaded company letterhead.
-          <a href="#/settings/letterhead">Manage →</a></p>
-       </div>`
-    : '';
+  const dir     = meta?.form?.direction || 'ltr';
 
   // Group fields
   const groupOrder = [];
-  const groups = {};
+  const groups     = {};
   fieldDefs.forEach(def => {
     const g = def.group || '';
     if (!groups[g]) { groups[g] = []; groupOrder.push(g); }
@@ -1222,92 +1827,104 @@ async function renderFillMode(id) {
     return heading + groups[g].map(def => renderField(def, id)).join('');
   }).join('');
 
-  const lhSet = !!localStorage.getItem('letterhead');
-  const lhWarning = hasLogo && !lhSet
-    ? `<div style="background:#fff8dc;border:1px solid #e5c84a;border-radius:5px;padding:8px 12px;font-size:.8rem;color:#7a5800;margin-bottom:14px">
-        No letterhead set. <a href="#/settings/letterhead" style="color:#d4a000;font-weight:600">Upload one →</a>
+  const logoHtml = hasLogo
+    ? `<div class="fill-field">
+        <div class="fill-label">Letterhead</div>
+        <p class="fill-logo-note">${lhSet ? 'Using your uploaded company letterhead.' : 'No letterhead uploaded.'} <a href="#/settings/letterhead">${lhSet ? 'Change →' : 'Set up →'}</a></p>
        </div>` : '';
 
-  // Check if editing an existing saved doc
-  const editingId = sessionStorage.getItem('editing_doc_id');
-  const existing = editingId ? DB.getById(editingId) : null;
-  // Only show "editing" context if the doc matches this template
-  const editingThisTemplate = existing && existing.templateId === id;
+  const lhWarning = hasLogo && !lhSet
+    ? `<div style="background:#fff8dc;border:1px solid #e5c84a;border-radius:5px;padding:9px 11px;font-size:.78rem;color:#7a5800;margin-bottom:12px">
+        No letterhead configured. <a href="#/settings/letterhead" style="color:var(--amber-ui);font-weight:600">Upload one →</a>
+       </div>` : '';
 
-  document.getElementById('main').innerHTML = `
+  const editingId = sessionStorage.getItem('editing_doc_id');
+  const existingDoc = editingId ? DB.getById(editingId) : null;
+  if (existingDoc && existingDoc.templateId !== id) sessionStorage.removeItem('editing_doc_id');
+
+  main.innerHTML = `
     <div class="doc-screen-header">
       <div class="breadcrumb">
-        <a href="#/">Home</a> ›
-        <a href="#/category/${t.category}">${escapeHtml(cat.label)}</a> ›
+        <a href="#/">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="#/category/${escapeHtml(t.category)}">${escapeHtml(cat.label)}</a>
+        <span class="breadcrumb-sep">›</span>
         <span>${escapeHtml(t.name)}</span>
       </div>
       <h1 class="doc-title">${escapeHtml(t.name)}</h1>
       <div class="doc-actions">
-        <button class="btn btn-print" onclick="printDocument('${id}')">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          Print / Save as PDF
+        <button class="btn btn-print" onclick="printDocument('${escapeHtml(id)}')">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+          </svg>
+          Print / Save PDF
         </button>
-        <button class="btn btn-outline" onclick="saveDocAs('${id}','draft')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <button class="btn btn-outline" onclick="saveDocAs('${escapeHtml(id)}','draft')">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+          </svg>
           Save Draft
         </button>
-        <button class="btn btn-primary" onclick="saveDocAs('${id}','published')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <button class="btn btn-primary" onclick="saveDocAs('${escapeHtml(id)}','published')">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
           Publish
         </button>
-        <a class="btn btn-outline" href="#/category/${t.category}">← Back</a>
+        <a class="btn btn-outline" href="#/category/${escapeHtml(t.category)}">← Back</a>
       </div>
     </div>
+
     <div class="fill-layout">
+      <!-- Form panel -->
       <div class="fill-form" dir="${dir}">
         <div class="fill-form-header">
           <div class="fill-form-header-row">
             <div>
-              <div class="fill-form-header-title">Document Information</div>
+              <div class="fill-form-header-title">Document Fields</div>
               <div class="fill-form-header-sub">${fieldDefs.length} field${fieldDefs.length !== 1 ? 's' : ''} — preview updates live</div>
             </div>
-            <button class="btn-clear-draft" onclick="clearDraftAndReset('${id}')" title="Clear saved draft">Clear</button>
+            <button class="btn-clear-draft" onclick="clearDraftAndReset('${escapeHtml(id)}')" title="Clear saved draft">Clear</button>
           </div>
           <div class="fill-saved-indicator" id="saved-indicator">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            Saved
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Autosaved
           </div>
         </div>
         <div class="fill-form-body">
-          ${lhWarning}
-          ${logoHtml}
-          ${formHtml}
+          ${lhWarning}${logoHtml}${formHtml}
         </div>
       </div>
+
+      <!-- Preview column -->
       <div>
         <div class="preview-col-label">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
           Live Preview
         </div>
         <div class="preview-page-wrap">
-          <div class="doc-preview" id="doc-preview"></div>
+          <div class="doc-preview" id="doc-preview" aria-label="Document preview"></div>
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
 
-  // Restore draft if available
+  // Restore autosaved draft
   const draft = Drafts.load(id);
-  if (draft && draft.fields) {
+  if (draft?.fields) {
     Object.entries(draft.fields).forEach(([key, val]) => {
       const el = document.getElementById('ff-' + key);
       if (el) el.value = val;
     });
     const indicator = document.getElementById('saved-indicator');
     if (indicator && draft.savedAt) {
-      indicator.textContent = 'Saved ' + new Date(draft.savedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      indicator.textContent = 'Saved ' + new Date(draft.savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       indicator.classList.add('visible');
     }
-  }
-
-  // Clear editing session if template doesn't match
-  if (!editingThisTemplate) {
-    sessionStorage.removeItem('editing_doc_id');
   }
 
   livePreview(id);
@@ -1320,84 +1937,72 @@ function clearDraftAndReset(templateId) {
   renderFillMode(templateId);
 }
 
-// ── Live Preview ──────────────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Live preview
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function livePreview(id) {
-  const t = TEMPLATES.find(x => x.id === id);
-  if (!t) return;
   const preview = document.getElementById('doc-preview');
   if (!preview) return;
-  const rawText = await loadTemplate(id);
-
-  let body = getBody(rawText);
-  const keys = extractPlaceholders(rawText);
-  const lh = localStorage.getItem('letterhead');
-
-  if (keys.includes('Logo')) {
-    const logoHtml = lh
-      ? `<img src="${lh}" class="doc-letterhead" alt="Company Letterhead">`
-      : `<div class="doc-letterhead-ph">
-           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
-           Company Letterhead — <a href="#/settings/letterhead">upload to see it here</a>
-         </div>`;
-    body = body.replace(/\{\{Logo\}\}/g, logoHtml);
+  try {
+    const rawText = await loadTemplate(id);
+    const body    = getBody(rawText);
+    const keys    = extractPlaceholders(rawText);
+    const substituted = substituteFields(body, keys, k => {
+      const el = document.getElementById('ff-' + k);
+      return el ? el.value : '';
+    }, false);
+    preview.innerHTML = marked.parse(substituted);
+  } catch (e) {
+    // Silent — error already shown by renderFillMode
   }
-
-  keys.forEach(key => {
-    if (key === 'Logo') return;
-    const el = document.getElementById('ff-' + key);
-    const val = el ? el.value : '';
-    body = body.replace(
-      new RegExp('\\{\\{' + escapeRegex(key) + '\\}\\}', 'g'),
-      val.trim()
-        ? val
-        : `<span class="ph">{{${key}}}</span>`
-    );
-  });
-
-  preview.innerHTML = marked.parse(body);
 }
 
-// ── Print / Save as PDF ───────────────────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Print / Save as PDF
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function printDocument(id) {
   const t = TEMPLATES.find(x => x.id === id);
   if (!t) return;
-  const rawText = await loadTemplate(id);
-  const keys = extractPlaceholders(rawText);
-  const lh = localStorage.getItem('letterhead');
-  let body = getBody(rawText);
 
-  if (keys.includes('Logo')) {
-    const logoHtml = lh
-      ? `<img src="${lh}" class="doc-letterhead" alt="Company Letterhead">`
-      : '';
-    body = body.replace(/\{\{Logo\}\}/g, logoHtml);
-  }
-
-  keys.forEach(key => {
-    if (key === 'Logo') return;
-    const el = document.getElementById('ff-' + key);
-    const val = el ? el.value.trim() : '';
-    body = body.replace(
-      new RegExp('\\{\\{' + escapeRegex(key) + '\\}\\}', 'g'),
-      val
-    );
-  });
-
-  const htmlContent = marked.parse(body);
-  const shell = docShell(htmlContent, t.name);
-
-  const win = window.open('', '_blank');
-  if (!win) {
-    showToast('Please allow pop-ups for this site to open the print window.', 'error');
+  let rawText;
+  try {
+    rawText = await loadTemplate(id);
+  } catch (e) {
+    showToast('Could not load template for printing.', 'error');
     return;
   }
-  // Assign onload BEFORE document.write so it's ready when load fires
-  win.onload = function() { win.focus(); win.print(); };
-  win.document.write(shell);
+
+  const body = getBody(rawText);
+  const keys = extractPlaceholders(rawText);
+  const substituted = substituteFields(body, keys, k => {
+    const el = document.getElementById('ff-' + k);
+    return el ? el.value.trim() : '';
+  }, true);
+
+  const htmlContent = marked.parse(substituted);
+  const win = window.open('', '_blank');
+  if (!win) {
+    showToast('Allow pop-ups for this site to open the print window.', 'error');
+    return;
+  }
+  win.onload = () => { win.focus(); win.print(); };
+  win.document.write(docShell(htmlContent, t.name));
   win.document.close();
 }
 
-// ── Document Shell (print-ready HTML) ────────────────────────────────────
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Keyboard shortcut: Ctrl/Cmd+P → document print (not browser page print)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'p' && _currentTemplateId) {
+    e.preventDefault();
+    printDocument(_currentTemplateId);
+  }
+});
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Print shell — generates the print-ready HTML page
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function docShell(bodyHtml, title) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -1406,115 +2011,70 @@ function docShell(bodyHtml, title) {
 <title>${escapeHtml(title)}</title>
 <style>
 @page {
-  size: A4;
-  margin: 20mm 20mm 20mm 20mm;
+  size: A4 portrait;
+  margin: 22mm 20mm 25mm 22mm;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 11pt;
   color: #1a1a1a;
-  line-height: 1.55;
+  line-height: 1.6;
   background: #fff;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-p { margin: 5px 0; }
+p  { margin: 5px 0; orphans: 3; widows: 3; }
 strong { font-weight: 700; }
 em { color: #555; font-size: 9pt; }
-a { color: #1a1a2e; text-decoration: none; }
+a  { color: #1a1a2e; text-decoration: none; }
+a[href]::after { content: none !important; }
 h1 {
-  font-size: 14pt;
-  font-weight: 700;
-  text-align: center;
-  color: #1a1a2e;
-  border-bottom: 2.5px solid #1a1a2e;
-  padding-bottom: 9px;
-  margin: 20px 0 16px;
+  font-size: 14pt; font-weight: 700; text-align: center; color: #1a1a2e;
+  border-bottom: 2pt solid #1a1a2e; padding-bottom: 9pt;
+  margin: 18pt 0 14pt; letter-spacing: .01em;
   page-break-after: avoid;
 }
 h2 {
-  font-size: 9pt;
-  font-weight: 700;
-  color: #1a1a2e;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-bottom: 1px solid #c0c6d6;
-  padding-bottom: 4px;
-  margin: 22px 0 10px;
-  page-break-after: avoid;
+  font-size: 9pt; font-weight: 700; color: #1a1a2e;
+  text-transform: uppercase; letter-spacing: .11em;
+  border-bottom: 1px solid #c0c6d6; padding-bottom: 4pt;
+  margin: 20pt 0 9pt; page-break-after: avoid;
 }
-h3 {
-  font-size: 10pt;
-  font-weight: 700;
-  color: #2a2a3e;
-  margin: 14px 0 6px;
-  page-break-after: avoid;
-}
-h4 {
-  font-size: 10pt;
-  font-weight: 600;
-  color: #333;
-  margin: 10px 0 4px;
-  page-break-after: avoid;
-}
-hr {
-  border: none;
-  border-top: 1px solid #d0d4dc;
-  margin: 16px 0;
-}
+h3 { font-size: 10pt; font-weight: 700; color: #2a2a3e; margin: 14pt 0 6pt; page-break-after: avoid; }
+h4 { font-size: 10pt; font-weight: 600; color: #333; margin: 10pt 0 4pt; page-break-after: avoid; }
+hr { border: none; border-top: 1px solid #d0d4dc; margin: 14pt 0; }
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 8px 0 16px;
-  font-size: 10pt;
+  width: 100%; border-collapse: collapse;
+  margin: 6pt 0 14pt; font-size: 10pt;
   page-break-inside: avoid;
-}
-th {
-  background-color: #e8eaf2;
-  color: #1a1a2e;
-  font-weight: 700;
-  font-size: 9pt;
-  padding: 7px 10px;
-  text-align: left;
-  border: 1px solid #c0c6d6;
-}
-td {
-  border: 1px solid #d0d4dc;
-  padding: 6px 10px;
-  vertical-align: top;
-  line-height: 1.45;
 }
 thead { display: table-header-group; }
+tr    { page-break-inside: avoid; }
+th {
+  background-color: #e8eaf2; color: #1a1a2e;
+  font-weight: 700; font-size: 9pt;
+  padding: 7pt 10pt; text-align: left;
+  border: 1px solid #c0c6d6;
+}
+td { border: 1px solid #d0d4dc; padding: 6pt 10pt; vertical-align: top; line-height: 1.5; }
 blockquote {
-  border-left: 3px solid #d4a000;
-  padding: 8px 14px;
-  background: #fffcf0;
-  margin: 10px 0;
-  font-size: 10pt;
+  border-left: 3pt solid #c89600; padding: 8pt 14pt;
+  background: #fffcf0; margin: 10pt 0; font-size: 10pt;
   page-break-inside: avoid;
 }
-blockquote p { margin: 3px 0; }
-ul, ol { margin: 6px 0; padding-left: 22px; }
-li { margin: 3px 0; line-height: 1.5; }
-code { font-family: "Courier New", monospace; font-size: 9.5pt; background: #f4f5f7; padding: 1px 4px; }
-pre { background: #f4f5f7; padding: 10px 14px; font-size: 9pt; overflow-x: auto; page-break-inside: avoid; }
-p { orphans: 3; widows: 3; }
-a[href]::after { content: none; }
-/* Letterhead — sits naturally at the top of the document */
+blockquote p { margin: 3pt 0; }
+ul, ol  { margin: 6pt 0; padding-left: 22pt; }
+li      { margin: 3pt 0; line-height: 1.5; }
+code    { font-family: "Courier New", monospace; font-size: 9.5pt; background: #f4f5f7; padding: 1pt 4pt; }
+pre     { background: #f4f5f7; padding: 10pt 14pt; font-size: 9pt; overflow-x: auto; page-break-inside: avoid; }
+/* Letterhead */
 .doc-letterhead {
-  display: block;
-  width: 100%;
-  max-height: 45mm;
-  object-fit: contain;
-  object-position: left;
-  margin-bottom: 6mm;
-}
-/* Signature tables: keep together */
-table:last-of-type,
-h2:last-of-type + table {
-  page-break-inside: avoid;
-  page-break-before: avoid;
+  display: block; width: 100%; max-height: 38mm;
+  object-fit: contain; object-position: left top;
+  margin-bottom: 8mm;
 }
 </style>
 </head>
@@ -1522,14 +2082,6 @@ h2:last-of-type + table {
 ${bodyHtml}
 </body>
 </html>`;
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
 }
 </script>
 </body>
