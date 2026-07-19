@@ -653,6 +653,50 @@ button, input, select, textarea { font-family: inherit; }
 .lh-setup-banner-sub { font-size: .78rem; color: #9a7000; }
 .lh-setup-banner-cta { flex-shrink: 0; }
 
+/* ── Version History Modal ───────────────────────────────────────────────── */
+.history-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 8100;
+  background: rgba(0,0,0,.7); backdrop-filter: blur(3px);
+  align-items: flex-end; justify-content: center;
+}
+.history-backdrop.open { display: flex; }
+.history-dialog {
+  width: min(560px, 100vw);
+  max-height: 78vh;
+  background: var(--bg2);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: 0 -8px 40px rgba(0,0,0,.3);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.history-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.history-header-title {
+  font-size: .9rem; font-weight: 600; color: var(--text);
+  display: flex; align-items: center; gap: 7px;
+}
+.history-close {
+  background: none; border: none; cursor: pointer; color: var(--text-muted);
+  padding: 4px 6px; border-radius: 4px; font-size: 1rem; line-height: 1;
+  transition: color .15s, background .15s;
+}
+.history-close:hover { color: var(--text); background: var(--bg3); }
+.history-list { overflow-y: auto; flex: 1; padding: 10px 0; }
+.history-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 20px; border-bottom: 1px solid var(--border-light);
+  transition: background .12s;
+}
+.history-item:last-child { border-bottom: none; }
+.history-item:hover { background: var(--bg3); }
+.history-item-meta { flex: 1; min-width: 0; }
+.history-item-date { font-size: .82rem; font-weight: 600; color: var(--text); }
+.history-item-fields { font-size: .73rem; color: var(--text-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.history-empty { padding: 32px 20px; text-align: center; color: var(--text-muted); font-size: .84rem; }
+
 /* ── Page Preview Modal ──────────────────────────────────────────────────── */
 .page-preview-backdrop {
   display: none; position: fixed; inset: 0; z-index: 8000;
@@ -804,6 +848,22 @@ button, input, select, textarea { font-family: inherit; }
 
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 <div id="toast-root" role="region" aria-live="polite" aria-label="Notifications"></div>
+
+<!-- Version History Modal -->
+<div class="history-backdrop" id="history-backdrop" onclick="handleHistoryBackdropClick(event)" role="dialog" aria-modal="true" aria-label="Version History">
+  <div class="history-dialog">
+    <div class="history-header">
+      <div class="history-header-title">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span id="history-dialog-title">Version History</span>
+      </div>
+      <button class="history-close" onclick="closeDocHistory()" aria-label="Close history">✕</button>
+    </div>
+    <div class="history-list" id="history-list"></div>
+  </div>
+</div>
 
 <!-- Page Preview Modal -->
 <div class="page-preview-backdrop" id="page-preview-backdrop" onclick="handlePagePreviewBackdropClick(event)" role="dialog" aria-modal="true" aria-label="Page Preview">
@@ -1141,6 +1201,11 @@ function applyCollapse(collapse, persist) {
 window.addEventListener('hashchange', route);
 window.addEventListener('load', route);
 
+// Register service worker for offline support
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {/* SW optional */});
+}
+
 function route() {
   const hash  = location.hash || '#/';
   const parts = hash.slice(2).split('/').filter(Boolean);
@@ -1296,7 +1361,13 @@ const DB = {
   save(doc) {
     const docs = this._load();
     const idx  = docs.findIndex(d => d.id === doc.id);
-    if (idx >= 0) docs[idx] = doc; else docs.unshift(doc);
+    if (idx >= 0) {
+      // Archive the previous version before overwriting
+      History.push(doc.id, docs[idx]);
+      docs[idx] = doc;
+    } else {
+      docs.unshift(doc);
+    }
     this._save(docs);
   },
   delete(id) { this._save(this._load().filter(d => d.id !== id)); },
@@ -1334,6 +1405,47 @@ const DB = {
 function genDocId() {
   return 'doc_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Version history store (per-document, localStorage)
+   Max 10 versions per document to limit storage use.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const MAX_VERSIONS = 10;
+const History = {
+  _key: 'alba_docs_history',
+  _load() {
+    try { return JSON.parse(localStorage.getItem(this._key) || '{}'); } catch { return {}; }
+  },
+  _save(data) {
+    try { localStorage.setItem(this._key, JSON.stringify(data)); } catch { /* storage full — silently skip */ }
+  },
+  /** Archive snapshot of a doc before it is overwritten. */
+  push(docId, snapshot) {
+    const data = this._load();
+    if (!data[docId]) data[docId] = [];
+    // Store compact version: fields + timestamps + status only
+    data[docId].unshift({
+      fields:    snapshot.fields,
+      status:    snapshot.status,
+      updatedAt: snapshot.updatedAt,
+      savedAt:   new Date().toISOString(),
+    });
+    // Keep only the newest MAX_VERSIONS
+    if (data[docId].length > MAX_VERSIONS) data[docId] = data[docId].slice(0, MAX_VERSIONS);
+    this._save(data);
+  },
+  /** Return version history for a document, newest first. */
+  get(docId) {
+    const data = this._load();
+    return data[docId] || [];
+  },
+  /** Delete all history for a document. */
+  clear(docId) {
+    const data = this._load();
+    delete data[docId];
+    this._save(data);
+  },
+};
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Draft store (per-template autosave)
@@ -1436,6 +1548,11 @@ function renderMyDocuments() {
       </div>
       <div class="my-doc-item-actions">
         <button class="btn btn-outline btn-sm" onclick="openSavedDoc('${escapeHtml(doc.id)}')">Open</button>
+        <button class="btn btn-outline btn-sm" onclick="openDocHistory('${escapeHtml(doc.id)}')" title="View version history" aria-label="History for ${escapeHtml(doc.templateName)}">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </button>
         <button class="btn btn-danger btn-sm" onclick="deleteSavedDoc('${escapeHtml(doc.id)}')" title="Delete document" aria-label="Delete ${escapeHtml(doc.templateName)}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="3 6 5 6 21 6"/>
@@ -1476,6 +1593,71 @@ function renderMyDocuments() {
  * Handle the Import JSON file-input change event.
  * Reads the selected file, parses it, merges into the store, re-renders.
  */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Version history modal
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _historyDocId = null;
+
+function openDocHistory(docId) {
+  const doc = DB.getById(docId);
+  if (!doc) return;
+  _historyDocId = docId;
+
+  const titleEl = document.getElementById('history-dialog-title');
+  if (titleEl) titleEl.textContent = doc.templateName + ' — Version History';
+
+  const versions = History.get(docId);
+  const listEl   = document.getElementById('history-list');
+
+  if (!versions.length) {
+    listEl.innerHTML = `<div class="history-empty">No previous versions yet.<br>Each time you save changes to this document, the previous version is stored here.</div>`;
+  } else {
+    listEl.innerHTML = versions.map((v, idx) => {
+      const fieldCount  = Object.values(v.fields || {}).filter(Boolean).length;
+      const fieldSample = Object.entries(v.fields || {}).filter(([, val]) => val).slice(0, 3).map(([k, val]) => `${k}: ${String(val).slice(0, 30)}`).join(' · ');
+      return `<div class="history-item">
+        <div class="history-item-meta">
+          <div class="history-item-date">${new Date(v.savedAt).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })} — ${v.status === 'published' ? 'Published' : 'Draft'}</div>
+          <div class="history-item-fields">${fieldSample || 'No fields filled'}${fieldCount > 3 ? ' …' : ''}</div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="restoreDocVersion('${escapeHtml(docId)}', ${idx})" title="Restore this version">Restore</button>
+      </div>`;
+    }).join('');
+  }
+
+  document.getElementById('history-backdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDocHistory() {
+  document.getElementById('history-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+  _historyDocId = null;
+}
+
+function handleHistoryBackdropClick(e) {
+  if (e.target === document.getElementById('history-backdrop')) closeDocHistory();
+}
+
+function restoreDocVersion(docId, versionIdx) {
+  const doc = DB.getById(docId);
+  if (!doc) return;
+  const versions = History.get(docId);
+  const version  = versions[versionIdx];
+  if (!version) return;
+
+  const restored = {
+    ...doc,
+    fields:    version.fields,
+    status:    version.status,
+    updatedAt: new Date().toISOString(),
+  };
+  DB.save(restored);
+  closeDocHistory();
+  showToast('Version restored', 'success');
+  renderMyDocuments();
+}
+
 function importJsonFile(input) {
   const file = input.files[0];
   if (!file) return;
